@@ -401,9 +401,10 @@ if [ "$SUCCESS" = true ]; then
   # Save knowledge
   save_knowledge "v${NEXT_V}" "success" "$NEW_SCORE" "$CURRENT_SCORE"
 
-  # Git commit
+  # Git commit + push to GitHub
   git add -A
   git commit -m "v${NEXT_V}: auto-improved (score: ${CURRENT_SCORE}→${NEW_SCORE}, +${DIFF}, attempts: ${ATTEMPT})"
+  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git push origin main 2>/dev/null || echo "   ⚠ Git push failed (non-critical)"
 
   echo ""
   echo "═══════════════════════════════════════"

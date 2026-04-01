@@ -119,14 +119,26 @@ If ANY of these fail, the version is NOT ready.
 - Makes the output more FUNCTIONAL (links work, buttons work, menus work)
 - Has been VERIFIED individually to improve scores (not just assumed)
 
-## Scoring Weights
-- Image rendering: 20% (every img ACTUALLY RENDERS, naturalWidth > 0)
-- CSS quality: 15% (layout, fonts, colors match original)
-- Link integrity: 15% (every internal href resolves to a real file, ZERO external)
-- Content preservation: 15% (original text words appear in clone)
-- Layout fidelity: 15% (structural similarity — element counts, visible elements)
-- Interactions: 10% (buttons clickable, nav exists)
-- Console errors: 10% (zero JS errors in clone)
+## Scoring Weights (9 metrics)
+- Image rendering: 15% (every img ACTUALLY RENDERS, naturalWidth > 0)
+- **Pixel fidelity: 15%** (pixelmatch comparison — original vs clone screenshot, NEW)
+- CSS quality: 12% (layout, fonts, colors match original)
+- Link integrity: 12% (every internal href resolves to a real file, ZERO external)
+- Content preservation: 12% (original text words appear in clone)
+- Layout fidelity: 10% (structural similarity — element counts, visible elements)
+- Interactions: 8% (buttons clickable, nav exists)
+- Console errors: 8% (zero JS errors in clone)
+- **Capture manifest: 8%** (no broken downloads, no external refs remaining, NEW)
+
+### New: Pixel Diff
+The test suite now generates `{hostname}-diff.png` — a visual heatmap showing exactly which pixels differ between original and clone. READ THIS to see precisely where the clone fails visually. Red = different, transparent = matching.
+
+### New: Capture Manifest
+Each clone gets a `{hostname}-manifest.json` with:
+- File counts by type (HTML, images, fonts, videos)
+- File sizes and totals
+- Issues detected (empty HTML, tiny/broken images, remaining external refs)
+- Use this to understand WHAT was captured vs what should have been captured
 
 ## The 100% Rule (CRITICAL)
 - 100% means TRUE 100% — every metric must be individually perfect

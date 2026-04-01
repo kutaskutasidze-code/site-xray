@@ -21,6 +21,8 @@ const { execSync, spawnSync, execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { PNG } = require('pngjs');
+const pixelmatch = require('pixelmatch');
 
 function execAsync(cmd, opts = {}) {
   return new Promise((resolve, reject) => {
@@ -250,6 +252,177 @@ async function scoreConsoleErrors(page) {
 }
 
 // ═══════════════════════════════════════
+// PIXEL COMPARISON — SSIM-like visual fidelity
+// ═══════════════════════════════════════
+
+async function scorePixels(origScreenshot, cloneScreenshot, resultsDir, hostname) {
+  // Compare two screenshots pixel-by-pixel using pixelmatch
+  try {
+    if (!fs.existsSync(origScreenshot) || !fs.existsSync(cloneScreenshot)) {
+      return { score: 0, error: 'screenshots missing', mismatchPercent: 100, perfect: false };
+    }
+
+    const origData = PNG.sync.read(fs.readFileSync(origScreenshot));
+    const cloneData = PNG.sync.read(fs.readFileSync(cloneScreenshot));
+
+    // Resize to same dimensions (use smaller)
+    const width = Math.min(origData.width, cloneData.width);
+    const height = Math.min(origData.height, cloneData.height);
+
+    if (width < 10 || height < 10) {
+      return { score: 0, error: 'screenshot too small', mismatchPercent: 100, perfect: false };
+    }
+
+    // Crop both to same size
+    const cropPNG = (png, w, h) => {
+      const cropped = new PNG({ width: w, height: h });
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const srcIdx = (y * png.width + x) * 4;
+          const dstIdx = (y * w + x) * 4;
+          cropped.data[dstIdx] = png.data[srcIdx];
+          cropped.data[dstIdx + 1] = png.data[srcIdx + 1];
+          cropped.data[dstIdx + 2] = png.data[srcIdx + 2];
+          cropped.data[dstIdx + 3] = png.data[srcIdx + 3];
+        }
+      }
+      return cropped;
+    };
+
+    const origCropped = origData.width === width && origData.height === height ? origData : cropPNG(origData, width, height);
+    const cloneCropped = cloneData.width === width && cloneData.height === height ? cloneData : cropPNG(cloneData, width, height);
+
+    const diff = new PNG({ width, height });
+    const mismatchCount = pixelmatch(
+      origCropped.data, cloneCropped.data, diff.data,
+      width, height,
+      { threshold: 0.15, alpha: 0.3 }  // 0.15 = tolerant of anti-aliasing
+    );
+
+    const totalPixels = width * height;
+    const mismatchPercent = Math.round((mismatchCount / totalPixels) * 10000) / 100;
+    const matchPercent = 100 - mismatchPercent;
+
+    // Save diff image for visual inspection
+    const diffFile = path.join(resultsDir, `${hostname}-diff.png`);
+    fs.writeFileSync(diffFile, PNG.sync.write(diff));
+
+    // Score: 100% match = 100, <50% match = 0
+    const score = Math.max(0, Math.min(100, Math.round(matchPercent)));
+
+    return {
+      score,
+      mismatchPercent,
+      mismatchCount,
+      totalPixels,
+      dimensions: { width, height },
+      diffImage: diffFile,
+      perfect: matchPercent >= 92,  // 92%+ pixel match = perfect
+    };
+  } catch (e) {
+    return { score: 0, error: e.message?.slice(0, 80), mismatchPercent: 100, perfect: false };
+  }
+}
+
+// ═══════════════════════════════════════
+// CAPTURE MANIFEST — instrument what was captured
+// ═══════════════════════════════════════
+
+function generateManifest(cloneDir, site) {
+  // Analyze the clone directory to understand what was captured
+  const manifest = {
+    site: site.url,
+    timestamp: new Date().toISOString(),
+    files: { html: 0, css: 0, images: 0, fonts: 0, videos: 0, models: 0, other: 0 },
+    sizes: { html: 0, css: 0, images: 0, fonts: 0, videos: 0, total: 0 },
+    assets: { images: [], fonts: [], videos: [] },
+    issues: [],
+  };
+
+  function walk(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { walk(full); continue; }
+      const size = fs.statSync(full).size;
+      const ext = path.extname(entry.name).toLowerCase();
+      manifest.sizes.total += size;
+
+      if (['.html', '.htm'].includes(ext)) {
+        manifest.files.html++;
+        manifest.sizes.html += size;
+        // Check for empty HTML files
+        if (size < 100) manifest.issues.push(`Empty HTML: ${path.relative(cloneDir, full)} (${size}b)`);
+      } else if (['.css'].includes(ext)) {
+        manifest.files.css++;
+        manifest.sizes.css += size;
+      } else if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.avif', '.ico'].includes(ext)) {
+        manifest.files.images++;
+        manifest.sizes.images += size;
+        manifest.assets.images.push({ file: entry.name, size });
+        // Check for tiny images (likely broken downloads)
+        if (size < 100 && !['.svg', '.ico'].includes(ext)) {
+          manifest.issues.push(`Tiny image (likely broken): ${entry.name} (${size}b)`);
+        }
+      } else if (['.woff', '.woff2', '.ttf', '.otf', '.eot'].includes(ext)) {
+        manifest.files.fonts++;
+        manifest.sizes.fonts += size;
+        manifest.assets.fonts.push({ file: entry.name, size });
+      } else if (['.mp4', '.webm', '.mov'].includes(ext)) {
+        manifest.files.videos++;
+        manifest.sizes.videos += size;
+        manifest.assets.videos.push({ file: entry.name, size });
+      } else if (['.glb', '.gltf', '.obj'].includes(ext)) {
+        manifest.files.models++;
+      } else {
+        manifest.files.other++;
+      }
+    }
+  }
+  walk(cloneDir);
+
+  // Check HTML files for remaining external references
+  const htmlFiles = [];
+  function findHTML(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.isDirectory()) findHTML(path.join(dir, entry.name));
+      else if (entry.name.endsWith('.html')) htmlFiles.push(path.join(dir, entry.name));
+    }
+  }
+  findHTML(cloneDir);
+
+  let externalRefs = 0;
+  let inlineStyles = 0;
+  let totalCSSSize = 0;
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, 'utf-8');
+    // Count external references still in HTML
+    const extMatches = html.match(/(?:src|href)="https?:\/\/[^"]+"/g) || [];
+    externalRefs += extMatches.length;
+    // Count inline style blocks
+    const styleMatches = html.match(/<style[^>]*>([\s\S]*?)<\/style>/g) || [];
+    inlineStyles += styleMatches.length;
+    for (const s of styleMatches) totalCSSSize += s.length;
+  }
+
+  manifest.analysis = {
+    htmlPages: htmlFiles.length,
+    externalRefsRemaining: externalRefs,
+    inlineStyleBlocks: inlineStyles,
+    totalCSSInHTML: totalCSSSize,
+    avgImageSize: manifest.files.images > 0 ? Math.round(manifest.sizes.images / manifest.files.images) : 0,
+    totalSizeKB: Math.round(manifest.sizes.total / 1024),
+  };
+
+  if (externalRefs > 0) manifest.issues.push(`${externalRefs} external references still in HTML (should be 0)`);
+  if (manifest.files.html === 0) manifest.issues.push('No HTML files captured');
+  if (manifest.sizes.html === 0) manifest.issues.push('HTML files are empty (0 bytes total)');
+
+  return manifest;
+}
+
+// ═══════════════════════════════════════
 // DEEP ANALYSIS — per-site root cause detection
 // ═══════════════════════════════════════
 
@@ -430,8 +603,23 @@ async function analyzeSite(browser, site, cloneDir, resultsDir, scoreResult) {
 | Links | ${m.links?.score}/100 | ${m.links?.perfect ? 'YES' : 'NO'} |
 | Content | ${m.content?.score}/100 | ${m.content?.perfect ? 'YES' : 'NO'} |
 | Layout | ${m.layout?.score}/100 | ${m.layout?.perfect ? 'YES' : 'NO'} |
+| Pixels | ${m.pixels?.score}/100 | ${m.pixels?.perfect ? 'YES' : 'NO'} |
 | Interactions | ${m.interactions?.score}/100 | ${m.interactions?.perfect ? 'YES' : 'NO'} |
 | Console | ${m.console?.score}/100 | ${m.console?.perfect ? 'YES' : 'NO'} |
+| Manifest | ${m.manifest?.score}/100 | ${m.manifest?.perfect ? 'YES' : 'NO'} |
+
+## Pixel Comparison
+- Match: ${m.pixels?.mismatchPercent != null ? (100 - m.pixels.mismatchPercent).toFixed(1) : '?'}%
+- Mismatched pixels: ${m.pixels?.mismatchCount || '?'} / ${m.pixels?.totalPixels || '?'}
+- Diff image: \`${hostname}-diff.png\`
+
+## Capture Manifest
+- HTML pages: ${m.manifest?.files?.html || 0}
+- Images: ${m.manifest?.files?.images || 0} (avg ${m.manifest?.sizes?.avgImageSize || 0} bytes)
+- Fonts: ${m.manifest?.files?.fonts || 0}
+- Total size: ${m.manifest?.sizes?.totalSizeKB || 0} KB
+- External refs remaining: ${m.manifest?.sizes?.externalRefsRemaining || 0}
+- Issues: ${(m.manifest?.issues || []).length > 0 ? m.manifest.issues.map(i => '\n  - ' + i).join('') : 'none'}
 
 ## Root Causes
 ${rootCauses.map(r => `- ${r}`).join('\n')}
@@ -442,6 +630,7 @@ ${suggestions.map(s => `- ${s}`).join('\n') || '- No specific suggestions — si
 ## Screenshots
 - Original: \`${hostname}-original.png\`
 - Clone: \`${hostname}-clone.png\`
+- Diff: \`${hostname}-diff.png\`
 `;
 
   fs.writeFileSync(reportFile, report);
@@ -473,7 +662,7 @@ async function scoreSite(browser, site, cloneDir, resultsDir) {
     await clonePage.waitForTimeout(3000);
   } catch {}
 
-  // Run all scoring
+  // Run all scoring (parallel where possible)
   const metrics = {};
   metrics.images = await scoreImages(clonePage, '', cloneDir);
   metrics.css = await scoreCSS(clonePage);
@@ -487,21 +676,39 @@ async function scoreSite(browser, site, cloneDir, resultsDir) {
   await origPage.close();
   try { process.kill(-srv.pid); } catch { try { srv.kill(); } catch {} }
 
-  // WEIGHTED TOTAL (strict)
+  // Pixel comparison (uses screenshots from layout scoring)
+  const origShot = path.join(resultsDir, `${hostname}-original.png`);
+  const cloneShot = path.join(resultsDir, `${hostname}-clone.png`);
+  metrics.pixels = await scorePixels(origShot, cloneShot, resultsDir, hostname);
+
+  // Capture manifest — instrument what the cloner produced
+  const manifest = generateManifest(cloneDir, site);
+  fs.writeFileSync(path.join(resultsDir, `${hostname}-manifest.json`), JSON.stringify(manifest, null, 2));
+  metrics.manifest = {
+    score: Math.max(0, 100 - manifest.issues.length * 15),
+    issues: manifest.issues,
+    files: manifest.files,
+    sizes: manifest.analysis,
+    perfect: manifest.issues.length === 0,
+  };
+
+  // WEIGHTED TOTAL (strict — now 9 metrics)
   const totalScore = Math.round(
-    metrics.images.score * 0.20 +
-    metrics.css.score * 0.15 +
-    metrics.links.score * 0.15 +
-    metrics.content.score * 0.15 +
-    metrics.layout.score * 0.15 +
-    metrics.interactions.score * 0.10 +
-    metrics.console.score * 0.10
+    metrics.images.score * 0.15 +
+    metrics.css.score * 0.12 +
+    metrics.links.score * 0.12 +
+    metrics.content.score * 0.12 +
+    metrics.layout.score * 0.10 +
+    metrics.interactions.score * 0.08 +
+    metrics.console.score * 0.08 +
+    metrics.pixels.score * 0.15 +    // NEW: pixel-level visual fidelity
+    metrics.manifest.score * 0.08    // NEW: capture completeness
   );
 
   // PERFECT = ALL metrics perfect (true 100%)
   const perfect = Object.values(metrics).every(m => m.perfect);
 
-  return { site: site.url, category: site.category, totalScore, perfect, metrics };
+  return { site: site.url, category: site.category, totalScore, perfect, metrics, manifest };
 }
 
 async function main() {
@@ -546,7 +753,7 @@ async function main() {
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
     const status = score.perfect ? '✅ PERFECT' : `${score.totalScore}/100`;
-    const breakdown = `img:${score.metrics.images?.score} css:${score.metrics.css?.score} link:${score.metrics.links?.score} content:${score.metrics.content?.score} layout:${score.metrics.layout?.score}`;
+    const breakdown = `img:${score.metrics.images?.score} css:${score.metrics.css?.score} link:${score.metrics.links?.score} px:${score.metrics.pixels?.score} content:${score.metrics.content?.score}`;
     console.log(`   ${tag} ${hostname}: ${status} (${breakdown}) [${elapsed}s]`);
 
     if (isMastered && !score.perfect) {
