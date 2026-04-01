@@ -1,0 +1,20 @@
+{
+  "lib": "",
+  "gsap": [],
+  "st": [],
+  "lenis": [],
+  "framer": [],
+  "eases": [],
+  "durs": [
+    "duration:0",
+    "duration:1",
+    "duration:400",
+    "duration:8",
+    "duration:200",
+    "duration:500"
+  ],
+  "delays": [
+    "delay:0",
+    "delay:1500"
+  ]
+}

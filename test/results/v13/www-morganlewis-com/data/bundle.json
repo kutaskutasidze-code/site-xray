@@ -1,0 +1,12 @@
+{
+  "lib": "framer-motion,",
+  "gsap": [],
+  "st": [],
+  "lenis": [],
+  "framer": [
+    "motion.com"
+  ],
+  "eases": [],
+  "durs": [],
+  "delays": []
+}

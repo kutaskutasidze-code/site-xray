@@ -1,0 +1,782 @@
+{
+  "version": "v13",
+  "date": "2026-04-01T17:19:28.806Z",
+  "averageScore": 85,
+  "perfectCount": 0,
+  "totalSites": 8,
+  "regressions": 0,
+  "sites": [
+    {
+      "site": "https://linear.app",
+      "category": "nextjs",
+      "totalScore": 99,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 31,
+          "rendered": 31,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 100,
+          "hasBackground": true,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 645899,
+          "fontsLoaded": 6,
+          "perfect": true
+        },
+        "links": {
+          "score": 97,
+          "totalLinks": 2828,
+          "workingLinks": 2736,
+          "brokenLinks": 92,
+          "externalLinks": 925,
+          "broken": [
+            "/static/favicon.svg",
+            "/static/apple-touch-icon.png?v=2",
+            "/static/favicon.svg",
+            "/static/apple-touch-icon.png?v=2",
+            "/static/favicon.svg",
+            "/static/apple-touch-icon.png?v=2",
+            "/static/favicon.svg",
+            "/static/apple-touch-icon.png?v=2",
+            "/static/favicon.svg",
+            "/static/apple-touch-icon.png?v=2"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 97,
+          "origWords": 517,
+          "cloneWords": 536,
+          "matched": 504,
+          "perfect": true
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 1605,
+            "imgs": 26,
+            "texts": 566
+          },
+          "cloneStructure": {
+            "divs": 1612,
+            "imgs": 26,
+            "texts": 573
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/linear-app-original.png",
+            "clone": "/opt/site-xray/test/results/v13/linear-app-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 98,
+          "totalButtons": 85,
+          "clickable": 82,
+          "links": 63,
+          "hasNav": true,
+          "perfect": true
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://cuberto.com",
+      "category": "webflow",
+      "totalScore": 93,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 17,
+          "rendered": 17,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 100,
+          "hasBackground": true,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 146325,
+          "fontsLoaded": 22,
+          "perfect": true
+        },
+        "links": {
+          "score": 91,
+          "totalLinks": 1129,
+          "workingLinks": 1027,
+          "brokenLinks": 102,
+          "externalLinks": 306,
+          "broken": [
+            "/apple-touch-icon.png",
+            "/favicon-32x32.png",
+            "/favicon-16x16.png",
+            "/apple-touch-icon.png",
+            "/favicon-32x32.png",
+            "/favicon-16x16.png",
+            "/apple-touch-icon.png",
+            "/favicon-32x32.png",
+            "/favicon-16x16.png",
+            "/apple-touch-icon.png"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 100,
+          "origWords": 164,
+          "cloneWords": 164,
+          "matched": 164,
+          "perfect": true
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 473,
+            "imgs": 17,
+            "texts": 97
+          },
+          "cloneStructure": {
+            "divs": 473,
+            "imgs": 17,
+            "texts": 97
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/cuberto-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/cuberto-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 40,
+          "totalButtons": 1,
+          "clickable": 0,
+          "links": 40,
+          "hasNav": true,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://vercel.com",
+      "category": "nextjs",
+      "totalScore": 99,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 51,
+          "rendered": 51,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 100,
+          "hasBackground": true,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 1802278,
+          "fontsLoaded": 76,
+          "perfect": true
+        },
+        "links": {
+          "score": 97,
+          "totalLinks": 5707,
+          "workingLinks": 5549,
+          "brokenLinks": 158,
+          "externalLinks": 1695,
+          "broken": [
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-42.svg#chevron-circle-right-fill",
+            "/images/img-72.svg#sparkles",
+            "/images/img-83.svg#shield-globe"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 99,
+          "origWords": 343,
+          "cloneWords": 344,
+          "matched": 341,
+          "perfect": true
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 1215,
+            "imgs": 8,
+            "texts": 293
+          },
+          "cloneStructure": {
+            "divs": 1213,
+            "imgs": 8,
+            "texts": 293
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/vercel-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/vercel-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 92,
+          "totalButtons": 15,
+          "clickable": 13,
+          "links": 129,
+          "hasNav": true,
+          "perfect": true
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://www.morganlewis.com",
+      "category": "corporate",
+      "totalScore": 88,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 14,
+          "rendered": 14,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 1211813,
+          "fontsLoaded": 53,
+          "perfect": false
+        },
+        "links": {
+          "score": 75,
+          "totalLinks": 6235,
+          "workingLinks": 4661,
+          "brokenLinks": 1574,
+          "externalLinks": 2359,
+          "broken": [
+            "/Contents/images/favicon.ico",
+            "/CareersContents/plugins/mediaelement/mediaelementplayer.min.v-3w4wrmpazz9lqgav26iw.css",
+            "/Contents/css/ML.Web.min.v-w4irrczknhxi1prnmllabq.css",
+            "/favicon.ico",
+            "/Contents/images/favicon.ico",
+            "/CareersContents/plugins/mediaelement/mediaelementplayer.min.v-3w4wrmpazz9lqgav26iw.css",
+            "/Contents/css/ML.Web.min.v-w4irrczknhxi1prnmllabq.css",
+            "/favicon.ico",
+            "/Contents/images/favicon.ico",
+            "/CareersContents/plugins/mediaelement/mediaelementplayer.min.v-3w4wrmpazz9lqgav26iw.css"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 93,
+          "origWords": 361,
+          "cloneWords": 336,
+          "matched": 336,
+          "perfect": false
+        },
+        "layout": {
+          "score": 93,
+          "origStructure": {
+            "divs": 392,
+            "imgs": 13,
+            "texts": 96
+          },
+          "cloneStructure": {
+            "divs": 341,
+            "imgs": 13,
+            "texts": 82
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/www-morganlewis-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/www-morganlewis-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 57,
+          "totalButtons": 7,
+          "clickable": 2,
+          "links": 63,
+          "hasNav": true,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://pentagram.com",
+      "category": "portfolio",
+      "totalScore": 90,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 134,
+          "rendered": 134,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 1115516,
+          "fontsLoaded": 12,
+          "perfect": false
+        },
+        "links": {
+          "score": 75,
+          "totalLinks": 96,
+          "workingLinks": 72,
+          "brokenLinks": 24,
+          "externalLinks": 461,
+          "broken": [
+            "humans.txt",
+            "/images/favicon-96x96.png",
+            "/images/favicon.svg",
+            "/images/apple-touch-icon.png",
+            "humans.txt",
+            "/images/favicon-96x96.png",
+            "/images/favicon.svg",
+            "/images/apple-touch-icon.png",
+            "humans.txt",
+            "/images/favicon-96x96.png"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 93,
+          "origWords": 973,
+          "cloneWords": 957,
+          "matched": 907,
+          "perfect": false
+        },
+        "layout": {
+          "score": 77,
+          "origStructure": {
+            "divs": 2105,
+            "imgs": 162,
+            "texts": 534
+          },
+          "cloneStructure": {
+            "divs": 1655,
+            "imgs": 122,
+            "texts": 443
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/pentagram-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/pentagram-com-clone.png"
+          },
+          "perfect": false
+        },
+        "interactions": {
+          "score": 97,
+          "totalButtons": 67,
+          "clickable": 64,
+          "links": 328,
+          "hasNav": true,
+          "perfect": true
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://stripe.com",
+      "category": "heavy-js",
+      "totalScore": 98,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 53,
+          "rendered": 53,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 435089,
+          "fontsLoaded": 4,
+          "perfect": false
+        },
+        "links": {
+          "score": 100,
+          "totalLinks": 54163,
+          "workingLinks": 54163,
+          "brokenLinks": 0,
+          "externalLinks": 10757,
+          "broken": [],
+          "perfect": false
+        },
+        "content": {
+          "score": 98,
+          "origWords": 832,
+          "cloneWords": 1052,
+          "matched": 819,
+          "perfect": true
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 1302,
+            "imgs": 25,
+            "texts": 391
+          },
+          "cloneStructure": {
+            "divs": 1942,
+            "imgs": 38,
+            "texts": 632
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/stripe-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/stripe-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 96,
+          "totalButtons": 32,
+          "clickable": 30,
+          "links": 158,
+          "hasNav": true,
+          "perfect": true
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://www.cravath.com",
+      "category": "corporate",
+      "totalScore": 60,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 0,
+          "rendered": 0,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 15,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": true,
+          "hasLayout": false,
+          "cssSize": 0,
+          "fontsLoaded": 0,
+          "perfect": false
+        },
+        "links": {
+          "score": 100,
+          "totalLinks": 0,
+          "workingLinks": 0,
+          "brokenLinks": 0,
+          "externalLinks": 0,
+          "broken": [],
+          "perfect": true
+        },
+        "content": {
+          "score": 50,
+          "origLength": 4667,
+          "cloneLength": 0,
+          "perfect": false
+        },
+        "layout": {
+          "score": 0,
+          "origStructure": {
+            "divs": 435,
+            "imgs": 2,
+            "texts": 102
+          },
+          "cloneStructure": {
+            "divs": 1,
+            "imgs": 0,
+            "texts": 0
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/www-cravath-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/www-cravath-com-clone.png"
+          },
+          "perfect": false
+        },
+        "interactions": {
+          "score": 50,
+          "totalButtons": 0,
+          "clickable": 0,
+          "links": 0,
+          "hasNav": false,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    },
+    {
+      "site": "https://www.roomshotels.com",
+      "category": "hospitality",
+      "totalScore": 56,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 0,
+          "total": 115,
+          "rendered": 0,
+          "broken": 115,
+          "empty": 0,
+          "brokenList": [
+            "https://roomshotels.com/images/img-0.jpg",
+            "https://roomshotels.com/images/img-1.jpg",
+            "https://roomshotels.com/images/img-2.jpg",
+            "https://roomshotels.com/images/img-3.webp",
+            "https://roomshotels.com/images/img-4.jpg",
+            "https://roomshotels.com/images/img-4.jpg",
+            "https://roomshotels.com/images/img-0.jpg",
+            "https://roomshotels.com/images/img-1.jpg",
+            "https://roomshotels.com/images/img-5.jpg",
+            "https://roomshotels.com/images/img-6.jpg",
+            "https://roomshotels.com/images/img-7.jpg",
+            "https://roomshotels.com/images/img-8.jpg",
+            "https://roomshotels.com/images/img-9.jpg",
+            "https://roomshotels.com/images/img-10.jpg",
+            "https://roomshotels.com/images/img-11.jpg",
+            "https://roomshotels.com/images/img-12.jpg",
+            "https://roomshotels.com/images/img-13.jpg",
+            "https://roomshotels.com/images/img-14.jpg",
+            "https://roomshotels.com/images/img-15.jpg",
+            "https://roomshotels.com/images/img-16.jpg",
+            "https://roomshotels.com/images/img-17.jpg",
+            "https://roomshotels.com/images/img-18.jpg",
+            "https://roomshotels.com/images/img-19.jpg",
+            "https://roomshotels.com/images/img-20.jpg",
+            "https://roomshotels.com/images/img-21.jpg",
+            "https://roomshotels.com/images/img-22.jpg",
+            "https://roomshotels.com/images/img-23.jpg",
+            "https://roomshotels.com/images/img-24.jpg",
+            "https://roomshotels.com/images/img-25.jpg",
+            "https://roomshotels.com/images/img-26.jpg",
+            "https://roomshotels.com/images/img-27.jpg",
+            "https://roomshotels.com/images/img-28.jpg",
+            "https://roomshotels.com/images/img-29.jpg",
+            "https://roomshotels.com/images/img-30.jpg",
+            "https://roomshotels.com/images/img-31.jpg",
+            "https://roomshotels.com/images/img-32.jpg",
+            "https://roomshotels.com/images/img-33.jpg",
+            "https://roomshotels.com/images/img-34.jpg",
+            "https://roomshotels.com/images/img-35.jpg",
+            "https://roomshotels.com/images/img-36.png",
+            "https://roomshotels.com/images/img-37.jpg",
+            "https://roomshotels.com/images/img-38.jpg",
+            "https://roomshotels.com/images/img-39.jpg",
+            "https://roomshotels.com/images/img-27.jpg",
+            "https://roomshotels.com/images/img-40.jpg",
+            "https://roomshotels.com/images/img-41.jpg",
+            "https://roomshotels.com/images/img-42.jpg",
+            "https://roomshotels.com/images/img-43.jpg",
+            "https://roomshotels.com/images/img-44.jpg",
+            "https://roomshotels.com/images/img-45.jpg",
+            "https://roomshotels.com/images/img-40.jpg",
+            "https://roomshotels.com/images/img-46.jpg",
+            "https://roomshotels.com/images/img-47.jpg",
+            "https://roomshotels.com/images/img-48.jpg",
+            "https://roomshotels.com/images/img-49.jpg",
+            "https://roomshotels.com/images/img-34.jpg",
+            "https://roomshotels.com/images/img-35.jpg",
+            "https://roomshotels.com/images/img-36.png",
+            "https://roomshotels.com/images/img-37.jpg",
+            "https://roomshotels.com/images/img-38.jpg",
+            "https://roomshotels.com/images/img-39.jpg",
+            "https://roomshotels.com/images/img-27.jpg",
+            "https://roomshotels.com/images/img-40.jpg",
+            "https://roomshotels.com/images/img-41.jpg",
+            "https://roomshotels.com/images/img-42.jpg",
+            "https://roomshotels.com/images/img-43.jpg",
+            "https://roomshotels.com/images/img-44.jpg",
+            "https://roomshotels.com/images/img-45.jpg",
+            "https://roomshotels.com/images/img-40.jpg",
+            "https://roomshotels.com/images/img-46.jpg",
+            "https://roomshotels.com/images/img-47.jpg",
+            "https://roomshotels.com/images/img-48.jpg",
+            "https://roomshotels.com/images/img-49.jpg",
+            "https://roomshotels.com/images/img-50.jpg",
+            "https://roomshotels.com/images/img-51.jpg",
+            "https://roomshotels.com/images/img-52.jpg",
+            "https://roomshotels.com/images/img-53.jpg",
+            "https://roomshotels.com/images/img-54.jpg",
+            "https://roomshotels.com/images/img-55.jpg",
+            "https://roomshotels.com/images/img-56.jpg",
+            "https://roomshotels.com/images/img-57.jpg",
+            "https://roomshotels.com/images/img-58.jpg",
+            "https://roomshotels.com/images/img-59.jpg",
+            "https://roomshotels.com/images/img-60.jpg",
+            "https://roomshotels.com/images/img-61.jpg",
+            "https://roomshotels.com/images/img-62.jpg",
+            "https://roomshotels.com/images/img-63.jpg",
+            "https://roomshotels.com/images/img-64.jpg",
+            "https://roomshotels.com/images/img-65.jpg",
+            "https://roomshotels.com/images/img-66.jpg",
+            "https://roomshotels.com/images/img-67.jpg",
+            "https://roomshotels.com/images/img-68.jpg",
+            "https://roomshotels.com/images/img-69.jpg",
+            "https://roomshotels.com/images/img-70.jpg",
+            "https://roomshotels.com/images/img-71.jpg",
+            "https://roomshotels.com/images/img-72.jpg",
+            "https://roomshotels.com/images/img-73.jpg",
+            "https://roomshotels.com/images/img-74.jpg",
+            "https://roomshotels.com/images/img-75.jpg",
+            "https://roomshotels.com/images/img-36.png",
+            "https://roomshotels.com/images/img-52.jpg",
+            "https://roomshotels.com/images/img-76.jpg",
+            "https://roomshotels.com/images/img-72.jpg",
+            "https://roomshotels.com/images/img-71.jpg",
+            "https://roomshotels.com/images/img-77.jpg",
+            "https://roomshotels.com/images/img-78.jpg",
+            "https://roomshotels.com/images/img-79.jpg",
+            "https://roomshotels.com/images/img-80.jpg",
+            "https://roomshotels.com/images/img-81.jpg",
+            "https://roomshotels.com/images/img-82.jpg",
+            "https://roomshotels.com/images/img-77.jpg",
+            "https://roomshotels.com/images/img-83.jpg",
+            "https://roomshotels.com/images/img-84.jpg",
+            "https://roomshotels.com/images/img-85.jpg",
+            "https://roomshotels.com/images/img-86.jpg"
+          ],
+          "perfect": false
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 570492,
+          "fontsLoaded": 33,
+          "perfect": false
+        },
+        "links": {
+          "score": 0,
+          "totalLinks": 1,
+          "workingLinks": 0,
+          "brokenLinks": 1,
+          "externalLinks": 32,
+          "broken": [
+            "/favicon.ico"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 96,
+          "origWords": 307,
+          "cloneWords": 296,
+          "matched": 296,
+          "perfect": true
+        },
+        "layout": {
+          "score": 93,
+          "origStructure": {
+            "divs": 578,
+            "imgs": 79,
+            "texts": 101
+          },
+          "cloneStructure": {
+            "divs": 508,
+            "imgs": 78,
+            "texts": 85
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v13/www-roomshotels-com-original.png",
+            "clone": "/opt/site-xray/test/results/v13/www-roomshotels-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 42,
+          "totalButtons": 10,
+          "clickable": 7,
+          "links": 19,
+          "hasNav": false,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        }
+      }
+    }
+  ]
+}

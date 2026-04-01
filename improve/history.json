@@ -1,0 +1,6 @@
+[
+  { "version": "v10", "score": null, "note": "Baseline — v7 + WebGL/3D extraction" },
+  { "version": "v11", "score": null, "note": "Cookie dismiss, SVG inline, Next.js images, post-processing links, verification" },
+  { "version": "v12", "score": null, "note": "Subpage images, external CSS, smart script removal, layout freeze" },
+  { "version": "v13", "score": null, "note": "Nav priority queue, stub pages, computed layout freeze, UI scripts, default 50 pages" }
+]

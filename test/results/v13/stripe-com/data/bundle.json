@@ -1,0 +1,46 @@
+{
+  "lib": "",
+  "gsap": [],
+  "st": [],
+  "lenis": [],
+  "framer": [],
+  "eases": [
+    "ease:\"linear\""
+  ],
+  "durs": [
+    "duration:1",
+    "duration:1900",
+    "duration:1600",
+    "duration:1400",
+    "duration:325",
+    "duration:0",
+    "duration:.5",
+    "duration:1.5",
+    "duration:.75",
+    "duration:.3",
+    "duration:.6",
+    "duration:2.5",
+    "duration:.25",
+    "duration:1.8",
+    "duration:.2",
+    "duration:.35",
+    "duration:.36",
+    "duration:3"
+  ],
+  "delays": [
+    "delay:150",
+    "delay:300",
+    "delay:0",
+    "delay:50",
+    "delay:1",
+    "delay:6",
+    "delay:2",
+    "delay:.75",
+    "delay:.5",
+    "delay:2.6",
+    "delay:.1",
+    "delay:.2",
+    "delay:200",
+    "delay:500"
+  ]
+}

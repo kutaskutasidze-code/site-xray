@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="142" height="142" viewBox="0 0 142 142">
+  <defs>
+    <filter id="Ellipse_27" x="0" y="0" width="142" height="142" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_56" x="45.335" y="25.649" width="60.624" height="90.701" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur-2"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_265" data-name="Group 265" transform="translate(-1047 -926)">
+    <g transform="matrix(1, 0, 0, 1, 1047, 926)" filter="url(#Ellipse_27)">
+      <g id="Ellipse_27-2" data-name="Ellipse 27" transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="5">
+        <circle cx="59" cy="59" r="59" stroke="none"/>
+        <circle cx="59" cy="59" r="56.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1047, 926)" filter="url(#Path_56)">
+      <path id="Path_56-2" data-name="Path 56" d="M-3297.665-4111.586h7.471l29.153-33.749-29.153-32.952h-7.471l29.407,32.952Z" transform="translate(3355 4215.94)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
