@@ -1,0 +1,6 @@
+node_modules/
+test/results/
+improve/logs/
+improve/cycle-v*.log
+*.log
+/tmp/
