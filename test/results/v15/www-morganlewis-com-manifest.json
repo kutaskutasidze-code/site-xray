@@ -1,0 +1,744 @@
+{
+  "site": "https://www.morganlewis.com",
+  "timestamp": "2026-04-02T00:38:22.964Z",
+  "files": {
+    "html": 393,
+    "css": 0,
+    "images": 131,
+    "fonts": 45,
+    "videos": 0,
+    "models": 0,
+    "other": 2
+  },
+  "sizes": {
+    "html": 481255479,
+    "css": 0,
+    "images": 14583351,
+    "fonts": 73809269,
+    "videos": 0,
+    "total": 569689655
+  },
+  "assets": {
+    "images": [
+      {
+        "file": "favicon.ico",
+        "size": 666
+      },
+      {
+        "file": "clone.png",
+        "size": 1115579
+      },
+      {
+        "file": "en.png",
+        "size": 2779343
+      },
+      {
+        "file": "original.png",
+        "size": 989988
+      },
+      {
+        "file": "our-approach.png",
+        "size": 821499
+      },
+      {
+        "file": "our-people.png",
+        "size": 1912569
+      },
+      {
+        "file": "our-services.png",
+        "size": 995157
+      },
+      {
+        "file": "reference.png",
+        "size": 3444910
+      },
+      {
+        "file": "img-0.svg",
+        "size": 3762
+      },
+      {
+        "file": "img-1.svg",
+        "size": 3762
+      },
+      {
+        "file": "img-10.png",
+        "size": 547
+      },
+      {
+        "file": "img-100.jpg",
+        "size": 449
+      },
+      {
+        "file": "img-101.png",
+        "size": 399
+      },
+      {
+        "file": "img-102.png",
+        "size": 1360
+      },
+      {
+        "file": "img-103.png",
+        "size": 187
+      },
+      {
+        "file": "img-104.png",
+        "size": 140
+      },
+      {
+        "file": "img-105.png",
+        "size": 115
+      },
+      {
+        "file": "img-106.png",
+        "size": 1261
+      },
+      {
+        "file": "img-107.png",
+        "size": 76
+      },
+      {
+        "file": "img-108.png",
+        "size": 131
+      },
+      {
+        "file": "img-109.gif",
+        "size": 8685
+      },
+      {
+        "file": "img-11.png",
+        "size": 823
+      },
+      {
+        "file": "img-110.jpg",
+        "size": 8371
+      },
+      {
+        "file": "img-111.png",
+        "size": 15764
+      },
+      {
+        "file": "img-112.svg",
+        "size": 1496
+      },
+      {
+        "file": "img-113.jpg",
+        "size": 29207
+      },
+      {
+        "file": "img-114.jpg",
+        "size": 31204
+      },
+      {
+        "file": "img-115.jpg",
+        "size": 26670
+      },
+      {
+        "file": "img-116.jpg",
+        "size": 112110
+      },
+      {
+        "file": "img-118.jpg",
+        "size": 150022
+      },
+      {
+        "file": "img-119.jpg",
+        "size": 11789
+      },
+      {
+        "file": "img-12.png",
+        "size": 521
+      },
+      {
+        "file": "img-120.jpg",
+        "size": 38732
+      },
+      {
+        "file": "img-121.jpg",
+        "size": 53318
+      },
+      {
+        "file": "img-122.jpg",
+        "size": 28661
+      },
+      {
+        "file": "img-123.jpg",
+        "size": 170449
+      },
+      {
+        "file": "img-13.png",
+        "size": 1264
+      },
+      {
+        "file": "img-14.jpg",
+        "size": 229725
+      },
+      {
+        "file": "img-15.jpg",
+        "size": 36939
+      },
+      {
+        "file": "img-16.jpg",
+        "size": 391572
+      },
+      {
+        "file": "img-17.jpg",
+        "size": 42836
+      },
+      {
+        "file": "img-18.jpeg",
+        "size": 17380
+      },
+      {
+        "file": "img-19.jpg",
+        "size": 81825
+      },
+      {
+        "file": "img-2.png",
+        "size": 419
+      },
+      {
+        "file": "img-20.jpeg",
+        "size": 94001
+      },
+      {
+        "file": "img-21.jpg",
+        "size": 106505
+      },
+      {
+        "file": "img-22.jpg",
+        "size": 61338
+      },
+      {
+        "file": "img-23.jpg",
+        "size": 45666
+      },
+      {
+        "file": "img-24.jpg",
+        "size": 50332
+      },
+      {
+        "file": "img-25.jpg",
+        "size": 160094
+      },
+      {
+        "file": "img-26.png",
+        "size": 115
+      },
+      {
+        "file": "img-27.svg",
+        "size": 3762
+      },
+      {
+        "file": "img-28.svg",
+        "size": 3762
+      },
+      {
+        "file": "img-29.png",
+        "size": 419
+      },
+      {
+        "file": "img-3.png",
+        "size": 556
+      },
+      {
+        "file": "img-30.png",
+        "size": 556
+      },
+      {
+        "file": "img-31.png",
+        "size": 595
+      },
+      {
+        "file": "img-32.png",
+        "size": 624
+      },
+      {
+        "file": "img-33.png",
+        "size": 1024
+      },
+      {
+        "file": "img-34.png",
+        "size": 384
+      },
+      {
+        "file": "img-35.png",
+        "size": 1856
+      },
+      {
+        "file": "img-36.png",
+        "size": 1264
+      },
+      {
+        "file": "img-37.png",
+        "size": 495
+      },
+      {
+        "file": "img-38.png",
+        "size": 823
+      },
+      {
+        "file": "img-39.png",
+        "size": 547
+      },
+      {
+        "file": "img-4.png",
+        "size": 595
+      },
+      {
+        "file": "img-40.png",
+        "size": 521
+      },
+      {
+        "file": "img-41.svg",
+        "size": 5194
+      },
+      {
+        "file": "img-42.png",
+        "size": 4230
+      },
+      {
+        "file": "img-43.svg",
+        "size": 497
+      },
+      {
+        "file": "img-44.jpg",
+        "size": 117597
+      },
+      {
+        "file": "img-45.gif",
+        "size": 1440
+      },
+      {
+        "file": "img-46.jpg",
+        "size": 4891
+      },
+      {
+        "file": "img-47.jpg",
+        "size": 5533
+      },
+      {
+        "file": "img-48.jpg",
+        "size": 4367
+      },
+      {
+        "file": "img-49.jpg",
+        "size": 5231
+      },
+      {
+        "file": "img-5.png",
+        "size": 1024
+      },
+      {
+        "file": "img-50.jpg",
+        "size": 5192
+      },
+      {
+        "file": "img-51.jpg",
+        "size": 6608
+      },
+      {
+        "file": "img-52.jpg",
+        "size": 5687
+      },
+      {
+        "file": "img-53.jpg",
+        "size": 5497
+      },
+      {
+        "file": "img-54.jpg",
+        "size": 6431
+      },
+      {
+        "file": "img-55.jpg",
+        "size": 5597
+      },
+      {
+        "file": "img-56.jpg",
+        "size": 5860
+      },
+      {
+        "file": "img-57.jpg",
+        "size": 6908
+      },
+      {
+        "file": "img-58.jpg",
+        "size": 6205
+      },
+      {
+        "file": "img-59.jpg",
+        "size": 5423
+      },
+      {
+        "file": "img-6.png",
+        "size": 624
+      },
+      {
+        "file": "img-60.jpg",
+        "size": 5308
+      },
+      {
+        "file": "img-61.jpg",
+        "size": 4726
+      },
+      {
+        "file": "img-62.jpg",
+        "size": 5128
+      },
+      {
+        "file": "img-63.jpg",
+        "size": 6151
+      },
+      {
+        "file": "img-64.jpg",
+        "size": 4857
+      },
+      {
+        "file": "img-65.jpg",
+        "size": 4576
+      },
+      {
+        "file": "img-66.jpg",
+        "size": 6115
+      },
+      {
+        "file": "img-67.jpg",
+        "size": 4808
+      },
+      {
+        "file": "img-68.jpg",
+        "size": 5583
+      },
+      {
+        "file": "img-69.jpg",
+        "size": 4985
+      },
+      {
+        "file": "img-7.png",
+        "size": 1856
+      },
+      {
+        "file": "img-70.jpg",
+        "size": 5235
+      },
+      {
+        "file": "img-71.jpg",
+        "size": 5399
+      },
+      {
+        "file": "img-72.jpg",
+        "size": 6211
+      },
+      {
+        "file": "img-73.jpg",
+        "size": 5745
+      },
+      {
+        "file": "img-74.jpg",
+        "size": 4531
+      },
+      {
+        "file": "img-75.jpg",
+        "size": 6224
+      },
+      {
+        "file": "img-76.jpg",
+        "size": 4614
+      },
+      {
+        "file": "img-77.jpg",
+        "size": 4888
+      },
+      {
+        "file": "img-78.jpg",
+        "size": 6205
+      },
+      {
+        "file": "img-79.jpg",
+        "size": 6237
+      },
+      {
+        "file": "img-8.png",
+        "size": 384
+      },
+      {
+        "file": "img-80.jpg",
+        "size": 924
+      },
+      {
+        "file": "img-81.jpg",
+        "size": 5313
+      },
+      {
+        "file": "img-82.jpg",
+        "size": 5702
+      },
+      {
+        "file": "img-83.jpg",
+        "size": 5499
+      },
+      {
+        "file": "img-84.jpg",
+        "size": 4340
+      },
+      {
+        "file": "img-85.jpg",
+        "size": 5957
+      },
+      {
+        "file": "img-86.jpg",
+        "size": 6186
+      },
+      {
+        "file": "img-87.jpg",
+        "size": 5783
+      },
+      {
+        "file": "img-88.jpg",
+        "size": 5334
+      },
+      {
+        "file": "img-89.jpg",
+        "size": 5330
+      },
+      {
+        "file": "img-9.png",
+        "size": 495
+      },
+      {
+        "file": "img-90.jpg",
+        "size": 5559
+      },
+      {
+        "file": "img-91.jpg",
+        "size": 5687
+      },
+      {
+        "file": "img-92.jpg",
+        "size": 11960
+      },
+      {
+        "file": "img-93.jpg",
+        "size": 6669
+      },
+      {
+        "file": "img-94.jpg",
+        "size": 5669
+      },
+      {
+        "file": "img-95.jpg",
+        "size": 4538
+      },
+      {
+        "file": "img-96.jpg",
+        "size": 74117
+      },
+      {
+        "file": "img-97.png",
+        "size": 402
+      },
+      {
+        "file": "img-98.jpg",
+        "size": 339
+      },
+      {
+        "file": "img-99.png",
+        "size": 230
+      }
+    ],
+    "fonts": [
+      {
+        "file": "font-0.woff",
+        "size": 23885
+      },
+      {
+        "file": "font-1.ttf",
+        "size": 44616
+      },
+      {
+        "file": "font-10.woff2",
+        "size": 34907
+      },
+      {
+        "file": "font-11.woff",
+        "size": 47773
+      },
+      {
+        "file": "font-12.woff2",
+        "size": 35203
+      },
+      {
+        "file": "font-13.woff",
+        "size": 48821
+      },
+      {
+        "file": "font-14.woff2",
+        "size": 35719
+      },
+      {
+        "file": "font-15.woff",
+        "size": 48677
+      },
+      {
+        "file": "font-16.woff2",
+        "size": 36759
+      },
+      {
+        "file": "font-17.woff",
+        "size": 50205
+      },
+      {
+        "file": "font-18.woff2",
+        "size": 35731
+      },
+      {
+        "file": "font-19.woff",
+        "size": 48597
+      },
+      {
+        "file": "font-2.woff2",
+        "size": 34591
+      },
+      {
+        "file": "font-20.woff2",
+        "size": 36611
+      },
+      {
+        "file": "font-21.woff",
+        "size": 50013
+      },
+      {
+        "file": "font-22.woff2",
+        "size": 34451
+      },
+      {
+        "file": "font-23.woff",
+        "size": 47277
+      },
+      {
+        "file": "font-24.woff2",
+        "size": 35263
+      },
+      {
+        "file": "font-25.woff",
+        "size": 48393
+      },
+      {
+        "file": "font-26.woff2",
+        "size": 52832
+      },
+      {
+        "file": "font-27.woff",
+        "size": 54366
+      },
+      {
+        "file": "font-28.otf",
+        "size": 8434216
+      },
+      {
+        "file": "font-29.otf",
+        "size": 8482020
+      },
+      {
+        "file": "font-3.woff",
+        "size": 47769
+      },
+      {
+        "file": "font-30.otf",
+        "size": 8508580
+      },
+      {
+        "file": "font-31.otf",
+        "size": 8716392
+      },
+      {
+        "file": "font-32.otf",
+        "size": 8950680
+      },
+      {
+        "file": "font-33.otf",
+        "size": 5733208
+      },
+      {
+        "file": "font-34.otf",
+        "size": 5766468
+      },
+      {
+        "file": "font-35.otf",
+        "size": 5788004
+      },
+      {
+        "file": "font-36.otf",
+        "size": 5942628
+      },
+      {
+        "file": "font-37.otf",
+        "size": 6119096
+      },
+      {
+        "file": "font-38.ttf",
+        "size": 9088
+      },
+      {
+        "file": "font-39.woff2",
+        "size": 35595
+      },
+      {
+        "file": "font-4.woff2",
+        "size": 35423
+      },
+      {
+        "file": "font-40.woff",
+        "size": 23885
+      },
+      {
+        "file": "font-41.woff2",
+        "size": 34907
+      },
+      {
+        "file": "font-42.woff2",
+        "size": 35719
+      },
+      {
+        "file": "font-43.woff2",
+        "size": 19292
+      },
+      {
+        "file": "font-44.woff2",
+        "size": 19544
+      },
+      {
+        "file": "font-5.woff",
+        "size": 49013
+      },
+      {
+        "file": "font-6.woff2",
+        "size": 35595
+      },
+      {
+        "file": "font-7.woff",
+        "size": 48749
+      },
+      {
+        "file": "font-8.woff2",
+        "size": 37427
+      },
+      {
+        "file": "font-9.woff",
+        "size": 51281
+      }
+    ],
+    "videos": []
+  },
+  "issues": [
+    "Tiny image (likely broken): img-107.png (76b)",
+    "2753 external references still in HTML (should be 0)"
+  ],
+  "analysis": {
+    "htmlPages": 393,
+    "externalRefsRemaining": 2753,
+    "inlineStyleBlocks": 787,
+    "totalCSSInHTML": 476257038,
+    "avgImageSize": 111323,
+    "totalSizeKB": 556338
+  }
+}

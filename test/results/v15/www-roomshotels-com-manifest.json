@@ -1,0 +1,471 @@
+{
+  "site": "https://www.roomshotels.com",
+  "timestamp": "2026-04-02T00:38:47.122Z",
+  "files": {
+    "html": 9,
+    "css": 1,
+    "images": 99,
+    "fonts": 9,
+    "videos": 0,
+    "models": 0,
+    "other": 3
+  },
+  "sizes": {
+    "html": 667563,
+    "css": 259311,
+    "images": 62926450,
+    "fonts": 757684,
+    "videos": 0,
+    "total": 64613150
+  },
+  "assets": {
+    "images": [
+      {
+        "file": "clone.png",
+        "size": 385376
+      },
+      {
+        "file": "original.png",
+        "size": 761389
+      },
+      {
+        "file": "reference.png",
+        "size": 1261374
+      },
+      {
+        "file": "img-0.jpg",
+        "size": 125976
+      },
+      {
+        "file": "img-1.jpg",
+        "size": 96799
+      },
+      {
+        "file": "img-10.jpg",
+        "size": 314634
+      },
+      {
+        "file": "img-11.jpg",
+        "size": 470998
+      },
+      {
+        "file": "img-12.jpg",
+        "size": 1510130
+      },
+      {
+        "file": "img-13.jpg",
+        "size": 324384
+      },
+      {
+        "file": "img-14.jpg",
+        "size": 248254
+      },
+      {
+        "file": "img-15.jpg",
+        "size": 686916
+      },
+      {
+        "file": "img-16.jpg",
+        "size": 399734
+      },
+      {
+        "file": "img-17.jpg",
+        "size": 644360
+      },
+      {
+        "file": "img-18.jpg",
+        "size": 1448538
+      },
+      {
+        "file": "img-19.jpg",
+        "size": 740090
+      },
+      {
+        "file": "img-2.jpg",
+        "size": 151912
+      },
+      {
+        "file": "img-20.jpg",
+        "size": 390182
+      },
+      {
+        "file": "img-21.jpg",
+        "size": 1369216
+      },
+      {
+        "file": "img-22.jpg",
+        "size": 267662
+      },
+      {
+        "file": "img-23.jpg",
+        "size": 539752
+      },
+      {
+        "file": "img-24.jpg",
+        "size": 827080
+      },
+      {
+        "file": "img-25.jpg",
+        "size": 496422
+      },
+      {
+        "file": "img-26.jpg",
+        "size": 378498
+      },
+      {
+        "file": "img-27.jpg",
+        "size": 637166
+      },
+      {
+        "file": "img-28.jpg",
+        "size": 161778
+      },
+      {
+        "file": "img-29.jpg",
+        "size": 1276314
+      },
+      {
+        "file": "img-3.webp",
+        "size": 164168
+      },
+      {
+        "file": "img-30.jpg",
+        "size": 312703
+      },
+      {
+        "file": "img-31.jpg",
+        "size": 386208
+      },
+      {
+        "file": "img-32.jpg",
+        "size": 243184
+      },
+      {
+        "file": "img-33.jpg",
+        "size": 292690
+      },
+      {
+        "file": "img-34.jpg",
+        "size": 211574
+      },
+      {
+        "file": "img-35.jpg",
+        "size": 319480
+      },
+      {
+        "file": "img-36.png",
+        "size": 626058
+      },
+      {
+        "file": "img-37.jpg",
+        "size": 94712
+      },
+      {
+        "file": "img-38.jpg",
+        "size": 142086
+      },
+      {
+        "file": "img-39.jpg",
+        "size": 167095
+      },
+      {
+        "file": "img-4.jpg",
+        "size": 461018
+      },
+      {
+        "file": "img-40.jpg",
+        "size": 537733
+      },
+      {
+        "file": "img-41.jpg",
+        "size": 273060
+      },
+      {
+        "file": "img-42.jpg",
+        "size": 263905
+      },
+      {
+        "file": "img-43.jpg",
+        "size": 468744
+      },
+      {
+        "file": "img-44.jpg",
+        "size": 190348
+      },
+      {
+        "file": "img-45.jpg",
+        "size": 201734
+      },
+      {
+        "file": "img-46.jpg",
+        "size": 214274
+      },
+      {
+        "file": "img-47.jpg",
+        "size": 196184
+      },
+      {
+        "file": "img-48.jpg",
+        "size": 223445
+      },
+      {
+        "file": "img-49.jpg",
+        "size": 199218
+      },
+      {
+        "file": "img-5.jpg",
+        "size": 122391
+      },
+      {
+        "file": "img-50.jpg",
+        "size": 1052810
+      },
+      {
+        "file": "img-51.jpg",
+        "size": 1425830
+      },
+      {
+        "file": "img-52.jpg",
+        "size": 368198
+      },
+      {
+        "file": "img-53.jpg",
+        "size": 1171974
+      },
+      {
+        "file": "img-54.jpg",
+        "size": 1433584
+      },
+      {
+        "file": "img-55.jpg",
+        "size": 1527652
+      },
+      {
+        "file": "img-56.jpg",
+        "size": 1329302
+      },
+      {
+        "file": "img-57.jpg",
+        "size": 939612
+      },
+      {
+        "file": "img-58.jpg",
+        "size": 173566
+      },
+      {
+        "file": "img-59.jpg",
+        "size": 589068
+      },
+      {
+        "file": "img-6.jpg",
+        "size": 266104
+      },
+      {
+        "file": "img-60.jpg",
+        "size": 1423202
+      },
+      {
+        "file": "img-61.jpg",
+        "size": 2078906
+      },
+      {
+        "file": "img-62.jpg",
+        "size": 1455534
+      },
+      {
+        "file": "img-63.jpg",
+        "size": 834122
+      },
+      {
+        "file": "img-64.jpg",
+        "size": 1721362
+      },
+      {
+        "file": "img-65.jpg",
+        "size": 1375762
+      },
+      {
+        "file": "img-66.jpg",
+        "size": 890028
+      },
+      {
+        "file": "img-67.jpg",
+        "size": 1575938
+      },
+      {
+        "file": "img-68.jpg",
+        "size": 726932
+      },
+      {
+        "file": "img-69.jpg",
+        "size": 2055016
+      },
+      {
+        "file": "img-7.jpg",
+        "size": 259390
+      },
+      {
+        "file": "img-70.jpg",
+        "size": 1262912
+      },
+      {
+        "file": "img-71.jpg",
+        "size": 2160204
+      },
+      {
+        "file": "img-72.jpg",
+        "size": 616026
+      },
+      {
+        "file": "img-73.jpg",
+        "size": 1247502
+      },
+      {
+        "file": "img-74.jpg",
+        "size": 993418
+      },
+      {
+        "file": "img-75.jpg",
+        "size": 946194
+      },
+      {
+        "file": "img-76.jpg",
+        "size": 814960
+      },
+      {
+        "file": "img-77.jpg",
+        "size": 1186698
+      },
+      {
+        "file": "img-78.jpg",
+        "size": 194114
+      },
+      {
+        "file": "img-79.jpg",
+        "size": 515156
+      },
+      {
+        "file": "img-8.jpg",
+        "size": 414528
+      },
+      {
+        "file": "img-80.jpg",
+        "size": 974898
+      },
+      {
+        "file": "img-81.jpg",
+        "size": 644158
+      },
+      {
+        "file": "img-82.jpg",
+        "size": 742934
+      },
+      {
+        "file": "img-83.jpg",
+        "size": 660702
+      },
+      {
+        "file": "img-84.jpg",
+        "size": 595802
+      },
+      {
+        "file": "img-85.jpg",
+        "size": 1029750
+      },
+      {
+        "file": "img-86.jpg",
+        "size": 647980
+      },
+      {
+        "file": "img-87.svg",
+        "size": 1345
+      },
+      {
+        "file": "img-88.svg",
+        "size": 3762
+      },
+      {
+        "file": "img-9.jpg",
+        "size": 328308
+      },
+      {
+        "file": "apple-touch-icon.png",
+        "size": 4302
+      },
+      {
+        "file": "favicon-96x96.png",
+        "size": 1862
+      },
+      {
+        "file": "favicon.ico",
+        "size": 15086
+      },
+      {
+        "file": "favicon.svg",
+        "size": 13915
+      },
+      {
+        "file": "cropped-favicon-512-png-180x180.png",
+        "size": 3996
+      },
+      {
+        "file": "cropped-favicon-512-png-192x192.png",
+        "size": 4287
+      },
+      {
+        "file": "cropped-favicon-512-png-32x32.png",
+        "size": 813
+      }
+    ],
+    "fonts": [
+      {
+        "file": "font-0.otf",
+        "size": 95216
+      },
+      {
+        "file": "font-1.otf",
+        "size": 96420
+      },
+      {
+        "file": "font-2.otf",
+        "size": 105096
+      },
+      {
+        "file": "font-3.otf",
+        "size": 106108
+      },
+      {
+        "file": "font-4.otf",
+        "size": 100796
+      },
+      {
+        "file": "font-5.otf",
+        "size": 100780
+      },
+      {
+        "file": "font-6.otf",
+        "size": 60732
+      },
+      {
+        "file": "font-7.otf",
+        "size": 60920
+      },
+      {
+        "file": "font-8.otf",
+        "size": 31616
+      }
+    ],
+    "videos": []
+  },
+  "issues": [
+    "6 external references still in HTML (should be 0)"
+  ],
+  "analysis": {
+    "htmlPages": 9,
+    "externalRefsRemaining": 6,
+    "inlineStyleBlocks": 15,
+    "totalCSSInHTML": 571382,
+    "avgImageSize": 635621,
+    "totalSizeKB": 63099
+  }
+}

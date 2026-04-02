@@ -1,4 +1,72 @@
 {
-  "learnings": [],
-  "failed_approaches": []
+  "learnings": [
+    {
+      "version": "v15",
+      "technique": "Download external CSS files as local assets",
+      "detail": "External CSS files referenced by <link rel='stylesheet'> tags were being fetched and inlined into <style> tags, but the <link> tags remained pointing to non-existent local paths. Fix: save CSS files to /css/style-N.css, map URLs via mapAsset(), and rewrite <link> hrefs during post-processing.",
+      "impact": "Cravath links: 5→100, Pentagram links: 95→98, fixed broken CSS references on 5 sites"
+    },
+    {
+      "version": "v15",
+      "technique": "Favicon download from exact HTML-referenced paths",
+      "detail": "Sites use deep favicon paths (e.g., /cached/40060/images/favicons/apple-touch-icon.png) and query-parameterized icon URLs (/static/icon.png?v=2). Download icons to their exact local paths by parsing <link> icon tags and preserving directory structure.",
+      "impact": "Cravath: favicon paths resolved, Linear: query-param icons mapped"
+    },
+    {
+      "version": "v15",
+      "technique": "Broad attribute-based external ref cleanup",
+      "detail": "Previous cleanup only handled src/href/action/poster. v15 matches ANY attribute containing the domain URL using regex pattern (\\w+)=\"([^\"]*?)DOMAIN(/[^\"]*?)\". Also handles hash-only URLs (domain#section).",
+      "impact": "Reduced external refs on all sites, improved manifest scores"
+    },
+    {
+      "version": "v14",
+      "technique": "Clean context recovery for DOM-destroying init scripts",
+      "detail": "The addInitScript (WebGL/model/timeline pollers) can destroy DOM on certain sites (e.g., Cravath). Recovery: detect empty body after capture, create a NEW browser context WITHOUT init script, navigate and capture cleanly. Don't run dismissOverlays on the clean page.",
+      "impact": "Cravath: 62 → 82 points"
+    },
+    {
+      "version": "v14",
+      "technique": "www/non-www URL rewriting",
+      "detail": "Sites use both www.example.com and example.com. Must strip BOTH variants when rewriting URLs to local paths. Added altDomain global variable and mapped it in mapAsset(), HTML post-processing, CSS cleanup, and final external cleanup.",
+      "impact": "Rooms Hotels images: 0→100 rendered, score 54→85"
+    },
+    {
+      "version": "v14",
+      "technique": "Universal overlay dismissal via viewport coverage",
+      "detail": "Instead of matching specific popup class names, detect ANY fixed/absolute element covering >60% of viewport with z-index >10. Skip if it contains nav or has >10 children with >3 images.",
+      "impact": "Removed promotional popups on Rooms Hotels and similar sites"
+    },
+    {
+      "version": "v14",
+      "technique": "Final external URL cleanup pass",
+      "detail": "After all link rewriting, do a final pass over all HTML files to strip any remaining references to both the primary domain and the www/non-www variant, including protocol-relative URLs.",
+      "impact": "Reduced external refs remaining across all sites"
+    }
+  ],
+  "failed_approaches": [
+    {
+      "version": "v15",
+      "technique": "Aggressive overlay dismissal with z-index > 100",
+      "detail": "Lowering the z-index threshold from 999 to 100 caused catastrophic regression on Pentagram (86→51) and other sites. Many legitimate UI elements (sticky headers, toolbars, etc.) use z-index 100-500. Also, broad popup class selectors like [class*='modal'] match non-overlay components.",
+      "reason": "z-index 100-500 is commonly used by legitimate UI elements, not just overlays"
+    },
+    {
+      "version": "v15",
+      "technique": "JSON-LD and free-text domain replacement",
+      "detail": "Replacing domain URLs in free text (not just attributes) with patterns like '\"DOMAIN/\" → \"/\"' can break CSS, inline scripts, and structured data in unintended ways.",
+      "reason": "Too broad — domain strings appear in many non-URL contexts"
+    },
+    {
+      "version": "v14",
+      "technique": "Page reload within init-script context for recovery",
+      "detail": "Reloading the page within the same browser context (that has addInitScript) doesn't help — the init script re-runs and re-destroys the DOM. Must use a SEPARATE context without init script.",
+      "reason": "Init script interference persists across reloads in same context"
+    },
+    {
+      "version": "v14",
+      "technique": "Launching new browser for recovery",
+      "detail": "Creating a whole new browser instance for recovery fails (possibly rate limiting or resource contention). Using newContext on same browser works fine.",
+      "reason": "Multiple browser instances may trigger rate limiting or resource issues"
+    }
+  ]
 }

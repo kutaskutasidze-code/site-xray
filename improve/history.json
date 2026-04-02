@@ -1,6 +1,32 @@
 [
-  { "version": "v10", "score": null, "note": "Baseline — v7 + WebGL/3D extraction" },
-  { "version": "v11", "score": null, "note": "Cookie dismiss, SVG inline, Next.js images, post-processing links, verification" },
-  { "version": "v12", "score": null, "note": "Subpage images, external CSS, smart script removal, layout freeze" },
-  { "version": "v13", "score": null, "note": "Nav priority queue, stub pages, computed layout freeze, UI scripts, default 50 pages" }
+  {
+    "version": "v10",
+    "score": null,
+    "note": "Baseline — v7 + WebGL/3D extraction"
+  },
+  {
+    "version": "v11",
+    "score": null,
+    "note": "Cookie dismiss, SVG inline, Next.js images, post-processing links, verification"
+  },
+  {
+    "version": "v12",
+    "score": null,
+    "note": "Subpage images, external CSS, smart script removal, layout freeze"
+  },
+  {
+    "version": "v13",
+    "score": 84,
+    "note": "Nav priority queue, stub pages, computed layout freeze, UI scripts, default 50 pages"
+  },
+  {
+    "version": "v14",
+    "score": 89,
+    "note": "Blank page recovery (clean context without init script), www/non-www URL rewriting, universal overlay/popup dismissal (viewport coverage detection), favicon/icon download, final external URL cleanup. Cravath: 62→82, Rooms Hotels: 54→85"
+  },
+  {
+    "version": "v15",
+    "score": 90,
+    "note": "Download external CSS as local files (fixes broken link refs), broader external ref cleanup (attribute-based), favicon download from exact HTML-referenced paths (deep dirs, query strings), conservative overlay/popup dismissal via role=dialog. Cravath: 76→93, Rooms Hotels: 78→84, Linear: 92→93"
+  }
 ]
