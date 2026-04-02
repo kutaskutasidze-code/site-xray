@@ -49,6 +49,14 @@
       "diff": 4,
       "date": "2026-04-02T00:49:57.111Z",
       "log_tail": "All three background test runs have completed. The final committed v15 scored **90/100** average (+3 from v14's 87), with the biggest win being Cravath jumping from 76 to 93. Everything is committed and ready.\n"
+    },
+    {
+      "version": "v17",
+      "score": 93,
+      "prev_score": 88,
+      "diff": 5,
+      "date": "2026-04-02T12:52:25.459Z",
+      "log_tail": "All done. v17 is committed with the final test suite run confirming **94/100 average** (+6 from v16's 88), **2 sites mastered** (vercel, linear), and **zero regressions**.\n"
     }
   ],
   "failed_approaches": [

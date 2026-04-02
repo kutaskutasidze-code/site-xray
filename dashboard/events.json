@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": "2026-04-02T10:29:53.189Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SWAP: OK (1s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T10:29:53.190Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (swap): ALL OK — 0.0m",
+    "status": "success"
+  }
+]

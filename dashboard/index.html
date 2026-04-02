@@ -1,962 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X-RAY // EVOLUTION ENGINE</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YEEZY // Control System</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F4F7FB;--bg2:#FFF;--bg3:#EEF2F7;--surface:#FFF;
+  --text:#071D2F;--dim:rgba(7,29,47,.6);--muted:rgba(7,29,47,.35);
+  --red:#FF1919;--red-g:rgba(255,25,25,.08);--red-d:rgba(255,25,25,.4);
+  --green:#16A34A;--green-g:rgba(22,163,74,.1);
+  --amber:#D97706;--blue:#0A68F5;
+  --border:rgba(7,29,47,.08);
+  --font:'JetBrains Mono',monospace;--fd:'Space Grotesk',sans-serif;
+  --ease:cubic-bezier(.625,.05,0,1);
+}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(7,29,47,.12);border-radius:2px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 2px,rgba(0,0,0,.006) 2px,rgba(0,0,0,.006) 4px);animation:scan 8s linear infinite}
+@keyframes scan{to{transform:translateY(12px)}}
 
-    :root {
-      --bg: #F4F7FB;
-      --bg-2: #FFFFFF;
-      --bg-3: #EEF2F7;
-      --surface: #FFFFFF;
-      --surface-2: #F8FAFE;
-      --cream: #071D2F;
-      --cream-dim: rgba(7, 29, 47, 0.6);
-      --cream-muted: rgba(7, 29, 47, 0.35);
-      --red: #FF1919;
-      --red-dim: rgba(255, 25, 25, 0.4);
-      --red-glow: rgba(255, 25, 25, 0.08);
-      --green: #16A34A;
-      --green-dim: rgba(22, 163, 74, 0.1);
-      --amber: #D97706;
-      --border: rgba(7, 29, 47, 0.08);
-      --border-active: rgba(255, 25, 25, 0.3);
-      --font: 'JetBrains Mono', ui-monospace, monospace;
-      --font-display: 'Space Grotesk', system-ui, sans-serif;
-      --ease: cubic-bezier(0.625, 0.05, 0, 1);
-    }
+.container{max-width:1400px;margin:0 auto;padding:0 24px}
 
-    ::selection { background: var(--red); color: #fff; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(7,29,47,0.15); border-radius: 2px; }
+/* ═══ HEADER ═══ */
+.header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;height:52px;gap:0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);padding-right:24px;border-right:1px solid var(--border);margin-right:4px}
+.logo-mark{font-size:11px;font-weight:800;letter-spacing:.15em;color:#fff;background:var(--red);padding:3px 8px}
+.logo-text{font-family:var(--fd);font-weight:700;font-size:14px;letter-spacing:-.01em}
 
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--cream);
-      font-size: 13px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+/* Nav */
+.nav{display:flex;align-items:center;height:100%;gap:0;flex:1}
+.nav-group{display:flex;align-items:center;height:100%;border-right:1px solid var(--border)}
+.nav-group:last-child{border-right:none}
+.nav-group-label{padding:0 12px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;height:100%;display:flex;align-items:center;transition:color .2s}
+.nav-group-label:hover,.nav-group-label.active{color:var(--red)}
+.nav-sub{display:flex;height:100%}
+.nav-btn{padding:0 10px;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;height:100%;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .2s var(--ease);text-decoration:none}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.active{color:var(--red);border-bottom-color:var(--red)}
 
-    /* ── Scanlines (subtle on light) ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9998;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        rgba(0,0,0,0.008) 2px,
-        rgba(0,0,0,0.008) 4px
-      );
-      animation: scanline-drift 8s linear infinite;
-    }
-    @keyframes scanline-drift {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(12px); }
-    }
+.header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(22,163,74,.4);animation:pulseg 2s ease-in-out infinite}
+@keyframes pulseg{0%,100%{opacity:1}50%{opacity:.4}}
+.status-lbl{font-size:10px;color:var(--muted)}
 
-    /* ── Glitch Text ── */
-    .glitch {
-      position: relative;
-      display: inline-block;
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    .glitch::before {
-      color: var(--red);
-      animation: glitch-shift 4s linear infinite;
-      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-      opacity: 0.7;
-    }
-    .glitch::after {
-      color: #0A68F5;
-      animation: glitch-shift 4s linear infinite reverse;
-      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-      opacity: 0.5;
-    }
-    @keyframes glitch-shift {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-3px, 1px); }
-      94% { transform: translate(2px, -1px); }
-      96% { transform: translate(-1px, 2px); }
-      98% { transform: translate(3px, 0); }
-    }
+/* ═══ PAGES ═══ */
+.page{display:none;animation:pageIn .4s var(--ease)}.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    /* ── Layout ── */
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+.section{padding:32px 0}
+.sec-label{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.sec-title{font-family:var(--fd);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:24px}
 
-    /* ── Header ── */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0;
-    }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--cream);
-    }
-    .logo-mark {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      color: #fff;
-      background: var(--red);
-      padding: 4px 8px;
-    }
-    .logo-text {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-      color: var(--cream);
-    }
-    .logo-coord {
-      font-size: 10px;
-      color: var(--cream-muted);
-      letter-spacing: 0.05em;
-    }
+/* ═══ STATS ROW ═══ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:32px}
+.stat{background:var(--bg);padding:20px;transition:background .2s}.stat:hover{background:var(--bg2)}
+.stat-v{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.stat-l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.stat-t{font-size:10px;font-weight:600;margin-top:6px}
+.t-up{color:var(--green)}.t-down{color:var(--red)}.t-flat{color:var(--muted)}
 
-    /* ── Nav ── */
-    .nav {
-      display: flex;
-      gap: 0;
-    }
-    .nav-item {
-      padding: 18px 20px;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cream-muted);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.3s var(--ease);
-      text-decoration: none;
-    }
-    .nav-item:hover { color: var(--cream); }
-    .nav-item.active {
-      color: var(--red);
-      border-bottom-color: var(--red);
-    }
+/* ═══ TABLE ═══ */
+.tbl-wrap{border:1px solid var(--border);overflow-x:auto;margin-bottom:32px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead{background:var(--bg3);position:sticky;top:0}
+th{padding:10px 14px;text-align:left;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+th.c,td.c{text-align:center}
+td{padding:12px 14px;border-bottom:1px solid var(--border);transition:background .1s}
+tr:hover td{background:rgba(255,25,25,.02)}
+.host{font-weight:600;font-size:13px}.cat{font-size:8px;font-weight:600;color:var(--red);background:var(--red-g);padding:2px 6px;letter-spacing:.05em;text-transform:uppercase;margin-left:6px;display:inline-block}
+.sn{font-weight:700;font-size:13px}
+.sc-p{color:var(--green)}.sc-h{color:var(--text)}.sc-m{color:var(--amber)}.sc-l{color:var(--red)}
+.bar{display:block;height:3px;background:var(--bg3);margin-top:3px;overflow:hidden}.bar-f{height:100%;transition:width .6s var(--ease)}
+.f-p{background:var(--green)}.f-h{background:var(--dim)}.f-m{background:var(--amber)}.f-l{background:var(--red)}
 
-    .header-status {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .pulse {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(22,163,74,0.4);
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .status-label {
-      font-size: 10px;
-      color: var(--cream-muted);
-      letter-spacing: 0.05em;
-    }
+/* ═══ TIMELINE ═══ */
+.timeline{display:flex;gap:2px;overflow-x:auto;padding-bottom:6px;margin-bottom:32px}
+.tl{flex-shrink:0;padding:14px 18px;min-width:120px;background:var(--bg2);border:1px solid var(--border);text-align:center;transition:all .2s var(--ease)}
+.tl:hover{border-color:var(--red-d)}.tl.latest{border-color:var(--red);box-shadow:0 4px 20px var(--red-g)}
+.tl-v{font-size:10px;font-weight:700;color:var(--red);letter-spacing:.05em}.tl-s{font-family:var(--fd);font-size:24px;font-weight:800}.tl-d{font-size:10px;font-weight:600;margin-top:3px}.tl-n{font-size:8px;color:var(--muted);margin-top:4px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-    /* ── Pages ── */
-    .page { display: none; }
-    .page.active { display: block; animation: page-in 0.5s var(--ease); }
-    @keyframes page-in {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ═══ UNIFIED LOGS ═══ */
+.log-entry{display:grid;grid-template-columns:140px 70px 70px 1fr;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border);font-size:12px;transition:background .1s}
+.log-entry:hover{background:rgba(255,25,25,.015)}
+.log-time{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.log-sys{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;display:inline-block}
+.log-sys.xray{color:var(--blue);background:rgba(10,104,245,.08)}
+.log-sys.leads{color:var(--amber);background:rgba(217,119,6,.08)}
+.log-sys.server{color:var(--muted);background:var(--bg3)}
+.log-sys.bot{color:var(--red);background:var(--red-g)}
+.log-status{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px}
+.log-status.success{color:var(--green);background:var(--green-g)}
+.log-status.failure{color:var(--red);background:var(--red-g)}
+.log-status.info{color:var(--blue);background:rgba(10,104,245,.06)}
+.log-status.warning{color:var(--amber);background:rgba(217,119,6,.06)}
+.log-status.healing{color:#9333EA;background:rgba(147,51,234,.06)}
+.log-msg{font-size:12px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-    /* ── Section ── */
-    .section { padding: 40px 0; }
-    .section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 6px;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 32px;
-    }
+/* ═══ ARCHITECTURE — ANIMATED NODES ═══ */
+.arch-canvas{position:relative;padding:40px 0;overflow-x:auto}
+.node-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.node{position:relative;background:var(--bg2);border:1px solid var(--border);padding:20px;min-width:180px;max-width:240px;transition:all .3s var(--ease)}
+.node:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 8px 24px var(--red-g)}
+.node-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.node-name{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:-.01em}
+.node-status{width:8px;height:8px;border-radius:50%}
+.node-status.on{background:var(--green);box-shadow:0 0 6px rgba(22,163,74,.5);animation:pulseg 2s ease-in-out infinite}
+.node-status.off{background:var(--muted)}
+.node-status.busy{background:var(--amber);animation:pulseg 1s ease-in-out infinite}
+.node-data{font-size:10px;color:var(--muted);line-height:1.8}
+.node-data strong{color:var(--text);font-weight:600}
+.node-tag{font-size:8px;font-weight:600;color:var(--red);background:var(--red-g);padding:1px 6px;letter-spacing:.05em;text-transform:uppercase;display:inline-block;margin:3px 3px 0 0}
 
-    /* ── Stat Grid ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 40px;
-    }
-    .stat {
-      background: var(--bg);
-      padding: 28px 24px;
-      transition: background 0.3s;
-    }
-    .stat:hover { background: var(--bg-2); }
-    .stat-val {
-      font-family: var(--font-display);
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-val.red { color: var(--red); }
-    .stat-val.green { color: var(--green); }
-    .stat-val.cream { color: var(--cream); }
-    .stat-lbl {
-      font-size: 10px;
-      color: var(--cream-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
-    }
-    .stat-trend {
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .trend-up { color: var(--green); }
-    .trend-down { color: var(--red); }
-    .trend-flat { color: var(--cream-muted); }
+/* Connection lines between nodes */
+.conn-row{display:flex;align-items:center;justify-content:center;gap:0;margin:20px 0}
+.conn-arrow{color:var(--red);font-size:18px;padding:0 8px;animation:arrowPulse 2s ease-in-out infinite}
+@keyframes arrowPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.conn-line{width:40px;height:2px;background:linear-gradient(90deg,var(--red-g),var(--red-d),var(--red-g));animation:flowLine 2s linear infinite;background-size:200% 100%}
+@keyframes flowLine{to{background-position:-200% 0}}
 
-    /* ── Score Table ── */
-    .table-wrap {
-      border: 1px solid var(--border);
-      overflow-x: auto;
-      margin-bottom: 40px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    thead {
-      background: var(--bg-2);
-      position: sticky;
-      top: 0;
-    }
-    th {
-      padding: 12px 16px;
-      text-align: left;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cream-muted);
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-    }
-    th.center, td.center { text-align: center; }
-    td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-      transition: background 0.15s;
-    }
-    tr:hover td { background: rgba(255,25,25,0.03); }
-    .site-host {
-      font-weight: 600;
-      color: var(--cream);
-      font-size: 13px;
-    }
-    .site-cat {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 500;
-      color: var(--red);
-      background: var(--red-glow);
-      padding: 2px 6px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-left: 8px;
-    }
-    .score-num {
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .sc-perfect { color: var(--green); }
-    .sc-high { color: var(--cream); }
-    .sc-mid { color: var(--amber); }
-    .sc-low { color: var(--red); }
-    .bar {
-      display: block;
-      height: 3px;
-      background: var(--surface);
-      margin-top: 4px;
-      overflow: hidden;
-    }
-    .bar-fill {
-      height: 100%;
-      transition: width 0.8s var(--ease);
-    }
-    .fill-perfect { background: var(--green); }
-    .fill-high { background: var(--cream-dim); }
-    .fill-mid { background: var(--amber); }
-    .fill-low { background: var(--red); }
+/* Pipeline flow */
+.pipe-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:16px 0;margin-bottom:24px}
+.pipe-step{flex-shrink:0;padding:10px 16px;background:var(--bg2);border:1px solid var(--border);font-size:10px;font-weight:600;text-align:center;transition:all .3s}
+.pipe-step:hover{border-color:var(--red);color:var(--red);background:var(--red-g)}
+.pipe-step.active{border-color:var(--green);color:var(--green);background:var(--green-g)}
+.pipe-arrow{flex-shrink:0;color:var(--red);font-size:14px;padding:0 6px;animation:arrowPulse 2s ease-in-out infinite}
 
-    /* ── Version Timeline ── */
-    .timeline {
-      display: flex;
-      gap: 2px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 40px;
-    }
-    .tl-entry {
-      flex-shrink: 0;
-      padding: 16px 20px;
-      min-width: 130px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: all 0.3s var(--ease);
-      cursor: default;
-    }
-    .tl-entry:hover { border-color: var(--red-dim); background: var(--bg); }
-    .tl-entry.latest { border-color: var(--red); box-shadow: 0 4px 24px var(--red-glow); }
-    .tl-ver {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--red);
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-    .tl-score {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 800;
-    }
-    .tl-diff {
-      font-size: 11px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-    .tl-note {
-      font-size: 9px;
-      color: var(--cream-muted);
-      margin-top: 6px;
-      max-width: 140px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+/* ═══ FOOTER ═══ */
+.footer{border-top:1px solid var(--border);padding:16px 0;margin-top:32px}
+.footer-inner{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.footer-red{color:var(--red)}
 
-    /* ── Logs Page ── */
-    .log-entry {
-      border: 1px solid var(--border);
-      padding: 20px 24px;
-      margin-bottom: 2px;
-      background: var(--bg);
-      transition: background 0.2s;
-    }
-    .log-entry:hover { background: var(--bg-2); }
-    .log-entry.success { border-left: 3px solid var(--green); }
-    .log-entry.failure { border-left: 3px solid var(--red); }
-    .log-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .log-version {
-      font-weight: 700;
-      font-size: 14px;
-    }
-    .log-badge {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-    }
-    .badge-success { background: var(--green-dim); color: var(--green); }
-    .badge-failure { background: var(--red-glow); color: var(--red); }
-    .log-detail {
-      font-size: 12px;
-      color: var(--cream-dim);
-      line-height: 1.7;
-    }
-    .log-impact {
-      font-size: 11px;
-      color: var(--green);
-      margin-top: 6px;
-    }
-    .log-reason {
-      font-size: 11px;
-      color: var(--red);
-      margin-top: 6px;
-    }
-    .log-date {
-      font-size: 10px;
-      color: var(--cream-muted);
-    }
-
-    /* ── Architecture Page ── */
-    .arch-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-bottom: 40px;
-    }
-    @media (max-width: 768px) { .arch-grid { grid-template-columns: 1fr; } }
-    .arch-block {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      padding: 28px;
-      transition: all 0.3s var(--ease);
-    }
-    .arch-block:hover { border-color: var(--red-dim); }
-    .arch-block.full { grid-column: 1 / -1; }
-    .arch-num {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--red);
-      opacity: 0.15;
-      line-height: 1;
-      margin-bottom: -20px;
-      font-family: var(--font-display);
-    }
-    .arch-title {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-    .arch-desc {
-      font-size: 12px;
-      color: var(--cream-dim);
-      line-height: 1.8;
-    }
-    .arch-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 500;
-      color: var(--red);
-      background: var(--red-glow);
-      padding: 2px 8px;
-      margin: 4px 4px 0 0;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .arch-metric {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 12px;
-    }
-    .arch-metric:last-child { border-bottom: none; }
-    .arch-metric-val {
-      font-weight: 700;
-      color: var(--cream);
-    }
-    .arch-flow {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      overflow-x: auto;
-      padding: 20px 0;
-    }
-    .flow-step {
-      flex-shrink: 0;
-      padding: 12px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      font-size: 11px;
-      font-weight: 600;
-      text-align: center;
-      min-width: 100px;
-      transition: all 0.3s;
-    }
-    .flow-step:hover { border-color: var(--red); color: var(--red); background: var(--red-glow); }
-    .flow-arrow {
-      flex-shrink: 0;
-      color: var(--red);
-      font-size: 16px;
-      padding: 0 8px;
-    }
-
-    /* ── Cycle Table ── */
-    .cycle-table td, .cycle-table th { padding: 10px 14px; }
-
-    /* ── Footer ── */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 20px 0;
-      margin-top: 40px;
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10px;
-      color: var(--cream-muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .footer-red { color: var(--red); }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .stats-row { grid-template-columns: 1fr 1fr; }
-      .nav-item { padding: 18px 12px; font-size: 9px; }
-      .header-status { display: none; }
-    }
-
-    /* ── Animations ── */
-    .fade-in {
-      animation: page-in 0.6s var(--ease) both;
-    }
-    .d1 { animation-delay: 0.05s; }
-    .d2 { animation-delay: 0.1s; }
-    .d3 { animation-delay: 0.15s; }
-    .d4 { animation-delay: 0.2s; }
-    .d5 { animation-delay: 0.25s; }
-  </style>
+@media(max-width:768px){
+  .nav-sub{display:none}.stats{grid-template-columns:1fr 1fr}
+  .log-entry{grid-template-columns:100px 60px 1fr;}.log-status{display:none}
+  .header-right{display:none}
+}
+</style>
 </head>
 <body>
 
 <header class="header">
-  <div class="container header-inner">
-    <a class="logo" href="#">
-      <span class="logo-mark">X-RAY</span>
-      <span class="logo-text">Evolution Engine</span>
-    </a>
-    <nav class="nav">
-      <a class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</a>
-      <a class="nav-item" data-page="logs" onclick="showPage('logs')">Logs</a>
-      <a class="nav-item" data-page="architecture" onclick="showPage('architecture')">Architecture</a>
-    </nav>
-    <div class="header-status">
-      <div class="pulse" id="statusDot"></div>
-      <span class="status-label" id="statusLabel">LOADING</span>
+<div class="container header-inner">
+  <a class="logo" href="#"><span class="logo-mark">Y</span><span class="logo-text">YEEZY</span></a>
+  <nav class="nav">
+    <div class="nav-group">
+      <span class="nav-group-label active" onclick="setSystem('main')">MAIN</span>
+      <div class="nav-sub" data-sys="main">
+        <a class="nav-btn active" onclick="go('main','dash')">Dashboard</a>
+        <a class="nav-btn" onclick="go('main','logs')">Logs</a>
+        <a class="nav-btn" onclick="go('main','arch')">Architecture</a>
+      </div>
     </div>
+    <div class="nav-group">
+      <span class="nav-group-label" onclick="setSystem('xray')">X-RAY</span>
+      <div class="nav-sub" data-sys="xray">
+        <a class="nav-btn" onclick="go('xray','dash')">Dashboard</a>
+        <a class="nav-btn" onclick="go('xray','logs')">Logs</a>
+        <a class="nav-btn" onclick="go('xray','arch')">Architecture</a>
+      </div>
+    </div>
+    <div class="nav-group">
+      <span class="nav-group-label" onclick="setSystem('swapper')">SWAPPER</span>
+      <div class="nav-sub" data-sys="swapper">
+        <a class="nav-btn" onclick="go('swapper','dash')">Dashboard</a>
+        <a class="nav-btn" onclick="go('swapper','logs')">Logs</a>
+        <a class="nav-btn" onclick="go('swapper','arch')">Architecture</a>
+      </div>
+    </div>
+  </nav>
+  <div class="header-right">
+    <div class="pulse" id="sDot"></div>
+    <span class="status-lbl" id="sLbl">LOADING</span>
   </div>
+</div>
 </header>
 
-<!-- ═══════════════════════════════════ DASHBOARD ═══════════════════════════════════ -->
-<div class="page active" id="page-dashboard">
-  <div class="container">
-    <section class="section">
-      <div class="section-label">Self-Improving Web Cloner</div>
-      <div class="section-title">
-        <span class="glitch" data-text="" id="heroScore">--/100</span>
-      </div>
+<main class="container" id="app"></main>
 
-      <div class="stats-row fade-in">
-        <div class="stat">
-          <div class="stat-lbl">Average Score</div>
-          <div class="stat-val red" id="sAvg">--</div>
-          <div class="stat-trend" id="sAvgTrend">--</div>
-        </div>
-        <div class="stat">
-          <div class="stat-lbl">Perfect Sites</div>
-          <div class="stat-val green" id="sPerfect">0</div>
-          <div class="stat-trend trend-flat" id="sPerfectOf">of -- tested</div>
-        </div>
-        <div class="stat">
-          <div class="stat-lbl">Mastered</div>
-          <div class="stat-val cream" id="sMastered">0</div>
-          <div class="stat-trend trend-flat" id="sQueue">-- queued</div>
-        </div>
-        <div class="stat">
-          <div class="stat-lbl">Cycles Run</div>
-          <div class="stat-val cream" id="sCycles">--</div>
-          <div class="stat-trend trend-flat" id="sLast">--</div>
-        </div>
-        <div class="stat">
-          <div class="stat-lbl">Current Version</div>
-          <div class="stat-val red" id="sVersion">--</div>
-          <div class="stat-trend trend-flat" id="sLines">-- lines</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in d2">
-      <div class="section-label">Version History</div>
-      <div class="timeline" id="timeline"></div>
-    </section>
-
-    <section class="section fade-in d3">
-      <div class="section-label">Per-Site Scores</div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Site</th>
-              <th class="center">Total</th>
-              <th class="center">Images</th>
-              <th class="center">Pixels</th>
-              <th class="center">CSS</th>
-              <th class="center">Links</th>
-              <th class="center">Content</th>
-              <th class="center">Layout</th>
-              <th class="center">Console</th>
-              <th class="center">Manifest</th>
-            </tr>
-          </thead>
-          <tbody id="siteTable"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section fade-in d4">
-      <div class="section-label">Cycle History</div>
-      <div class="table-wrap">
-        <table class="cycle-table">
-          <thead>
-            <tr>
-              <th>Version</th>
-              <th class="center">Score</th>
-              <th class="center">Prev</th>
-              <th class="center">Diff</th>
-              <th class="center">Attempts</th>
-              <th>Date</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody id="cycleTable"></tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════ LOGS ═══════════════════════════════════ -->
-<div class="page" id="page-logs">
-  <div class="container">
-    <section class="section">
-      <div class="section-label">Knowledge Base</div>
-      <div class="section-title">
-        <span class="glitch" data-text="Execution Logs">Execution Logs</span>
-      </div>
-
-      <div class="section-label" style="margin-top:40px">Learnings</div>
-      <div id="logLearnings"></div>
-
-      <div class="section-label" style="margin-top:40px">Failed Approaches</div>
-      <div id="logFailures"></div>
-    </section>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════ ARCHITECTURE ═══════════════════════════════════ -->
-<div class="page" id="page-architecture">
-  <div class="container">
-    <section class="section">
-      <div class="section-label">System Architecture</div>
-      <div class="section-title">
-        <span class="glitch" data-text="X-Ray Engine">X-Ray Engine</span>
-      </div>
-
-      <!-- Pipeline Flow -->
-      <div class="section-label" style="margin-top:24px">Improvement Pipeline</div>
-      <div class="arch-flow fade-in">
-        <div class="flow-step">HEALTH<br>CHECK</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">CLONE<br>8 SITES</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">SCORE<br>9 METRICS</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">ANALYZE<br>ROOT CAUSE</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">SYNTHESIZE<br>PATTERNS</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step" style="border-color:var(--red);color:var(--red)">CLAUDE<br>IMPROVES</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">RETEST<br>VERIFY</div>
-        <div class="flow-arrow">&rarr;</div>
-        <div class="flow-step">ACCEPT<br>/ REJECT</div>
-      </div>
-
-      <div class="arch-grid fade-in d2">
-        <div class="arch-block">
-          <div class="arch-num">01</div>
-          <div class="arch-title">Cloning Engine</div>
-          <div class="arch-desc">
-            Single-file Playwright-based web cloner. Captures CSS, images, fonts, videos, 3D models, WebGL shaders, and animations. Detects framework (Next.js, Webflow, React) and applies specialized handling.
-          </div>
-          <div style="margin-top:12px">
-            <span class="arch-tag">Playwright</span>
-            <span class="arch-tag">Single File</span>
-            <span class="arch-tag" id="archLines">-- lines</span>
-          </div>
-        </div>
-
-        <div class="arch-block">
-          <div class="arch-num">02</div>
-          <div class="arch-title">Test Suite</div>
-          <div class="arch-desc">
-            Parallel pipeline: clone&rarr;score&rarr;analyze per site. 9 strict metrics with pixel-level comparison (pixelmatch). Generates per-site analysis reports and cross-site synthesis.
-          </div>
-          <div style="margin-top:12px">
-            <span class="arch-tag">9 Metrics</span>
-            <span class="arch-tag">Pixel Diff</span>
-            <span class="arch-tag">Parallel</span>
-          </div>
-        </div>
-
-        <div class="arch-block">
-          <div class="arch-num">03</div>
-          <div class="arch-title">Safety Systems</div>
-          <div class="arch-desc">
-            PID lock prevents overlapping cycles. 90-min timeout kills stuck processes. Per-site regression gate rejects if any site drops &gt;5 points. Disk cleanup keeps last 5 results.
-          </div>
-          <div style="margin-top:12px">
-            <span class="arch-tag">PID Lock</span>
-            <span class="arch-tag">Timeout</span>
-            <span class="arch-tag">Regression Gate</span>
-          </div>
-        </div>
-
-        <div class="arch-block">
-          <div class="arch-num">04</div>
-          <div class="arch-title">Learning System</div>
-          <div class="arch-desc">
-            Knowledge base persists across cycles. Records techniques that worked (with impact scores) and approaches that failed (with reasons). Claude reads this before every cycle.
-          </div>
-          <div style="margin-top:12px">
-            <span class="arch-tag">knowledge.json</span>
-            <span class="arch-tag">Retry Logic</span>
-            <span class="arch-tag">Plateau Detection</span>
-          </div>
-        </div>
-
-        <div class="arch-block full">
-          <div class="arch-num">05</div>
-          <div class="arch-title">Scoring Weights</div>
-          <div style="margin-top:16px">
-            <div class="arch-metric"><span>Images (naturalWidth &gt; 0)</span><span class="arch-metric-val">15%</span></div>
-            <div class="arch-metric"><span>Pixel Fidelity (pixelmatch)</span><span class="arch-metric-val">15%</span></div>
-            <div class="arch-metric"><span>CSS Quality</span><span class="arch-metric-val">12%</span></div>
-            <div class="arch-metric"><span>Link Integrity</span><span class="arch-metric-val">12%</span></div>
-            <div class="arch-metric"><span>Content Preservation</span><span class="arch-metric-val">12%</span></div>
-            <div class="arch-metric"><span>Layout Fidelity</span><span class="arch-metric-val">10%</span></div>
-            <div class="arch-metric"><span>Interactions</span><span class="arch-metric-val">8%</span></div>
-            <div class="arch-metric"><span>Console Errors</span><span class="arch-metric-val">8%</span></div>
-            <div class="arch-metric"><span>Capture Manifest</span><span class="arch-metric-val">8%</span></div>
-          </div>
-        </div>
-
-        <div class="arch-block full">
-          <div class="arch-num">06</div>
-          <div class="arch-title">Site Rotation</div>
-          <div class="arch-desc" style="margin-bottom:16px">Sites that reach 100% become permanent regression tests. A harder site rotates in from the queue. The tool progressively masters easy&rarr;medium&rarr;hard&rarr;extreme.</div>
-          <div class="arch-flow" style="padding:0">
-            <div class="flow-step" style="border-color:var(--green);color:var(--green)">ACTIVE<br><span id="archActive">8</span> sites</div>
-            <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step">100%?</div>
-            <div class="flow-arrow">&rarr;</div>
-            <div class="flow-step" style="border-color:var(--green)">MASTERED<br><span id="archMastered">0</span> locked</div>
-            <div class="flow-arrow" style="opacity:0.3">&larr;</div>
-            <div class="flow-step">QUEUE<br><span id="archQueue">10</span> waiting</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container footer-inner">
-    <span>SITE X-RAY <span class="footer-red">// AUTONOMOUS EVOLUTION</span></span>
-    <span id="footerTime">--</span>
-  </div>
-</footer>
+<footer class="footer"><div class="container footer-inner">
+  <span>YEEZY <span class="footer-red">// CONTROL SYSTEM</span></span>
+  <span id="fTime">--</span>
+</div></footer>
 
 <script>
-const API = '/api';
+const A='/api';
+let D={report:{},history:[],knowledge:{},sites:{},events:[],system:{}};
+let curSys='main',curPage='dash';
 
-function sc(v) {
-  if (v >= 95) return 'perfect';
-  if (v >= 75) return 'high';
-  if (v >= 50) return 'mid';
-  return 'low';
-}
-function ago(d) {
-  if (!d) return '--';
-  const s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-  if (s < 60) return s + 's ago';
-  if (s < 3600) return Math.floor(s/60) + 'm ago';
-  if (s < 86400) return Math.floor(s/3600) + 'h ago';
-  return Math.floor(s/86400) + 'd ago';
-}
+function sc(v){return v>=95?'p':v>=75?'h':v>=50?'m':'l'}
+function ago(d){if(!d)return'--';const s=Math.floor((Date.now()-new Date(d).getTime())/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
+function ts(d){if(!d)return'--';const dt=new Date(d);return dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
 
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  document.querySelector('[data-page="' + name + '"]').classList.add('active');
+function go(sys,page){curSys=sys;curPage=page;render();
+  document.querySelectorAll('.nav-group-label').forEach(n=>n.classList.toggle('active',n.textContent.toLowerCase().includes(sys==='main'?'main':sys)));
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  event?.target?.classList?.add('active');
+}
+function setSystem(sys){curSys=sys;curPage='dash';render();
+  document.querySelectorAll('.nav-group-label').forEach(n=>n.classList.toggle('active',n.textContent.toLowerCase().includes(sys==='main'?'main':sys)));
+  document.querySelectorAll('.nav-sub').forEach(s=>s.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===0&&s.dataset.sys===sys)));
 }
 
-async function load() {
-  try {
-    const [report, history, kb, sites] = await Promise.all([
-      fetch(API + '/report').then(r => r.json()),
-      fetch(API + '/history').then(r => r.json()),
-      fetch(API + '/knowledge').then(r => r.json()),
-      fetch(API + '/sites').then(r => r.json()),
-    ]);
-    render(report, history, kb, sites);
-  } catch(e) {
-    document.getElementById('statusLabel').textContent = 'ERROR: ' + e.message;
-    document.getElementById('statusDot').style.background = 'var(--red)';
-  }
+async function load(){
+  const [report,history,knowledge,sites,events,system]=await Promise.all([
+    fetch(A+'/report').then(r=>r.json()).catch(()=>({})),
+    fetch(A+'/history').then(r=>r.json()).catch(()=>[]),
+    fetch(A+'/knowledge').then(r=>r.json()).catch(()=>({learnings:[],failed_approaches:[]})),
+    fetch(A+'/sites').then(r=>r.json()).catch(()=>({active:[],mastered:[],queue:[]})),
+    fetch(A+'/events').then(r=>r.json()).catch(()=>[]),
+    fetch(A+'/system').then(r=>r.json()).catch(()=>({})),
+  ]);
+  D={report,history,knowledge,sites,events,system};
+  document.getElementById('sLbl').textContent=(D.system.version||'--')+' // '+(D.system.cycleRunning?'CYCLE RUNNING':ago(D.report.date));
+  document.getElementById('fTime').textContent=new Date().toLocaleString().toUpperCase();
+  render();
 }
 
-function render(report, history, kb, sites) {
-  const scored = history.filter(h => typeof h.score === 'number');
-  const lastDiff = scored.length > 0 ? (scored[scored.length-1].diff || 0) : 0;
+function render(){
+  const p=curSys+'-'+curPage;
+  const R={
+    'main-dash':renderMainDash,'main-logs':renderMainLogs,'main-arch':renderMainArch,
+    'xray-dash':renderXrayDash,'xray-logs':renderXrayLogs,'xray-arch':renderXrayArch,
+    'swapper-dash':renderSwapperDash,'swapper-logs':renderSwapperLogs,'swapper-arch':renderSwapperArch,
+  };
+  document.getElementById('app').innerHTML=(R[p]||renderMainDash)();
+}
 
-  // Status
-  document.getElementById('statusLabel').textContent = report.version?.toUpperCase() + ' // ' + ago(report.date);
+// ═══════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════
 
-  // Hero
-  const hero = document.getElementById('heroScore');
-  hero.textContent = report.averageScore + '/100';
-  hero.setAttribute('data-text', report.averageScore + '/100');
+function renderMainDash(){
+  const r=D.report,h=D.history,s=D.sites,sys=D.system;
+  const scored=h.filter(x=>typeof x.score==='number');
+  const last=scored[scored.length-1];
+  return`<section class="section">
+  <div class="sec-label">Yeezy Control System</div>
+  <div class="sec-title">${r.averageScore||'--'}/100</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Score</div><div class="stat-v" style="color:var(--red)">${r.averageScore||'--'}</div><div class="stat-t ${(last?.diff||0)>0?'t-up':'t-flat'}">${last?.diff>0?'+':''}${last?.diff||0} last</div></div>
+    <div class="stat"><div class="stat-l">Version</div><div class="stat-v" style="color:var(--red)">${sys.version||'--'}</div><div class="stat-t t-flat">${sys.cycleRunning?'RUNNING':'idle'}</div></div>
+    <div class="stat"><div class="stat-l">Perfect</div><div class="stat-v" style="color:var(--green)">${r.perfectCount||0}</div><div class="stat-t t-flat">of ${r.totalSites||'--'}</div></div>
+    <div class="stat"><div class="stat-l">Mastered</div><div class="stat-v">${s.mastered?.length||0}</div><div class="stat-t t-flat">${s.queue?.length||0} queued</div></div>
+    <div class="stat"><div class="stat-l">Cycles</div><div class="stat-v">${scored.length}</div><div class="stat-t t-flat">${ago(r.date)}</div></div>
+    <div class="stat"><div class="stat-l">Server</div><div class="stat-v" style="font-size:16px">${sys.diskUsed||'--'}</div><div class="stat-t t-flat">${sys.memUsed||'--'}</div></div>
+  </div></section>
+  <section class="section"><div class="sec-label">Version History</div>
+  <div class="timeline">${scored.slice(-12).map((x,i,a)=>`<div class="tl ${i===a.length-1?'latest':''}"><div class="tl-v">${x.version?.toUpperCase()}</div><div class="tl-s sc-${sc(x.score)}">${x.score}</div><div class="tl-d ${x.diff>0?'t-up':x.diff<0?'t-down':'t-flat'}">${x.diff>0?'+':''}${x.diff??''}</div><div class="tl-n" title="${x.note||''}">${(x.note||'').slice(0,30)}</div></div>`).join('')}</div></section>
+  <section class="section"><div class="sec-label">Recent Events</div>
+  <div style="border:1px solid var(--border)">${(D.events||[]).slice(-15).reverse().map(e=>`<div class="log-entry"><span class="log-time">${ts(e.timestamp)}</span><span class="log-sys ${e.system}">${e.system}</span><span class="log-status ${e.status}">${e.status}</span><span class="log-msg">${e.message}</span></div>`).join('')||'<div style="padding:20px;color:var(--muted)">No events yet</div>'}</div></section>`;
+}
 
-  // Stats
-  document.getElementById('sAvg').textContent = report.averageScore;
-  const trendEl = document.getElementById('sAvgTrend');
-  trendEl.textContent = (lastDiff >= 0 ? '+' : '') + lastDiff + ' last cycle';
-  trendEl.className = 'stat-trend ' + (lastDiff > 0 ? 'trend-up' : lastDiff < 0 ? 'trend-down' : 'trend-flat');
-  document.getElementById('sPerfect').textContent = report.perfectCount || 0;
-  document.getElementById('sPerfectOf').textContent = 'of ' + report.totalSites + ' tested';
-  document.getElementById('sMastered').textContent = sites.mastered?.length || 0;
-  document.getElementById('sQueue').textContent = (sites.queue?.length || 0) + ' queued';
-  document.getElementById('sCycles').textContent = scored.length;
-  document.getElementById('sLast').textContent = report.date ? ago(report.date) : '--';
-  document.getElementById('sVersion').textContent = report.version?.toUpperCase() || '--';
+function renderMainLogs(){
+  const all=[];
+  // Merge events + knowledge learnings + knowledge failures into unified log
+  (D.events||[]).forEach(e=>all.push({t:e.timestamp,sys:e.system,status:e.status,msg:e.message}));
+  (D.knowledge.learnings||[]).forEach(l=>all.push({t:l.date||'',sys:'xray',status:'success',msg:`[${l.version}] ${l.technique}: ${l.impact||l.detail||''}`}));
+  (D.knowledge.failed_approaches||[]).forEach(f=>all.push({t:f.date||'',sys:'xray',status:'failure',msg:`[${f.version}] ${f.technique||'attempt'}: ${f.reason||f.detail||''}`}));
+  // Sort by timestamp desc
+  all.sort((a,b)=>new Date(b.t)-new Date(a.t));
+  return`<section class="section"><div class="sec-label">All System Logs</div><div class="sec-title">Unified Log</div>
+  <div style="border:1px solid var(--border);max-height:70vh;overflow-y:auto">${all.slice(0,100).map(e=>`<div class="log-entry"><span class="log-time">${ts(e.t)}</span><span class="log-sys ${e.sys}">${e.sys}</span><span class="log-status ${e.status}">${e.status}</span><span class="log-msg">${e.msg}</span></div>`).join('')||'<div style="padding:20px;color:var(--muted)">No logs yet</div>'}</div></section>`;
+}
 
-  // Timeline
-  const tl = document.getElementById('timeline');
-  tl.innerHTML = '';
-  scored.slice(-12).forEach((h, i, arr) => {
-    const isLatest = i === arr.length - 1;
-    tl.innerHTML += '<div class="tl-entry ' + (isLatest ? 'latest' : '') + '">' +
-      '<div class="tl-ver">' + h.version.toUpperCase() + '</div>' +
-      '<div class="tl-score sc-' + sc(h.score) + '">' + h.score + '</div>' +
-      (h.diff != null ? '<div class="tl-diff ' + (h.diff > 0 ? 'trend-up' : h.diff < 0 ? 'trend-down' : 'trend-flat') + '">' + (h.diff > 0 ? '+' : '') + h.diff + '</div>' : '') +
-      '<div class="tl-note" title="' + (h.note || '') + '">' + (h.note?.slice(0, 35) || '') + '</div>' +
-      '</div>';
-  });
+function renderMainArch(){
+  const sys=D.system;
+  return`<section class="section"><div class="sec-label">System Architecture</div><div class="sec-title">Live System Map</div>
+  <div class="node-grid">
+    <div class="node"><div class="node-header"><span class="node-name">Hetzner Server</span><span class="node-status on"></span></div><div class="node-data"><strong>Uptime:</strong> ${sys.uptime||'--'}<br><strong>Disk:</strong> ${sys.diskUsed||'--'}<br><strong>RAM:</strong> ${sys.memUsed||'--'}<br><strong>Chromium:</strong> ${sys.chromiumProcesses||0} procs</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Dashboard</span><span class="node-status ${sys.services?.dashboard?'on':'off'}"></span></div><div class="node-data"><strong>Port:</strong> 3847<br><strong>Status:</strong> ${sys.services?.dashboard?'OK':'DOWN'}</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Operator Bot</span><span class="node-status ${sys.services?.bot?'on':'off'}"></span></div><div class="node-data"><strong>Telegram:</strong> @xrayevolve_bot<br><strong>Self-heal:</strong> active<br><strong>Checks:</strong> every 5m</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Supabase</span><span class="node-status on"></span></div><div class="node-data"><strong>Table:</strong> us_leads<br><strong>Project:</strong> cywmdjl...</div></div>
+  </div>
+  <div class="conn-row"><span class="conn-arrow">&darr;</span><div class="conn-line"></div><span class="conn-arrow">&darr;</span><div class="conn-line"></div><span class="conn-arrow">&darr;</span></div>
+  <div class="node-grid">
+    <div class="node"><div class="node-header"><span class="node-name">X-Ray Engine</span><span class="node-status ${sys.cycleRunning?'busy':'on'}"></span></div><div class="node-data"><strong>Version:</strong> ${sys.version||'--'}<br><strong>Next cycle:</strong> ${sys.nextXrayCycle||'--'}<br><strong>Evolution:</strong> every 6h</div><div class="node-tag">cloner</div><div class="node-tag">self-improving</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Lead Machine</span><span class="node-status on"></span></div><div class="node-data"><strong>Next scrape:</strong> ${sys.nextScrape||'--'}<br><strong>Segments:</strong> 4 (law, dental, RE, constr)<br><strong>Cities:</strong> 20 US</div><div class="node-tag">scraper</div><div class="node-tag">scorer</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Swapper</span><span class="node-status off"></span></div><div class="node-data"><strong>Status:</strong> Not built yet<br><strong>Planned:</strong> v4 universal</div><div class="node-tag">planned</div></div>
+  </div>
+  <div class="conn-row"><span class="conn-arrow">&darr;</span><div class="conn-line"></div><span class="conn-arrow">&darr;</span></div>
+  <div class="node-grid">
+    <div class="node"><div class="node-header"><span class="node-name">Quality Gate</span><span class="node-status off"></span></div><div class="node-data"><strong>Status:</strong> Planned<br><strong>Model:</strong> Claude (deep review)</div><div class="node-tag">planned</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Demo Deployer</span><span class="node-status off"></span></div><div class="node-data"><strong>Status:</strong> Planned<br><strong>Host:</strong> nginx wildcards</div><div class="node-tag">planned</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Email System</span><span class="node-status off"></span></div><div class="node-data"><strong>Status:</strong> Planned<br><strong>Brand:</strong> Clonica<br><strong>Via:</strong> Resend</div><div class="node-tag">planned</div></div>
+  </div></section>`;
+}
 
-  // Site table
-  const tb = document.getElementById('siteTable');
-  tb.innerHTML = '';
-  const sortedSites = [...(report.sites || [])].sort((a, b) => a.totalScore - b.totalScore);
-  sortedSites.forEach(s => {
-    const host = new URL(s.site).hostname;
-    const m = s.metrics || {};
-    const cell = (metric) => {
-      const v = metric?.score ?? 0;
-      return '<td class="center"><span class="score-num sc-' + sc(v) + '">' + v + '</span><span class="bar"><span class="bar-fill fill-' + sc(v) + '" style="width:' + v + '%"></span></span></td>';
-    };
-    tb.innerHTML += '<tr>' +
-      '<td><span class="site-host">' + host + '</span><span class="site-cat">' + (s.category || '') + '</span></td>' +
-      '<td class="center"><span class="score-num sc-' + sc(s.totalScore) + '" style="font-size:15px">' + s.totalScore + '</span></td>' +
-      cell(m.images) + cell(m.pixels) + cell(m.css) + cell(m.links) + cell(m.content) + cell(m.layout) + cell(m.console) + cell(m.manifest) +
-      '</tr>';
-  });
+// ═══════════════════════════════════════
+// X-RAY
+// ═══════════════════════════════════════
 
-  // Cycle history table
-  const ct = document.getElementById('cycleTable');
-  ct.innerHTML = '';
-  [...history].reverse().forEach(h => {
-    ct.innerHTML += '<tr>' +
-      '<td><span style="font-weight:700;color:var(--red)">' + (h.version || '--') + '</span></td>' +
-      '<td class="center"><span class="score-num sc-' + sc(h.score || 0) + '">' + (h.score ?? '--') + '</span></td>' +
-      '<td class="center" style="color:var(--cream-muted)">' + (h.prev_score ?? '--') + '</td>' +
-      '<td class="center"><span class="' + ((h.diff || 0) > 0 ? 'trend-up' : (h.diff || 0) < 0 ? 'trend-down' : 'trend-flat') + '">' + (h.diff != null ? (h.diff > 0 ? '+' : '') + h.diff : '--') + '</span></td>' +
-      '<td class="center" style="color:var(--cream-muted)">' + (h.attempts || '--') + '</td>' +
-      '<td style="color:var(--cream-muted);font-size:11px">' + (h.date ? new Date(h.date).toLocaleDateString() : '--') + '</td>' +
-      '<td style="color:var(--cream-dim);font-size:11px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + (h.note || '') + '">' + (h.note || '--') + '</td>' +
-      '</tr>';
-  });
+function renderXrayDash(){
+  const r=D.report,h=D.history,s=D.sites,sys=D.system;
+  const scored=h.filter(x=>typeof x.score==='number');
+  const sites=r.sites||[];
+  const sorted=[...sites].sort((a,b)=>a.totalScore-b.totalScore);
+  const cell=(m)=>{const v=m?.score??0;return`<td class="c"><span class="sn sc-${sc(v)}">${v}</span><span class="bar"><span class="bar-f f-${sc(v)}" style="width:${v}%"></span></span></td>`};
+  return`<section class="section"><div class="sec-label">X-Ray Cloner</div><div class="sec-title">${r.averageScore||'--'}/100 — ${sys.version||'--'}</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Score</div><div class="stat-v" style="color:var(--red)">${r.averageScore||'--'}</div></div>
+    <div class="stat"><div class="stat-l">Perfect</div><div class="stat-v" style="color:var(--green)">${r.perfectCount||0}</div></div>
+    <div class="stat"><div class="stat-l">Active</div><div class="stat-v">${s.active?.length||0}</div></div>
+    <div class="stat"><div class="stat-l">Mastered</div><div class="stat-v">${s.mastered?.length||0}</div></div>
+    <div class="stat"><div class="stat-l">Queue</div><div class="stat-v">${s.queue?.length||0}</div></div>
+  </div></section>
+  <section class="section"><div class="sec-label">Version History</div>
+  <div class="timeline">${scored.slice(-12).map((x,i,a)=>`<div class="tl ${i===a.length-1?'latest':''}"><div class="tl-v">${x.version?.toUpperCase()}</div><div class="tl-s sc-${sc(x.score)}">${x.score}</div><div class="tl-d ${x.diff>0?'t-up':x.diff<0?'t-down':'t-flat'}">${x.diff>0?'+':''}${x.diff??''}</div></div>`).join('')}</div></section>
+  <section class="section"><div class="sec-label">Per-Site Scores</div>
+  <div class="tbl-wrap"><table><thead><tr><th>Site</th><th class="c">Total</th><th class="c">Img</th><th class="c">Px</th><th class="c">CSS</th><th class="c">Link</th><th class="c">Content</th><th class="c">Layout</th><th class="c">Console</th></tr></thead><tbody>${sorted.map(s=>{const h=new URL(s.site).hostname,m=s.metrics||{};return`<tr><td><span class="host">${h}</span><span class="cat">${s.category||''}</span></td><td class="c"><span class="sn sc-${sc(s.totalScore)}" style="font-size:15px">${s.totalScore}</span></td>${cell(m.images)}${cell(m.pixels)}${cell(m.css)}${cell(m.links)}${cell(m.content)}${cell(m.layout)}${cell(m.console)}</tr>`}).join('')}</tbody></table></div></section>
+  <section class="section"><div class="sec-label">Cycle History</div>
+  <div class="tbl-wrap"><table><thead><tr><th>Version</th><th class="c">Score</th><th class="c">Prev</th><th class="c">Diff</th><th>Date</th><th>Notes</th></tr></thead><tbody>${[...h].reverse().map(x=>`<tr><td style="color:var(--red);font-weight:700">${x.version||'--'}</td><td class="c"><span class="sn sc-${sc(x.score||0)}">${x.score??'--'}</span></td><td class="c" style="color:var(--muted)">${x.prev_score??'--'}</td><td class="c"><span class="${(x.diff||0)>0?'t-up':(x.diff||0)<0?'t-down':'t-flat'}">${x.diff!=null?(x.diff>0?'+':'')+x.diff:'--'}</span></td><td style="color:var(--muted);font-size:11px">${x.date?new Date(x.date).toLocaleDateString():'--'}</td><td style="color:var(--dim);font-size:11px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${x.note||''}">${x.note||'--'}</td></tr>`).join('')}</tbody></table></div></section>`;
+}
 
-  // Logs — Learnings
-  const ll = document.getElementById('logLearnings');
-  ll.innerHTML = '';
-  (kb.learnings || []).slice().reverse().forEach(l => {
-    ll.innerHTML += '<div class="log-entry success">' +
-      '<div class="log-head"><span class="log-version">' + (l.version || '--') + ' &mdash; ' + (l.technique || 'Improvement') + '</span><span class="log-badge badge-success">SUCCESS</span></div>' +
-      '<div class="log-detail">' + (l.detail || l.log_tail?.slice(0, 200) || '') + '</div>' +
-      (l.impact ? '<div class="log-impact">' + l.impact + '</div>' : '') +
-      (l.date ? '<div class="log-date">' + new Date(l.date).toLocaleString() + '</div>' : '') +
-      '</div>';
-  });
-  if (!ll.innerHTML) ll.innerHTML = '<div style="padding:20px;color:var(--cream-muted)">No learnings recorded yet</div>';
+function renderXrayLogs(){
+  const all=[];
+  (D.events||[]).filter(e=>e.system==='xray').forEach(e=>all.push({t:e.timestamp,status:e.status,msg:e.message}));
+  (D.knowledge.learnings||[]).forEach(l=>all.push({t:l.date||'',status:'success',msg:`${l.version}: ${l.technique} — ${l.impact||l.detail||''}`}));
+  (D.knowledge.failed_approaches||[]).forEach(f=>all.push({t:f.date||'',status:'failure',msg:`${f.version}: ${f.technique||'attempt'} — ${f.reason||f.detail||''}`}));
+  all.sort((a,b)=>new Date(b.t)-new Date(a.t));
+  return`<section class="section"><div class="sec-label">X-Ray Logs</div><div class="sec-title">Evolution Log</div>
+  <div style="border:1px solid var(--border);max-height:70vh;overflow-y:auto">${all.slice(0,100).map(e=>`<div class="log-entry" style="grid-template-columns:140px 70px 1fr"><span class="log-time">${ts(e.t)}</span><span class="log-status ${e.status}">${e.status}</span><span class="log-msg">${e.msg}</span></div>`).join('')||'<div style="padding:20px;color:var(--muted)">No X-Ray logs yet</div>'}</div></section>`;
+}
 
-  // Logs — Failures
-  const lf = document.getElementById('logFailures');
-  lf.innerHTML = '';
-  (kb.failed_approaches || []).slice().reverse().forEach(f => {
-    lf.innerHTML += '<div class="log-entry failure">' +
-      '<div class="log-head"><span class="log-version">' + (f.version || '--') + ' &mdash; ' + (f.technique || 'Cycle attempt') + '</span><span class="log-badge badge-failure">FAILED</span></div>' +
-      '<div class="log-detail">' + (f.detail || '') + '</div>' +
-      (f.reason ? '<div class="log-reason">Reason: ' + f.reason + '</div>' : '') +
-      (f.date ? '<div class="log-date">' + new Date(f.date).toLocaleString() + '</div>' : '') +
-      '</div>';
-  });
-  if (!lf.innerHTML) lf.innerHTML = '<div style="padding:20px;color:var(--cream-muted)">No failures recorded yet</div>';
+function renderXrayArch(){
+  const sys=D.system;
+  return`<section class="section"><div class="sec-label">X-Ray Architecture</div><div class="sec-title">Evolution Pipeline</div>
+  <div class="pipe-flow">
+    <div class="pipe-step ${sys.cycleRunning?'active':''}">HEALTH<br>CHECK</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">CLONE<br>8 SITES</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">SCORE<br>9 METRICS</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">ANALYZE<br>ROOT CAUSE</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">SYNTHESIZE<br>PATTERNS</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step" style="border-color:var(--red);color:var(--red)">CLAUDE<br>IMPROVES</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">RETEST<br>VERIFY</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">ACCEPT<br>/ REJECT</div>
+  </div>
+  <div class="node-grid">
+    <div class="node"><div class="node-header"><span class="node-name">Safety</span><span class="node-status on"></span></div><div class="node-data"><strong>PID lock</strong> — no overlaps<br><strong>90min timeout</strong> — kills stuck<br><strong>Per-site gate</strong> — no regressions<br><strong>Disk cleanup</strong> — last 5 results</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Scoring</span><span class="node-status on"></span></div><div class="node-data"><strong>Images:</strong> 15%<br><strong>Pixels:</strong> 15%<br><strong>CSS:</strong> 12%<br><strong>Links:</strong> 12%<br><strong>Content:</strong> 12%<br><strong>Layout:</strong> 10%<br><strong>Interact:</strong> 8%<br><strong>Console:</strong> 8%<br><strong>Manifest:</strong> 8%</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Learning</span><span class="node-status on"></span></div><div class="node-data"><strong>Knowledge base:</strong> ${D.knowledge.learnings?.length||0} learnings<br><strong>Failed:</strong> ${D.knowledge.failed_approaches?.length||0}<br><strong>Retry:</strong> 2 attempts/cycle<br><strong>Plateau detect:</strong> active</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Rotation</span><span class="node-status on"></span></div><div class="node-data"><strong>Active:</strong> ${D.sites.active?.length||0} sites<br><strong>Mastered:</strong> ${D.sites.mastered?.length||0} locked<br><strong>Queue:</strong> ${D.sites.queue?.length||0} waiting<br><strong>Next cycle:</strong> ${sys.nextXrayCycle||'--'}</div></div>
+  </div></section>`;
+}
 
-  // Architecture
-  document.getElementById('archActive').textContent = sites.active?.length || 0;
-  document.getElementById('archMastered').textContent = sites.mastered?.length || 0;
-  document.getElementById('archQueue').textContent = sites.queue?.length || 0;
+// ═══════════════════════════════════════
+// SWAPPER (placeholder until built)
+// ═══════════════════════════════════════
 
-  // Footer
-  document.getElementById('footerTime').textContent = new Date().toLocaleString().toUpperCase();
+function renderSwapperDash(){
+  return`<section class="section"><div class="sec-label">Site Swapper</div><div class="sec-title">Not Built Yet</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Status</div><div class="stat-v" style="color:var(--muted);font-size:16px">PLANNED</div></div>
+    <div class="stat"><div class="stat-l">Current</div><div class="stat-v" style="color:var(--muted)">v3</div><div class="stat-t t-flat">Morgan Lewis only</div></div>
+    <div class="stat"><div class="stat-l">Target</div><div class="stat-v" style="color:var(--red)">v4</div><div class="stat-t t-flat">Universal</div></div>
+    <div class="stat"><div class="stat-l">Templates</div><div class="stat-v" style="color:var(--muted)">0</div><div class="stat-t t-flat">need library</div></div>
+  </div>
+  <div style="padding:40px;text-align:center;color:var(--muted);border:1px solid var(--border)">Swapper v4 + evolution cycle will be built in Plan 4. Dashboard will populate with live data once operational.</div></section>`;
+}
+
+function renderSwapperLogs(){
+  const all=(D.events||[]).filter(e=>e.system==='swapper');
+  return`<section class="section"><div class="sec-label">Swapper Logs</div><div class="sec-title">Swap Log</div>
+  <div style="border:1px solid var(--border);max-height:70vh;overflow-y:auto">${all.length?all.slice(-50).reverse().map(e=>`<div class="log-entry" style="grid-template-columns:140px 70px 1fr"><span class="log-time">${ts(e.timestamp)}</span><span class="log-status ${e.status}">${e.status}</span><span class="log-msg">${e.message}</span></div>`).join(''):'<div style="padding:20px;color:var(--muted)">No swapper logs yet — system not built</div>'}</div></section>`;
+}
+
+function renderSwapperArch(){
+  return`<section class="section"><div class="sec-label">Swapper Architecture</div><div class="sec-title">Planned Pipeline</div>
+  <div class="pipe-flow">
+    <div class="pipe-step">TEMPLATE<br>MAP</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">EXTRACT<br>BRAND</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">REWRITE<br>TEXT</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">SWAP<br>HTML</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">INJECT<br>ASSETS</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step" style="border-color:var(--red);color:var(--red)">CLAUDE<br>REVIEWS</div><span class="pipe-arrow">&rarr;</span>
+    <div class="pipe-step">DEPLOY<br>DEMO</div>
+  </div>
+  <div class="node-grid">
+    <div class="node"><div class="node-header"><span class="node-name">Template Library</span><span class="node-status off"></span></div><div class="node-data"><strong>Source:</strong> Awwwards, CSS Awards<br><strong>Categories:</strong> law, dental, RE, construction<br><strong>Templates/cat:</strong> 3-5</div><div class="node-tag">planned</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Brand Extractor</span><span class="node-status off"></span></div><div class="node-data"><strong>Extracts:</strong> logo, colors, fonts, images, text, contacts, socials<br><strong>AI assist:</strong> Groq for unstructured text</div><div class="node-tag">planned</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Quality Gate</span><span class="node-status off"></span></div><div class="node-data"><strong>Code screen:</strong> 10 automated checks<br><strong>Claude review:</strong> HTML + screenshot + brand coverage<br><strong>Human gate:</strong> approve top 10</div><div class="node-tag">planned</div></div>
+    <div class="node"><div class="node-header"><span class="node-name">Evolution</span><span class="node-status off"></span></div><div class="node-data"><strong>Pattern:</strong> same as X-Ray<br><strong>Frequency:</strong> every 12h<br><strong>Self-improving:</strong> test+score+fix cycle</div><div class="node-tag">planned</div></div>
+  </div></section>`;
 }
 
 load();
-setInterval(load, 300000);
+setInterval(load,60000);
 </script>
 </body>
 </html>

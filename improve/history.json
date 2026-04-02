@@ -45,5 +45,13 @@
     "date": "2026-04-02T12:00:00.000Z",
     "attempts": 1,
     "note": "Aggressive external ref cleanup (ALL https:// refs → local or stripped), tracking pixel removal, CSS download on subpages, CSS asset limit 30→150, conservative overlay dismissal, nav role injection. Mastered: vercel.com, linear.app. Cravath +10, cuberto +8, linear +8, morganlewis +5, roomshotels +3, pentagram +2, stripe +1."
+  },
+  {
+    "version": "v17",
+    "score": 93,
+    "prev_score": 88,
+    "diff": 5,
+    "date": "2026-04-02T12:52:25.412Z",
+    "attempts": 1
   }
 ]

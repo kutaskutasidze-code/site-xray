@@ -71,6 +71,41 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (url.pathname === '/api/events') {
+    const events = readJSON('dashboard/events.json');
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(events || []));
+    return;
+  }
+
+  if (url.pathname === '/api/system') {
+    // Live system data for architecture view
+    const version = (() => { try { return fs.readFileSync(path.join(XRAY_DIR, 'VERSION'), 'utf-8').trim(); } catch { return '?'; } })();
+    const cycleRunning = fs.existsSync('/tmp/site-xray-cycle.lock');
+    const lockAge = cycleRunning ? Math.round((Date.now() - fs.statSync('/tmp/site-xray-cycle.lock').mtimeMs) / 60000) : 0;
+    const chromiumCount = (() => { try { return parseInt(require('child_process').execSync('pgrep -c chromium 2>/dev/null || echo 0', { encoding: 'utf-8' }).trim()); } catch { return 0; } })();
+    const uptime = (() => { try { return require('child_process').execSync('uptime -p 2>/dev/null', { encoding: 'utf-8' }).trim(); } catch { return '?'; } })();
+    const disk = (() => { try { return require('child_process').execSync("df -h / | tail -1 | awk '{print $5}'", { encoding: 'utf-8' }).trim(); } catch { return '?'; } })();
+    const mem = (() => { try { return require('child_process').execSync("free -m | head -2 | tail -1 | awk '{printf \"%d/%dMB\", $3, $2}'", { encoding: 'utf-8' }).trim(); } catch { return '?'; } })();
+    const nextXrayCycle = (() => {
+      const now = new Date();
+      const hours = [0, 6, 12, 18];
+      for (const h of hours) { if (h > now.getUTCHours()) return `${h}:00 UTC`; }
+      return '0:00 UTC (tomorrow)';
+    })();
+    const nextScrape = '2:00 UTC';
+    const dashboardOk = (() => { try { require('child_process').execSync(`curl -s -o /dev/null -w "%{http_code}" http://localhost:${DASHBOARD_PORT}/api/report`, { encoding: 'utf-8' }); return true; } catch { return false; } })();
+    const botOk = (() => { try { return require('child_process').execSync('systemctl is-active monitor-bot 2>/dev/null', { encoding: 'utf-8' }).trim() === 'active'; } catch { return false; } })();
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      version: `v${version}`, cycleRunning, lockAgeMin: lockAge, chromiumProcesses: chromiumCount,
+      uptime, diskUsed: disk, memUsed: mem, nextXrayCycle, nextScrape,
+      services: { dashboard: dashboardOk, bot: botOk, xrayCron: true, scrapeCron: true },
+    }));
+    return;
+  }
+
   if (url.pathname === '/api/sites') {
     const sites = readJSON('test/sites.json');
     res.writeHead(200, { 'Content-Type': 'application/json' });
