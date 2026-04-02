@@ -28,5 +28,13 @@
     "version": "v15",
     "score": 90,
     "note": "Download external CSS as local files (fixes broken link refs), broader external ref cleanup (attribute-based), favicon download from exact HTML-referenced paths (deep dirs, query strings), conservative overlay/popup dismissal via role=dialog. Cravath: 76→93, Rooms Hotels: 78→84, Linear: 92→93"
+  },
+  {
+    "version": "v15",
+    "score": 91,
+    "prev_score": 87,
+    "diff": 4,
+    "date": "2026-04-02T00:49:57.090Z",
+    "attempts": 1
   }
 ]

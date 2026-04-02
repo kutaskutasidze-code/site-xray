@@ -1,6 +1,6 @@
 {
   "site": "https://www.cravath.com",
-  "timestamp": "2026-04-02T00:38:40.944Z",
+  "timestamp": "2026-04-02T00:49:35.039Z",
   "files": {
     "html": 26,
     "css": 2,
@@ -13,10 +13,10 @@
   "sizes": {
     "html": 1278520,
     "css": 238052,
-    "images": 850125,
+    "images": 998360,
     "fonts": 150780,
     "videos": 0,
-    "total": 2517745
+    "total": 2665980
   },
   "assets": {
     "images": [
@@ -42,11 +42,11 @@
       },
       {
         "file": "clone.png",
-        "size": 383697
+        "size": 538882
       },
       {
         "file": "original.png",
-        "size": 391625
+        "size": 384675
       },
       {
         "file": "favicon.ico",
@@ -68,19 +68,19 @@
     "fonts": [
       {
         "file": "font-0.woff2",
-        "size": 1784
-      },
-      {
-        "file": "font-1.woff2",
-        "size": 27588
-      },
-      {
-        "file": "font-2.woff2",
         "size": 94704
       },
       {
-        "file": "font-3.woff2",
+        "file": "font-1.woff2",
+        "size": 1784
+      },
+      {
+        "file": "font-2.woff2",
         "size": 26704
+      },
+      {
+        "file": "font-3.woff2",
+        "size": 27588
       }
     ],
     "videos": []
@@ -93,7 +93,7 @@
     "externalRefsRemaining": 104,
     "inlineStyleBlocks": 28,
     "totalCSSInHTML": 240106,
-    "avgImageSize": 77284,
-    "totalSizeKB": 2459
+    "avgImageSize": 90760,
+    "totalSizeKB": 2603
   }
 }

@@ -1,6 +1,6 @@
 {
   "site": "https://www.morganlewis.com",
-  "timestamp": "2026-04-02T00:38:22.964Z",
+  "timestamp": "2026-04-02T00:49:10.254Z",
   "files": {
     "html": 393,
     "css": 0,
@@ -11,12 +11,12 @@
     "other": 2
   },
   "sizes": {
-    "html": 481255479,
+    "html": 481255426,
     "css": 0,
-    "images": 14583351,
+    "images": 14722017,
     "fonts": 73809269,
     "videos": 0,
-    "total": 569689655
+    "total": 569828268
   },
   "assets": {
     "images": [
@@ -30,11 +30,11 @@
       },
       {
         "file": "en.png",
-        "size": 2779343
+        "size": 2778164
       },
       {
         "file": "original.png",
-        "size": 989988
+        "size": 993353
       },
       {
         "file": "our-approach.png",
@@ -50,7 +50,7 @@
       },
       {
         "file": "reference.png",
-        "size": 3444910
+        "size": 3581390
       },
       {
         "file": "img-0.svg",
@@ -254,7 +254,7 @@
       },
       {
         "file": "img-33.png",
-        "size": 1024
+        "size": 1856
       },
       {
         "file": "img-34.png",
@@ -262,23 +262,23 @@
       },
       {
         "file": "img-35.png",
-        "size": 1856
+        "size": 1024
       },
       {
         "file": "img-36.png",
-        "size": 1264
-      },
-      {
-        "file": "img-37.png",
         "size": 495
       },
       {
+        "file": "img-37.png",
+        "size": 521
+      },
+      {
         "file": "img-38.png",
-        "size": 823
+        "size": 547
       },
       {
         "file": "img-39.png",
-        "size": 547
+        "size": 823
       },
       {
         "file": "img-4.png",
@@ -286,15 +286,15 @@
       },
       {
         "file": "img-40.png",
-        "size": 521
+        "size": 1264
       },
       {
-        "file": "img-41.svg",
-        "size": 5194
-      },
-      {
-        "file": "img-42.png",
+        "file": "img-41.png",
         "size": 4230
+      },
+      {
+        "file": "img-42.svg",
+        "size": 5194
       },
       {
         "file": "img-43.svg",
@@ -680,7 +680,7 @@
       },
       {
         "file": "font-39.woff2",
-        "size": 35595
+        "size": 35719
       },
       {
         "file": "font-4.woff2",
@@ -692,11 +692,11 @@
       },
       {
         "file": "font-41.woff2",
-        "size": 34907
+        "size": 35595
       },
       {
         "file": "font-42.woff2",
-        "size": 35719
+        "size": 34907
       },
       {
         "file": "font-43.woff2",
@@ -738,7 +738,7 @@
     "externalRefsRemaining": 2753,
     "inlineStyleBlocks": 787,
     "totalCSSInHTML": 476257038,
-    "avgImageSize": 111323,
-    "totalSizeKB": 556338
+    "avgImageSize": 112382,
+    "totalSizeKB": 556473
   }
 }

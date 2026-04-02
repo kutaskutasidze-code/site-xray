@@ -1,6 +1,6 @@
 {
   "site": "https://www.roomshotels.com",
-  "timestamp": "2026-04-02T00:38:47.122Z",
+  "timestamp": "2026-04-02T00:49:37.306Z",
   "files": {
     "html": 9,
     "css": 1,
@@ -11,22 +11,22 @@
     "other": 3
   },
   "sizes": {
-    "html": 667563,
+    "html": 667565,
     "css": 259311,
-    "images": 62926450,
+    "images": 62855171,
     "fonts": 757684,
     "videos": 0,
-    "total": 64613150
+    "total": 64541873
   },
   "assets": {
     "images": [
       {
         "file": "clone.png",
-        "size": 385376
+        "size": 538882
       },
       {
         "file": "original.png",
-        "size": 761389
+        "size": 536604
       },
       {
         "file": "reference.png",
@@ -465,7 +465,7 @@
     "externalRefsRemaining": 6,
     "inlineStyleBlocks": 15,
     "totalCSSInHTML": 571382,
-    "avgImageSize": 635621,
-    "totalSizeKB": 63099
+    "avgImageSize": 634901,
+    "totalSizeKB": 63029
   }
 }

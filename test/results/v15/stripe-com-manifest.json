@@ -1,6 +1,6 @@
 {
   "site": "https://stripe.com",
-  "timestamp": "2026-04-02T00:38:57.319Z",
+  "timestamp": "2026-04-02T00:49:37.854Z",
   "files": {
     "html": 278,
     "css": 10,
@@ -11,30 +11,30 @@
     "other": 1
   },
   "sizes": {
-    "html": 208255707,
+    "html": 204668806,
     "css": 434981,
-    "images": 76074677,
+    "images": 76361371,
     "fonts": 70732,
     "videos": 0,
-    "total": 284836822
+    "total": 281536615
   },
   "assets": {
     "images": [
       {
         "file": "clone.png",
-        "size": 342526
+        "size": 634248
       },
       {
         "file": "de_pricing.png",
-        "size": 2539678
+        "size": 2539364
       },
       {
         "file": "original.png",
-        "size": 342848
+        "size": 342800
       },
       {
         "file": "reference.png",
-        "size": 6248564
+        "size": 6243898
       },
       {
         "file": "favicon.ico",
@@ -578,23 +578,23 @@
       },
       {
         "file": "img-210.png",
-        "size": 7312
-      },
-      {
-        "file": "img-211.png",
         "size": 31704
       },
       {
-        "file": "img-212.png",
-        "size": 60860
-      },
-      {
-        "file": "img-213.png",
+        "file": "img-211.png",
         "size": 28990
       },
       {
-        "file": "img-214.png",
+        "file": "img-212.png",
         "size": 19148
+      },
+      {
+        "file": "img-213.png",
+        "size": 7312
+      },
+      {
+        "file": "img-214.png",
+        "size": 60860
       },
       {
         "file": "img-215.png",
@@ -1066,7 +1066,7 @@
     "externalRefsRemaining": 7432,
     "inlineStyleBlocks": 621,
     "totalCSSInHTML": 121083595,
-    "avgImageSize": 297167,
-    "totalSizeKB": 278161
+    "avgImageSize": 298287,
+    "totalSizeKB": 274938
   }
 }

@@ -26,7 +26,7 @@
 | Images | 100/100 | YES |
 | CSS | 90/100 | NO |
 | Links | 100/100 | NO |
-| Content | 98/100 | YES |
+| Content | 99/100 | YES |
 | Layout | 100/100 | YES |
 | Pixels | 99/100 | YES |
 | Interactions | 96/100 | YES |
@@ -35,14 +35,14 @@
 
 ## Pixel Comparison
 - Match: 99.2%
-- Mismatched pixels: 10903 / 1296000
+- Mismatched pixels: 10755 / 1296000
 - Diff image: `stripe-com-diff.png`
 
 ## Capture Manifest
 - HTML pages: 278
-- Images: 256 (avg 297167 bytes)
+- Images: 256 (avg 298287 bytes)
 - Fonts: 2
-- Total size: 278161 KB
+- Total size: 274938 KB
 - External refs remaining: 7432
 - Issues: 
   - Tiny image (likely broken): img-206.png (38b)

@@ -28,21 +28,21 @@
 | Links | 100/100 | NO |
 | Content | 100/100 | YES |
 | Layout | 100/100 | YES |
-| Pixels | 68/100 | NO |
+| Pixels | 71/100 | NO |
 | Interactions | 40/100 | NO |
 | Console | 100/100 | YES |
 | Manifest | 70/100 | NO |
 
 ## Pixel Comparison
-- Match: 68.3%
-- Mismatched pixels: 410913 / 1296000
+- Match: 70.7%
+- Mismatched pixels: 380090 / 1296000
 - Diff image: `cuberto-com-diff.png`
 
 ## Capture Manifest
 - HTML pages: 34
-- Images: 69 (avg 227982 bytes)
+- Images: 69 (avg 229447 bytes)
 - Fonts: 16
-- Total size: 341486 KB
+- Total size: 341585 KB
 - External refs remaining: 374
 - Issues: 
   - Tiny image (likely broken): img-23.gif (43b)

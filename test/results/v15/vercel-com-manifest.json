@@ -1,6 +1,6 @@
 {
   "site": "https://vercel.com",
-  "timestamp": "2026-04-02T00:38:48.109Z",
+  "timestamp": "2026-04-02T00:49:40.781Z",
   "files": {
     "html": 73,
     "css": 12,
@@ -11,26 +11,26 @@
     "other": 7
   },
   "sizes": {
-    "html": 149717953,
+    "html": 149637108,
     "css": 857856,
-    "images": 5966958,
-    "fonts": 69786862,
+    "images": 5964973,
+    "fonts": 69923826,
     "videos": 0,
-    "total": 234490631
+    "total": 234540213
   },
   "assets": {
     "images": [
       {
         "file": "apple-touch-icon-precomposed.png",
-        "size": 232140
+        "size": 232142
       },
       {
         "file": "apple-touch-icon.png",
-        "size": 232082
+        "size": 232080
       },
       {
         "file": "ai.png",
-        "size": 446605
+        "size": 446582
       },
       {
         "file": "clone.png",
@@ -38,7 +38,7 @@
       },
       {
         "file": "home.png",
-        "size": 1112224
+        "size": 1113249
       },
       {
         "file": "original.png",
@@ -46,15 +46,15 @@
       },
       {
         "file": "reference.png",
-        "size": 1116513
+        "size": 1113516
       },
       {
         "file": "favicon-16x16.png",
-        "size": 232065
+        "size": 232069
       },
       {
         "file": "favicon-32x32.png",
-        "size": 232067
+        "size": 232069
       },
       {
         "file": "favicon.ico",
@@ -62,7 +62,7 @@
       },
       {
         "file": "favicon.svg",
-        "size": 232035
+        "size": 232037
       },
       {
         "file": "apple-touch-icon-114x114.png",
@@ -286,11 +286,11 @@
       },
       {
         "file": "img-41.svg",
-        "size": 1641
+        "size": 1882
       },
       {
         "file": "img-42.svg",
-        "size": 1314
+        "size": 1641
       },
       {
         "file": "img-43.svg",
@@ -298,27 +298,27 @@
       },
       {
         "file": "img-44.svg",
-        "size": 1882
+        "size": 1314
       },
       {
         "file": "img-45.svg",
-        "size": 1882
+        "size": 1917
       },
       {
         "file": "img-46.svg",
-        "size": 1917
+        "size": 503
       },
       {
         "file": "img-47.svg",
-        "size": 1917
+        "size": 1882
       },
       {
         "file": "img-48.svg",
-        "size": 728
+        "size": 1917
       },
       {
         "file": "img-49.svg",
-        "size": 503
+        "size": 728
       },
       {
         "file": "img-5.svg",
@@ -334,7 +334,7 @@
       },
       {
         "file": "img-52.svg",
-        "size": 1936
+        "size": 1154
       },
       {
         "file": "img-53.svg",
@@ -342,27 +342,27 @@
       },
       {
         "file": "img-54.svg",
-        "size": 2735
-      },
-      {
-        "file": "img-55.svg",
-        "size": 1667
-      },
-      {
-        "file": "img-56.svg",
         "size": 3035
       },
       {
-        "file": "img-57.svg",
-        "size": 1154
+        "file": "img-55.svg",
+        "size": 3011
       },
       {
-        "file": "img-58.svg",
+        "file": "img-56.svg",
+        "size": 1936
+      },
+      {
+        "file": "img-57.svg",
         "size": 1615
       },
       {
+        "file": "img-58.svg",
+        "size": 3011
+      },
+      {
         "file": "img-59.svg",
-        "size": 1885
+        "size": 1158
       },
       {
         "file": "img-6.svg",
@@ -370,43 +370,43 @@
       },
       {
         "file": "img-60.svg",
-        "size": 2693
-      },
-      {
-        "file": "img-61.svg",
-        "size": 1887
-      },
-      {
-        "file": "img-62.svg",
         "size": 1667
       },
       {
+        "file": "img-61.svg",
+        "size": 3035
+      },
+      {
+        "file": "img-62.svg",
+        "size": 2735
+      },
+      {
         "file": "img-63.svg",
-        "size": 1154
+        "size": 1541
       },
       {
         "file": "img-64.svg",
-        "size": 1541
+        "size": 1615
       },
       {
         "file": "img-65.svg",
-        "size": 1541
+        "size": 2732
       },
       {
         "file": "img-66.svg",
-        "size": 3011
+        "size": 1667
       },
       {
         "file": "img-67.svg",
-        "size": 1158
+        "size": 1541
       },
       {
         "file": "img-68.svg",
-        "size": 2693
+        "size": 1155
       },
       {
         "file": "img-69.svg",
-        "size": 3011
+        "size": 2693
       },
       {
         "file": "img-7.svg",
@@ -414,19 +414,19 @@
       },
       {
         "file": "img-70.svg",
-        "size": 2732
+        "size": 1885
       },
       {
         "file": "img-71.svg",
-        "size": 1615
+        "size": 1887
       },
       {
         "file": "img-72.svg",
-        "size": 1155
+        "size": 2693
       },
       {
         "file": "img-73.svg",
-        "size": 3035
+        "size": 1154
       },
       {
         "file": "img-74.svg",
@@ -542,21 +542,21 @@
       },
       {
         "file": "safari-pinned-tab.svg",
-        "size": 232085
+        "size": 232087
       }
     ],
     "fonts": [
       {
         "file": "font-0.woff2",
-        "size": 976190
+        "size": 978174
       },
       {
         "file": "font-1.woff2",
-        "size": 989165
+        "size": 977037
       },
       {
         "file": "font-10.woff2",
-        "size": 976033
+        "size": 977256
       },
       {
         "file": "font-11.woff2",
@@ -580,299 +580,299 @@
       },
       {
         "file": "font-16.woff2",
-        "size": 977170
+        "size": 977068
       },
       {
         "file": "font-17.woff",
-        "size": 991273
+        "size": 990257
       },
       {
         "file": "font-18.ttf",
-        "size": 977108
+        "size": 991428
       },
       {
         "file": "font-19.woff2",
-        "size": 976376
+        "size": 977223
       },
       {
         "file": "font-2.woff2",
-        "size": 989061
+        "size": 978424
       },
       {
         "file": "font-20.woff",
-        "size": 976164
+        "size": 977192
       },
       {
         "file": "font-21.ttf",
-        "size": 987964
+        "size": 991583
       },
       {
         "file": "font-22.woff2",
-        "size": 977418
+        "size": 977547
       },
       {
         "file": "font-23.woff",
-        "size": 977575
+        "size": 977285
       },
       {
         "file": "font-24.ttf",
-        "size": 976407
+        "size": 978391
       },
       {
         "file": "font-25.woff2",
-        "size": 976064
+        "size": 977280
       },
       {
         "file": "font-26.woff",
-        "size": 990333
+        "size": 977111
       },
       {
         "file": "font-27.ttf",
-        "size": 976002
+        "size": 978174
       },
       {
         "file": "font-28.woff2",
-        "size": 976164
+        "size": 977373
       },
       {
         "file": "font-29.woff",
-        "size": 976126
+        "size": 977565
       },
       {
         "file": "font-3.woff2",
-        "size": 990093
+        "size": 990445
       },
       {
         "file": "font-30.ttf",
-        "size": 976095
+        "size": 977318
       },
       {
         "file": "font-31.woff2",
-        "size": 975971
+        "size": 977006
       },
       {
         "file": "font-32.woff",
-        "size": 989103
+        "size": 976968
       },
       {
         "file": "font-33.ttf",
-        "size": 974960
+        "size": 990352
       },
       {
         "file": "font-34.woff2",
-        "size": 976157
+        "size": 990414
       },
       {
         "file": "font-35.woff",
-        "size": 977263
+        "size": 977349
       },
       {
         "file": "font-36.ttf",
-        "size": 989077
+        "size": 994093
       },
       {
         "file": "font-37.woff2",
-        "size": 976076
+        "size": 978205
       },
       {
         "file": "font-38.woff",
-        "size": 976009
+        "size": 991416
       },
       {
         "file": "font-39.ttf",
-        "size": 975978
+        "size": 977006
       },
       {
         "file": "font-4.woff2",
-        "size": 977370
+        "size": 978174
       },
       {
         "file": "font-40.woff2",
-        "size": 976071
+        "size": 977287
       },
       {
         "file": "font-41.woff",
-        "size": 976033
+        "size": 977061
       },
       {
         "file": "font-42.ttf",
-        "size": 976002
+        "size": 978174
       },
       {
         "file": "font-43.woff2",
-        "size": 976164
+        "size": 979459
       },
       {
         "file": "font-44.woff",
-        "size": 976314
+        "size": 977154
       },
       {
         "file": "font-45.ttf",
-        "size": 976283
+        "size": 977132
       },
       {
         "file": "font-46.woff2",
-        "size": 976221
+        "size": 977256
       },
       {
         "file": "font-47.woff",
-        "size": 975244
+        "size": 977037
       },
       {
         "file": "font-48.ttf",
-        "size": 990230
+        "size": 979273
       },
       {
         "file": "font-49.woff2",
-        "size": 977331
+        "size": 991585
       },
       {
         "file": "font-5.woff2",
-        "size": 978381
+        "size": 990319
       },
       {
         "file": "font-50.woff",
-        "size": 978474
+        "size": 977320
       },
       {
         "file": "font-51.ttf",
-        "size": 977081
+        "size": 977289
       },
       {
         "file": "font-52.woff2",
-        "size": 977436
+        "size": 977411
       },
       {
         "file": "font-53.woff",
-        "size": 990584
+        "size": 977228
       },
       {
         "file": "font-54.ttf",
-        "size": 977333
+        "size": 977351
       },
       {
         "file": "font-55.woff2",
-        "size": 977426
+        "size": 979530
       },
       {
         "file": "font-56.woff",
-        "size": 979524
+        "size": 979540
       },
       {
         "file": "font-57.ttf",
-        "size": 978356
+        "size": 1003345
       },
       {
         "file": "font-58.woff2",
-        "size": 977145
+        "size": 977154
       },
       {
         "file": "font-59.woff",
-        "size": 979388
+        "size": 977302
       },
       {
         "file": "font-6.woff2",
-        "size": 974958
+        "size": 977130
       },
       {
         "file": "font-60.ttf",
-        "size": 977083
+        "size": 990509
       },
       {
         "file": "font-61.woff2",
-        "size": 977114
+        "size": 990538
       },
       {
         "file": "font-62.woff",
-        "size": 977278
+        "size": 977101
       },
       {
         "file": "font-63.ttf",
-        "size": 977052
+        "size": 1001860
       },
       {
         "file": "font-64.woff2",
-        "size": 990341
+        "size": 978267
       },
       {
         "file": "font-65.woff",
-        "size": 977090
+        "size": 977099
       },
       {
         "file": "font-66.ttf",
-        "size": 977247
+        "size": 991613
       },
       {
         "file": "font-67.woff2",
-        "size": 978258
+        "size": 977320
       },
       {
         "file": "font-68.woff",
-        "size": 977278
+        "size": 977101
       },
       {
         "file": "font-69.ttf",
-        "size": 977247
+        "size": 990469
       },
       {
         "file": "font-7.woff2",
-        "size": 976221
+        "size": 977068
       },
       {
         "file": "font-70.woff2",
-        "size": 977121
+        "size": 978269
       },
       {
         "file": "font-71.woff",
-        "size": 977090
+        "size": 977099
       },
       {
         "file": "font-72.ttf",
-        "size": 990281
+        "size": 992629
       },
       {
         "file": "font-73.woff2",
-        "size": 977278
+        "size": 977285
       },
       {
         "file": "font-74.woff",
-        "size": 977245
+        "size": 977435
       },
       {
         "file": "font-75.ttf",
-        "size": 990490
+        "size": 977216
       },
       {
         "file": "font-76.woff2",
-        "size": 31288
-      },
-      {
-        "file": "font-77.woff2",
-        "size": 28388
-      },
-      {
-        "file": "font-78.woff2",
         "size": 28616
       },
       {
-        "file": "font-79.woff2",
+        "file": "font-77.woff2",
+        "size": 18192
+      },
+      {
+        "file": "font-78.woff2",
         "size": 28104
       },
       {
+        "file": "font-79.woff2",
+        "size": 28388
+      },
+      {
         "file": "font-8.woff2",
-        "size": 978419
+        "size": 977320
       },
       {
         "file": "font-80.woff2",
-        "size": 28552
+        "size": 31288
       },
       {
         "file": "font-81.woff2",
-        "size": 28900
+        "size": 28552
       },
       {
         "file": "font-82.woff2",
-        "size": 18192
+        "size": 28900
       },
       {
         "file": "font-83.woff2",
@@ -880,7 +880,7 @@
       },
       {
         "file": "font-9.woff2",
-        "size": 976157
+        "size": 978329
       }
     ],
     "videos": []
@@ -893,7 +893,7 @@
     "externalRefsRemaining": 892,
     "inlineStyleBlocks": 298,
     "totalCSSInHTML": 131596044,
-    "avgImageSize": 45549,
-    "totalSizeKB": 228995
+    "avgImageSize": 45534,
+    "totalSizeKB": 229043
   }
 }

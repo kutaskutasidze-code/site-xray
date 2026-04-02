@@ -2,31 +2,31 @@
 **Category:** nextjs | **Score:** 93/100 | **Perfect:** false
 
 ## Tech Stack (Original)
-- Framework: Next.js
-- CSS: 16 external sheets
-- Images: lazy-loading
+- Framework: Unknown
+- CSS: Unknown
+- Images: Unknown
 - JS libs: none detected
-- Scripts: 11 | Stylesheets: 16
-- WebGL: no | SVGs: 176 | Iframes: 0
+- Scripts: 0 | Stylesheets: 0
+- WebGL: no | SVGs: 0 | Iframes: 0
 
 ## Element Comparison (Original → Clone)
 | Element | Original | Clone | Delta |
 |---------|----------|-------|-------|
-| Visible | 1603 | 1603 | 0 |
-| Images (rendered) | 19 | 19 | 0 |
-| Links | 74 | 74 | 0 |
-| Buttons | 85 | 85 | 0 |
-| Headings | 17 | 17 | 0 |
-| Grids | 98 | 98 | 0 |
-| Flexes | 492 | 492 | 0 |
+| Visible | 0 | 1601 | 1601 |
+| Images (rendered) | 0 | 31 | 31 |
+| Links | 0 | 74 | 74 |
+| Buttons | 0 | 85 | 85 |
+| Headings | 0 | 17 | 17 |
+| Grids | 0 | 98 | 98 |
+| Flexes | 0 | 495 | 495 |
 
 ## Scores
 | Metric | Score | Perfect |
 |--------|-------|---------|
-| Images | 61/100 | NO |
+| Images | 100/100 | YES |
 | CSS | 100/100 | YES |
 | Links | 100/100 | NO |
-| Content | 100/100 | YES |
+| Content | 50/100 | NO |
 | Layout | 100/100 | YES |
 | Pixels | 100/100 | YES |
 | Interactions | 98/100 | YES |
@@ -34,24 +34,24 @@
 | Manifest | 85/100 | NO |
 
 ## Pixel Comparison
-- Match: 99.8%
-- Mismatched pixels: 2018 / 1296000
+- Match: 99.9%
+- Mismatched pixels: 1858 / 1296000
 - Diff image: `linear-app-diff.png`
 
 ## Capture Manifest
 - HTML pages: 46
-- Images: 47 (avg 280910 bytes)
+- Images: 48 (avg 298583 bytes)
 - Fonts: 3
-- Total size: 108955 KB
+- Total size: 109756 KB
 - External refs remaining: 240
 - Issues: 
   - 240 external references still in HTML (should be 0)
 
 ## Root Causes
-- IMAGES: 19/19 rendered (0 missing). Strategy: lazy-loading. Broken: http://localhost:19884/images/img-1.jpg, http://localhost:19884/images/img-15.jpg, http://localhost:19884/images/img-16.jpg, http://localhost:19884/images/img-17.jpg, http://localhost:19884/images/img-17.jpg
+- CONTENT: undefined/undefined words matched (50%). Clone has undefined words.
 
 ## Suggested Fixes (universal)
-- Handle lazy-loading: scroll to trigger lazy images before capture, or rewrite data-src to src
+- undefined renders content via JS — may need to wait longer or use networkidle
 
 ## Screenshots
 - Original: `linear-app-original.png`

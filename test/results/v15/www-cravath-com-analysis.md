@@ -34,15 +34,15 @@
 | Manifest | 85/100 | NO |
 
 ## Pixel Comparison
-- Match: 96.8%
-- Mismatched pixels: 41527 / 1296000
+- Match: 96.9%
+- Mismatched pixels: 39848 / 1296000
 - Diff image: `www-cravath-com-diff.png`
 
 ## Capture Manifest
 - HTML pages: 26
-- Images: 11 (avg 77284 bytes)
+- Images: 11 (avg 90760 bytes)
 - Fonts: 4
-- Total size: 2459 KB
+- Total size: 2603 KB
 - External refs remaining: 104
 - Issues: 
   - 104 external references still in HTML (should be 0)

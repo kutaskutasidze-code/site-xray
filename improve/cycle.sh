@@ -261,41 +261,42 @@ while [ $ATTEMPT -lt $MAX_RETRIES ] && [ "$SUCCESS" = false ]; do
   ATTEMPT=$((ATTEMPT + 1))
   echo "🤖 Step 2: Improvement attempt ${ATTEMPT}/${MAX_RETRIES}..."
 
-  # Build prompt — include failure reasons from previous attempts
-  RETRY_CONTEXT=""
+  # Build prompt to a temp file (avoids bash quoting issues with special chars in knowledge.json)
+  PROMPT_FILE=$(mktemp /tmp/xray-prompt-XXXXX.txt)
+  trap 'rm -f "$LOCK_FILE" "$PROMPT_FILE"' EXIT
+
+  cat > "$PROMPT_FILE" <<PROMPT_EOF
+You are improving site-xray, a web cloning tool.
+
+Current version: v${CURRENT_V} (score: ${CURRENT_SCORE}/100)
+PROMPT_EOF
+
   if [ $ATTEMPT -gt 1 ]; then
-    RETRY_CONTEXT="
+    cat >> "$PROMPT_FILE" <<RETRY_EOF
+
 ## PREVIOUS ATTEMPT FAILED
 This is retry #${ATTEMPT}. Previous attempt failed because:
 ${FAILURE_REASONS}
 
 Try a DIFFERENT approach. Do NOT repeat what was tried before.
 Read improve/knowledge.json for past failures to avoid.
-"
+RETRY_EOF
   fi
 
-  # Include knowledge base context
-  KNOWLEDGE_CONTEXT=""
-  if [ -f "improve/knowledge.json" ]; then
-    KNOWLEDGE_CONTEXT="
-## Knowledge Base (past learnings)
-$(cat improve/knowledge.json | head -100)
-"
-  fi
+  cat >> "$PROMPT_FILE" <<'STATIC_EOF'
 
-  PROMPT="You are improving site-xray, a web cloning tool.
-
-Current version: v${CURRENT_V} (score: ${CURRENT_SCORE}/100)
-${RETRY_CONTEXT}
 The test suite already ran a full parallel pipeline: clone → score → deep analysis for ALL sites.
 It produced per-site analysis reports and a cross-site synthesis. Your job is to READ these, THINK, then IMPLEMENT.
-${KNOWLEDGE_CONTEXT}
+
 ## Step 1: READ (do all of these first, before any code changes)
+- Read `improve/knowledge.json` FIRST — see what worked and what FAILED in past cycles. Do NOT repeat failed approaches.
+STATIC_EOF
+
+  cat >> "$PROMPT_FILE" <<VERSION_EOF
 - Read \`test/results/v${CURRENT_V}/synthesis.md\` — the cross-site pattern analysis
 - Read the individual \`*-analysis.md\` files for the 3 WORST scoring sites
-- Read the screenshot PNGs for those sites (you can see images) — visually compare original vs clone
+- Read the screenshot PNGs AND diff PNGs for those sites (you can see images) — visually compare original vs clone
 - Read \`improve/history.json\` — see what was tried before
-- Read \`improve/knowledge.json\` — see what worked and what FAILED in past cycles
 - Read \`v${CURRENT_V}-stable.js\` — understand current implementation
 
 ## Step 2: THINK (use structured reasoning, do NOT skip)
@@ -319,11 +320,12 @@ Write your reasoning out before proceeding.
 - Check no regressions on a previously-good site too
 
 Do NOT modify v${CURRENT_V}-stable.js — only create v${NEXT_V}-stable.js.
-Read improve/CLAUDE.md for detailed rules."
+Read improve/CLAUDE.md for detailed rules.
+VERSION_EOF
 
   if [ "$AUTO" = true ]; then
-    # Run with timeout protection
-    if timeout "$MAX_CYCLE_TIME" bash -c "echo '$PROMPT' | claude -p --allowedTools 'Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch' --max-turns 50 > 'improve/cycle-v${NEXT_V}.log' 2>&1"; then
+    # Run with timeout protection — pipe prompt file to claude
+    if timeout "$MAX_CYCLE_TIME" bash -c "cat '$PROMPT_FILE' | claude -p --allowedTools 'Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch' --max-turns 50 > 'improve/cycle-v${NEXT_V}.log' 2>&1"; then
       echo "   Claude Code completed."
     else
       echo "   ⚠ Claude Code timed out or errored (attempt $ATTEMPT)"
@@ -426,12 +428,13 @@ else
 
   save_knowledge "v${NEXT_V}" "failed" "${CURRENT_SCORE}" "${CURRENT_SCORE}" "all_retries_exhausted"
 
-  # ── Plateau detection ──
+  # ── Plateau detection (only count entries with real scores) ──
   PLATEAU=$(node -e "
     const fs=require('fs');
     const h=fs.existsSync('improve/history.json')?JSON.parse(fs.readFileSync('improve/history.json','utf-8')):[];
-    const recent=h.slice(-3);
-    if(recent.length>=3 && recent.every(r=>Math.abs(r.diff||0)<=1)){
+    const scored=h.filter(r=>typeof r.score==='number' && typeof r.diff==='number');
+    const recent=scored.slice(-3);
+    if(recent.length>=3 && recent.every(r=>Math.abs(r.diff)<=1)){
       console.log('PLATEAU');
     } else { console.log('OK'); }
   " 2>/dev/null || echo "OK")

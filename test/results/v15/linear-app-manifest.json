@@ -1,22 +1,22 @@
 {
   "site": "https://linear.app",
-  "timestamp": "2026-04-02T00:39:33.677Z",
+  "timestamp": "2026-04-02T00:49:00.891Z",
   "files": {
     "html": 46,
-    "css": 48,
-    "images": 47,
+    "css": 16,
+    "images": 48,
     "fonts": 3,
     "videos": 1,
     "models": 0,
-    "other": 0
+    "other": 1
   },
   "sizes": {
-    "html": 47102026,
-    "css": 1287494,
-    "images": 13202765,
+    "html": 47651044,
+    "css": 429196,
+    "images": 14331988,
     "fonts": 551224,
     "videos": 49425938,
-    "total": 111569447
+    "total": 112389785
   },
   "assets": {
     "images": [
@@ -34,15 +34,19 @@
       },
       {
         "file": "clone.png",
-        "size": 114952
+        "size": 114910
       },
       {
         "file": "homepage.png",
-        "size": 1188185
+        "size": 1188535
       },
       {
         "file": "original.png",
-        "size": 78694
+        "size": 15894
+      },
+      {
+        "file": "reference.png",
+        "size": 1191715
       },
       {
         "file": "favicon-16x16.png",
@@ -237,8 +241,8 @@
     "htmlPages": 46,
     "externalRefsRemaining": 240,
     "inlineStyleBlocks": 184,
-    "totalCSSInHTML": 30741948,
-    "avgImageSize": 280910,
-    "totalSizeKB": 108955
+    "totalCSSInHTML": 29727132,
+    "avgImageSize": 298583,
+    "totalSizeKB": 109756
   }
 }

@@ -1,6 +1,6 @@
 {
   "site": "https://cuberto.com",
-  "timestamp": "2026-04-02T00:38:14.340Z",
+  "timestamp": "2026-04-02T00:49:04.720Z",
   "files": {
     "html": 34,
     "css": 0,
@@ -11,12 +11,12 @@
     "other": 8
   },
   "sizes": {
-    "html": 5937666,
+    "html": 5937611,
     "css": 0,
-    "images": 15730762,
+    "images": 15831856,
     "fonts": 280285,
     "videos": 326699084,
-    "total": 349681567
+    "total": 349782744
   },
   "assets": {
     "images": [
@@ -26,23 +26,23 @@
       },
       {
         "file": "clone.png",
-        "size": 292645
+        "size": 280142
       },
       {
         "file": "original.png",
-        "size": 358054
+        "size": 367609
       },
       {
         "file": "projects_.png",
-        "size": 3570355
+        "size": 3570408
       },
       {
         "file": "reference.png",
-        "size": 3310123
+        "size": 3310244
       },
       {
         "file": "services_.png",
-        "size": 589401
+        "size": 693269
       },
       {
         "file": "favicon-16x16.png",
@@ -101,8 +101,8 @@
         "size": 118916
       },
       {
-        "file": "img-19.svg",
-        "size": 9738
+        "file": "img-19.jpg",
+        "size": 124003
       },
       {
         "file": "img-2.jpg",
@@ -110,15 +110,15 @@
       },
       {
         "file": "img-20.jpg",
-        "size": 124003
+        "size": 46899
       },
       {
         "file": "img-21.jpg",
         "size": 68124
       },
       {
-        "file": "img-22.jpg",
-        "size": 46899
+        "file": "img-22.svg",
+        "size": 9738
       },
       {
         "file": "img-23.gif",
@@ -142,11 +142,11 @@
       },
       {
         "file": "img-28.jpg",
-        "size": 71441
+        "size": 64950
       },
       {
         "file": "img-29.jpg",
-        "size": 64950
+        "size": 71441
       },
       {
         "file": "img-3.jpg",
@@ -158,19 +158,19 @@
       },
       {
         "file": "img-31.png",
-        "size": 44489
-      },
-      {
-        "file": "img-32.png",
         "size": 28493
       },
       {
+        "file": "img-32.png",
+        "size": 44489
+      },
+      {
         "file": "img-33.webp",
-        "size": 40374
+        "size": 46292
       },
       {
         "file": "img-34.webp",
-        "size": 46292
+        "size": 40374
       },
       {
         "file": "img-35.webp",
@@ -182,15 +182,15 @@
       },
       {
         "file": "img-37.jpg",
-        "size": 164844
+        "size": 271682
       },
       {
         "file": "img-38.jpg",
-        "size": 339798
+        "size": 71438
       },
       {
         "file": "img-39.jpg",
-        "size": 271682
+        "size": 164844
       },
       {
         "file": "img-4.jpg",
@@ -198,7 +198,7 @@
       },
       {
         "file": "img-40.jpg",
-        "size": 71438
+        "size": 339798
       },
       {
         "file": "img-41.jpg",
@@ -218,23 +218,23 @@
       },
       {
         "file": "img-45.jpg",
-        "size": 180947
-      },
-      {
-        "file": "img-46.png",
-        "size": 109317
-      },
-      {
-        "file": "img-47.png",
-        "size": 76101
-      },
-      {
-        "file": "img-48.jpg",
         "size": 179091
       },
       {
-        "file": "img-49.png",
+        "file": "img-46.jpg",
+        "size": 180947
+      },
+      {
+        "file": "img-47.png",
+        "size": 109317
+      },
+      {
+        "file": "img-48.png",
         "size": 139698
+      },
+      {
+        "file": "img-49.png",
+        "size": 76101
       },
       {
         "file": "img-5.jpg",
@@ -551,7 +551,7 @@
     "externalRefsRemaining": 374,
     "inlineStyleBlocks": 102,
     "totalCSSInHTML": 4976580,
-    "avgImageSize": 227982,
-    "totalSizeKB": 341486
+    "avgImageSize": 229447,
+    "totalSizeKB": 341585
   }
 }

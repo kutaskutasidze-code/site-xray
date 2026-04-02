@@ -1,6 +1,6 @@
 {
   "site": "https://pentagram.com",
-  "timestamp": "2026-04-02T00:38:53.207Z",
+  "timestamp": "2026-04-02T00:49:27.732Z",
   "files": {
     "html": 136,
     "css": 2,
@@ -11,18 +11,18 @@
     "other": 2
   },
   "sizes": {
-    "html": 168193190,
+    "html": 168194482,
     "css": 1052990,
-    "images": 174003335,
+    "images": 174218433,
     "fonts": 0,
     "videos": 655447,
-    "total": 344004247
+    "total": 344220637
   },
   "assets": {
     "images": [
       {
         "file": "clone.png",
-        "size": 1247624
+        "size": 1247287
       },
       {
         "file": "original.png",
@@ -190,19 +190,19 @@
       },
       {
         "file": "img-130.jpg",
-        "size": 191920
-      },
-      {
-        "file": "img-131.jpg",
         "size": 106824
       },
       {
-        "file": "img-132.jpg",
+        "file": "img-131.jpg",
         "size": 474588
       },
       {
+        "file": "img-132.jpg",
+        "size": 191920
+      },
+      {
         "file": "img-133.jpg",
-        "size": 141688
+        "size": 365288
       },
       {
         "file": "img-134.png",
@@ -1394,7 +1394,7 @@
       },
       {
         "file": "img-41.jpg",
-        "size": 309355
+        "size": 391649
       },
       {
         "file": "img-410.jpg",
@@ -1438,7 +1438,7 @@
       },
       {
         "file": "img-42.jpg",
-        "size": 391649
+        "size": 487269
       },
       {
         "file": "img-420.jpg",
@@ -1482,7 +1482,7 @@
       },
       {
         "file": "img-43.jpg",
-        "size": 598083
+        "size": 309355
       },
       {
         "file": "img-430.jpg",
@@ -1569,6 +1569,10 @@
         "size": 236397
       },
       {
+        "file": "img-45.gif",
+        "size": 1628325
+      },
+      {
         "file": "img-450.png",
         "size": 226764
       },
@@ -1610,7 +1614,7 @@
       },
       {
         "file": "img-46.gif",
-        "size": 86501
+        "size": 146901
       },
       {
         "file": "img-460.jpg",
@@ -1654,7 +1658,7 @@
       },
       {
         "file": "img-47.gif",
-        "size": 1628325
+        "size": 86501
       },
       {
         "file": "img-470.jpg",
@@ -1695,10 +1699,6 @@
       {
         "file": "img-479.jpg",
         "size": 499439
-      },
-      {
-        "file": "img-48.gif",
-        "size": 146901
       },
       {
         "file": "img-480.jpg",
@@ -2142,7 +2142,7 @@
       },
       {
         "file": "img-58.jpg",
-        "size": 465119
+        "size": 52441
       },
       {
         "file": "img-580.jpg",
@@ -2186,7 +2186,7 @@
       },
       {
         "file": "img-59.jpg",
-        "size": 52441
+        "size": 465119
       },
       {
         "file": "img-590.jpg",
@@ -2322,7 +2322,7 @@
       },
       {
         "file": "img-62.jpg",
-        "size": 723754
+        "size": 646822
       },
       {
         "file": "img-620.jpg",
@@ -2365,8 +2365,8 @@
         "size": 1426974
       },
       {
-        "file": "img-63.gif",
-        "size": 130325
+        "file": "img-63.jpg",
+        "size": 497108
       },
       {
         "file": "img-630.jpg",
@@ -2410,7 +2410,7 @@
       },
       {
         "file": "img-64.jpg",
-        "size": 646822
+        "size": 462196
       },
       {
         "file": "img-640.jpg",
@@ -2798,7 +2798,7 @@
       },
       {
         "file": "img-728.jpg",
-        "size": 1212
+        "size": 3800
       },
       {
         "file": "img-729.jpg",
@@ -2810,23 +2810,23 @@
       },
       {
         "file": "img-730.jpg",
-        "size": 3796
+        "size": 1212
       },
       {
         "file": "img-731.gif",
         "size": 3789
       },
       {
-        "file": "img-733.gif",
-        "size": 3793
-      },
-      {
-        "file": "img-734.gif",
+        "file": "img-732.gif",
         "size": 3822
       },
       {
-        "file": "img-735.gif",
+        "file": "img-733.gif",
         "size": 3798
+      },
+      {
+        "file": "img-734.gif",
+        "size": 3793
       },
       {
         "file": "img-736.png",
@@ -2870,11 +2870,11 @@
       },
       {
         "file": "img-745.jpg",
-        "size": 3815
+        "size": 3796
       },
       {
         "file": "img-746.jpg",
-        "size": 3796
+        "size": 3815
       },
       {
         "file": "img-747.gif",
@@ -2886,19 +2886,19 @@
       },
       {
         "file": "img-749.jpg",
-        "size": 3803
+        "size": 3791
       },
       {
         "file": "img-75.jpg",
         "size": 355520
       },
       {
-        "file": "img-750.gif",
-        "size": 3805
+        "file": "img-750.jpg",
+        "size": 1217
       },
       {
         "file": "img-751.jpg",
-        "size": 3791
+        "size": 3806
       },
       {
         "file": "img-752.jpg",
@@ -3366,15 +3366,15 @@
       },
       {
         "file": "img-857.jpg",
-        "size": 3802
-      },
-      {
-        "file": "img-858.jpg",
         "size": 3794
       },
       {
-        "file": "img-859.jpg",
+        "file": "img-858.jpg",
         "size": 3801
+      },
+      {
+        "file": "img-859.jpg",
+        "size": 3802
       },
       {
         "file": "img-86.png",
@@ -3382,7 +3382,7 @@
       },
       {
         "file": "img-860.jpg",
-        "size": 3798
+        "size": 3803
       },
       {
         "file": "img-861.png",
@@ -3501,7 +3501,7 @@
     "externalRefsRemaining": 1496,
     "inlineStyleBlocks": 272,
     "totalCSSInHTML": 151733296,
-    "avgImageSize": 203038,
-    "totalSizeKB": 335942
+    "avgImageSize": 203289,
+    "totalSizeKB": 336153
   }
 }

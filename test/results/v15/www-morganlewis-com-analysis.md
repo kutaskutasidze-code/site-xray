@@ -34,15 +34,15 @@
 | Manifest | 70/100 | NO |
 
 ## Pixel Comparison
-- Match: 91.1%
-- Mismatched pixels: 115342 / 1296000
+- Match: 90.6%
+- Mismatched pixels: 121354 / 1296000
 - Diff image: `www-morganlewis-com-diff.png`
 
 ## Capture Manifest
 - HTML pages: 393
-- Images: 131 (avg 111323 bytes)
+- Images: 131 (avg 112382 bytes)
 - Fonts: 45
-- Total size: 556338 KB
+- Total size: 556473 KB
 - External refs remaining: 2753
 - Issues: 
   - Tiny image (likely broken): img-107.png (76b)

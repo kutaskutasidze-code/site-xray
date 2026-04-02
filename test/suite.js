@@ -22,7 +22,8 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 const { PNG } = require('pngjs');
-const pixelmatch = require('pixelmatch');
+const _pm = require('pixelmatch');
+const pixelmatch = typeof _pm === 'function' ? _pm : _pm.default;
 
 function execAsync(cmd, opts = {}) {
   return new Promise((resolve, reject) => {

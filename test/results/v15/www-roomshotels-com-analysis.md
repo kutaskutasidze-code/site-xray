@@ -40,9 +40,9 @@
 
 ## Capture Manifest
 - HTML pages: 9
-- Images: 99 (avg 635621 bytes)
+- Images: 99 (avg 634901 bytes)
 - Fonts: 9
-- Total size: 63099 KB
+- Total size: 63029 KB
 - External refs remaining: 6
 - Issues: 
   - 6 external references still in HTML (should be 0)

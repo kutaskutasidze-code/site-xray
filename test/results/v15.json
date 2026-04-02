@@ -1,11 +1,369 @@
 {
   "version": "v15",
-  "date": "2026-04-02T00:39:43.450Z",
-  "averageScore": 90,
+  "date": "2026-04-02T00:49:56.921Z",
+  "averageScore": 91,
   "perfectCount": 0,
   "totalSites": 8,
   "regressions": 0,
   "sites": [
+    {
+      "site": "https://linear.app",
+      "category": "nextjs",
+      "totalScore": 93,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 31,
+          "rendered": 31,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 100,
+          "hasBackground": true,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 646113,
+          "fontsLoaded": 6,
+          "perfect": true
+        },
+        "links": {
+          "score": 100,
+          "totalLinks": 3558,
+          "workingLinks": 3558,
+          "brokenLinks": 0,
+          "externalLinks": 195,
+          "broken": [],
+          "perfect": false
+        },
+        "content": {
+          "score": 50,
+          "origLength": 0,
+          "cloneLength": 8268,
+          "perfect": false
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 1605,
+            "imgs": 26,
+            "texts": 566
+          },
+          "cloneStructure": {
+            "divs": 1601,
+            "imgs": 26,
+            "texts": 562
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v15/linear-app-original.png",
+            "clone": "/opt/site-xray/test/results/v15/linear-app-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 98,
+          "totalButtons": 85,
+          "clickable": 82,
+          "links": 63,
+          "hasNav": true,
+          "perfect": true
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        },
+        "pixels": {
+          "score": 100,
+          "mismatchPercent": 0.14,
+          "mismatchCount": 1858,
+          "totalPixels": 1296000,
+          "dimensions": {
+            "width": 1440,
+            "height": 900
+          },
+          "diffImage": "/opt/site-xray/test/results/v15/linear-app-diff.png",
+          "perfect": true
+        },
+        "manifest": {
+          "score": 85,
+          "issues": [
+            "240 external references still in HTML (should be 0)"
+          ],
+          "files": {
+            "html": 46,
+            "css": 16,
+            "images": 48,
+            "fonts": 3,
+            "videos": 1,
+            "models": 0,
+            "other": 1
+          },
+          "sizes": {
+            "htmlPages": 46,
+            "externalRefsRemaining": 240,
+            "inlineStyleBlocks": 184,
+            "totalCSSInHTML": 29727132,
+            "avgImageSize": 298583,
+            "totalSizeKB": 109756
+          },
+          "perfect": false
+        }
+      },
+      "manifest": {
+        "site": "https://linear.app",
+        "timestamp": "2026-04-02T00:49:00.891Z",
+        "files": {
+          "html": 46,
+          "css": 16,
+          "images": 48,
+          "fonts": 3,
+          "videos": 1,
+          "models": 0,
+          "other": 1
+        },
+        "sizes": {
+          "html": 47651044,
+          "css": 429196,
+          "images": 14331988,
+          "fonts": 551224,
+          "videos": 49425938,
+          "total": 112389785
+        },
+        "assets": {
+          "images": [
+            {
+              "file": "apple-touch-icon-precomposed.png",
+              "size": 15842
+            },
+            {
+              "file": "apple-touch-icon.png",
+              "size": 15842
+            },
+            {
+              "file": "about.png",
+              "size": 1643943
+            },
+            {
+              "file": "clone.png",
+              "size": 114910
+            },
+            {
+              "file": "homepage.png",
+              "size": 1188535
+            },
+            {
+              "file": "original.png",
+              "size": 15894
+            },
+            {
+              "file": "reference.png",
+              "size": 1191715
+            },
+            {
+              "file": "favicon-16x16.png",
+              "size": 15842
+            },
+            {
+              "file": "favicon-32x32.png",
+              "size": 15842
+            },
+            {
+              "file": "favicon.ico",
+              "size": 22382
+            },
+            {
+              "file": "favicon.svg",
+              "size": 15842
+            },
+            {
+              "file": "img-0.jpg",
+              "size": 332356
+            },
+            {
+              "file": "img-1.jpg",
+              "size": 724173
+            },
+            {
+              "file": "img-10.jpg",
+              "size": 4148
+            },
+            {
+              "file": "img-11.jpg",
+              "size": 4500
+            },
+            {
+              "file": "img-12.jpg",
+              "size": 337771
+            },
+            {
+              "file": "img-13.jpg",
+              "size": 44271
+            },
+            {
+              "file": "img-14.jpg",
+              "size": 48145
+            },
+            {
+              "file": "img-15.jpg",
+              "size": 396789
+            },
+            {
+              "file": "img-16.jpg",
+              "size": 932019
+            },
+            {
+              "file": "img-17.jpg",
+              "size": 3132
+            },
+            {
+              "file": "img-18.jpg",
+              "size": 14973
+            },
+            {
+              "file": "img-19.jpg",
+              "size": 18738
+            },
+            {
+              "file": "img-2.jpg",
+              "size": 1031287
+            },
+            {
+              "file": "img-20.jpg",
+              "size": 2769
+            },
+            {
+              "file": "img-21.jpg",
+              "size": 9659
+            },
+            {
+              "file": "img-22.jpg",
+              "size": 994391
+            },
+            {
+              "file": "img-23.jpg",
+              "size": 410200
+            },
+            {
+              "file": "img-24.jpg",
+              "size": 15842
+            },
+            {
+              "file": "img-26.jpg",
+              "size": 1713157
+            },
+            {
+              "file": "img-27.jpg",
+              "size": 346650
+            },
+            {
+              "file": "img-28.jpg",
+              "size": 338350
+            },
+            {
+              "file": "img-29.jpg",
+              "size": 302574
+            },
+            {
+              "file": "img-3.png",
+              "size": 2404
+            },
+            {
+              "file": "img-30.jpg",
+              "size": 444978
+            },
+            {
+              "file": "img-31.jpg",
+              "size": 376121
+            },
+            {
+              "file": "img-32.jpg",
+              "size": 315641
+            },
+            {
+              "file": "img-33.jpg",
+              "size": 354370
+            },
+            {
+              "file": "img-34.jpg",
+              "size": 481487
+            },
+            {
+              "file": "img-4.jpg",
+              "size": 9311
+            },
+            {
+              "file": "img-5.jpg",
+              "size": 3859
+            },
+            {
+              "file": "img-6.jpg",
+              "size": 4388
+            },
+            {
+              "file": "img-7.jpg",
+              "size": 4851
+            },
+            {
+              "file": "img-8.jpg",
+              "size": 4318
+            },
+            {
+              "file": "img-9.jpg",
+              "size": 5902
+            },
+            {
+              "file": "safari-pinned-tab.svg",
+              "size": 15842
+            },
+            {
+              "file": "apple-touch-icon.png",
+              "size": 25274
+            },
+            {
+              "file": "favicon.svg",
+              "size": 759
+            }
+          ],
+          "fonts": [
+            {
+              "file": "font-0.woff2",
+              "size": 352240
+            },
+            {
+              "file": "font-1.woff2",
+              "size": 160932
+            },
+            {
+              "file": "font-2.woff2",
+              "size": 38052
+            }
+          ],
+          "videos": [
+            {
+              "file": "img-25.mp4",
+              "size": 49425938
+            }
+          ]
+        },
+        "issues": [
+          "240 external references still in HTML (should be 0)"
+        ],
+        "analysis": {
+          "htmlPages": 46,
+          "externalRefsRemaining": 240,
+          "inlineStyleBlocks": 184,
+          "totalCSSInHTML": 29727132,
+          "avgImageSize": 298583,
+          "totalSizeKB": 109756
+        }
+      }
+    },
     {
       "site": "https://cuberto.com",
       "category": "webflow",
@@ -80,9 +438,9 @@
           "perfect": true
         },
         "pixels": {
-          "score": 68,
-          "mismatchPercent": 31.71,
-          "mismatchCount": 410913,
+          "score": 71,
+          "mismatchPercent": 29.33,
+          "mismatchCount": 380090,
           "totalPixels": 1296000,
           "dimensions": {
             "width": 1440,
@@ -111,15 +469,15 @@
             "externalRefsRemaining": 374,
             "inlineStyleBlocks": 102,
             "totalCSSInHTML": 4976580,
-            "avgImageSize": 227982,
-            "totalSizeKB": 341486
+            "avgImageSize": 229447,
+            "totalSizeKB": 341585
           },
           "perfect": false
         }
       },
       "manifest": {
         "site": "https://cuberto.com",
-        "timestamp": "2026-04-02T00:38:14.340Z",
+        "timestamp": "2026-04-02T00:49:04.720Z",
         "files": {
           "html": 34,
           "css": 0,
@@ -130,12 +488,12 @@
           "other": 8
         },
         "sizes": {
-          "html": 5937666,
+          "html": 5937611,
           "css": 0,
-          "images": 15730762,
+          "images": 15831856,
           "fonts": 280285,
           "videos": 326699084,
-          "total": 349681567
+          "total": 349782744
         },
         "assets": {
           "images": [
@@ -145,23 +503,23 @@
             },
             {
               "file": "clone.png",
-              "size": 292645
+              "size": 280142
             },
             {
               "file": "original.png",
-              "size": 358054
+              "size": 367609
             },
             {
               "file": "projects_.png",
-              "size": 3570355
+              "size": 3570408
             },
             {
               "file": "reference.png",
-              "size": 3310123
+              "size": 3310244
             },
             {
               "file": "services_.png",
-              "size": 589401
+              "size": 693269
             },
             {
               "file": "favicon-16x16.png",
@@ -220,8 +578,8 @@
               "size": 118916
             },
             {
-              "file": "img-19.svg",
-              "size": 9738
+              "file": "img-19.jpg",
+              "size": 124003
             },
             {
               "file": "img-2.jpg",
@@ -229,15 +587,15 @@
             },
             {
               "file": "img-20.jpg",
-              "size": 124003
+              "size": 46899
             },
             {
               "file": "img-21.jpg",
               "size": 68124
             },
             {
-              "file": "img-22.jpg",
-              "size": 46899
+              "file": "img-22.svg",
+              "size": 9738
             },
             {
               "file": "img-23.gif",
@@ -261,11 +619,11 @@
             },
             {
               "file": "img-28.jpg",
-              "size": 71441
+              "size": 64950
             },
             {
               "file": "img-29.jpg",
-              "size": 64950
+              "size": 71441
             },
             {
               "file": "img-3.jpg",
@@ -277,19 +635,19 @@
             },
             {
               "file": "img-31.png",
-              "size": 44489
-            },
-            {
-              "file": "img-32.png",
               "size": 28493
             },
             {
+              "file": "img-32.png",
+              "size": 44489
+            },
+            {
               "file": "img-33.webp",
-              "size": 40374
+              "size": 46292
             },
             {
               "file": "img-34.webp",
-              "size": 46292
+              "size": 40374
             },
             {
               "file": "img-35.webp",
@@ -301,15 +659,15 @@
             },
             {
               "file": "img-37.jpg",
-              "size": 164844
+              "size": 271682
             },
             {
               "file": "img-38.jpg",
-              "size": 339798
+              "size": 71438
             },
             {
               "file": "img-39.jpg",
-              "size": 271682
+              "size": 164844
             },
             {
               "file": "img-4.jpg",
@@ -317,7 +675,7 @@
             },
             {
               "file": "img-40.jpg",
-              "size": 71438
+              "size": 339798
             },
             {
               "file": "img-41.jpg",
@@ -337,23 +695,23 @@
             },
             {
               "file": "img-45.jpg",
-              "size": 180947
-            },
-            {
-              "file": "img-46.png",
-              "size": 109317
-            },
-            {
-              "file": "img-47.png",
-              "size": 76101
-            },
-            {
-              "file": "img-48.jpg",
               "size": 179091
             },
             {
-              "file": "img-49.png",
+              "file": "img-46.jpg",
+              "size": 180947
+            },
+            {
+              "file": "img-47.png",
+              "size": 109317
+            },
+            {
+              "file": "img-48.png",
               "size": 139698
+            },
+            {
+              "file": "img-49.png",
+              "size": 76101
             },
             {
               "file": "img-5.jpg",
@@ -670,8 +1028,8 @@
           "externalRefsRemaining": 374,
           "inlineStyleBlocks": 102,
           "totalCSSInHTML": 4976580,
-          "avgImageSize": 227982,
-          "totalSizeKB": 341486
+          "avgImageSize": 229447,
+          "totalSizeKB": 341585
         }
       }
     },
@@ -761,8 +1119,8 @@
         },
         "pixels": {
           "score": 91,
-          "mismatchPercent": 8.9,
-          "mismatchCount": 115342,
+          "mismatchPercent": 9.36,
+          "mismatchCount": 121354,
           "totalPixels": 1296000,
           "dimensions": {
             "width": 1440,
@@ -791,15 +1149,15 @@
             "externalRefsRemaining": 2753,
             "inlineStyleBlocks": 787,
             "totalCSSInHTML": 476257038,
-            "avgImageSize": 111323,
-            "totalSizeKB": 556338
+            "avgImageSize": 112382,
+            "totalSizeKB": 556473
           },
           "perfect": false
         }
       },
       "manifest": {
         "site": "https://www.morganlewis.com",
-        "timestamp": "2026-04-02T00:38:22.964Z",
+        "timestamp": "2026-04-02T00:49:10.254Z",
         "files": {
           "html": 393,
           "css": 0,
@@ -810,12 +1168,12 @@
           "other": 2
         },
         "sizes": {
-          "html": 481255479,
+          "html": 481255426,
           "css": 0,
-          "images": 14583351,
+          "images": 14722017,
           "fonts": 73809269,
           "videos": 0,
-          "total": 569689655
+          "total": 569828268
         },
         "assets": {
           "images": [
@@ -829,11 +1187,11 @@
             },
             {
               "file": "en.png",
-              "size": 2779343
+              "size": 2778164
             },
             {
               "file": "original.png",
-              "size": 989988
+              "size": 993353
             },
             {
               "file": "our-approach.png",
@@ -849,7 +1207,7 @@
             },
             {
               "file": "reference.png",
-              "size": 3444910
+              "size": 3581390
             },
             {
               "file": "img-0.svg",
@@ -1053,7 +1411,7 @@
             },
             {
               "file": "img-33.png",
-              "size": 1024
+              "size": 1856
             },
             {
               "file": "img-34.png",
@@ -1061,23 +1419,23 @@
             },
             {
               "file": "img-35.png",
-              "size": 1856
+              "size": 1024
             },
             {
               "file": "img-36.png",
-              "size": 1264
-            },
-            {
-              "file": "img-37.png",
               "size": 495
             },
             {
+              "file": "img-37.png",
+              "size": 521
+            },
+            {
               "file": "img-38.png",
-              "size": 823
+              "size": 547
             },
             {
               "file": "img-39.png",
-              "size": 547
+              "size": 823
             },
             {
               "file": "img-4.png",
@@ -1085,15 +1443,15 @@
             },
             {
               "file": "img-40.png",
-              "size": 521
+              "size": 1264
             },
             {
-              "file": "img-41.svg",
-              "size": 5194
-            },
-            {
-              "file": "img-42.png",
+              "file": "img-41.png",
               "size": 4230
+            },
+            {
+              "file": "img-42.svg",
+              "size": 5194
             },
             {
               "file": "img-43.svg",
@@ -1479,7 +1837,7 @@
             },
             {
               "file": "font-39.woff2",
-              "size": 35595
+              "size": 35719
             },
             {
               "file": "font-4.woff2",
@@ -1491,11 +1849,11 @@
             },
             {
               "file": "font-41.woff2",
-              "size": 34907
+              "size": 35595
             },
             {
               "file": "font-42.woff2",
-              "size": 35719
+              "size": 34907
             },
             {
               "file": "font-43.woff2",
@@ -1537,1816 +1895,8 @@
           "externalRefsRemaining": 2753,
           "inlineStyleBlocks": 787,
           "totalCSSInHTML": 476257038,
-          "avgImageSize": 111323,
-          "totalSizeKB": 556338
-        }
-      }
-    },
-    {
-      "site": "https://www.cravath.com",
-      "category": "corporate",
-      "totalScore": 93,
-      "perfect": false,
-      "metrics": {
-        "images": {
-          "score": 100,
-          "total": 2,
-          "rendered": 2,
-          "broken": 0,
-          "empty": 0,
-          "brokenList": [],
-          "perfect": true
-        },
-        "css": {
-          "score": 90,
-          "hasBackground": false,
-          "hasFont": true,
-          "hasPadding": false,
-          "hasLayout": true,
-          "cssSize": 238161,
-          "fontsLoaded": 36,
-          "perfect": false
-        },
-        "links": {
-          "score": 100,
-          "totalLinks": 1384,
-          "workingLinks": 1384,
-          "brokenLinks": 0,
-          "externalLinks": 104,
-          "broken": [],
-          "perfect": false
-        },
-        "content": {
-          "score": 100,
-          "origWords": 221,
-          "cloneWords": 221,
-          "matched": 221,
-          "perfect": true
-        },
-        "layout": {
-          "score": 100,
-          "origStructure": {
-            "divs": 437,
-            "imgs": 2,
-            "texts": 102
-          },
-          "cloneStructure": {
-            "divs": 435,
-            "imgs": 2,
-            "texts": 102
-          },
-          "screenshots": {
-            "original": "/opt/site-xray/test/results/v15/www-cravath-com-original.png",
-            "clone": "/opt/site-xray/test/results/v15/www-cravath-com-clone.png"
-          },
-          "perfect": true
-        },
-        "interactions": {
-          "score": 52,
-          "totalButtons": 15,
-          "clickable": 13,
-          "links": 46,
-          "hasNav": false,
-          "perfect": false
-        },
-        "console": {
-          "score": 100,
-          "errors": [],
-          "count": 0,
-          "perfect": true
-        },
-        "pixels": {
-          "score": 97,
-          "mismatchPercent": 3.2,
-          "mismatchCount": 41527,
-          "totalPixels": 1296000,
-          "dimensions": {
-            "width": 1440,
-            "height": 900
-          },
-          "diffImage": "/opt/site-xray/test/results/v15/www-cravath-com-diff.png",
-          "perfect": true
-        },
-        "manifest": {
-          "score": 85,
-          "issues": [
-            "104 external references still in HTML (should be 0)"
-          ],
-          "files": {
-            "html": 26,
-            "css": 2,
-            "images": 11,
-            "fonts": 4,
-            "videos": 0,
-            "models": 0,
-            "other": 1
-          },
-          "sizes": {
-            "htmlPages": 26,
-            "externalRefsRemaining": 104,
-            "inlineStyleBlocks": 28,
-            "totalCSSInHTML": 240106,
-            "avgImageSize": 77284,
-            "totalSizeKB": 2459
-          },
-          "perfect": false
-        }
-      },
-      "manifest": {
-        "site": "https://www.cravath.com",
-        "timestamp": "2026-04-02T00:38:40.944Z",
-        "files": {
-          "html": 26,
-          "css": 2,
-          "images": 11,
-          "fonts": 4,
-          "videos": 0,
-          "models": 0,
-          "other": 1
-        },
-        "sizes": {
-          "html": 1278520,
-          "css": 238052,
-          "images": 850125,
-          "fonts": 150780,
-          "videos": 0,
-          "total": 2517745
-        },
-        "assets": {
-          "images": [
-            {
-              "file": "apple-touch-icon.png",
-              "size": 2732
-            },
-            {
-              "file": "favicon-16x16.png",
-              "size": 634
-            },
-            {
-              "file": "favicon-32x32.png",
-              "size": 943
-            },
-            {
-              "file": "favicon.ico",
-              "size": 7406
-            },
-            {
-              "file": "safari-pinned-tab.svg",
-              "size": 1330
-            },
-            {
-              "file": "clone.png",
-              "size": 383697
-            },
-            {
-              "file": "original.png",
-              "size": 391625
-            },
-            {
-              "file": "favicon.ico",
-              "size": 7406
-            },
-            {
-              "file": "img-0.svg",
-              "size": 1422
-            },
-            {
-              "file": "img-1.svg",
-              "size": 10937
-            },
-            {
-              "file": "img-2.jpg",
-              "size": 41993
-            }
-          ],
-          "fonts": [
-            {
-              "file": "font-0.woff2",
-              "size": 1784
-            },
-            {
-              "file": "font-1.woff2",
-              "size": 27588
-            },
-            {
-              "file": "font-2.woff2",
-              "size": 94704
-            },
-            {
-              "file": "font-3.woff2",
-              "size": 26704
-            }
-          ],
-          "videos": []
-        },
-        "issues": [
-          "104 external references still in HTML (should be 0)"
-        ],
-        "analysis": {
-          "htmlPages": 26,
-          "externalRefsRemaining": 104,
-          "inlineStyleBlocks": 28,
-          "totalCSSInHTML": 240106,
-          "avgImageSize": 77284,
-          "totalSizeKB": 2459
-        }
-      }
-    },
-    {
-      "site": "https://www.roomshotels.com",
-      "category": "hospitality",
-      "totalScore": 84,
-      "perfect": false,
-      "metrics": {
-        "images": {
-          "score": 100,
-          "total": 115,
-          "rendered": 115,
-          "broken": 0,
-          "empty": 0,
-          "brokenList": [],
-          "perfect": true
-        },
-        "css": {
-          "score": 90,
-          "hasBackground": false,
-          "hasFont": true,
-          "hasPadding": false,
-          "hasLayout": true,
-          "cssSize": 570446,
-          "fontsLoaded": 33,
-          "perfect": false
-        },
-        "links": {
-          "score": 97,
-          "totalLinks": 36,
-          "workingLinks": 35,
-          "brokenLinks": 1,
-          "externalLinks": 3,
-          "broken": [
-            "/favicon.ico"
-          ],
-          "perfect": false
-        },
-        "content": {
-          "score": 96,
-          "origWords": 307,
-          "cloneWords": 296,
-          "matched": 296,
-          "perfect": true
-        },
-        "layout": {
-          "score": 94,
-          "origStructure": {
-            "divs": 597,
-            "imgs": 95,
-            "texts": 103
-          },
-          "cloneStructure": {
-            "divs": 526,
-            "imgs": 96,
-            "texts": 85
-          },
-          "screenshots": {
-            "original": "/opt/site-xray/test/results/v15/www-roomshotels-com-original.png",
-            "clone": "/opt/site-xray/test/results/v15/www-roomshotels-com-clone.png"
-          },
-          "perfect": true
-        },
-        "interactions": {
-          "score": 42,
-          "totalButtons": 10,
-          "clickable": 7,
-          "links": 19,
-          "hasNav": false,
-          "perfect": false
-        },
-        "console": {
-          "score": 100,
-          "errors": [],
-          "count": 0,
-          "perfect": true
-        },
-        "pixels": {
-          "score": 52,
-          "mismatchPercent": 48.13,
-          "mismatchCount": 623799,
-          "totalPixels": 1296000,
-          "dimensions": {
-            "width": 1440,
-            "height": 900
-          },
-          "diffImage": "/opt/site-xray/test/results/v15/www-roomshotels-com-diff.png",
-          "perfect": false
-        },
-        "manifest": {
-          "score": 85,
-          "issues": [
-            "6 external references still in HTML (should be 0)"
-          ],
-          "files": {
-            "html": 9,
-            "css": 1,
-            "images": 99,
-            "fonts": 9,
-            "videos": 0,
-            "models": 0,
-            "other": 3
-          },
-          "sizes": {
-            "htmlPages": 9,
-            "externalRefsRemaining": 6,
-            "inlineStyleBlocks": 15,
-            "totalCSSInHTML": 571382,
-            "avgImageSize": 635621,
-            "totalSizeKB": 63099
-          },
-          "perfect": false
-        }
-      },
-      "manifest": {
-        "site": "https://www.roomshotels.com",
-        "timestamp": "2026-04-02T00:38:47.122Z",
-        "files": {
-          "html": 9,
-          "css": 1,
-          "images": 99,
-          "fonts": 9,
-          "videos": 0,
-          "models": 0,
-          "other": 3
-        },
-        "sizes": {
-          "html": 667563,
-          "css": 259311,
-          "images": 62926450,
-          "fonts": 757684,
-          "videos": 0,
-          "total": 64613150
-        },
-        "assets": {
-          "images": [
-            {
-              "file": "clone.png",
-              "size": 385376
-            },
-            {
-              "file": "original.png",
-              "size": 761389
-            },
-            {
-              "file": "reference.png",
-              "size": 1261374
-            },
-            {
-              "file": "img-0.jpg",
-              "size": 125976
-            },
-            {
-              "file": "img-1.jpg",
-              "size": 96799
-            },
-            {
-              "file": "img-10.jpg",
-              "size": 314634
-            },
-            {
-              "file": "img-11.jpg",
-              "size": 470998
-            },
-            {
-              "file": "img-12.jpg",
-              "size": 1510130
-            },
-            {
-              "file": "img-13.jpg",
-              "size": 324384
-            },
-            {
-              "file": "img-14.jpg",
-              "size": 248254
-            },
-            {
-              "file": "img-15.jpg",
-              "size": 686916
-            },
-            {
-              "file": "img-16.jpg",
-              "size": 399734
-            },
-            {
-              "file": "img-17.jpg",
-              "size": 644360
-            },
-            {
-              "file": "img-18.jpg",
-              "size": 1448538
-            },
-            {
-              "file": "img-19.jpg",
-              "size": 740090
-            },
-            {
-              "file": "img-2.jpg",
-              "size": 151912
-            },
-            {
-              "file": "img-20.jpg",
-              "size": 390182
-            },
-            {
-              "file": "img-21.jpg",
-              "size": 1369216
-            },
-            {
-              "file": "img-22.jpg",
-              "size": 267662
-            },
-            {
-              "file": "img-23.jpg",
-              "size": 539752
-            },
-            {
-              "file": "img-24.jpg",
-              "size": 827080
-            },
-            {
-              "file": "img-25.jpg",
-              "size": 496422
-            },
-            {
-              "file": "img-26.jpg",
-              "size": 378498
-            },
-            {
-              "file": "img-27.jpg",
-              "size": 637166
-            },
-            {
-              "file": "img-28.jpg",
-              "size": 161778
-            },
-            {
-              "file": "img-29.jpg",
-              "size": 1276314
-            },
-            {
-              "file": "img-3.webp",
-              "size": 164168
-            },
-            {
-              "file": "img-30.jpg",
-              "size": 312703
-            },
-            {
-              "file": "img-31.jpg",
-              "size": 386208
-            },
-            {
-              "file": "img-32.jpg",
-              "size": 243184
-            },
-            {
-              "file": "img-33.jpg",
-              "size": 292690
-            },
-            {
-              "file": "img-34.jpg",
-              "size": 211574
-            },
-            {
-              "file": "img-35.jpg",
-              "size": 319480
-            },
-            {
-              "file": "img-36.png",
-              "size": 626058
-            },
-            {
-              "file": "img-37.jpg",
-              "size": 94712
-            },
-            {
-              "file": "img-38.jpg",
-              "size": 142086
-            },
-            {
-              "file": "img-39.jpg",
-              "size": 167095
-            },
-            {
-              "file": "img-4.jpg",
-              "size": 461018
-            },
-            {
-              "file": "img-40.jpg",
-              "size": 537733
-            },
-            {
-              "file": "img-41.jpg",
-              "size": 273060
-            },
-            {
-              "file": "img-42.jpg",
-              "size": 263905
-            },
-            {
-              "file": "img-43.jpg",
-              "size": 468744
-            },
-            {
-              "file": "img-44.jpg",
-              "size": 190348
-            },
-            {
-              "file": "img-45.jpg",
-              "size": 201734
-            },
-            {
-              "file": "img-46.jpg",
-              "size": 214274
-            },
-            {
-              "file": "img-47.jpg",
-              "size": 196184
-            },
-            {
-              "file": "img-48.jpg",
-              "size": 223445
-            },
-            {
-              "file": "img-49.jpg",
-              "size": 199218
-            },
-            {
-              "file": "img-5.jpg",
-              "size": 122391
-            },
-            {
-              "file": "img-50.jpg",
-              "size": 1052810
-            },
-            {
-              "file": "img-51.jpg",
-              "size": 1425830
-            },
-            {
-              "file": "img-52.jpg",
-              "size": 368198
-            },
-            {
-              "file": "img-53.jpg",
-              "size": 1171974
-            },
-            {
-              "file": "img-54.jpg",
-              "size": 1433584
-            },
-            {
-              "file": "img-55.jpg",
-              "size": 1527652
-            },
-            {
-              "file": "img-56.jpg",
-              "size": 1329302
-            },
-            {
-              "file": "img-57.jpg",
-              "size": 939612
-            },
-            {
-              "file": "img-58.jpg",
-              "size": 173566
-            },
-            {
-              "file": "img-59.jpg",
-              "size": 589068
-            },
-            {
-              "file": "img-6.jpg",
-              "size": 266104
-            },
-            {
-              "file": "img-60.jpg",
-              "size": 1423202
-            },
-            {
-              "file": "img-61.jpg",
-              "size": 2078906
-            },
-            {
-              "file": "img-62.jpg",
-              "size": 1455534
-            },
-            {
-              "file": "img-63.jpg",
-              "size": 834122
-            },
-            {
-              "file": "img-64.jpg",
-              "size": 1721362
-            },
-            {
-              "file": "img-65.jpg",
-              "size": 1375762
-            },
-            {
-              "file": "img-66.jpg",
-              "size": 890028
-            },
-            {
-              "file": "img-67.jpg",
-              "size": 1575938
-            },
-            {
-              "file": "img-68.jpg",
-              "size": 726932
-            },
-            {
-              "file": "img-69.jpg",
-              "size": 2055016
-            },
-            {
-              "file": "img-7.jpg",
-              "size": 259390
-            },
-            {
-              "file": "img-70.jpg",
-              "size": 1262912
-            },
-            {
-              "file": "img-71.jpg",
-              "size": 2160204
-            },
-            {
-              "file": "img-72.jpg",
-              "size": 616026
-            },
-            {
-              "file": "img-73.jpg",
-              "size": 1247502
-            },
-            {
-              "file": "img-74.jpg",
-              "size": 993418
-            },
-            {
-              "file": "img-75.jpg",
-              "size": 946194
-            },
-            {
-              "file": "img-76.jpg",
-              "size": 814960
-            },
-            {
-              "file": "img-77.jpg",
-              "size": 1186698
-            },
-            {
-              "file": "img-78.jpg",
-              "size": 194114
-            },
-            {
-              "file": "img-79.jpg",
-              "size": 515156
-            },
-            {
-              "file": "img-8.jpg",
-              "size": 414528
-            },
-            {
-              "file": "img-80.jpg",
-              "size": 974898
-            },
-            {
-              "file": "img-81.jpg",
-              "size": 644158
-            },
-            {
-              "file": "img-82.jpg",
-              "size": 742934
-            },
-            {
-              "file": "img-83.jpg",
-              "size": 660702
-            },
-            {
-              "file": "img-84.jpg",
-              "size": 595802
-            },
-            {
-              "file": "img-85.jpg",
-              "size": 1029750
-            },
-            {
-              "file": "img-86.jpg",
-              "size": 647980
-            },
-            {
-              "file": "img-87.svg",
-              "size": 1345
-            },
-            {
-              "file": "img-88.svg",
-              "size": 3762
-            },
-            {
-              "file": "img-9.jpg",
-              "size": 328308
-            },
-            {
-              "file": "apple-touch-icon.png",
-              "size": 4302
-            },
-            {
-              "file": "favicon-96x96.png",
-              "size": 1862
-            },
-            {
-              "file": "favicon.ico",
-              "size": 15086
-            },
-            {
-              "file": "favicon.svg",
-              "size": 13915
-            },
-            {
-              "file": "cropped-favicon-512-png-180x180.png",
-              "size": 3996
-            },
-            {
-              "file": "cropped-favicon-512-png-192x192.png",
-              "size": 4287
-            },
-            {
-              "file": "cropped-favicon-512-png-32x32.png",
-              "size": 813
-            }
-          ],
-          "fonts": [
-            {
-              "file": "font-0.otf",
-              "size": 95216
-            },
-            {
-              "file": "font-1.otf",
-              "size": 96420
-            },
-            {
-              "file": "font-2.otf",
-              "size": 105096
-            },
-            {
-              "file": "font-3.otf",
-              "size": 106108
-            },
-            {
-              "file": "font-4.otf",
-              "size": 100796
-            },
-            {
-              "file": "font-5.otf",
-              "size": 100780
-            },
-            {
-              "file": "font-6.otf",
-              "size": 60732
-            },
-            {
-              "file": "font-7.otf",
-              "size": 60920
-            },
-            {
-              "file": "font-8.otf",
-              "size": 31616
-            }
-          ],
-          "videos": []
-        },
-        "issues": [
-          "6 external references still in HTML (should be 0)"
-        ],
-        "analysis": {
-          "htmlPages": 9,
-          "externalRefsRemaining": 6,
-          "inlineStyleBlocks": 15,
-          "totalCSSInHTML": 571382,
-          "avgImageSize": 635621,
-          "totalSizeKB": 63099
-        }
-      }
-    },
-    {
-      "site": "https://vercel.com",
-      "category": "nextjs",
-      "totalScore": 92,
-      "perfect": false,
-      "metrics": {
-        "images": {
-          "score": 100,
-          "total": 51,
-          "rendered": 51,
-          "broken": 0,
-          "empty": 0,
-          "brokenList": [],
-          "perfect": true
-        },
-        "css": {
-          "score": 100,
-          "hasBackground": true,
-          "hasFont": true,
-          "hasPadding": false,
-          "hasLayout": true,
-          "cssSize": 1802770,
-          "fontsLoaded": 114,
-          "perfect": true
-        },
-        "links": {
-          "score": 100,
-          "totalLinks": 6510,
-          "workingLinks": 6506,
-          "brokenLinks": 4,
-          "externalLinks": 892,
-          "broken": [
-            "/images/img-74.svg#sparkles",
-            "/images/img-85.svg#shield-globe",
-            "/images/img-86.svg#firewall-check",
-            "/images/img-87.svg#robot"
-          ],
-          "perfect": false
-        },
-        "content": {
-          "score": 50,
-          "origLength": 0,
-          "cloneLength": 5243,
-          "perfect": false
-        },
-        "layout": {
-          "score": 100,
-          "origStructure": {
-            "divs": 1215,
-            "imgs": 8,
-            "texts": 293
-          },
-          "cloneStructure": {
-            "divs": 1213,
-            "imgs": 8,
-            "texts": 293
-          },
-          "screenshots": {
-            "original": "/opt/site-xray/test/results/v15/vercel-com-original.png",
-            "clone": "/opt/site-xray/test/results/v15/vercel-com-clone.png"
-          },
-          "perfect": true
-        },
-        "interactions": {
-          "score": 92,
-          "totalButtons": 15,
-          "clickable": 13,
-          "links": 129,
-          "hasNav": true,
-          "perfect": true
-        },
-        "console": {
-          "score": 100,
-          "errors": [],
-          "count": 0,
-          "perfect": true
-        },
-        "pixels": {
-          "score": 100,
-          "mismatchPercent": 0.24,
-          "mismatchCount": 3117,
-          "totalPixels": 1296000,
-          "dimensions": {
-            "width": 1440,
-            "height": 900
-          },
-          "diffImage": "/opt/site-xray/test/results/v15/vercel-com-diff.png",
-          "perfect": true
-        },
-        "manifest": {
-          "score": 85,
-          "issues": [
-            "892 external references still in HTML (should be 0)"
-          ],
-          "files": {
-            "html": 73,
-            "css": 12,
-            "images": 131,
-            "fonts": 84,
-            "videos": 0,
-            "models": 0,
-            "other": 7
-          },
-          "sizes": {
-            "htmlPages": 73,
-            "externalRefsRemaining": 892,
-            "inlineStyleBlocks": 298,
-            "totalCSSInHTML": 131596044,
-            "avgImageSize": 45549,
-            "totalSizeKB": 228995
-          },
-          "perfect": false
-        }
-      },
-      "manifest": {
-        "site": "https://vercel.com",
-        "timestamp": "2026-04-02T00:38:48.109Z",
-        "files": {
-          "html": 73,
-          "css": 12,
-          "images": 131,
-          "fonts": 84,
-          "videos": 0,
-          "models": 0,
-          "other": 7
-        },
-        "sizes": {
-          "html": 149717953,
-          "css": 857856,
-          "images": 5966958,
-          "fonts": 69786862,
-          "videos": 0,
-          "total": 234490631
-        },
-        "assets": {
-          "images": [
-            {
-              "file": "apple-touch-icon-precomposed.png",
-              "size": 232140
-            },
-            {
-              "file": "apple-touch-icon.png",
-              "size": 232082
-            },
-            {
-              "file": "ai.png",
-              "size": 446605
-            },
-            {
-              "file": "clone.png",
-              "size": 634248
-            },
-            {
-              "file": "home.png",
-              "size": 1112224
-            },
-            {
-              "file": "original.png",
-              "size": 631642
-            },
-            {
-              "file": "reference.png",
-              "size": 1116513
-            },
-            {
-              "file": "favicon-16x16.png",
-              "size": 232065
-            },
-            {
-              "file": "favicon-32x32.png",
-              "size": 232067
-            },
-            {
-              "file": "favicon.ico",
-              "size": 15086
-            },
-            {
-              "file": "favicon.svg",
-              "size": 232035
-            },
-            {
-              "file": "apple-touch-icon-114x114.png",
-              "size": 375
-            },
-            {
-              "file": "apple-touch-icon-120x120.png",
-              "size": 391
-            },
-            {
-              "file": "apple-touch-icon-144x144.png",
-              "size": 466
-            },
-            {
-              "file": "apple-touch-icon-152x152.png",
-              "size": 474
-            },
-            {
-              "file": "apple-touch-icon-180x180.png",
-              "size": 534
-            },
-            {
-              "file": "apple-touch-icon-256x256.png",
-              "size": 745
-            },
-            {
-              "file": "apple-touch-icon-57x57.png",
-              "size": 265
-            },
-            {
-              "file": "apple-touch-icon-60x60.png",
-              "size": 272
-            },
-            {
-              "file": "apple-touch-icon-72x72.png",
-              "size": 294
-            },
-            {
-              "file": "apple-touch-icon-76x76.png",
-              "size": 304
-            },
-            {
-              "file": "favicon.ico",
-              "size": 15086
-            },
-            {
-              "file": "img-0.svg",
-              "size": 1641
-            },
-            {
-              "file": "img-1.svg",
-              "size": 1641
-            },
-            {
-              "file": "img-10.svg",
-              "size": 2732
-            },
-            {
-              "file": "img-100.svg",
-              "size": 2115
-            },
-            {
-              "file": "img-101.svg",
-              "size": 2115
-            },
-            {
-              "file": "img-102.svg",
-              "size": 1419
-            },
-            {
-              "file": "img-103.svg",
-              "size": 1419
-            },
-            {
-              "file": "img-104.svg",
-              "size": 1894
-            },
-            {
-              "file": "img-105.svg",
-              "size": 1894
-            },
-            {
-              "file": "img-106.svg",
-              "size": 6255
-            },
-            {
-              "file": "img-107.svg",
-              "size": 6242
-            },
-            {
-              "file": "img-11.svg",
-              "size": 2735
-            },
-            {
-              "file": "img-12.svg",
-              "size": 1154
-            },
-            {
-              "file": "img-13.svg",
-              "size": 1154
-            },
-            {
-              "file": "img-14.svg",
-              "size": 3035
-            },
-            {
-              "file": "img-15.svg",
-              "size": 3035
-            },
-            {
-              "file": "img-16.svg",
-              "size": 1667
-            },
-            {
-              "file": "img-17.svg",
-              "size": 1667
-            },
-            {
-              "file": "img-18.svg",
-              "size": 1615
-            },
-            {
-              "file": "img-19.svg",
-              "size": 1615
-            },
-            {
-              "file": "img-2.svg",
-              "size": 1314
-            },
-            {
-              "file": "img-20.svg",
-              "size": 1541
-            },
-            {
-              "file": "img-21.svg",
-              "size": 1541
-            },
-            {
-              "file": "img-22.svg",
-              "size": 1155
-            },
-            {
-              "file": "img-23.svg",
-              "size": 1158
-            },
-            {
-              "file": "img-24.svg",
-              "size": 3011
-            },
-            {
-              "file": "img-25.svg",
-              "size": 3011
-            },
-            {
-              "file": "img-26.svg",
-              "size": 1885
-            },
-            {
-              "file": "img-27.svg",
-              "size": 1887
-            },
-            {
-              "file": "img-28.svg",
-              "size": 2693
-            },
-            {
-              "file": "img-29.svg",
-              "size": 2693
-            },
-            {
-              "file": "img-3.svg",
-              "size": 1314
-            },
-            {
-              "file": "img-30.svg",
-              "size": 503
-            },
-            {
-              "file": "img-31.svg",
-              "size": 3726
-            },
-            {
-              "file": "img-32.svg",
-              "size": 3740
-            },
-            {
-              "file": "img-33.svg",
-              "size": 11592
-            },
-            {
-              "file": "img-34.svg",
-              "size": 11597
-            },
-            {
-              "file": "img-35.svg",
-              "size": 8329
-            },
-            {
-              "file": "img-36.svg",
-              "size": 8335
-            },
-            {
-              "file": "img-37.svg",
-              "size": 26689
-            },
-            {
-              "file": "img-38.svg",
-              "size": 26009
-            },
-            {
-              "file": "img-39.svg",
-              "size": 728
-            },
-            {
-              "file": "img-4.svg",
-              "size": 1882
-            },
-            {
-              "file": "img-40.svg",
-              "size": 1641
-            },
-            {
-              "file": "img-41.svg",
-              "size": 1641
-            },
-            {
-              "file": "img-42.svg",
-              "size": 1314
-            },
-            {
-              "file": "img-43.svg",
-              "size": 1314
-            },
-            {
-              "file": "img-44.svg",
-              "size": 1882
-            },
-            {
-              "file": "img-45.svg",
-              "size": 1882
-            },
-            {
-              "file": "img-46.svg",
-              "size": 1917
-            },
-            {
-              "file": "img-47.svg",
-              "size": 1917
-            },
-            {
-              "file": "img-48.svg",
-              "size": 728
-            },
-            {
-              "file": "img-49.svg",
-              "size": 503
-            },
-            {
-              "file": "img-5.svg",
-              "size": 1882
-            },
-            {
-              "file": "img-50.svg",
-              "size": 503
-            },
-            {
-              "file": "img-51.svg",
-              "size": 728
-            },
-            {
-              "file": "img-52.svg",
-              "size": 1936
-            },
-            {
-              "file": "img-53.svg",
-              "size": 1936
-            },
-            {
-              "file": "img-54.svg",
-              "size": 2735
-            },
-            {
-              "file": "img-55.svg",
-              "size": 1667
-            },
-            {
-              "file": "img-56.svg",
-              "size": 3035
-            },
-            {
-              "file": "img-57.svg",
-              "size": 1154
-            },
-            {
-              "file": "img-58.svg",
-              "size": 1615
-            },
-            {
-              "file": "img-59.svg",
-              "size": 1885
-            },
-            {
-              "file": "img-6.svg",
-              "size": 1917
-            },
-            {
-              "file": "img-60.svg",
-              "size": 2693
-            },
-            {
-              "file": "img-61.svg",
-              "size": 1887
-            },
-            {
-              "file": "img-62.svg",
-              "size": 1667
-            },
-            {
-              "file": "img-63.svg",
-              "size": 1154
-            },
-            {
-              "file": "img-64.svg",
-              "size": 1541
-            },
-            {
-              "file": "img-65.svg",
-              "size": 1541
-            },
-            {
-              "file": "img-66.svg",
-              "size": 3011
-            },
-            {
-              "file": "img-67.svg",
-              "size": 1158
-            },
-            {
-              "file": "img-68.svg",
-              "size": 2693
-            },
-            {
-              "file": "img-69.svg",
-              "size": 3011
-            },
-            {
-              "file": "img-7.svg",
-              "size": 1917
-            },
-            {
-              "file": "img-70.svg",
-              "size": 2732
-            },
-            {
-              "file": "img-71.svg",
-              "size": 1615
-            },
-            {
-              "file": "img-72.svg",
-              "size": 1155
-            },
-            {
-              "file": "img-73.svg",
-              "size": 3035
-            },
-            {
-              "file": "img-74.svg",
-              "size": 1096
-            },
-            {
-              "file": "img-75.png",
-              "size": 90838
-            },
-            {
-              "file": "img-76.png",
-              "size": 50709
-            },
-            {
-              "file": "img-77.png",
-              "size": 90807
-            },
-            {
-              "file": "img-78.png",
-              "size": 51044
-            },
-            {
-              "file": "img-79.svg",
-              "size": 7211
-            },
-            {
-              "file": "img-8.svg",
-              "size": 1936
-            },
-            {
-              "file": "img-80.svg",
-              "size": 7900
-            },
-            {
-              "file": "img-81.svg",
-              "size": 7261
-            },
-            {
-              "file": "img-82.svg",
-              "size": 7950
-            },
-            {
-              "file": "img-83.svg",
-              "size": 3587
-            },
-            {
-              "file": "img-84.svg",
-              "size": 3587
-            },
-            {
-              "file": "img-85.svg",
-              "size": 2481
-            },
-            {
-              "file": "img-86.svg",
-              "size": 1733
-            },
-            {
-              "file": "img-87.svg",
-              "size": 1055
-            },
-            {
-              "file": "img-88.svg",
-              "size": 888
-            },
-            {
-              "file": "img-89.svg",
-              "size": 888
-            },
-            {
-              "file": "img-9.svg",
-              "size": 1936
-            },
-            {
-              "file": "img-90.svg",
-              "size": 3756
-            },
-            {
-              "file": "img-91.svg",
-              "size": 3756
-            },
-            {
-              "file": "img-92.svg",
-              "size": 927
-            },
-            {
-              "file": "img-93.svg",
-              "size": 927
-            },
-            {
-              "file": "img-94.svg",
-              "size": 2152
-            },
-            {
-              "file": "img-95.svg",
-              "size": 2152
-            },
-            {
-              "file": "img-96.svg",
-              "size": 3866
-            },
-            {
-              "file": "img-97.svg",
-              "size": 3866
-            },
-            {
-              "file": "img-98.svg",
-              "size": 2366
-            },
-            {
-              "file": "img-99.svg",
-              "size": 2366
-            },
-            {
-              "file": "safari-pinned-tab.svg",
-              "size": 232085
-            }
-          ],
-          "fonts": [
-            {
-              "file": "font-0.woff2",
-              "size": 976190
-            },
-            {
-              "file": "font-1.woff2",
-              "size": 989165
-            },
-            {
-              "file": "font-10.woff2",
-              "size": 976033
-            },
-            {
-              "file": "font-11.woff2",
-              "size": 15716
-            },
-            {
-              "file": "font-12.woff2",
-              "size": 11984
-            },
-            {
-              "file": "font-13.woff2",
-              "size": 11916
-            },
-            {
-              "file": "font-14.woff2",
-              "size": 22140
-            },
-            {
-              "file": "font-15.woff2",
-              "size": 712
-            },
-            {
-              "file": "font-16.woff2",
-              "size": 977170
-            },
-            {
-              "file": "font-17.woff",
-              "size": 991273
-            },
-            {
-              "file": "font-18.ttf",
-              "size": 977108
-            },
-            {
-              "file": "font-19.woff2",
-              "size": 976376
-            },
-            {
-              "file": "font-2.woff2",
-              "size": 989061
-            },
-            {
-              "file": "font-20.woff",
-              "size": 976164
-            },
-            {
-              "file": "font-21.ttf",
-              "size": 987964
-            },
-            {
-              "file": "font-22.woff2",
-              "size": 977418
-            },
-            {
-              "file": "font-23.woff",
-              "size": 977575
-            },
-            {
-              "file": "font-24.ttf",
-              "size": 976407
-            },
-            {
-              "file": "font-25.woff2",
-              "size": 976064
-            },
-            {
-              "file": "font-26.woff",
-              "size": 990333
-            },
-            {
-              "file": "font-27.ttf",
-              "size": 976002
-            },
-            {
-              "file": "font-28.woff2",
-              "size": 976164
-            },
-            {
-              "file": "font-29.woff",
-              "size": 976126
-            },
-            {
-              "file": "font-3.woff2",
-              "size": 990093
-            },
-            {
-              "file": "font-30.ttf",
-              "size": 976095
-            },
-            {
-              "file": "font-31.woff2",
-              "size": 975971
-            },
-            {
-              "file": "font-32.woff",
-              "size": 989103
-            },
-            {
-              "file": "font-33.ttf",
-              "size": 974960
-            },
-            {
-              "file": "font-34.woff2",
-              "size": 976157
-            },
-            {
-              "file": "font-35.woff",
-              "size": 977263
-            },
-            {
-              "file": "font-36.ttf",
-              "size": 989077
-            },
-            {
-              "file": "font-37.woff2",
-              "size": 976076
-            },
-            {
-              "file": "font-38.woff",
-              "size": 976009
-            },
-            {
-              "file": "font-39.ttf",
-              "size": 975978
-            },
-            {
-              "file": "font-4.woff2",
-              "size": 977370
-            },
-            {
-              "file": "font-40.woff2",
-              "size": 976071
-            },
-            {
-              "file": "font-41.woff",
-              "size": 976033
-            },
-            {
-              "file": "font-42.ttf",
-              "size": 976002
-            },
-            {
-              "file": "font-43.woff2",
-              "size": 976164
-            },
-            {
-              "file": "font-44.woff",
-              "size": 976314
-            },
-            {
-              "file": "font-45.ttf",
-              "size": 976283
-            },
-            {
-              "file": "font-46.woff2",
-              "size": 976221
-            },
-            {
-              "file": "font-47.woff",
-              "size": 975244
-            },
-            {
-              "file": "font-48.ttf",
-              "size": 990230
-            },
-            {
-              "file": "font-49.woff2",
-              "size": 977331
-            },
-            {
-              "file": "font-5.woff2",
-              "size": 978381
-            },
-            {
-              "file": "font-50.woff",
-              "size": 978474
-            },
-            {
-              "file": "font-51.ttf",
-              "size": 977081
-            },
-            {
-              "file": "font-52.woff2",
-              "size": 977436
-            },
-            {
-              "file": "font-53.woff",
-              "size": 990584
-            },
-            {
-              "file": "font-54.ttf",
-              "size": 977333
-            },
-            {
-              "file": "font-55.woff2",
-              "size": 977426
-            },
-            {
-              "file": "font-56.woff",
-              "size": 979524
-            },
-            {
-              "file": "font-57.ttf",
-              "size": 978356
-            },
-            {
-              "file": "font-58.woff2",
-              "size": 977145
-            },
-            {
-              "file": "font-59.woff",
-              "size": 979388
-            },
-            {
-              "file": "font-6.woff2",
-              "size": 974958
-            },
-            {
-              "file": "font-60.ttf",
-              "size": 977083
-            },
-            {
-              "file": "font-61.woff2",
-              "size": 977114
-            },
-            {
-              "file": "font-62.woff",
-              "size": 977278
-            },
-            {
-              "file": "font-63.ttf",
-              "size": 977052
-            },
-            {
-              "file": "font-64.woff2",
-              "size": 990341
-            },
-            {
-              "file": "font-65.woff",
-              "size": 977090
-            },
-            {
-              "file": "font-66.ttf",
-              "size": 977247
-            },
-            {
-              "file": "font-67.woff2",
-              "size": 978258
-            },
-            {
-              "file": "font-68.woff",
-              "size": 977278
-            },
-            {
-              "file": "font-69.ttf",
-              "size": 977247
-            },
-            {
-              "file": "font-7.woff2",
-              "size": 976221
-            },
-            {
-              "file": "font-70.woff2",
-              "size": 977121
-            },
-            {
-              "file": "font-71.woff",
-              "size": 977090
-            },
-            {
-              "file": "font-72.ttf",
-              "size": 990281
-            },
-            {
-              "file": "font-73.woff2",
-              "size": 977278
-            },
-            {
-              "file": "font-74.woff",
-              "size": 977245
-            },
-            {
-              "file": "font-75.ttf",
-              "size": 990490
-            },
-            {
-              "file": "font-76.woff2",
-              "size": 31288
-            },
-            {
-              "file": "font-77.woff2",
-              "size": 28388
-            },
-            {
-              "file": "font-78.woff2",
-              "size": 28616
-            },
-            {
-              "file": "font-79.woff2",
-              "size": 28104
-            },
-            {
-              "file": "font-8.woff2",
-              "size": 978419
-            },
-            {
-              "file": "font-80.woff2",
-              "size": 28552
-            },
-            {
-              "file": "font-81.woff2",
-              "size": 28900
-            },
-            {
-              "file": "font-82.woff2",
-              "size": 18192
-            },
-            {
-              "file": "font-83.woff2",
-              "size": 7340
-            },
-            {
-              "file": "font-9.woff2",
-              "size": 976157
-            }
-          ],
-          "videos": []
-        },
-        "issues": [
-          "892 external references still in HTML (should be 0)"
-        ],
-        "analysis": {
-          "htmlPages": 73,
-          "externalRefsRemaining": 892,
-          "inlineStyleBlocks": 298,
-          "totalCSSInHTML": 131596044,
-          "avgImageSize": 45549,
-          "totalSizeKB": 228995
+          "avgImageSize": 112382,
+          "totalSizeKB": 556473
         }
       }
     },
@@ -3357,11 +1907,11 @@
       "perfect": false,
       "metrics": {
         "images": {
-          "score": 64,
-          "total": 170,
+          "score": 63,
+          "total": 171,
           "rendered": 108,
           "broken": 0,
-          "empty": 62,
+          "empty": 63,
           "brokenList": [],
           "perfect": false
         },
@@ -3397,21 +1947,21 @@
         },
         "content": {
           "score": 100,
-          "origWords": 959,
-          "cloneWords": 959,
-          "matched": 959,
+          "origWords": 954,
+          "cloneWords": 954,
+          "matched": 954,
           "perfect": true
         },
         "layout": {
           "score": 100,
           "origStructure": {
             "divs": 2084,
-            "imgs": 158,
+            "imgs": 159,
             "texts": 528
           },
           "cloneStructure": {
             "divs": 2084,
-            "imgs": 158,
+            "imgs": 159,
             "texts": 528
           },
           "screenshots": {
@@ -3435,9 +1985,9 @@
           "perfect": true
         },
         "pixels": {
-          "score": 48,
-          "mismatchPercent": 52.35,
-          "mismatchCount": 678407,
+          "score": 47,
+          "mismatchPercent": 53.42,
+          "mismatchCount": 692381,
           "totalPixels": 1296000,
           "dimensions": {
             "width": 1440,
@@ -3465,15 +2015,15 @@
             "externalRefsRemaining": 1496,
             "inlineStyleBlocks": 272,
             "totalCSSInHTML": 151733296,
-            "avgImageSize": 203038,
-            "totalSizeKB": 335942
+            "avgImageSize": 203289,
+            "totalSizeKB": 336153
           },
           "perfect": false
         }
       },
       "manifest": {
         "site": "https://pentagram.com",
-        "timestamp": "2026-04-02T00:38:53.207Z",
+        "timestamp": "2026-04-02T00:49:27.732Z",
         "files": {
           "html": 136,
           "css": 2,
@@ -3484,18 +2034,18 @@
           "other": 2
         },
         "sizes": {
-          "html": 168193190,
+          "html": 168194482,
           "css": 1052990,
-          "images": 174003335,
+          "images": 174218433,
           "fonts": 0,
           "videos": 655447,
-          "total": 344004247
+          "total": 344220637
         },
         "assets": {
           "images": [
             {
               "file": "clone.png",
-              "size": 1247624
+              "size": 1247287
             },
             {
               "file": "original.png",
@@ -3663,19 +2213,19 @@
             },
             {
               "file": "img-130.jpg",
-              "size": 191920
-            },
-            {
-              "file": "img-131.jpg",
               "size": 106824
             },
             {
-              "file": "img-132.jpg",
+              "file": "img-131.jpg",
               "size": 474588
             },
             {
+              "file": "img-132.jpg",
+              "size": 191920
+            },
+            {
               "file": "img-133.jpg",
-              "size": 141688
+              "size": 365288
             },
             {
               "file": "img-134.png",
@@ -4867,7 +3417,7 @@
             },
             {
               "file": "img-41.jpg",
-              "size": 309355
+              "size": 391649
             },
             {
               "file": "img-410.jpg",
@@ -4911,7 +3461,7 @@
             },
             {
               "file": "img-42.jpg",
-              "size": 391649
+              "size": 487269
             },
             {
               "file": "img-420.jpg",
@@ -4955,7 +3505,7 @@
             },
             {
               "file": "img-43.jpg",
-              "size": 598083
+              "size": 309355
             },
             {
               "file": "img-430.jpg",
@@ -5042,6 +3592,10 @@
               "size": 236397
             },
             {
+              "file": "img-45.gif",
+              "size": 1628325
+            },
+            {
               "file": "img-450.png",
               "size": 226764
             },
@@ -5083,7 +3637,7 @@
             },
             {
               "file": "img-46.gif",
-              "size": 86501
+              "size": 146901
             },
             {
               "file": "img-460.jpg",
@@ -5127,7 +3681,7 @@
             },
             {
               "file": "img-47.gif",
-              "size": 1628325
+              "size": 86501
             },
             {
               "file": "img-470.jpg",
@@ -5168,10 +3722,6 @@
             {
               "file": "img-479.jpg",
               "size": 499439
-            },
-            {
-              "file": "img-48.gif",
-              "size": 146901
             },
             {
               "file": "img-480.jpg",
@@ -5615,7 +4165,7 @@
             },
             {
               "file": "img-58.jpg",
-              "size": 465119
+              "size": 52441
             },
             {
               "file": "img-580.jpg",
@@ -5659,7 +4209,7 @@
             },
             {
               "file": "img-59.jpg",
-              "size": 52441
+              "size": 465119
             },
             {
               "file": "img-590.jpg",
@@ -5795,7 +4345,7 @@
             },
             {
               "file": "img-62.jpg",
-              "size": 723754
+              "size": 646822
             },
             {
               "file": "img-620.jpg",
@@ -5838,8 +4388,8 @@
               "size": 1426974
             },
             {
-              "file": "img-63.gif",
-              "size": 130325
+              "file": "img-63.jpg",
+              "size": 497108
             },
             {
               "file": "img-630.jpg",
@@ -5883,7 +4433,7 @@
             },
             {
               "file": "img-64.jpg",
-              "size": 646822
+              "size": 462196
             },
             {
               "file": "img-640.jpg",
@@ -6271,7 +4821,7 @@
             },
             {
               "file": "img-728.jpg",
-              "size": 1212
+              "size": 3800
             },
             {
               "file": "img-729.jpg",
@@ -6283,23 +4833,23 @@
             },
             {
               "file": "img-730.jpg",
-              "size": 3796
+              "size": 1212
             },
             {
               "file": "img-731.gif",
               "size": 3789
             },
             {
-              "file": "img-733.gif",
-              "size": 3793
-            },
-            {
-              "file": "img-734.gif",
+              "file": "img-732.gif",
               "size": 3822
             },
             {
-              "file": "img-735.gif",
+              "file": "img-733.gif",
               "size": 3798
+            },
+            {
+              "file": "img-734.gif",
+              "size": 3793
             },
             {
               "file": "img-736.png",
@@ -6343,11 +4893,11 @@
             },
             {
               "file": "img-745.jpg",
-              "size": 3815
+              "size": 3796
             },
             {
               "file": "img-746.jpg",
-              "size": 3796
+              "size": 3815
             },
             {
               "file": "img-747.gif",
@@ -6359,19 +4909,19 @@
             },
             {
               "file": "img-749.jpg",
-              "size": 3803
+              "size": 3791
             },
             {
               "file": "img-75.jpg",
               "size": 355520
             },
             {
-              "file": "img-750.gif",
-              "size": 3805
+              "file": "img-750.jpg",
+              "size": 1217
             },
             {
               "file": "img-751.jpg",
-              "size": 3791
+              "size": 3806
             },
             {
               "file": "img-752.jpg",
@@ -6839,15 +5389,15 @@
             },
             {
               "file": "img-857.jpg",
-              "size": 3802
-            },
-            {
-              "file": "img-858.jpg",
               "size": 3794
             },
             {
-              "file": "img-859.jpg",
+              "file": "img-858.jpg",
               "size": 3801
+            },
+            {
+              "file": "img-859.jpg",
+              "size": 3802
             },
             {
               "file": "img-86.png",
@@ -6855,7 +5405,7 @@
             },
             {
               "file": "img-860.jpg",
-              "size": 3798
+              "size": 3803
             },
             {
               "file": "img-861.png",
@@ -6974,8 +5524,802 @@
           "externalRefsRemaining": 1496,
           "inlineStyleBlocks": 272,
           "totalCSSInHTML": 151733296,
-          "avgImageSize": 203038,
-          "totalSizeKB": 335942
+          "avgImageSize": 203289,
+          "totalSizeKB": 336153
+        }
+      }
+    },
+    {
+      "site": "https://www.cravath.com",
+      "category": "corporate",
+      "totalScore": 93,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 2,
+          "rendered": 2,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 238161,
+          "fontsLoaded": 36,
+          "perfect": false
+        },
+        "links": {
+          "score": 100,
+          "totalLinks": 1384,
+          "workingLinks": 1384,
+          "brokenLinks": 0,
+          "externalLinks": 104,
+          "broken": [],
+          "perfect": false
+        },
+        "content": {
+          "score": 100,
+          "origWords": 221,
+          "cloneWords": 221,
+          "matched": 221,
+          "perfect": true
+        },
+        "layout": {
+          "score": 100,
+          "origStructure": {
+            "divs": 437,
+            "imgs": 2,
+            "texts": 102
+          },
+          "cloneStructure": {
+            "divs": 435,
+            "imgs": 2,
+            "texts": 102
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v15/www-cravath-com-original.png",
+            "clone": "/opt/site-xray/test/results/v15/www-cravath-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 52,
+          "totalButtons": 15,
+          "clickable": 13,
+          "links": 46,
+          "hasNav": false,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        },
+        "pixels": {
+          "score": 97,
+          "mismatchPercent": 3.07,
+          "mismatchCount": 39848,
+          "totalPixels": 1296000,
+          "dimensions": {
+            "width": 1440,
+            "height": 900
+          },
+          "diffImage": "/opt/site-xray/test/results/v15/www-cravath-com-diff.png",
+          "perfect": true
+        },
+        "manifest": {
+          "score": 85,
+          "issues": [
+            "104 external references still in HTML (should be 0)"
+          ],
+          "files": {
+            "html": 26,
+            "css": 2,
+            "images": 11,
+            "fonts": 4,
+            "videos": 0,
+            "models": 0,
+            "other": 1
+          },
+          "sizes": {
+            "htmlPages": 26,
+            "externalRefsRemaining": 104,
+            "inlineStyleBlocks": 28,
+            "totalCSSInHTML": 240106,
+            "avgImageSize": 90760,
+            "totalSizeKB": 2603
+          },
+          "perfect": false
+        }
+      },
+      "manifest": {
+        "site": "https://www.cravath.com",
+        "timestamp": "2026-04-02T00:49:35.039Z",
+        "files": {
+          "html": 26,
+          "css": 2,
+          "images": 11,
+          "fonts": 4,
+          "videos": 0,
+          "models": 0,
+          "other": 1
+        },
+        "sizes": {
+          "html": 1278520,
+          "css": 238052,
+          "images": 998360,
+          "fonts": 150780,
+          "videos": 0,
+          "total": 2665980
+        },
+        "assets": {
+          "images": [
+            {
+              "file": "apple-touch-icon.png",
+              "size": 2732
+            },
+            {
+              "file": "favicon-16x16.png",
+              "size": 634
+            },
+            {
+              "file": "favicon-32x32.png",
+              "size": 943
+            },
+            {
+              "file": "favicon.ico",
+              "size": 7406
+            },
+            {
+              "file": "safari-pinned-tab.svg",
+              "size": 1330
+            },
+            {
+              "file": "clone.png",
+              "size": 538882
+            },
+            {
+              "file": "original.png",
+              "size": 384675
+            },
+            {
+              "file": "favicon.ico",
+              "size": 7406
+            },
+            {
+              "file": "img-0.svg",
+              "size": 1422
+            },
+            {
+              "file": "img-1.svg",
+              "size": 10937
+            },
+            {
+              "file": "img-2.jpg",
+              "size": 41993
+            }
+          ],
+          "fonts": [
+            {
+              "file": "font-0.woff2",
+              "size": 94704
+            },
+            {
+              "file": "font-1.woff2",
+              "size": 1784
+            },
+            {
+              "file": "font-2.woff2",
+              "size": 26704
+            },
+            {
+              "file": "font-3.woff2",
+              "size": 27588
+            }
+          ],
+          "videos": []
+        },
+        "issues": [
+          "104 external references still in HTML (should be 0)"
+        ],
+        "analysis": {
+          "htmlPages": 26,
+          "externalRefsRemaining": 104,
+          "inlineStyleBlocks": 28,
+          "totalCSSInHTML": 240106,
+          "avgImageSize": 90760,
+          "totalSizeKB": 2603
+        }
+      }
+    },
+    {
+      "site": "https://www.roomshotels.com",
+      "category": "hospitality",
+      "totalScore": 84,
+      "perfect": false,
+      "metrics": {
+        "images": {
+          "score": 100,
+          "total": 115,
+          "rendered": 115,
+          "broken": 0,
+          "empty": 0,
+          "brokenList": [],
+          "perfect": true
+        },
+        "css": {
+          "score": 90,
+          "hasBackground": false,
+          "hasFont": true,
+          "hasPadding": false,
+          "hasLayout": true,
+          "cssSize": 570446,
+          "fontsLoaded": 33,
+          "perfect": false
+        },
+        "links": {
+          "score": 97,
+          "totalLinks": 36,
+          "workingLinks": 35,
+          "brokenLinks": 1,
+          "externalLinks": 3,
+          "broken": [
+            "/favicon.ico"
+          ],
+          "perfect": false
+        },
+        "content": {
+          "score": 96,
+          "origWords": 307,
+          "cloneWords": 296,
+          "matched": 296,
+          "perfect": true
+        },
+        "layout": {
+          "score": 94,
+          "origStructure": {
+            "divs": 597,
+            "imgs": 95,
+            "texts": 103
+          },
+          "cloneStructure": {
+            "divs": 526,
+            "imgs": 96,
+            "texts": 85
+          },
+          "screenshots": {
+            "original": "/opt/site-xray/test/results/v15/www-roomshotels-com-original.png",
+            "clone": "/opt/site-xray/test/results/v15/www-roomshotels-com-clone.png"
+          },
+          "perfect": true
+        },
+        "interactions": {
+          "score": 42,
+          "totalButtons": 10,
+          "clickable": 7,
+          "links": 19,
+          "hasNav": false,
+          "perfect": false
+        },
+        "console": {
+          "score": 100,
+          "errors": [],
+          "count": 0,
+          "perfect": true
+        },
+        "pixels": {
+          "score": 52,
+          "mismatchPercent": 48.13,
+          "mismatchCount": 623799,
+          "totalPixels": 1296000,
+          "dimensions": {
+            "width": 1440,
+            "height": 900
+          },
+          "diffImage": "/opt/site-xray/test/results/v15/www-roomshotels-com-diff.png",
+          "perfect": false
+        },
+        "manifest": {
+          "score": 85,
+          "issues": [
+            "6 external references still in HTML (should be 0)"
+          ],
+          "files": {
+            "html": 9,
+            "css": 1,
+            "images": 99,
+            "fonts": 9,
+            "videos": 0,
+            "models": 0,
+            "other": 3
+          },
+          "sizes": {
+            "htmlPages": 9,
+            "externalRefsRemaining": 6,
+            "inlineStyleBlocks": 15,
+            "totalCSSInHTML": 571382,
+            "avgImageSize": 634901,
+            "totalSizeKB": 63029
+          },
+          "perfect": false
+        }
+      },
+      "manifest": {
+        "site": "https://www.roomshotels.com",
+        "timestamp": "2026-04-02T00:49:37.306Z",
+        "files": {
+          "html": 9,
+          "css": 1,
+          "images": 99,
+          "fonts": 9,
+          "videos": 0,
+          "models": 0,
+          "other": 3
+        },
+        "sizes": {
+          "html": 667565,
+          "css": 259311,
+          "images": 62855171,
+          "fonts": 757684,
+          "videos": 0,
+          "total": 64541873
+        },
+        "assets": {
+          "images": [
+            {
+              "file": "clone.png",
+              "size": 538882
+            },
+            {
+              "file": "original.png",
+              "size": 536604
+            },
+            {
+              "file": "reference.png",
+              "size": 1261374
+            },
+            {
+              "file": "img-0.jpg",
+              "size": 125976
+            },
+            {
+              "file": "img-1.jpg",
+              "size": 96799
+            },
+            {
+              "file": "img-10.jpg",
+              "size": 314634
+            },
+            {
+              "file": "img-11.jpg",
+              "size": 470998
+            },
+            {
+              "file": "img-12.jpg",
+              "size": 1510130
+            },
+            {
+              "file": "img-13.jpg",
+              "size": 324384
+            },
+            {
+              "file": "img-14.jpg",
+              "size": 248254
+            },
+            {
+              "file": "img-15.jpg",
+              "size": 686916
+            },
+            {
+              "file": "img-16.jpg",
+              "size": 399734
+            },
+            {
+              "file": "img-17.jpg",
+              "size": 644360
+            },
+            {
+              "file": "img-18.jpg",
+              "size": 1448538
+            },
+            {
+              "file": "img-19.jpg",
+              "size": 740090
+            },
+            {
+              "file": "img-2.jpg",
+              "size": 151912
+            },
+            {
+              "file": "img-20.jpg",
+              "size": 390182
+            },
+            {
+              "file": "img-21.jpg",
+              "size": 1369216
+            },
+            {
+              "file": "img-22.jpg",
+              "size": 267662
+            },
+            {
+              "file": "img-23.jpg",
+              "size": 539752
+            },
+            {
+              "file": "img-24.jpg",
+              "size": 827080
+            },
+            {
+              "file": "img-25.jpg",
+              "size": 496422
+            },
+            {
+              "file": "img-26.jpg",
+              "size": 378498
+            },
+            {
+              "file": "img-27.jpg",
+              "size": 637166
+            },
+            {
+              "file": "img-28.jpg",
+              "size": 161778
+            },
+            {
+              "file": "img-29.jpg",
+              "size": 1276314
+            },
+            {
+              "file": "img-3.webp",
+              "size": 164168
+            },
+            {
+              "file": "img-30.jpg",
+              "size": 312703
+            },
+            {
+              "file": "img-31.jpg",
+              "size": 386208
+            },
+            {
+              "file": "img-32.jpg",
+              "size": 243184
+            },
+            {
+              "file": "img-33.jpg",
+              "size": 292690
+            },
+            {
+              "file": "img-34.jpg",
+              "size": 211574
+            },
+            {
+              "file": "img-35.jpg",
+              "size": 319480
+            },
+            {
+              "file": "img-36.png",
+              "size": 626058
+            },
+            {
+              "file": "img-37.jpg",
+              "size": 94712
+            },
+            {
+              "file": "img-38.jpg",
+              "size": 142086
+            },
+            {
+              "file": "img-39.jpg",
+              "size": 167095
+            },
+            {
+              "file": "img-4.jpg",
+              "size": 461018
+            },
+            {
+              "file": "img-40.jpg",
+              "size": 537733
+            },
+            {
+              "file": "img-41.jpg",
+              "size": 273060
+            },
+            {
+              "file": "img-42.jpg",
+              "size": 263905
+            },
+            {
+              "file": "img-43.jpg",
+              "size": 468744
+            },
+            {
+              "file": "img-44.jpg",
+              "size": 190348
+            },
+            {
+              "file": "img-45.jpg",
+              "size": 201734
+            },
+            {
+              "file": "img-46.jpg",
+              "size": 214274
+            },
+            {
+              "file": "img-47.jpg",
+              "size": 196184
+            },
+            {
+              "file": "img-48.jpg",
+              "size": 223445
+            },
+            {
+              "file": "img-49.jpg",
+              "size": 199218
+            },
+            {
+              "file": "img-5.jpg",
+              "size": 122391
+            },
+            {
+              "file": "img-50.jpg",
+              "size": 1052810
+            },
+            {
+              "file": "img-51.jpg",
+              "size": 1425830
+            },
+            {
+              "file": "img-52.jpg",
+              "size": 368198
+            },
+            {
+              "file": "img-53.jpg",
+              "size": 1171974
+            },
+            {
+              "file": "img-54.jpg",
+              "size": 1433584
+            },
+            {
+              "file": "img-55.jpg",
+              "size": 1527652
+            },
+            {
+              "file": "img-56.jpg",
+              "size": 1329302
+            },
+            {
+              "file": "img-57.jpg",
+              "size": 939612
+            },
+            {
+              "file": "img-58.jpg",
+              "size": 173566
+            },
+            {
+              "file": "img-59.jpg",
+              "size": 589068
+            },
+            {
+              "file": "img-6.jpg",
+              "size": 266104
+            },
+            {
+              "file": "img-60.jpg",
+              "size": 1423202
+            },
+            {
+              "file": "img-61.jpg",
+              "size": 2078906
+            },
+            {
+              "file": "img-62.jpg",
+              "size": 1455534
+            },
+            {
+              "file": "img-63.jpg",
+              "size": 834122
+            },
+            {
+              "file": "img-64.jpg",
+              "size": 1721362
+            },
+            {
+              "file": "img-65.jpg",
+              "size": 1375762
+            },
+            {
+              "file": "img-66.jpg",
+              "size": 890028
+            },
+            {
+              "file": "img-67.jpg",
+              "size": 1575938
+            },
+            {
+              "file": "img-68.jpg",
+              "size": 726932
+            },
+            {
+              "file": "img-69.jpg",
+              "size": 2055016
+            },
+            {
+              "file": "img-7.jpg",
+              "size": 259390
+            },
+            {
+              "file": "img-70.jpg",
+              "size": 1262912
+            },
+            {
+              "file": "img-71.jpg",
+              "size": 2160204
+            },
+            {
+              "file": "img-72.jpg",
+              "size": 616026
+            },
+            {
+              "file": "img-73.jpg",
+              "size": 1247502
+            },
+            {
+              "file": "img-74.jpg",
+              "size": 993418
+            },
+            {
+              "file": "img-75.jpg",
+              "size": 946194
+            },
+            {
+              "file": "img-76.jpg",
+              "size": 814960
+            },
+            {
+              "file": "img-77.jpg",
+              "size": 1186698
+            },
+            {
+              "file": "img-78.jpg",
+              "size": 194114
+            },
+            {
+              "file": "img-79.jpg",
+              "size": 515156
+            },
+            {
+              "file": "img-8.jpg",
+              "size": 414528
+            },
+            {
+              "file": "img-80.jpg",
+              "size": 974898
+            },
+            {
+              "file": "img-81.jpg",
+              "size": 644158
+            },
+            {
+              "file": "img-82.jpg",
+              "size": 742934
+            },
+            {
+              "file": "img-83.jpg",
+              "size": 660702
+            },
+            {
+              "file": "img-84.jpg",
+              "size": 595802
+            },
+            {
+              "file": "img-85.jpg",
+              "size": 1029750
+            },
+            {
+              "file": "img-86.jpg",
+              "size": 647980
+            },
+            {
+              "file": "img-87.svg",
+              "size": 1345
+            },
+            {
+              "file": "img-88.svg",
+              "size": 3762
+            },
+            {
+              "file": "img-9.jpg",
+              "size": 328308
+            },
+            {
+              "file": "apple-touch-icon.png",
+              "size": 4302
+            },
+            {
+              "file": "favicon-96x96.png",
+              "size": 1862
+            },
+            {
+              "file": "favicon.ico",
+              "size": 15086
+            },
+            {
+              "file": "favicon.svg",
+              "size": 13915
+            },
+            {
+              "file": "cropped-favicon-512-png-180x180.png",
+              "size": 3996
+            },
+            {
+              "file": "cropped-favicon-512-png-192x192.png",
+              "size": 4287
+            },
+            {
+              "file": "cropped-favicon-512-png-32x32.png",
+              "size": 813
+            }
+          ],
+          "fonts": [
+            {
+              "file": "font-0.otf",
+              "size": 95216
+            },
+            {
+              "file": "font-1.otf",
+              "size": 96420
+            },
+            {
+              "file": "font-2.otf",
+              "size": 105096
+            },
+            {
+              "file": "font-3.otf",
+              "size": 106108
+            },
+            {
+              "file": "font-4.otf",
+              "size": 100796
+            },
+            {
+              "file": "font-5.otf",
+              "size": 100780
+            },
+            {
+              "file": "font-6.otf",
+              "size": 60732
+            },
+            {
+              "file": "font-7.otf",
+              "size": 60920
+            },
+            {
+              "file": "font-8.otf",
+              "size": 31616
+            }
+          ],
+          "videos": []
+        },
+        "issues": [
+          "6 external references still in HTML (should be 0)"
+        ],
+        "analysis": {
+          "htmlPages": 9,
+          "externalRefsRemaining": 6,
+          "inlineStyleBlocks": 15,
+          "totalCSSInHTML": 571382,
+          "avgImageSize": 634901,
+          "totalSizeKB": 63029
         }
       }
     },
@@ -7025,8 +6369,8 @@
           "perfect": false
         },
         "content": {
-          "score": 98,
-          "origWords": 832,
+          "score": 99,
+          "origWords": 831,
           "cloneWords": 1052,
           "matched": 819,
           "perfect": true
@@ -7065,8 +6409,8 @@
         },
         "pixels": {
           "score": 99,
-          "mismatchPercent": 0.84,
-          "mismatchCount": 10903,
+          "mismatchPercent": 0.83,
+          "mismatchCount": 10755,
           "totalPixels": 1296000,
           "dimensions": {
             "width": 1440,
@@ -7095,15 +6439,15 @@
             "externalRefsRemaining": 7432,
             "inlineStyleBlocks": 621,
             "totalCSSInHTML": 121083595,
-            "avgImageSize": 297167,
-            "totalSizeKB": 278161
+            "avgImageSize": 298287,
+            "totalSizeKB": 274938
           },
           "perfect": false
         }
       },
       "manifest": {
         "site": "https://stripe.com",
-        "timestamp": "2026-04-02T00:38:57.319Z",
+        "timestamp": "2026-04-02T00:49:37.854Z",
         "files": {
           "html": 278,
           "css": 10,
@@ -7114,30 +6458,30 @@
           "other": 1
         },
         "sizes": {
-          "html": 208255707,
+          "html": 204668806,
           "css": 434981,
-          "images": 76074677,
+          "images": 76361371,
           "fonts": 70732,
           "videos": 0,
-          "total": 284836822
+          "total": 281536615
         },
         "assets": {
           "images": [
             {
               "file": "clone.png",
-              "size": 342526
+              "size": 634248
             },
             {
               "file": "de_pricing.png",
-              "size": 2539678
+              "size": 2539364
             },
             {
               "file": "original.png",
-              "size": 342848
+              "size": 342800
             },
             {
               "file": "reference.png",
-              "size": 6248564
+              "size": 6243898
             },
             {
               "file": "favicon.ico",
@@ -7681,23 +7025,23 @@
             },
             {
               "file": "img-210.png",
-              "size": 7312
-            },
-            {
-              "file": "img-211.png",
               "size": 31704
             },
             {
-              "file": "img-212.png",
-              "size": 60860
-            },
-            {
-              "file": "img-213.png",
+              "file": "img-211.png",
               "size": 28990
             },
             {
-              "file": "img-214.png",
+              "file": "img-212.png",
               "size": 19148
+            },
+            {
+              "file": "img-213.png",
+              "size": 7312
+            },
+            {
+              "file": "img-214.png",
+              "size": 60860
             },
             {
               "file": "img-215.png",
@@ -8169,38 +7513,25 @@
           "externalRefsRemaining": 7432,
           "inlineStyleBlocks": 621,
           "totalCSSInHTML": 121083595,
-          "avgImageSize": 297167,
-          "totalSizeKB": 278161
+          "avgImageSize": 298287,
+          "totalSizeKB": 274938
         }
       }
     },
     {
-      "site": "https://linear.app",
+      "site": "https://vercel.com",
       "category": "nextjs",
-      "totalScore": 93,
+      "totalScore": 98,
       "perfect": false,
       "metrics": {
         "images": {
-          "score": 61,
-          "total": 31,
-          "rendered": 19,
-          "broken": 12,
+          "score": 100,
+          "total": 51,
+          "rendered": 51,
+          "broken": 0,
           "empty": 0,
-          "brokenList": [
-            "http://localhost:19884/images/img-1.jpg",
-            "http://localhost:19884/images/img-15.jpg",
-            "http://localhost:19884/images/img-16.jpg",
-            "http://localhost:19884/images/img-17.jpg",
-            "http://localhost:19884/images/img-17.jpg",
-            "http://localhost:19884/images/img-18.jpg",
-            "http://localhost:19884/images/img-19.jpg",
-            "http://localhost:19884/images/img-5.jpg",
-            "http://localhost:19884/images/img-20.jpg",
-            "http://localhost:19884/images/img-21.jpg",
-            "http://localhost:19884/images/img-22.jpg",
-            "http://localhost:19884/images/img-23.jpg"
-          ],
-          "perfect": false
+          "brokenList": [],
+          "perfect": true
         },
         "css": {
           "score": 100,
@@ -8208,49 +7539,54 @@
           "hasFont": true,
           "hasPadding": false,
           "hasLayout": true,
-          "cssSize": 669177,
-          "fontsLoaded": 6,
+          "cssSize": 1802770,
+          "fontsLoaded": 114,
           "perfect": true
         },
         "links": {
           "score": 100,
-          "totalLinks": 3558,
-          "workingLinks": 3558,
-          "brokenLinks": 0,
-          "externalLinks": 195,
-          "broken": [],
+          "totalLinks": 6510,
+          "workingLinks": 6506,
+          "brokenLinks": 4,
+          "externalLinks": 892,
+          "broken": [
+            "/images/img-74.svg#sparkles",
+            "/images/img-85.svg#shield-globe",
+            "/images/img-86.svg#firewall-check",
+            "/images/img-87.svg#robot"
+          ],
           "perfect": false
         },
         "content": {
-          "score": 100,
-          "origWords": 529,
-          "cloneWords": 528,
-          "matched": 527,
+          "score": 99,
+          "origWords": 342,
+          "cloneWords": 343,
+          "matched": 340,
           "perfect": true
         },
         "layout": {
           "score": 100,
           "origStructure": {
-            "divs": 1605,
-            "imgs": 26,
-            "texts": 566
+            "divs": 1215,
+            "imgs": 8,
+            "texts": 293
           },
           "cloneStructure": {
-            "divs": 1603,
-            "imgs": 26,
-            "texts": 568
+            "divs": 1213,
+            "imgs": 8,
+            "texts": 293
           },
           "screenshots": {
-            "original": "/opt/site-xray/test/results/v15/linear-app-original.png",
-            "clone": "/opt/site-xray/test/results/v15/linear-app-clone.png"
+            "original": "/opt/site-xray/test/results/v15/vercel-com-original.png",
+            "clone": "/opt/site-xray/test/results/v15/vercel-com-clone.png"
           },
           "perfect": true
         },
         "interactions": {
-          "score": 98,
-          "totalButtons": 85,
-          "clickable": 82,
-          "links": 63,
+          "score": 92,
+          "totalButtons": 15,
+          "clickable": 13,
+          "links": 129,
           "hasNav": true,
           "perfect": true
         },
@@ -8262,283 +7598,938 @@
         },
         "pixels": {
           "score": 100,
-          "mismatchPercent": 0.16,
-          "mismatchCount": 2018,
+          "mismatchPercent": 0.06,
+          "mismatchCount": 818,
           "totalPixels": 1296000,
           "dimensions": {
             "width": 1440,
             "height": 900
           },
-          "diffImage": "/opt/site-xray/test/results/v15/linear-app-diff.png",
+          "diffImage": "/opt/site-xray/test/results/v15/vercel-com-diff.png",
           "perfect": true
         },
         "manifest": {
           "score": 85,
           "issues": [
-            "240 external references still in HTML (should be 0)"
+            "892 external references still in HTML (should be 0)"
           ],
           "files": {
-            "html": 46,
-            "css": 48,
-            "images": 47,
-            "fonts": 3,
-            "videos": 1,
+            "html": 73,
+            "css": 12,
+            "images": 131,
+            "fonts": 84,
+            "videos": 0,
             "models": 0,
-            "other": 0
+            "other": 7
           },
           "sizes": {
-            "htmlPages": 46,
-            "externalRefsRemaining": 240,
-            "inlineStyleBlocks": 184,
-            "totalCSSInHTML": 30741948,
-            "avgImageSize": 280910,
-            "totalSizeKB": 108955
+            "htmlPages": 73,
+            "externalRefsRemaining": 892,
+            "inlineStyleBlocks": 298,
+            "totalCSSInHTML": 131596044,
+            "avgImageSize": 45534,
+            "totalSizeKB": 229043
           },
           "perfect": false
         }
       },
       "manifest": {
-        "site": "https://linear.app",
-        "timestamp": "2026-04-02T00:39:33.677Z",
+        "site": "https://vercel.com",
+        "timestamp": "2026-04-02T00:49:40.781Z",
         "files": {
-          "html": 46,
-          "css": 48,
-          "images": 47,
-          "fonts": 3,
-          "videos": 1,
+          "html": 73,
+          "css": 12,
+          "images": 131,
+          "fonts": 84,
+          "videos": 0,
           "models": 0,
-          "other": 0
+          "other": 7
         },
         "sizes": {
-          "html": 47102026,
-          "css": 1287494,
-          "images": 13202765,
-          "fonts": 551224,
-          "videos": 49425938,
-          "total": 111569447
+          "html": 149637108,
+          "css": 857856,
+          "images": 5964973,
+          "fonts": 69923826,
+          "videos": 0,
+          "total": 234540213
         },
         "assets": {
           "images": [
             {
               "file": "apple-touch-icon-precomposed.png",
-              "size": 15842
+              "size": 232142
             },
             {
               "file": "apple-touch-icon.png",
-              "size": 15842
+              "size": 232080
             },
             {
-              "file": "about.png",
-              "size": 1643943
+              "file": "ai.png",
+              "size": 446582
             },
             {
               "file": "clone.png",
-              "size": 114952
+              "size": 634248
             },
             {
-              "file": "homepage.png",
-              "size": 1188185
+              "file": "home.png",
+              "size": 1113249
             },
             {
               "file": "original.png",
-              "size": 78694
+              "size": 631642
+            },
+            {
+              "file": "reference.png",
+              "size": 1113516
             },
             {
               "file": "favicon-16x16.png",
-              "size": 15842
+              "size": 232069
             },
             {
               "file": "favicon-32x32.png",
-              "size": 15842
+              "size": 232069
             },
             {
               "file": "favicon.ico",
-              "size": 22382
+              "size": 15086
             },
             {
               "file": "favicon.svg",
-              "size": 15842
+              "size": 232037
             },
             {
-              "file": "img-0.jpg",
-              "size": 332356
+              "file": "apple-touch-icon-114x114.png",
+              "size": 375
             },
             {
-              "file": "img-1.jpg",
-              "size": 724173
+              "file": "apple-touch-icon-120x120.png",
+              "size": 391
             },
             {
-              "file": "img-10.jpg",
-              "size": 4148
+              "file": "apple-touch-icon-144x144.png",
+              "size": 466
             },
             {
-              "file": "img-11.jpg",
-              "size": 4500
+              "file": "apple-touch-icon-152x152.png",
+              "size": 474
             },
             {
-              "file": "img-12.jpg",
-              "size": 337771
+              "file": "apple-touch-icon-180x180.png",
+              "size": 534
             },
             {
-              "file": "img-13.jpg",
-              "size": 44271
+              "file": "apple-touch-icon-256x256.png",
+              "size": 745
             },
             {
-              "file": "img-14.jpg",
-              "size": 48145
+              "file": "apple-touch-icon-57x57.png",
+              "size": 265
             },
             {
-              "file": "img-15.jpg",
-              "size": 396789
+              "file": "apple-touch-icon-60x60.png",
+              "size": 272
             },
             {
-              "file": "img-16.jpg",
-              "size": 932019
+              "file": "apple-touch-icon-72x72.png",
+              "size": 294
             },
             {
-              "file": "img-17.jpg",
-              "size": 3132
+              "file": "apple-touch-icon-76x76.png",
+              "size": 304
             },
             {
-              "file": "img-18.jpg",
-              "size": 14973
+              "file": "favicon.ico",
+              "size": 15086
             },
             {
-              "file": "img-19.jpg",
-              "size": 18738
+              "file": "img-0.svg",
+              "size": 1641
             },
             {
-              "file": "img-2.jpg",
-              "size": 1031287
+              "file": "img-1.svg",
+              "size": 1641
             },
             {
-              "file": "img-20.jpg",
-              "size": 2769
+              "file": "img-10.svg",
+              "size": 2732
             },
             {
-              "file": "img-21.jpg",
-              "size": 9659
+              "file": "img-100.svg",
+              "size": 2115
             },
             {
-              "file": "img-22.jpg",
-              "size": 994391
+              "file": "img-101.svg",
+              "size": 2115
             },
             {
-              "file": "img-23.jpg",
-              "size": 410200
+              "file": "img-102.svg",
+              "size": 1419
             },
             {
-              "file": "img-24.jpg",
-              "size": 15842
+              "file": "img-103.svg",
+              "size": 1419
             },
             {
-              "file": "img-26.jpg",
-              "size": 1713157
+              "file": "img-104.svg",
+              "size": 1894
             },
             {
-              "file": "img-27.jpg",
-              "size": 346650
+              "file": "img-105.svg",
+              "size": 1894
             },
             {
-              "file": "img-28.jpg",
-              "size": 338350
+              "file": "img-106.svg",
+              "size": 6255
             },
             {
-              "file": "img-29.jpg",
-              "size": 302574
+              "file": "img-107.svg",
+              "size": 6242
             },
             {
-              "file": "img-3.png",
-              "size": 2404
+              "file": "img-11.svg",
+              "size": 2735
             },
             {
-              "file": "img-30.jpg",
-              "size": 444978
+              "file": "img-12.svg",
+              "size": 1154
             },
             {
-              "file": "img-31.jpg",
-              "size": 376121
+              "file": "img-13.svg",
+              "size": 1154
             },
             {
-              "file": "img-32.jpg",
-              "size": 315641
+              "file": "img-14.svg",
+              "size": 3035
             },
             {
-              "file": "img-33.jpg",
-              "size": 354370
+              "file": "img-15.svg",
+              "size": 3035
             },
             {
-              "file": "img-34.jpg",
-              "size": 481487
+              "file": "img-16.svg",
+              "size": 1667
             },
             {
-              "file": "img-4.jpg",
-              "size": 9311
+              "file": "img-17.svg",
+              "size": 1667
             },
             {
-              "file": "img-5.jpg",
-              "size": 3859
+              "file": "img-18.svg",
+              "size": 1615
             },
             {
-              "file": "img-6.jpg",
-              "size": 4388
+              "file": "img-19.svg",
+              "size": 1615
             },
             {
-              "file": "img-7.jpg",
-              "size": 4851
+              "file": "img-2.svg",
+              "size": 1314
             },
             {
-              "file": "img-8.jpg",
-              "size": 4318
+              "file": "img-20.svg",
+              "size": 1541
             },
             {
-              "file": "img-9.jpg",
-              "size": 5902
+              "file": "img-21.svg",
+              "size": 1541
+            },
+            {
+              "file": "img-22.svg",
+              "size": 1155
+            },
+            {
+              "file": "img-23.svg",
+              "size": 1158
+            },
+            {
+              "file": "img-24.svg",
+              "size": 3011
+            },
+            {
+              "file": "img-25.svg",
+              "size": 3011
+            },
+            {
+              "file": "img-26.svg",
+              "size": 1885
+            },
+            {
+              "file": "img-27.svg",
+              "size": 1887
+            },
+            {
+              "file": "img-28.svg",
+              "size": 2693
+            },
+            {
+              "file": "img-29.svg",
+              "size": 2693
+            },
+            {
+              "file": "img-3.svg",
+              "size": 1314
+            },
+            {
+              "file": "img-30.svg",
+              "size": 503
+            },
+            {
+              "file": "img-31.svg",
+              "size": 3726
+            },
+            {
+              "file": "img-32.svg",
+              "size": 3740
+            },
+            {
+              "file": "img-33.svg",
+              "size": 11592
+            },
+            {
+              "file": "img-34.svg",
+              "size": 11597
+            },
+            {
+              "file": "img-35.svg",
+              "size": 8329
+            },
+            {
+              "file": "img-36.svg",
+              "size": 8335
+            },
+            {
+              "file": "img-37.svg",
+              "size": 26689
+            },
+            {
+              "file": "img-38.svg",
+              "size": 26009
+            },
+            {
+              "file": "img-39.svg",
+              "size": 728
+            },
+            {
+              "file": "img-4.svg",
+              "size": 1882
+            },
+            {
+              "file": "img-40.svg",
+              "size": 1641
+            },
+            {
+              "file": "img-41.svg",
+              "size": 1882
+            },
+            {
+              "file": "img-42.svg",
+              "size": 1641
+            },
+            {
+              "file": "img-43.svg",
+              "size": 1314
+            },
+            {
+              "file": "img-44.svg",
+              "size": 1314
+            },
+            {
+              "file": "img-45.svg",
+              "size": 1917
+            },
+            {
+              "file": "img-46.svg",
+              "size": 503
+            },
+            {
+              "file": "img-47.svg",
+              "size": 1882
+            },
+            {
+              "file": "img-48.svg",
+              "size": 1917
+            },
+            {
+              "file": "img-49.svg",
+              "size": 728
+            },
+            {
+              "file": "img-5.svg",
+              "size": 1882
+            },
+            {
+              "file": "img-50.svg",
+              "size": 503
+            },
+            {
+              "file": "img-51.svg",
+              "size": 728
+            },
+            {
+              "file": "img-52.svg",
+              "size": 1154
+            },
+            {
+              "file": "img-53.svg",
+              "size": 1936
+            },
+            {
+              "file": "img-54.svg",
+              "size": 3035
+            },
+            {
+              "file": "img-55.svg",
+              "size": 3011
+            },
+            {
+              "file": "img-56.svg",
+              "size": 1936
+            },
+            {
+              "file": "img-57.svg",
+              "size": 1615
+            },
+            {
+              "file": "img-58.svg",
+              "size": 3011
+            },
+            {
+              "file": "img-59.svg",
+              "size": 1158
+            },
+            {
+              "file": "img-6.svg",
+              "size": 1917
+            },
+            {
+              "file": "img-60.svg",
+              "size": 1667
+            },
+            {
+              "file": "img-61.svg",
+              "size": 3035
+            },
+            {
+              "file": "img-62.svg",
+              "size": 2735
+            },
+            {
+              "file": "img-63.svg",
+              "size": 1541
+            },
+            {
+              "file": "img-64.svg",
+              "size": 1615
+            },
+            {
+              "file": "img-65.svg",
+              "size": 2732
+            },
+            {
+              "file": "img-66.svg",
+              "size": 1667
+            },
+            {
+              "file": "img-67.svg",
+              "size": 1541
+            },
+            {
+              "file": "img-68.svg",
+              "size": 1155
+            },
+            {
+              "file": "img-69.svg",
+              "size": 2693
+            },
+            {
+              "file": "img-7.svg",
+              "size": 1917
+            },
+            {
+              "file": "img-70.svg",
+              "size": 1885
+            },
+            {
+              "file": "img-71.svg",
+              "size": 1887
+            },
+            {
+              "file": "img-72.svg",
+              "size": 2693
+            },
+            {
+              "file": "img-73.svg",
+              "size": 1154
+            },
+            {
+              "file": "img-74.svg",
+              "size": 1096
+            },
+            {
+              "file": "img-75.png",
+              "size": 90838
+            },
+            {
+              "file": "img-76.png",
+              "size": 50709
+            },
+            {
+              "file": "img-77.png",
+              "size": 90807
+            },
+            {
+              "file": "img-78.png",
+              "size": 51044
+            },
+            {
+              "file": "img-79.svg",
+              "size": 7211
+            },
+            {
+              "file": "img-8.svg",
+              "size": 1936
+            },
+            {
+              "file": "img-80.svg",
+              "size": 7900
+            },
+            {
+              "file": "img-81.svg",
+              "size": 7261
+            },
+            {
+              "file": "img-82.svg",
+              "size": 7950
+            },
+            {
+              "file": "img-83.svg",
+              "size": 3587
+            },
+            {
+              "file": "img-84.svg",
+              "size": 3587
+            },
+            {
+              "file": "img-85.svg",
+              "size": 2481
+            },
+            {
+              "file": "img-86.svg",
+              "size": 1733
+            },
+            {
+              "file": "img-87.svg",
+              "size": 1055
+            },
+            {
+              "file": "img-88.svg",
+              "size": 888
+            },
+            {
+              "file": "img-89.svg",
+              "size": 888
+            },
+            {
+              "file": "img-9.svg",
+              "size": 1936
+            },
+            {
+              "file": "img-90.svg",
+              "size": 3756
+            },
+            {
+              "file": "img-91.svg",
+              "size": 3756
+            },
+            {
+              "file": "img-92.svg",
+              "size": 927
+            },
+            {
+              "file": "img-93.svg",
+              "size": 927
+            },
+            {
+              "file": "img-94.svg",
+              "size": 2152
+            },
+            {
+              "file": "img-95.svg",
+              "size": 2152
+            },
+            {
+              "file": "img-96.svg",
+              "size": 3866
+            },
+            {
+              "file": "img-97.svg",
+              "size": 3866
+            },
+            {
+              "file": "img-98.svg",
+              "size": 2366
+            },
+            {
+              "file": "img-99.svg",
+              "size": 2366
             },
             {
               "file": "safari-pinned-tab.svg",
-              "size": 15842
-            },
-            {
-              "file": "apple-touch-icon.png",
-              "size": 25274
-            },
-            {
-              "file": "favicon.svg",
-              "size": 759
+              "size": 232087
             }
           ],
           "fonts": [
             {
               "file": "font-0.woff2",
-              "size": 352240
+              "size": 978174
             },
             {
               "file": "font-1.woff2",
-              "size": 160932
+              "size": 977037
+            },
+            {
+              "file": "font-10.woff2",
+              "size": 977256
+            },
+            {
+              "file": "font-11.woff2",
+              "size": 15716
+            },
+            {
+              "file": "font-12.woff2",
+              "size": 11984
+            },
+            {
+              "file": "font-13.woff2",
+              "size": 11916
+            },
+            {
+              "file": "font-14.woff2",
+              "size": 22140
+            },
+            {
+              "file": "font-15.woff2",
+              "size": 712
+            },
+            {
+              "file": "font-16.woff2",
+              "size": 977068
+            },
+            {
+              "file": "font-17.woff",
+              "size": 990257
+            },
+            {
+              "file": "font-18.ttf",
+              "size": 991428
+            },
+            {
+              "file": "font-19.woff2",
+              "size": 977223
             },
             {
               "file": "font-2.woff2",
-              "size": 38052
+              "size": 978424
+            },
+            {
+              "file": "font-20.woff",
+              "size": 977192
+            },
+            {
+              "file": "font-21.ttf",
+              "size": 991583
+            },
+            {
+              "file": "font-22.woff2",
+              "size": 977547
+            },
+            {
+              "file": "font-23.woff",
+              "size": 977285
+            },
+            {
+              "file": "font-24.ttf",
+              "size": 978391
+            },
+            {
+              "file": "font-25.woff2",
+              "size": 977280
+            },
+            {
+              "file": "font-26.woff",
+              "size": 977111
+            },
+            {
+              "file": "font-27.ttf",
+              "size": 978174
+            },
+            {
+              "file": "font-28.woff2",
+              "size": 977373
+            },
+            {
+              "file": "font-29.woff",
+              "size": 977565
+            },
+            {
+              "file": "font-3.woff2",
+              "size": 990445
+            },
+            {
+              "file": "font-30.ttf",
+              "size": 977318
+            },
+            {
+              "file": "font-31.woff2",
+              "size": 977006
+            },
+            {
+              "file": "font-32.woff",
+              "size": 976968
+            },
+            {
+              "file": "font-33.ttf",
+              "size": 990352
+            },
+            {
+              "file": "font-34.woff2",
+              "size": 990414
+            },
+            {
+              "file": "font-35.woff",
+              "size": 977349
+            },
+            {
+              "file": "font-36.ttf",
+              "size": 994093
+            },
+            {
+              "file": "font-37.woff2",
+              "size": 978205
+            },
+            {
+              "file": "font-38.woff",
+              "size": 991416
+            },
+            {
+              "file": "font-39.ttf",
+              "size": 977006
+            },
+            {
+              "file": "font-4.woff2",
+              "size": 978174
+            },
+            {
+              "file": "font-40.woff2",
+              "size": 977287
+            },
+            {
+              "file": "font-41.woff",
+              "size": 977061
+            },
+            {
+              "file": "font-42.ttf",
+              "size": 978174
+            },
+            {
+              "file": "font-43.woff2",
+              "size": 979459
+            },
+            {
+              "file": "font-44.woff",
+              "size": 977154
+            },
+            {
+              "file": "font-45.ttf",
+              "size": 977132
+            },
+            {
+              "file": "font-46.woff2",
+              "size": 977256
+            },
+            {
+              "file": "font-47.woff",
+              "size": 977037
+            },
+            {
+              "file": "font-48.ttf",
+              "size": 979273
+            },
+            {
+              "file": "font-49.woff2",
+              "size": 991585
+            },
+            {
+              "file": "font-5.woff2",
+              "size": 990319
+            },
+            {
+              "file": "font-50.woff",
+              "size": 977320
+            },
+            {
+              "file": "font-51.ttf",
+              "size": 977289
+            },
+            {
+              "file": "font-52.woff2",
+              "size": 977411
+            },
+            {
+              "file": "font-53.woff",
+              "size": 977228
+            },
+            {
+              "file": "font-54.ttf",
+              "size": 977351
+            },
+            {
+              "file": "font-55.woff2",
+              "size": 979530
+            },
+            {
+              "file": "font-56.woff",
+              "size": 979540
+            },
+            {
+              "file": "font-57.ttf",
+              "size": 1003345
+            },
+            {
+              "file": "font-58.woff2",
+              "size": 977154
+            },
+            {
+              "file": "font-59.woff",
+              "size": 977302
+            },
+            {
+              "file": "font-6.woff2",
+              "size": 977130
+            },
+            {
+              "file": "font-60.ttf",
+              "size": 990509
+            },
+            {
+              "file": "font-61.woff2",
+              "size": 990538
+            },
+            {
+              "file": "font-62.woff",
+              "size": 977101
+            },
+            {
+              "file": "font-63.ttf",
+              "size": 1001860
+            },
+            {
+              "file": "font-64.woff2",
+              "size": 978267
+            },
+            {
+              "file": "font-65.woff",
+              "size": 977099
+            },
+            {
+              "file": "font-66.ttf",
+              "size": 991613
+            },
+            {
+              "file": "font-67.woff2",
+              "size": 977320
+            },
+            {
+              "file": "font-68.woff",
+              "size": 977101
+            },
+            {
+              "file": "font-69.ttf",
+              "size": 990469
+            },
+            {
+              "file": "font-7.woff2",
+              "size": 977068
+            },
+            {
+              "file": "font-70.woff2",
+              "size": 978269
+            },
+            {
+              "file": "font-71.woff",
+              "size": 977099
+            },
+            {
+              "file": "font-72.ttf",
+              "size": 992629
+            },
+            {
+              "file": "font-73.woff2",
+              "size": 977285
+            },
+            {
+              "file": "font-74.woff",
+              "size": 977435
+            },
+            {
+              "file": "font-75.ttf",
+              "size": 977216
+            },
+            {
+              "file": "font-76.woff2",
+              "size": 28616
+            },
+            {
+              "file": "font-77.woff2",
+              "size": 18192
+            },
+            {
+              "file": "font-78.woff2",
+              "size": 28104
+            },
+            {
+              "file": "font-79.woff2",
+              "size": 28388
+            },
+            {
+              "file": "font-8.woff2",
+              "size": 977320
+            },
+            {
+              "file": "font-80.woff2",
+              "size": 31288
+            },
+            {
+              "file": "font-81.woff2",
+              "size": 28552
+            },
+            {
+              "file": "font-82.woff2",
+              "size": 28900
+            },
+            {
+              "file": "font-83.woff2",
+              "size": 7340
+            },
+            {
+              "file": "font-9.woff2",
+              "size": 978329
             }
           ],
-          "videos": [
-            {
-              "file": "img-25.mp4",
-              "size": 49425938
-            }
-          ]
+          "videos": []
         },
         "issues": [
-          "240 external references still in HTML (should be 0)"
+          "892 external references still in HTML (should be 0)"
         ],
         "analysis": {
-          "htmlPages": 46,
-          "externalRefsRemaining": 240,
-          "inlineStyleBlocks": 184,
-          "totalCSSInHTML": 30741948,
-          "avgImageSize": 280910,
-          "totalSizeKB": 108955
+          "htmlPages": 73,
+          "externalRefsRemaining": 892,
+          "inlineStyleBlocks": 298,
+          "totalCSSInHTML": 131596044,
+          "avgImageSize": 45534,
+          "totalSizeKB": 229043
         }
       }
     }

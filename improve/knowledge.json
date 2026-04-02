@@ -41,6 +41,14 @@
       "technique": "Final external URL cleanup pass",
       "detail": "After all link rewriting, do a final pass over all HTML files to strip any remaining references to both the primary domain and the www/non-www variant, including protocol-relative URLs.",
       "impact": "Reduced external refs remaining across all sites"
+    },
+    {
+      "version": "v15",
+      "score": 91,
+      "prev_score": 87,
+      "diff": 4,
+      "date": "2026-04-02T00:49:57.111Z",
+      "log_tail": "All three background test runs have completed. The final committed v15 scored **90/100** average (+3 from v14's 87), with the biggest win being Cravath jumping from 76 to 93. Everything is committed and ready.\n"
     }
   ],
   "failed_approaches": [
