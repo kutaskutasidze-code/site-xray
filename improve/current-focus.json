@@ -1,8 +1,14 @@
 {
-  "consecutive_failures": 19,
-  "last_approaches": [],
+  "consecutive_failures": 0,
+  "last_approaches": [
+    {
+      "version": "v20",
+      "approach": "refactor: split first-page try/catch into 4 isolated blocks, add dl() retry + redirect limit",
+      "result": "pentagram +5, morganlewis +1, stripe PERFECT, zero regressions on existing sites"
+    }
+  ],
   "regressions_seen": [],
   "current_strategy": "universal",
-  "last_failure_date": "2026-04-03T09:33:25.462Z",
-  "last_failure_reason": "20 consecutive cycles failed with reason all_retries_exhausted but no diff detail was captured (pre-v3 logging). All approaches unknown."
+  "last_failure_date": null,
+  "last_failure_reason": null
 }
