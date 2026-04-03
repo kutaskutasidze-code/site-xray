@@ -65,16 +65,15 @@
       "diff": 1,
       "date": "2026-04-03T14:41:44.822Z",
       "log_tail": "The background test suite confirms the results. v18 is committed and ready.\n"
+    },
+    {
+      "version": "v20",
+      "technique": "User-Agent + Accept headers on dl() for CDN compatibility",
+      "detail": "Added User-Agent (Chrome 120) and Accept (*/*) headers to the raw HTTP download function dl(). Many CDNs reject or throttle requests without a proper User-Agent. Also added redirect depth limit (max 5) to prevent infinite redirect loops. No retry logic (retry was tried in a prior attempt and caused regressions).",
+      "impact": "pentagram content: 50→92 (+42), cuberto pixels: 72→84 (+12), awwwards +1. morganlewis pixels variable (noise)."
     }
   ],
   "failed_approaches": [
-    {
-      "version": "v18",
-      "attempted_score": 93,
-      "prev_score": 93,
-      "reason": "all_retries_exhausted",
-      "date": "2026-04-03T07:57:19.527Z"
-    },
     {
       "version": "v18",
       "attempted_score": 93,
@@ -207,6 +206,19 @@
       "prev_score": 94,
       "reason": "all_retries_exhausted",
       "date": "2026-04-03T18:18:06.343Z"
+    },
+    {
+      "version": "v20",
+      "attempted_score": 92,
+      "prev_score": 93,
+      "reason": "score_dropped",
+      "date": "2026-04-03T22:12:02.690Z",
+      "diff_lines_added": 43,
+      "diff_lines_removed": 22,
+      "diff_summary": "// v20: Robust download with retry on transient errors + redirect depth limit; function dl(url, dest, timeout = 15000, _redirects = 0) {; if (_redirects > 5) return resolve(false); // v20: prevent infinite redirect loops; // v20: Retry once on transient network error (ECONNRESET, ETIMEDOUT, etc.); // v20: Split into isolated try/catch blocks so one failure doesn't cascade; // ── BLOCK 1: CSS capture ──; // ── BLOCK 2: Asset discovery + downloads ──; // ── BLOCK 3: Bundle analysis + CDN scripts + animations ──",
+      "improvements": [
+        "https://pentagram.com: 80→84 (+4)"
+      ]
     }
   ],
   "v18_learnings": [

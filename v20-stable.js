@@ -2,9 +2,9 @@
 /**
  * Site X-Ray v20 — Universal precision cloner.
  * Builds on v19 with REFACTOR focus:
- *   - Split first-page analysis into isolated try/catch blocks (no cascading failures)
- *   - Robust dl() with retry on transient errors + redirect depth limit
- *   - Better error isolation throughout capture pipeline
+ *   - Add User-Agent + Accept headers to dl() for better CDN compatibility
+ *   - Add redirect depth limit (max 5) to prevent infinite redirect loops
+ *   - Improved download reliability without retry complexity
  *
  * Single file. One dependency (playwright). Zero config.
  *
@@ -75,28 +75,30 @@ let sharedCSS = '', bundleLib = '', cdnScripts = [], sharedAnimScript = '';
 let imgC = 0, fontC = 0, vidC = 0, modelC = 0, shaderC = 0;
 let capturedBodyBg = ''; // v19: captured body background-color for CSS score fix
 
-// v20: Robust download with retry on transient errors + redirect depth limit
-function dl(url, dest, timeout = 15000, _redirects = 0) {
+// v20: Added User-Agent + Accept headers for better CDN compatibility, redirect depth limit
+function dl(url, dest, timeout = 15000, _depth = 0) {
   return new Promise(resolve => {
     try {
       if (!url || url.startsWith('data:') || url.startsWith('blob:')) return resolve(false);
-      if (_redirects > 5) return resolve(false); // v20: prevent infinite redirect loops
+      if (_depth > 5) return resolve(false); // v20: prevent infinite redirect loops
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       const file = fs.createWriteStream(dest);
       const client = url.startsWith('https') ? https : http;
-      const req = client.get(url, { timeout }, res => {
+      const reqOpts = {
+        timeout,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': '*/*',
+        },
+      };
+      const req = client.get(url, reqOpts, res => {
         if ([301,302,307,308].includes(res.statusCode) && res.headers.location) {
-          file.close(); try{fs.unlinkSync(dest)}catch(e){} return dl(new URL(res.headers.location,url).href,dest,timeout,_redirects+1).then(resolve);
+          file.close(); try{fs.unlinkSync(dest)}catch(e){} return dl(new URL(res.headers.location,url).href,dest,timeout,_depth+1).then(resolve);
         }
         if (res.statusCode!==200) { file.close(); try{fs.unlinkSync(dest)}catch(e){} return resolve(false); }
         res.pipe(file); file.on('finish',()=>{file.close();resolve(true)});
       });
-      req.on('error',()=>{
-        try{file.close();fs.unlinkSync(dest)}catch(e){}
-        // v20: Retry once on transient network error (ECONNRESET, ETIMEDOUT, etc.)
-        if (_redirects === 0) { dl(url,dest,timeout,1).then(resolve); }
-        else resolve(false);
-      });
+      req.on('error',()=>{try{file.close();fs.unlinkSync(dest)}catch(e){}resolve(false)});
       req.on('timeout',()=>{req.destroy();resolve(false)});
     } catch(e){resolve(false)}
   });
@@ -556,11 +558,7 @@ async function capturePage(page, urlPath, isFirst) {
   }
 
   // ── First page: capture CSS, download assets, analyze bundles ──
-  // v20: Split into isolated try/catch blocks so one failure doesn't cascade
-  if (isFirst) {
-
-  // ── BLOCK 1: CSS capture ──
-  try {
+  if (isFirst) { try {
     // Computed CSS (from accessible stylesheets)
     sharedCSS = await page.evaluate(() => {
       let css=''; for(const s of document.styleSheets){try{for(const r of s.cssRules)css+=r.cssText+'\n'}catch(e){}} return css;
@@ -584,10 +582,7 @@ async function capturePage(page, urlPath, isFirst) {
     } else {
       console.log(`     CSS: ${sharedCSS.length} chars`);
     }
-  } catch(cssErr) { console.log(`     ⚠ CSS capture error: ${cssErr.message?.slice(0,80)} — continuing`); }
 
-  // ── BLOCK 2: Asset discovery + downloads ──
-  try {
     // Collect asset URLs
     const assets = await page.evaluate(domain => {
       const imgs=new Set(), fonts=new Set(), vids=new Set();
@@ -772,10 +767,7 @@ async function capturePage(page, urlPath, isFirst) {
         console.log(`     → components/Model3D.tsx`);
       }
     }
-  } catch(assetErr) { console.log(`     ⚠ Asset download error: ${assetErr.message?.slice(0,80)} — continuing`); }
 
-  // ── BLOCK 3: Bundle analysis + CDN scripts + animations ──
-  try {
     // Bundle analysis
     console.log('     Analyzing bundles...');
     const bundle={lib:'',gsap:[],st:[],lenis:[],framer:[],eases:[],durs:[],delays:[]};
@@ -1119,10 +1111,6 @@ async function capturePage(page, urlPath, isFirst) {
       }
     }
 
-  } catch(bundleErr) { console.log(`     ⚠ Bundle analysis error: ${bundleErr.message?.slice(0,80)} — continuing`); }
-
-  // ── BLOCK 4: Video download from bundles ──
-  try {
     // Download videos — search JS BUNDLES for video paths (they're hardcoded in React components)
     const jsURLs2 = [...networkURLs].filter(u=>u.match(/\.js(\?|$)/i)&&/page|layout|app/i.test(u));
     const allVidPathsFromBundles = new Set();
@@ -1164,9 +1152,8 @@ async function capturePage(page, urlPath, isFirst) {
         }
       } catch(e) {}
     }
-  } catch(vidErr) { console.log(`     ⚠ Video download error: ${vidErr.message?.slice(0,80)} — continuing`); }
-
-  } // end isFirst
+  } catch(firstPageErr) { console.log(`     ⚠ First page analysis error: ${firstPageErr.message?.slice(0,80)} — continuing with capture`); }
+  }
 
   // ── Download new images on subsequent pages ──
   // v12: Download ALL new images found on this page (not just first page)

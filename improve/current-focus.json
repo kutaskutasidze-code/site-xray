@@ -5,10 +5,15 @@
       "version": "v20",
       "approach": "refactor: split first-page try/catch into 4 isolated blocks, add dl() retry + redirect limit",
       "result": "pentagram +5, morganlewis +1, stripe PERFECT, zero regressions on existing sites"
+    },
+    {
+      "attempt": 1,
+      "summary": "// v20: Robust download with retry on transient errors + redirect depth limit\nfunction dl(url, dest, timeout = 15000, _redirects = 0) {\n      if (_redirects > 5) return resolve(false); // v20: prevent infinite redirect loops\n        // v20: Retry once on transient network error (ECONNRESET, ETIMEDOUT, etc.)\n  // v20: Split into isolated try/catch blocks so one failure doesn't cascade",
+      "date": "2026-04-03T22:12:02.723Z"
     }
   ],
   "regressions_seen": [],
   "current_strategy": "universal",
-  "last_failure_date": null,
+  "last_failure_date": "2026-04-03T22:12:02.723Z",
   "last_failure_reason": null
 }
