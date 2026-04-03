@@ -73,13 +73,6 @@
       "attempted_score": 93,
       "prev_score": 93,
       "reason": "all_retries_exhausted",
-      "date": "2026-04-03T07:51:59.107Z"
-    },
-    {
-      "version": "v18",
-      "attempted_score": 93,
-      "prev_score": 93,
-      "reason": "all_retries_exhausted",
       "date": "2026-04-03T07:57:19.527Z"
     },
     {
@@ -207,6 +200,13 @@
       "prev_score": 93,
       "reason": "all_retries_exhausted",
       "date": "2026-04-03T09:33:25.462Z"
+    },
+    {
+      "version": "v19",
+      "attempted_score": 94,
+      "prev_score": 94,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T18:18:06.343Z"
     }
   ],
   "v18_learnings": [

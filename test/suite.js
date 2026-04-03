@@ -14,7 +14,7 @@
  * Sites that score 100% become regression tests (must stay 100%).
  * New harder sites rotate in from the queue.
  *
- * Usage: node test/suite.js [version]
+ * Usage: node test/suite.js [version] [--site domain.com]
  */
 
 const { execSync, spawnSync, execFile } = require('child_process');
@@ -41,6 +41,7 @@ const xrayFile = path.join(XRAY_DIR, `${version}-stable.js`);
 const sitesConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'sites.json'), 'utf-8'));
 const RESULTS_DIR = path.join(__dirname, 'results', version);
 const REPORT_FILE = path.join(__dirname, 'results', `${version}.json`);
+const SNAPSHOTS_DIR = path.join(__dirname, 'snapshots');
 
 function detectLatestVersion() {
   const files = fs.readdirSync(XRAY_DIR).filter(f => /^v\d+-stable\.js$/.test(f));
@@ -155,14 +156,20 @@ async function scoreLinks(cloneDir) {
   return { score, totalLinks, workingLinks, brokenLinks, externalLinks, broken, perfect: score === 100 && externalLinks === 0 };
 }
 
-async function scoreContent(page, originalPage, siteUrl) {
+async function scoreContent(page, originalPage, siteUrl, snapshotContentFile) {
   // Compare text content between original and clone
   let origText = '';
-  try {
-    await originalPage.goto(siteUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await originalPage.waitForTimeout(3000);
-    origText = await originalPage.evaluate(() => document.body?.innerText?.trim() || '');
-  } catch {}
+
+  // Fix 6: Use snapshot if available
+  if (snapshotContentFile && fs.existsSync(snapshotContentFile)) {
+    origText = fs.readFileSync(snapshotContentFile, 'utf-8');
+  } else {
+    try {
+      await originalPage.goto(siteUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await originalPage.waitForTimeout(3000);
+      origText = await originalPage.evaluate(() => document.body?.innerText?.trim() || '');
+    } catch {}
+  }
 
   const cloneText = await page.evaluate(() => document.body?.innerText?.trim() || '');
 
@@ -179,31 +186,48 @@ async function scoreContent(page, originalPage, siteUrl) {
   return { score, origWords: origWords.size, cloneWords: cloneWords.size, matched, perfect: score >= 95 };
 }
 
-async function scoreLayout(page, originalPage, siteUrl, resultsDir, hostname) {
+async function scoreLayout(page, originalPage, siteUrl, resultsDir, hostname, snapshotScreenshotFile) {
   // Pixel comparison: screenshot original vs clone
   const origShot = path.join(resultsDir, `${hostname}-original.png`);
   const cloneShot = path.join(resultsDir, `${hostname}-clone.png`);
 
-  try {
-    await originalPage.goto(siteUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    await originalPage.waitForTimeout(3000);
-    await originalPage.screenshot({ path: origShot, fullPage: false });
-  } catch {}
+  // Fix 6: Use snapshot screenshot if available
+  if (snapshotScreenshotFile && fs.existsSync(snapshotScreenshotFile)) {
+    fs.copyFileSync(snapshotScreenshotFile, origShot);
+  } else {
+    try {
+      await originalPage.goto(siteUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await originalPage.waitForTimeout(3000);
+      await originalPage.screenshot({ path: origShot, fullPage: false });
+    } catch {}
+  }
 
   await page.screenshot({ path: cloneShot, fullPage: false });
 
   // Basic structural comparison: count visible elements and compare
-  const origStructure = await originalPage.evaluate(() => {
-    let divs = 0, imgs = 0, texts = 0;
-    document.querySelectorAll('*').forEach(el => {
-      if (el.offsetWidth > 0 && el.offsetHeight > 0) {
-        divs++;
-        if (el.tagName === 'IMG') imgs++;
-        if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) texts++;
-      }
-    });
-    return { divs, imgs, texts };
-  }).catch(() => ({ divs: 0, imgs: 0, texts: 0 }));
+  let origStructure;
+  if (snapshotScreenshotFile && fs.existsSync(snapshotScreenshotFile)) {
+    // When using snapshot, get structure from structure.json
+    const snapshotStructureFile = path.join(path.dirname(snapshotScreenshotFile), 'structure.json');
+    if (fs.existsSync(snapshotStructureFile)) {
+      const structure = JSON.parse(fs.readFileSync(snapshotStructureFile, 'utf-8'));
+      origStructure = { divs: structure.visible || 0, imgs: structure.images || 0, texts: 0 };
+    } else {
+      origStructure = { divs: 0, imgs: 0, texts: 0 };
+    }
+  } else {
+    origStructure = await originalPage.evaluate(() => {
+      let divs = 0, imgs = 0, texts = 0;
+      document.querySelectorAll('*').forEach(el => {
+        if (el.offsetWidth > 0 && el.offsetHeight > 0) {
+          divs++;
+          if (el.tagName === 'IMG') imgs++;
+          if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) texts++;
+        }
+      });
+      return { divs, imgs, texts };
+    }).catch(() => ({ divs: 0, imgs: 0, texts: 0 }));
+  }
 
   const cloneStructure = await page.evaluate(() => {
     let divs = 0, imgs = 0, texts = 0;
@@ -642,6 +666,64 @@ ${suggestions.map(s => `- ${s}`).join('\n') || '- No specific suggestions — si
 // MAIN
 // ═══════════════════════════════════════
 
+
+// ═══════════════════════════════════════
+// FIX 6: Original site snapshots (daily cache)
+// ═══════════════════════════════════════
+
+async function ensureSnapshot(browser, siteUrl, hostname) {
+  const snapshotDir = path.join(SNAPSHOTS_DIR, hostname);
+  const screenshotFile = path.join(snapshotDir, 'screenshot.png');
+  const contentFile = path.join(snapshotDir, 'content.txt');
+  const structureFile = path.join(snapshotDir, 'structure.json');
+  const metaFile = path.join(snapshotDir, 'meta.json');
+
+  // Check if snapshot exists and is < 24h old
+  if (fs.existsSync(metaFile)) {
+    try {
+      const meta = JSON.parse(fs.readFileSync(metaFile, 'utf-8'));
+      const ageMs = Date.now() - new Date(meta.timestamp).getTime();
+      if (ageMs < 24 * 60 * 60 * 1000) {
+        return { screenshotFile, contentFile, structureFile, cached: true };
+      }
+    } catch {}
+  }
+
+  // Take new snapshot
+  fs.mkdirSync(snapshotDir, { recursive: true });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  try {
+    await page.goto(siteUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await new Promise(r => setTimeout(r, 4000));
+    await page.screenshot({ path: screenshotFile, fullPage: false });
+
+    const text = await page.evaluate(() => document.body?.innerText?.trim() || '');
+    fs.writeFileSync(contentFile, text);
+
+    const structure = await page.evaluate(() => {
+      const visible = el => el.offsetWidth > 0 && el.offsetHeight > 0;
+      const all = [...document.querySelectorAll('*')];
+      return {
+        total: all.length,
+        visible: all.filter(visible).length,
+        images: [...document.querySelectorAll('img')].filter(i => i.complete && i.naturalWidth > 0).length,
+        links: document.querySelectorAll('a[href]').length,
+        buttons: document.querySelectorAll('button,[role="button"]').length,
+        headings: document.querySelectorAll('h1,h2,h3').length,
+      };
+    }).catch(() => ({}));
+    fs.writeFileSync(structureFile, JSON.stringify(structure, null, 2));
+
+    fs.writeFileSync(metaFile, JSON.stringify({ timestamp: new Date().toISOString(), url: siteUrl }, null, 2));
+  } catch (e) {
+    // Snapshot failed — functions will fall back to live
+  } finally {
+    await page.close();
+  }
+
+  return { screenshotFile, contentFile, structureFile, cached: false };
+}
+
 async function scoreSite(browser, site, cloneDir, resultsDir) {
   const hostname = new URL(site.url).hostname.replace(/\./g, '-');
   const indexFile = path.join(cloneDir, 'index.html');
@@ -663,13 +745,17 @@ async function scoreSite(browser, site, cloneDir, resultsDir) {
     await clonePage.waitForTimeout(3000);
   } catch {}
 
+  // Fix 6: Ensure snapshot for deterministic comparison
+  const snapshot = await ensureSnapshot(browser, site.url, hostname);
+  if (!snapshot.cached) console.log('      Fresh snapshot taken for ' + hostname);
+
   // Run all scoring (parallel where possible)
   const metrics = {};
   metrics.images = await scoreImages(clonePage, '', cloneDir);
   metrics.css = await scoreCSS(clonePage);
   metrics.links = await scoreLinks(cloneDir);
-  metrics.content = await scoreContent(clonePage, origPage, site.url);
-  metrics.layout = await scoreLayout(clonePage, origPage, site.url, resultsDir, hostname);
+  metrics.content = await scoreContent(clonePage, origPage, site.url, snapshot.contentFile);
+  metrics.layout = await scoreLayout(clonePage, origPage, site.url, resultsDir, hostname, snapshot.screenshotFile);
   metrics.interactions = await scoreInteractions(clonePage);
   metrics.console = await scoreConsoleErrors(clonePage);
 
@@ -717,7 +803,22 @@ async function main() {
   fs.mkdirSync(RESULTS_DIR, { recursive: true });
 
   // Test both active AND mastered sites
-  const allSites = [...sitesConfig.active, ...sitesConfig.mastered];
+  let allSites = [...sitesConfig.active, ...sitesConfig.mastered];
+
+  // Fix 5: Single-site quick test mode
+  const singleSite = process.argv.find(a => a.startsWith('--site='))?.split('=')[1]
+    || (process.argv.indexOf('--site') > -1 ? process.argv[process.argv.indexOf('--site') + 1] : null);
+
+  if (singleSite) {
+    const match = allSites.find(s => s.url.includes(singleSite));
+    if (match) {
+      allSites = [match];
+      console.log('   Single-site mode: ' + match.url);
+    } else {
+      console.error(`Site not found: ${singleSite}. Available: ${allSites.map(s=>new URL(s.url).hostname).join(', ')}`);
+      process.exit(1);
+    }
+  }
 
   console.log(`\n🧪 Site X-Ray Test Suite v2 (Strict)`);
   console.log(`   Version: ${version}`);
@@ -885,6 +986,45 @@ ${analyses.map(a => `- \`${a.hostname}-original.png\` vs \`${a.hostname}-clone.p
     sites: results,
   };
   fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2));
+
+  // Fix 7: Update per-metric-per-site trend history
+  const trendFile = path.join(__dirname, 'results', 'trends.json');
+  let trends = {};
+  try { trends = JSON.parse(fs.readFileSync(trendFile, 'utf-8')); } catch {}
+
+  for (const result of results) {
+    const host = new URL(result.site).hostname;
+    if (!trends[host]) trends[host] = {};
+
+    const entry = { version, score: result.totalScore, date: new Date().toISOString() };
+    if (result.metrics) {
+      for (const [metric, data] of Object.entries(result.metrics)) {
+        entry[metric] = data.score;
+      }
+    }
+
+    if (!trends[host].history) trends[host].history = [];
+    trends[host].history.push(entry);
+    // Keep last 20 entries per site
+    trends[host].history = trends[host].history.slice(-20);
+
+    // Detect non-deterministic metrics (same version, different scores)
+    const lastTwo = trends[host].history.slice(-2);
+    if (lastTwo.length === 2 && lastTwo[0].version === lastTwo[1].version) {
+      const volatile = {};
+      for (const metric of Object.keys(lastTwo[0])) {
+        if (metric === 'version' || metric === 'score' || metric === 'date') continue;
+        const diff = Math.abs((lastTwo[0][metric] || 0) - (lastTwo[1][metric] || 0));
+        if (diff > 10) volatile[metric] = diff;
+      }
+      if (Object.keys(volatile).length > 0) {
+        trends[host].volatile_metrics = volatile;
+      }
+    }
+  }
+
+  fs.writeFileSync(trendFile, JSON.stringify(trends, null, 2));
+  console.log(`   Trends: ${trendFile}`);
 
   console.log(`\n═══════════════════════════════════════`);
   console.log(`   Version: ${version}`);
