@@ -62,5 +62,13 @@
     "date": "2026-04-03T14:16:59.032Z",
     "attempts": 1,
     "note": "Common stub files (favicon.ico, humans.txt, robots.txt), versioned CSS path mapping, broader nav detection, SVG sprite download, asset link stub creation. Cravath +6, roomshotels +3, pentagram +1, cuberto +1. Zero regressions."
+  },
+  {
+    "version": "v18",
+    "score": 94,
+    "prev_score": 93,
+    "diff": 1,
+    "date": "2026-04-03T14:41:44.801Z",
+    "attempts": 2
   }
 ]

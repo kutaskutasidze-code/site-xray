@@ -726,8 +726,19 @@ async function main() {
   const results = [];
   const browser = await chromium.launch({ headless: true });
 
-  // ── PIPELINE: clone → score → analyze per site, all sites in parallel ──
-  console.log('   ⚡ Pipeline: clone→score→analyze per site, all parallel...\n');
+  // ── PIPELINE: clone → score → analyze per site, with concurrency limit ──
+  const MAX_CONCURRENT = 3; // Limit parallel clones to avoid OOM on low-memory systems
+  let running = 0;
+  const waiting = [];
+  function acquireSlot() {
+    if (running < MAX_CONCURRENT) { running++; return Promise.resolve(); }
+    return new Promise(resolve => waiting.push(resolve));
+  }
+  function releaseSlot() {
+    running--;
+    if (waiting.length > 0) { running++; waiting.shift()(); }
+  }
+  console.log(`   ⚡ Pipeline: clone→score→analyze per site (max ${MAX_CONCURRENT} parallel)...\n`);
   const startTime = Date.now();
   const analyses = [];
 
@@ -737,16 +748,19 @@ async function main() {
     const isMastered = sitesConfig.mastered.some(m => m.url === site.url);
     const tag = isMastered ? '🔒' : '🔍';
 
-    // ── STAGE 1: CLONE ──
+    // ── STAGE 1: CLONE (with concurrency limit to prevent OOM) ──
+    await acquireSlot();
     try {
       if (fs.existsSync(cloneDir)) fs.rmSync(cloneDir, { recursive: true });
       await execAsync(`node ${xrayFile} ${site.url} ${cloneDir} ${site.pages}`, { timeout: 600000 });
       console.log(`   ${tag} ${hostname} cloned — scoring...`);
     } catch (e) {
+      releaseSlot();
       console.log(`   ${tag} ${hostname} clone failed: ${e.message?.slice(0, 50)}`);
       results.push({ site: site.url, category: site.category, totalScore: 0, error: e.message?.slice(0, 50), metrics: {}, perfect: false });
       return;
     }
+    releaseSlot();
 
     // ── STAGE 2: SCORE (immediately after clone) ──
     const score = await scoreSite(browser, site, cloneDir, RESULTS_DIR);

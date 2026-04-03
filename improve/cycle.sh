@@ -328,6 +328,14 @@ VERSION_EOF
     if timeout "$MAX_CYCLE_TIME" bash -c "cat '$PROMPT_FILE' | claude -p --allowedTools 'Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch' --max-turns 50 > 'improve/cycle-v${NEXT_V}.log' 2>&1"; then
       echo "   Claude Code completed."
     else
+      # Check if it was a rate limit (not a timeout)
+      if grep -qi "rate limit\|hit your limit\|resets.*UTC\|too many requests\|429" "improve/cycle-v${NEXT_V}.log" 2>/dev/null; then
+        echo "   ⚠ Claude Code hit rate limit. Aborting cycle — will retry next cron window."
+        FAILURE_REASONS="Claude Code rate limited. Waiting for limit reset."
+        send_notification "⚠️ X-Ray cycle: Claude rate-limited. Will retry next cron window (6h)."
+        # Break out of retry loop entirely — no point retrying rate limits
+        break
+      fi
       echo "   ⚠ Claude Code timed out or errored (attempt $ATTEMPT)"
       FAILURE_REASONS="Claude Code timed out or crashed. Try simpler, more focused fixes."
       continue

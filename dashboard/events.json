@@ -12,5 +12,2483 @@
     "system": "lead-machine",
     "message": "Pipeline (swap): ALL OK — 0.0m",
     "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:04:34.323Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:04:34.447Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:09:54.539Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:09:54.685Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:15:14.756Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:15:14.858Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:20:34.976Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:20:35.108Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:25:55.191Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:25:55.290Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:31:15.379Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:31:15.468Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:36:36.042Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:36:36.142Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:41:56.250Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:41:56.311Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:47:16.435Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:47:16.524Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:52:36.659Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:52:36.754Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T18:57:56.915Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T18:57:57.005Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:03:17.120Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:03:17.213Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:08:37.320Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:08:37.402Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:13:57.519Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:13:57.609Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:19:18.085Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:19:18.178Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:24:38.297Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:24:38.430Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:29:58.552Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:29:58.645Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:35:18.765Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:35:18.857Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:40:38.954Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:40:39.040Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:45:59.159Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:45:59.285Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:51:19.388Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:51:19.479Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T19:56:39.677Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T19:56:39.757Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:01:59.875Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:01:59.958Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:07:20.115Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:07:20.215Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:12:40.300Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:12:40.383Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:18:00.497Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:18:00.608Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:23:20.733Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:23:20.828Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:28:40.917Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:28:41.007Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:34:01.089Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:34:01.167Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:39:21.289Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:39:21.378Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:44:41.469Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:44:41.561Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:50:01.661Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:50:01.759Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T20:55:21.862Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T20:55:21.968Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:00:42.123Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:00:42.210Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:06:02.322Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:06:02.412Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:11:22.554Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:11:22.643Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:16:42.733Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:16:42.822Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:22:02.942Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:22:03.016Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:27:23.127Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:27:23.212Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:32:43.322Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:32:43.411Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:38:03.524Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:38:03.603Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:43:23.707Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:43:23.822Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:48:43.909Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:48:44.022Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:54:04.118Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:54:04.534Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T21:59:24.341Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T21:59:24.430Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:04:44.566Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:04:44.670Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:10:04.751Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:10:04.845Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:15:25.937Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:15:26.027Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:20:46.137Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:20:46.228Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:26:06.789Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:26:06.876Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:31:26.984Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:31:27.066Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:36:47.152Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:36:47.236Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:42:07.333Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:42:07.400Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:47:27.506Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:47:27.579Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:52:47.675Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:52:47.832Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T22:58:07.859Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T22:58:07.936Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:03:28.428Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:03:28.521Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:08:48.607Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:08:48.697Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:14:08.801Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:14:08.896Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:19:28.985Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:19:29.080Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:24:49.176Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:24:49.292Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:30:09.352Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:30:09.446Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:35:29.561Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:35:29.645Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:40:49.742Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:40:49.828Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:46:09.936Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:46:10.025Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:51:30.113Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:51:30.199Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-02T23:56:50.296Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-02T23:56:50.394Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:02:10.474Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:02:10.565Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:07:30.678Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:07:30.767Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:12:50.873Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:12:50.960Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:18:11.071Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:18:11.159Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:23:31.291Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:23:31.377Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:28:51.483Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:28:51.576Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:34:11.705Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:34:11.802Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:39:31.878Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:39:31.966Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:44:52.065Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:44:52.163Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:50:12.270Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:50:12.364Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T00:55:32.460Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T00:55:32.546Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:00:52.646Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:00:52.725Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:06:12.851Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:06:12.949Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:11:33.031Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:11:33.114Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:16:53.222Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:16:53.294Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:22:13.421Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:22:13.510Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:27:33.616Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:27:33.708Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:32:53.792Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:32:53.880Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:38:13.971Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:38:14.056Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:43:34.158Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:43:34.254Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:48:54.338Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:48:54.428Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:54:14.572Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:54:14.666Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T01:59:34.754Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T01:59:34.841Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:04:54.959Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:04:55.074Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:10:15.156Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:10:15.262Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:15:35.345Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:15:35.461Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:20:55.567Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:20:55.660Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:26:15.831Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:26:15.937Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:31:36.074Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:31:36.232Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:36:56.340Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:36:56.480Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:42:16.738Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:42:16.863Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:47:36.974Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:47:37.082Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:52:57.337Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:52:57.459Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T02:58:17.760Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T02:58:17.883Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:00:02.402Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SCRAPE: FAILED (3600s)",
+    "status": "error"
+  },
+  {
+    "timestamp": "2026-04-03T03:00:02.404Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (full): HAS FAILURES — 60.0m",
+    "status": "warning"
+  },
+  {
+    "timestamp": "2026-04-03T03:03:38.007Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:03:38.091Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:08:58.206Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:08:58.299Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:14:18.446Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:14:18.536Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:19:38.653Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:19:38.745Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:24:58.846Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:24:58.946Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:30:19.035Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:30:19.128Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:35:39.216Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:35:39.391Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:40:59.410Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:40:59.501Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:46:19.615Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:46:19.770Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:51:39.802Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:51:39.891Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T03:57:00.014Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T03:57:00.128Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:02:20.194Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:02:20.277Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:07:40.416Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:07:40.509Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:13:00.605Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:13:00.697Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:18:20.814Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:18:20.911Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:23:40.989Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:23:41.084Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:29:01.178Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:29:01.245Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:34:21.409Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:34:21.508Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:39:41.630Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:39:41.730Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:45:01.827Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:45:01.928Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:50:22.037Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:50:22.150Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T04:55:42.266Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T04:55:42.373Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:01:02.463Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:01:02.571Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:06:22.690Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:06:22.780Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:11:42.891Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:11:42.980Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:17:03.117Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:17:03.260Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:22:23.310Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:22:23.388Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:27:43.488Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:27:43.597Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:33:03.681Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:33:03.780Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:38:23.860Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:38:23.953Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:43:44.074Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:43:44.248Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:49:04.281Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:49:04.390Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:54:24.487Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:54:24.582Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T05:59:44.713Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T05:59:44.839Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:05:04.945Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:05:05.127Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:10:25.151Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:10:25.241Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:15:45.357Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:15:45.473Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:21:05.548Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:21:05.764Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:26:25.719Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:26:25.810Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:31:46.009Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:31:46.171Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:37:06.210Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:37:06.370Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:42:26.409Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:42:26.502Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:47:46.591Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:47:46.688Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:53:06.791Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:53:06.907Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T06:58:26.984Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T06:58:27.090Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:03:47.162Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:03:47.260Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:09:07.361Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:09:07.504Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:14:27.906Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:14:28.015Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:19:48.124Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:19:48.231Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:25:08.306Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:25:08.391Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:30:28.494Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:30:28.576Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:35:48.698Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:35:48.759Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:41:08.900Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:41:08.987Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:46:29.100Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:46:29.210Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:51:49.302Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:51:49.365Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T07:57:09.502Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T07:57:09.612Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:02:29.712Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:02:29.837Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:07:49.904Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:07:49.998Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:13:10.179Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:13:10.282Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:18:30.410Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:18:30.520Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:23:50.617Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:23:50.827Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:29:10.818Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:29:10.910Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:34:31.069Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:34:31.176Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:39:51.304Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:39:51.399Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:45:11.512Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:45:11.603Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:50:31.705Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:50:31.799Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T08:55:51.937Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T08:55:52.054Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:01:12.148Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:01:12.254Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:06:32.411Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:06:32.504Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:11:52.617Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:11:52.712Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:17:13.024Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:17:13.093Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:22:33.263Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:22:33.487Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:27:53.441Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:27:53.571Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T09:33:13.651Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T09:33:13.754Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T13:32:23.279Z",
+    "type": "heal",
+    "system": "xray",
+    "message": "Auto-healing: Timeout (attempt 1)",
+    "status": "healing"
+  },
+  {
+    "timestamp": "2026-04-03T13:32:23.381Z",
+    "type": "fix",
+    "system": "xray",
+    "message": "Fixed: Killed stuck browser processes and cleared lock",
+    "status": "success"
   }
 ]
