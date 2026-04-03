@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════
-# Site X-Ray Self-Improvement Cycle v2
+# Site X-Ray Self-Improvement Cycle v3
 #
 # Safety: PID lock, timeout, disk cleanup, health check
 # Quality: per-site regression gate, retry with learning, knowledge base
@@ -204,13 +204,39 @@ save_knowledge() {
         log_tail: log.slice(-1000)
       });
     } else {
-      kb.failed_approaches.push({
+      // Enrich failure with diff summary and per-site regressions
+      const entry = {
         version: '$version',
         attempted_score: $score,
         prev_score: $prev_score,
         reason: '$reason',
         date: new Date().toISOString()
-      });
+      };
+      // Add diff summary if available
+      const diffFile = 'improve/last-attempt.diff';
+      if (fs.existsSync(diffFile)) {
+        const diff = fs.readFileSync(diffFile, 'utf-8');
+        entry.diff_lines_added = (diff.match(/^>/gm) || []).length;
+        entry.diff_lines_removed = (diff.match(/^</gm) || []).length;
+        const summaryLines = diff.split('\\n')
+          .filter(l => l.startsWith('>'))
+          .filter(l => /\/\/\s|function\s|const\s|let\s|class\s|async\s/.test(l))
+          .slice(0, 8)
+          .map(l => l.replace(/^>\s*/, '').trim());
+        if (summaryLines.length) entry.diff_summary = summaryLines.join('; ');
+      }
+      // Add per-site score comparison if available
+      const scoresFile = 'improve/last-attempt-scores.json';
+      if (fs.existsSync(scoresFile)) {
+        try {
+          const scores = JSON.parse(fs.readFileSync(scoresFile, 'utf-8'));
+          const regs = scores.filter(s => s.diff < -3).map(s => s.site + ': ' + s.old + '→' + s.new + ' (' + s.diff + ')');
+          if (regs.length) entry.regressions = regs;
+          const imps = scores.filter(s => s.diff > 3).map(s => s.site + ': ' + s.old + '→' + s.new + ' (+' + s.diff + ')');
+          if (imps.length) entry.improvements = imps;
+        } catch(e) {}
+      }
+      kb.failed_approaches.push(entry);
     }
 
     // Keep last 20 entries of each type
@@ -227,7 +253,7 @@ save_knowledge() {
 
 echo ""
 echo "═══════════════════════════════════════"
-echo "  Site X-Ray Self-Improvement Cycle v2"
+echo "  Site X-Ray Self-Improvement Cycle v3"
 echo "  $(date '+%Y-%m-%d %H:%M:%S')"
 echo "═══════════════════════════════════════"
 echo ""
@@ -240,6 +266,16 @@ CURRENT_V=$(ls v*-stable.js 2>/dev/null | sed 's/v\([0-9]*\)-.*/\1/' | sort -n |
 NEXT_V=$((CURRENT_V + 1))
 echo "  Current: v${CURRENT_V} → Target: v${NEXT_V}"
 echo ""
+
+# ── Cross-run persistent context ──
+FOCUS_FILE="$XRAY_DIR/improve/current-focus.json"
+if [ ! -f "$FOCUS_FILE" ]; then
+  echo '{"consecutive_failures":0,"last_approaches":[],"regressions_seen":[],"current_strategy":"universal"}' > "$FOCUS_FILE"
+  echo "   Created fresh cross-run context"
+else
+  CONSEC=$(node -e "const f=JSON.parse(require('fs').readFileSync('$FOCUS_FILE','utf-8'));console.log(f.consecutive_failures||0)" 2>/dev/null || echo "?")
+  echo "   Cross-run context loaded (consecutive failures: ${CONSEC})"
+fi
 
 # ── Step 1: Test current version ──
 echo "📊 Step 1: Testing v${CURRENT_V}..."
@@ -265,11 +301,35 @@ while [ $ATTEMPT -lt $MAX_RETRIES ] && [ "$SUCCESS" = false ]; do
   PROMPT_FILE=$(mktemp /tmp/xray-prompt-XXXXX.txt)
   trap 'rm -f "$LOCK_FILE" "$PROMPT_FILE"' EXIT
 
+  # Read cross-run context for prompt injection
+  FOCUS_CONTEXT=""
+  if [ -f "$FOCUS_FILE" ]; then
+    FOCUS_CONTEXT=$(cat "$FOCUS_FILE")
+  fi
+
   cat > "$PROMPT_FILE" <<PROMPT_EOF
 You are improving site-xray, a web cloning tool.
 
 Current version: v${CURRENT_V} (score: ${CURRENT_SCORE}/100)
 PROMPT_EOF
+
+  # Inject cross-run context if failures exist
+  CONSEC_FAILURES=$(node -e "const f=JSON.parse(require('fs').readFileSync('$FOCUS_FILE','utf-8'));console.log(f.consecutive_failures||0)" 2>/dev/null || echo "0")
+  if [ "$CONSEC_FAILURES" -gt 0 ] 2>/dev/null; then
+    cat >> "$PROMPT_FILE" <<FOCUS_EOF
+
+## Cross-Run Context (CRITICAL -- read this first)
+This system has FAILED ${CONSEC_FAILURES} consecutive improvement cycles across multiple cron runs.
+Full context of what was tried and what regressed:
+
+${FOCUS_CONTEXT}
+
+If consecutive_failures > 0, previous attempts are listed with what code they changed.
+DO NOT repeat approaches that already failed. Try something fundamentally different.
+If a site appears in regressions_seen multiple times, do NOT modify code that affects it.
+Focus on SAFE, incremental changes that cannot regress existing high-scoring sites.
+FOCUS_EOF
+  fi
 
   if [ $ATTEMPT -gt 1 ]; then
     cat >> "$PROMPT_FILE" <<RETRY_EOF
@@ -357,6 +417,13 @@ VERSION_EOF
   fi
   echo "   ✓ v${NEXT_V}-stable.js created ($(wc -l < v${NEXT_V}-stable.js | tr -d ' ') lines)"
 
+  # ── Save what Claude changed (for learning from failures) ──
+  diff "v${CURRENT_V}-stable.js" "v${NEXT_V}-stable.js" > "improve/last-attempt.diff" 2>/dev/null || true
+  DIFF_LINES_ADDED=$(grep -c '^>' "improve/last-attempt.diff" 2>/dev/null || echo 0)
+  DIFF_LINES_REMOVED=$(grep -c '^<' "improve/last-attempt.diff" 2>/dev/null || echo 0)
+  DIFF_SUMMARY=$(grep '^>' "improve/last-attempt.diff" | grep -E '// |function |const ' | head -5 | sed 's/^> //' | tr '\n' '; ' || echo "no summary")
+  echo "   Diff captured: +${DIFF_LINES_ADDED}/-${DIFF_LINES_REMOVED} lines"
+
   # ── Step 4: Test new version ──
   echo "📊 Step 4: Testing v${NEXT_V}..."
   if timeout "$MAX_CYCLE_TIME" node test/suite.js v${NEXT_V}; then
@@ -371,6 +438,18 @@ VERSION_EOF
   NEW_SCORE=$(node -e "const r=require('./test/results/v${NEXT_V}.json');console.log(r.averageScore)")
   echo "   New score: ${NEW_SCORE}/100 (was ${CURRENT_SCORE}/100)"
 
+  # ── Save per-site score comparison (before accept/reject decision) ──
+  node -e "
+    const fs=require('fs');
+    const oldR=JSON.parse(fs.readFileSync('test/results/v${CURRENT_V}.json','utf-8'));
+    const newR=JSON.parse(fs.readFileSync('test/results/v${NEXT_V}.json','utf-8'));
+    const comparison=oldR.sites.map(o=>{
+      const n=newR.sites.find(s=>s.site===o.site);
+      return {site:o.site, old:o.totalScore, new:n?.totalScore||0, diff:(n?.totalScore||0)-o.totalScore};
+    }).sort((a,b)=>a.diff-b.diff);
+    fs.writeFileSync('improve/last-attempt-scores.json',JSON.stringify(comparison,null,2));
+  " 2>/dev/null || true
+
   # ── Step 5: Per-site regression check ──
   echo ""
   echo "🔍 Step 5: Per-site regression check..."
@@ -383,12 +462,44 @@ VERSION_EOF
       echo "   ❌ Overall score dropped: ${NEW_SCORE} < ${CURRENT_SCORE} (attempt $ATTEMPT)"
       FAILURE_REASONS="Overall score dropped from ${CURRENT_SCORE} to ${NEW_SCORE}. Fixes may have hurt more sites than they helped."
       save_knowledge "v${NEXT_V}" "failed" "$NEW_SCORE" "$CURRENT_SCORE" "score_dropped"
+      # Update cross-run context with failure details
+      node -e "
+        const fs=require('fs');
+        const f=JSON.parse(fs.readFileSync('$FOCUS_FILE','utf-8'));
+        f.consecutive_failures++;
+        const diffSum=fs.existsSync('improve/last-attempt.diff') ?
+          require('child_process').execSync('grep \"^>\" improve/last-attempt.diff | grep -E \"// |function |const \" | head -5 | sed \"s/^> //\"', {encoding:'utf-8'}).trim() : '';
+        if(diffSum) f.last_approaches.push({attempt:f.consecutive_failures, summary:diffSum, date:new Date().toISOString()});
+        f.last_approaches=f.last_approaches.slice(-10);
+        const scores=fs.existsSync('improve/last-attempt-scores.json')?JSON.parse(fs.readFileSync('improve/last-attempt-scores.json','utf-8')):[];
+        const regs=scores.filter(s=>s.diff<-3).map(s=>s.site+': '+s.old+'->'+s.new);
+        if(regs.length) f.regressions_seen.push(...regs);
+        f.regressions_seen=[...new Set(f.regressions_seen)].slice(-10);
+        f.last_failure_date=new Date().toISOString();
+        fs.writeFileSync('$FOCUS_FILE',JSON.stringify(f,null,2));
+      " 2>/dev/null || true
       rm -f "v${NEXT_V}-stable.js"
     fi
   else
     echo "   ❌ Per-site regression detected (attempt $ATTEMPT)"
     FAILURE_REASONS="One or more sites regressed by more than 5 points. The fix helped some sites but broke others."
     save_knowledge "v${NEXT_V}" "failed" "$NEW_SCORE" "$CURRENT_SCORE" "per_site_regression"
+    # Update cross-run context with failure details
+    node -e "
+      const fs=require('fs');
+      const f=JSON.parse(fs.readFileSync('$FOCUS_FILE','utf-8'));
+      f.consecutive_failures++;
+      const diffSum=fs.existsSync('improve/last-attempt.diff') ?
+        require('child_process').execSync('grep \"^>\" improve/last-attempt.diff | grep -E \"// |function |const \" | head -5 | sed \"s/^> //\"', {encoding:'utf-8'}).trim() : '';
+      if(diffSum) f.last_approaches.push({attempt:f.consecutive_failures, summary:diffSum, date:new Date().toISOString()});
+      f.last_approaches=f.last_approaches.slice(-10);
+      const scores=fs.existsSync('improve/last-attempt-scores.json')?JSON.parse(fs.readFileSync('improve/last-attempt-scores.json','utf-8')):[];
+      const regs=scores.filter(s=>s.diff<-3).map(s=>s.site+': '+s.old+'->'+s.new);
+      if(regs.length) f.regressions_seen.push(...regs);
+      f.regressions_seen=[...new Set(f.regressions_seen)].slice(-10);
+      f.last_failure_date=new Date().toISOString();
+      fs.writeFileSync('$FOCUS_FILE',JSON.stringify(f,null,2));
+    " 2>/dev/null || true
     rm -f "v${NEXT_V}-stable.js"
   fi
 done
@@ -410,6 +521,20 @@ if [ "$SUCCESS" = true ]; then
 
   # Save knowledge
   save_knowledge "v${NEXT_V}" "success" "$NEW_SCORE" "$CURRENT_SCORE"
+
+  # Reset cross-run context on success
+  node -e "
+    const fs=require('fs');
+    fs.writeFileSync('$FOCUS_FILE',JSON.stringify({
+      consecutive_failures:0,
+      last_approaches:[],
+      regressions_seen:[],
+      current_strategy:'universal',
+      last_success_date:new Date().toISOString(),
+      last_success_version:'v${NEXT_V}',
+      last_success_score:${NEW_SCORE}
+    },null,2));
+  " 2>/dev/null || true
 
   # Git commit + push to GitHub
   git add -A
@@ -435,6 +560,17 @@ else
   echo "═══════════════════════════════════════"
 
   save_knowledge "v${NEXT_V}" "failed" "${CURRENT_SCORE}" "${CURRENT_SCORE}" "all_retries_exhausted"
+
+  # Update cross-run context for total failure (if not already updated per-attempt)
+  node -e "
+    const fs=require('fs');
+    const f=JSON.parse(fs.readFileSync('$FOCUS_FILE','utf-8'));
+    // Only increment if inner loop didn't already (e.g. Claude never created the file)
+    if(f.consecutive_failures < 1) f.consecutive_failures = 1;
+    f.last_failure_date=new Date().toISOString();
+    f.last_failure_reason='${FAILURE_REASONS}'.slice(0,200);
+    fs.writeFileSync('$FOCUS_FILE',JSON.stringify(f,null,2));
+  " 2>/dev/null || true
 
   # ── Plateau detection (only count entries with real scores) ──
   PLATEAU=$(node -e "

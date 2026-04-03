@@ -1,0 +1,8 @@
+{
+  "consecutive_failures": 19,
+  "last_approaches": [],
+  "regressions_seen": [],
+  "current_strategy": "universal",
+  "last_failure_date": "2026-04-03T09:33:25.462Z",
+  "last_failure_reason": "20 consecutive cycles failed with reason all_retries_exhausted but no diff detail was captured (pre-v3 logging). All approaches unknown."
+}
