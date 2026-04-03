@@ -288,6 +288,38 @@ CURRENT_SCORE=$(node -e "const r=require('./test/results/v${CURRENT_V}.json');co
 echo "   Current score: ${CURRENT_SCORE}/100"
 echo ""
 
+# ── Auto-select strategy based on score + failure count ──
+STRATEGY=$(node -e "
+  const fs=require('fs');
+  const focus=JSON.parse(fs.readFileSync('improve/current-focus.json','utf-8'));
+  const score=${CURRENT_SCORE};
+  const fails=focus.consecutive_failures||0;
+  if(fails>=10) console.log('refactor');
+  else if(score>=93 && fails<10) console.log('metric-focus');
+  else if(score>=90) console.log('per-site');
+  else console.log('universal');
+" 2>/dev/null || echo "universal")
+
+CONSEC_FOR_LOG=$(node -e "const f=JSON.parse(require('fs').readFileSync('improve/current-focus.json','utf-8'));console.log(f.consecutive_failures||0)" 2>/dev/null || echo 0)
+echo "   Strategy: ${STRATEGY} (score: ${CURRENT_SCORE}, failures: ${CONSEC_FOR_LOG})"
+
+# Save strategy to focus file
+node -e "const fs=require('fs');const f=JSON.parse(fs.readFileSync('improve/current-focus.json','utf-8'));f.current_strategy='${STRATEGY}';fs.writeFileSync('improve/current-focus.json',JSON.stringify(f,null,2));" 2>/dev/null
+
+# Adjust max-turns based on strategy
+case "$STRATEGY" in
+  universal) MAX_TURNS=50;;
+  per-site) MAX_TURNS=80;;
+  metric-focus) MAX_TURNS=70;;
+  refactor) MAX_TURNS=30;;
+  *) MAX_TURNS=50;;
+esac
+echo "   Max turns: ${MAX_TURNS}"
+
+# Generate focused improvement brief
+node improve/generate-brief.js "$XRAY_DIR" "$CURRENT_V" "$STRATEGY" 2>/dev/null
+echo ""
+
 # ── Step 2: Improvement loop (with retries) ──
 ATTEMPT=0
 SUCCESS=false
@@ -343,49 +375,48 @@ Read improve/knowledge.json for past failures to avoid.
 RETRY_EOF
   fi
 
-  cat >> "$PROMPT_FILE" <<'STATIC_EOF'
-
-The test suite already ran a full parallel pipeline: clone → score → deep analysis for ALL sites.
-It produced per-site analysis reports and a cross-site synthesis. Your job is to READ these, THINK, then IMPLEMENT.
-
-## Step 1: READ (do all of these first, before any code changes)
-- Read `improve/knowledge.json` FIRST — see what worked and what FAILED in past cycles. Do NOT repeat failed approaches.
-STATIC_EOF
-
   cat >> "$PROMPT_FILE" <<VERSION_EOF
-- Read \`test/results/v${CURRENT_V}/synthesis.md\` — the cross-site pattern analysis
-- Read the individual \`*-analysis.md\` files for the 3 WORST scoring sites
-- Read the screenshot PNGs AND diff PNGs for those sites (you can see images) — visually compare original vs clone
-- Read \`improve/history.json\` — see what was tried before
-- Read \`v${CURRENT_V}-stable.js\` — understand current implementation
+
+Strategy for this cycle: **${STRATEGY}**
+
+## Step 1: READ THE BRIEF
+Read \`improve/brief.md\` — it contains everything pre-digested:
+- Current scores per site and per metric
+- What strategy to use and what to focus on
+- Last failed approaches (DO NOT repeat them)
+- Sites that regressed in past attempts
+- Recent techniques that worked
+- Volatile metrics to ignore
+
+Then read \`v${CURRENT_V}-stable.js\` — the code to improve.
+Then read \`improve/CLAUDE.md\` for rules.
+That's it. Do NOT spend turns reading synthesis.md, analysis files, or history — the brief already has everything.
 
 ## Step 2: THINK (use structured reasoning, do NOT skip)
 Before writing ANY code, reason through:
-a) What are the top 3 failure CATEGORIES across sites? (from synthesis.md)
-b) For each category: what is the ROOT CAUSE? (from per-site analyses)
-c) What UNIVERSAL fix would address each root cause?
-d) Will each fix help 3+ sites or just 1? (only implement if 3+)
-e) Could any fix REGRESS existing sites? How to prevent?
+a) Based on the brief's strategy (${STRATEGY}), what is the SPECIFIC focus?
+b) What are the root causes of the lowest scores?
+c) What 2-4 targeted fixes address these root causes?
+d) Could any fix REGRESS existing sites? How to prevent?
 Write your reasoning out before proceeding.
 
 ## Step 3: IMPLEMENT
 - Copy v${CURRENT_V}-stable.js to v${NEXT_V}-stable.js
-- Implement the 3-5 most universal fixes (ranked by cross-site impact from synthesis)
+- Implement 2-4 targeted fixes based on the strategy
 - Each fix: try/catch wrapped, clearly commented
 - Update version strings to v${NEXT_V}
 
 ## Step 4: VERIFY
 - Run: node v${NEXT_V}-stable.js <worst-site-url> /tmp/test-v${NEXT_V} 3
-- Read the clone screenshots — does it look right?
+- Quick single-site test: node test/suite.js v${NEXT_V} --site <hostname>
 - Check no regressions on a previously-good site too
 
 Do NOT modify v${CURRENT_V}-stable.js — only create v${NEXT_V}-stable.js.
-Read improve/CLAUDE.md for detailed rules.
 VERSION_EOF
 
   if [ "$AUTO" = true ]; then
     # Run with timeout protection — pipe prompt file to claude
-    if timeout "$MAX_CYCLE_TIME" bash -c "cat '$PROMPT_FILE' | claude -p --allowedTools 'Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch' --max-turns 50 > 'improve/cycle-v${NEXT_V}.log' 2>&1"; then
+    if timeout "$MAX_CYCLE_TIME" bash -c "cat '$PROMPT_FILE' | claude -p --allowedTools 'Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch' --max-turns ${MAX_TURNS} > 'improve/cycle-v${NEXT_V}.log' 2>&1"; then
       echo "   Claude Code completed."
     else
       # Check if it was a rate limit (not a timeout)
@@ -538,7 +569,7 @@ if [ "$SUCCESS" = true ]; then
 
   # Git commit + push to GitHub
   git add -A
-  git commit -m "v${NEXT_V}: auto-improved (score: ${CURRENT_SCORE}→${NEW_SCORE}, +${DIFF}, attempts: ${ATTEMPT})"
+  git commit -m "v${NEXT_V}: auto-improved (score: ${CURRENT_SCORE}→${NEW_SCORE}, +${DIFF}, strategy: ${STRATEGY}, attempts: ${ATTEMPT})"
   GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git push origin main 2>/dev/null || echo "   ⚠ Git push failed (non-critical)"
 
   echo ""
