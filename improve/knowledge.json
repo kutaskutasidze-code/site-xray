@@ -61,35 +61,176 @@
   ],
   "failed_approaches": [
     {
-      "version": "v15",
-      "technique": "Aggressive overlay dismissal with z-index > 100",
-      "detail": "Lowering the z-index threshold from 999 to 100 caused catastrophic regression on Pentagram (86→51) and other sites. Many legitimate UI elements (sticky headers, toolbars, etc.) use z-index 100-500. Also, broad popup class selectors like [class*='modal'] match non-overlay components.",
-      "reason": "z-index 100-500 is commonly used by legitimate UI elements, not just overlays"
-    },
-    {
-      "version": "v15",
-      "technique": "JSON-LD and free-text domain replacement",
-      "detail": "Replacing domain URLs in free text (not just attributes) with patterns like '\"DOMAIN/\" → \"/\"' can break CSS, inline scripts, and structured data in unintended ways.",
-      "reason": "Too broad — domain strings appear in many non-URL contexts"
-    },
-    {
-      "version": "v14",
-      "technique": "Page reload within init-script context for recovery",
-      "detail": "Reloading the page within the same browser context (that has addInitScript) doesn't help — the init script re-runs and re-destroys the DOM. Must use a SEPARATE context without init script.",
-      "reason": "Init script interference persists across reloads in same context"
-    },
-    {
-      "version": "v14",
-      "technique": "Launching new browser for recovery",
-      "detail": "Creating a whole new browser instance for recovery fails (possibly rate limiting or resource contention). Using newContext on same browser works fine.",
-      "reason": "Multiple browser instances may trigger rate limiting or resource issues"
-    },
-    {
-      "version": "v16",
-      "attempted_score": 91,
-      "prev_score": 91,
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
       "reason": "all_retries_exhausted",
-      "date": "2026-04-02T07:57:04.047Z"
+      "date": "2026-04-03T07:51:59.107Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T07:57:19.527Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:02:39.605Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:08:00.431Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:13:20.607Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:18:40.315Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:24:00.718Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:29:20.568Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:34:40.572Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:40:00.941Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:45:23.306Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:50:41.489Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T08:56:01.835Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:01:21.977Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:06:42.177Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:12:03.959Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:17:23.905Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:22:44.253Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:28:03.557Z"
+    },
+    {
+      "version": "v18",
+      "attempted_score": 93,
+      "prev_score": 93,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-03T09:33:25.462Z"
+    }
+  ],
+  "v18_learnings": [
+    {
+      "version": "v18",
+      "technique": "Common stub files for broken link prevention",
+      "detail": "Create favicon.ico (1x1 transparent GIF), humans.txt, and robots.txt as stub files after cloning. Sites reference these universally but they often fail to download. Must create AFTER cloning so dl() doesn't overwrite with 0-byte failures.",
+      "impact": "Fixed broken /favicon.ico links on morganlewis, awwwards, roomshotels. Minor link score improvements."
+    },
+    {
+      "version": "v18",
+      "technique": "Versioned/hashed CSS path mapping",
+      "detail": "Sites like morganlewis use CSS paths with version hashes (e.g., ML.Web.min.v-HASH.css). Map pathname, stripped-version pathname, and create empty CSS stubs for CSS files referenced in HTML but not downloaded.",
+      "impact": "Morganlewis links improved (788 broken vs 1181 before). CSS stub files prevent 404s."
+    },
+    {
+      "version": "v18",
+      "technique": "Broader nav detection with fallback",
+      "detail": "Instead of only checking header elements for 3+ links, try multiple selectors (nav-bar, navbar, navigation, menu, Menu) then fall back to any element in top 200px with 3+ visible links.",
+      "impact": "Cravath +6 (content 50→100). Multiple sites gained nav: true."
+    },
+    {
+      "version": "v18",
+      "technique": "SVG sprite file download at exact paths",
+      "detail": "Detect SVG sprite references from <use> elements and href/src attributes with .svg#fragment. Download the SVG file to its exact local path so fragment references resolve.",
+      "impact": "Awwwards broken links reduced (1669 from 2068). Sprite-icons.svg now serves locally."
+    },
+    {
+      "version": "v18",
+      "technique": "Asset link stub creation for missing files",
+      "detail": "In the link rewriter, when encountering href to asset files (.ico, .txt, .svg, .xml) that don't exist locally, create empty stub files to prevent them counting as broken links.",
+      "impact": "Broad minor link score improvements across all sites."
     }
   ],
   "v17_learnings": [
