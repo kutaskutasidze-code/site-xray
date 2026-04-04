@@ -91,6 +91,14 @@
       "diff": 4,
       "date": "2026-04-04T09:09:32.584Z",
       "log_tail": "All 6 background tasks are now complete. v21 is fully committed and verified. Nothing remaining.\n"
+    },
+    {
+      "version": "v22",
+      "score": 94,
+      "prev_score": 93,
+      "diff": 1,
+      "date": "2026-04-04T15:42:43.363Z",
+      "log_tail": "Full suite already captured — v22 averaged 94/100 with no real regressions. Everything is committed.\n"
     }
   ],
   "failed_approaches": [

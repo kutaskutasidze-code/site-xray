@@ -1,8 +1,68 @@
 [
   {
+    "site": "https://www.cravath.com",
+    "old": 97,
+    "new": 93,
+    "diff": -4
+  },
+  {
+    "site": "https://cuberto.com",
+    "old": 98,
+    "new": 95,
+    "diff": -3
+  },
+  {
+    "site": "https://www.morganlewis.com",
+    "old": 93,
+    "new": 92,
+    "diff": -1
+  },
+  {
+    "site": "https://www.apple.com",
+    "old": 98,
+    "new": 98,
+    "diff": 0
+  },
+  {
+    "site": "https://notion.so",
+    "old": 88,
+    "new": 88,
+    "diff": 0
+  },
+  {
     "site": "https://vercel.com",
-    "old": 95,
+    "old": 96,
     "new": 96,
+    "diff": 0
+  },
+  {
+    "site": "https://linear.app",
+    "old": 100,
+    "new": 100,
+    "diff": 0
+  },
+  {
+    "site": "https://stripe.com",
+    "old": 100,
+    "new": 100,
+    "diff": 0
+  },
+  {
+    "site": "https://pentagram.com",
+    "old": 84,
+    "new": 85,
     "diff": 1
+  },
+  {
+    "site": "https://www.roomshotels.com",
+    "old": 86,
+    "new": 95,
+    "diff": 9
+  },
+  {
+    "site": "https://www.awwwards.com",
+    "old": 81,
+    "new": 93,
+    "diff": 12
   }
 ]

@@ -2637,5 +2637,47 @@
     "system": "lead-machine",
     "message": "Pipeline (full): HAS FAILURES — 31.6m",
     "status": "warning"
+  },
+  {
+    "timestamp": "2026-04-04T12:18:37.909Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SWAP: OK (4s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T12:18:37.910Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (swap): ALL OK — 0.1m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T12:20:23.630Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T12:20:23.634Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (deploy): ALL OK — 0.0m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T12:24:28.690Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T12:24:28.693Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (deploy): ALL OK — 0.0m",
+    "status": "success"
   }
 ]

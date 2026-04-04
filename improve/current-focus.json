@@ -1,9 +1,9 @@
 {
   "consecutive_failures": 0,
-  "last_approaches": ["preserve-overlays-for-pixel-fidelity"],
+  "last_approaches": [],
   "regressions_seen": [],
-  "current_strategy": "metric-focus",
-  "last_success_date": "2026-04-04T15:00:00.000Z",
+  "current_strategy": "universal",
+  "last_success_date": "2026-04-04T15:42:43.400Z",
   "last_success_version": "v22",
   "last_success_score": 94
 }
