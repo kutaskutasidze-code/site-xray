@@ -113,5 +113,13 @@
     "date": "2026-04-04T18:00:00.000Z",
     "attempts": 1,
     "note": "METRIC-FOCUS pixels: Resolve <picture><source> elements to single <img> src (fixes broken images on Next.js sites), fix lazy images with placeholder src + data-src (duplicate attr bug), reveal CSS opacity:0 content elements in clone (JS entrance animations stripped), add image fixes to clean recapture path. Pentagram images: 63→100 (+37), pentagram overall: 85→90 (+5), morganlewis: 92→94 (+2), cravath: 93→95 (+2). Zero real regressions."
+  },
+  {
+    "version": "v23",
+    "score": 95,
+    "prev_score": 94,
+    "diff": 1,
+    "date": "2026-04-04T20:23:55.398Z",
+    "attempts": 1
   }
 ]

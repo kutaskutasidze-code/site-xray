@@ -99,6 +99,14 @@
       "diff": 1,
       "date": "2026-04-04T15:42:43.363Z",
       "log_tail": "Full suite already captured — v22 averaged 94/100 with no real regressions. Everything is committed.\n"
+    },
+    {
+      "version": "v23",
+      "score": 95,
+      "prev_score": 94,
+      "diff": 1,
+      "date": "2026-04-04T20:23:55.423Z",
+      "log_tail": "Full suite completed — v23 average 95/100 (up from 94). Already committed with all results verified.\n"
     }
   ],
   "failed_approaches": [

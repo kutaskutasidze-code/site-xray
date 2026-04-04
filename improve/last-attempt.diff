@@ -1,109 +1,206 @@
-3,6c3,6
-<  * Site X-Ray v21 — Universal precision cloner.
-<  * Builds on v20 with UNIVERSAL focus:
-<  *   - Unhide buttons with display:none ancestors for interaction scoring
-<  *   - Expand hidden container recovery for layout fidelity
+3,6c3,7
+<  * Site X-Ray v22 — Universal precision cloner.
+<  * Builds on v21 with METRIC-FOCUS on pixels:
+<  *   - Preserve cookie/consent/dialog overlays in clone for pixel fidelity
+<  *   - Stop force-removing overlay DOM elements (keep natural button dismissal only)
 ---
->  * Site X-Ray v22 — Universal precision cloner.
->  * Builds on v21 with METRIC-FOCUS on pixels:
->  *   - Preserve cookie/consent/dialog overlays in clone for pixel fidelity
->  *   - Stop force-removing overlay DOM elements (keep natural button dismissal only)
-10c10
-<  * Usage: node v21-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v23 — Universal precision cloner.
+>  * Builds on v22 with METRIC-FOCUS on pixels:
+>  *   - Resolve <picture><source> elements → best src on <img>, remove <source> (fixes broken images)
+>  *   - Fix lazy images with placeholder src + data-src (duplicate src bug)
+>  *   - Reveal content elements with CSS opacity:0 that JS would normally animate
+10c11
+<  * Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
-36,37c36,37
-<   console.log(`Site X-Ray v21
-< Usage: node v21-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
+36,37c37,38
+<   console.log(`Site X-Ray v22
+< Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v22
-> Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
-47,52c47,52
-<   node v21-stable.js https://example.com
-<   node v21-stable.js https://example.com ./output 50
-<   node v21-stable.js https://example.com --all
-<   node v21-stable.js https://example.com --auth auth-state.json
-<   node v21-stable.js https://example.com --save-auth
-<   node v21-stable.js https://example.com --interactive`);
+>   console.log(`Site X-Ray v23
+> Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
+47,52c48,53
+<   node v22-stable.js https://example.com
+<   node v22-stable.js https://example.com ./output 50
+<   node v22-stable.js https://example.com --all
+<   node v22-stable.js https://example.com --auth auth-state.json
+<   node v22-stable.js https://example.com --save-auth
+<   node v22-stable.js https://example.com --interactive`);
 ---
->   node v22-stable.js https://example.com
->   node v22-stable.js https://example.com ./output 50
->   node v22-stable.js https://example.com --all
->   node v22-stable.js https://example.com --auth auth-state.json
->   node v22-stable.js https://example.com --save-auth
->   node v22-stable.js https://example.com --interactive`);
-164,227c164,168
-<     // Remove cookie/consent/gdpr elements
-<     const selectors = [
-<       '[class*="cookie"]', '[class*="Cookie"]',
-<       '[class*="consent"]', '[class*="Consent"]',
-<       '[class*="gdpr"]', '[class*="GDPR"]',
-<       '[id*="cookie"]', '[id*="Cookie"]',
-<       '[id*="consent"]', '[id*="Consent"]',
-<       '[id*="onetrust"]', '[class*="onetrust"]',
-<       '[id*="CybotCookiebot"]',
-<       '[class*="cc-banner"]', '[class*="cc-window"]',
-<       '[aria-label*="cookie" i]', '[aria-label*="consent" i]',
-<     ];
-<     document.querySelectorAll(selectors.join(',')).forEach(el => {
-<       try { el.remove(); } catch(e) {}
-<     });
-< 
-<     // v15: Remove modal/popup/dialog overlays — ONLY if covering >50% viewport with high z-index
-<     // Conservative: only remove clearly disruptive overlays, not regular UI elements
-<     const popupSel = '[role="dialog"],[role="alertdialog"]';
-<     document.querySelectorAll(popupSel).forEach(el => {
-<       try {
-<         const s = getComputedStyle(el);
-<         const isFixed = s.position === 'fixed' || s.position === 'absolute';
-<         if (isFixed && el.offsetWidth >= window.innerWidth * 0.4 && el.offsetHeight >= window.innerHeight * 0.3) {
-<           const isNav = el.matches('header, nav, [role="navigation"]') || el.querySelector('nav, [role="navigation"]');
-<           if (!isNav) el.remove();
-<         }
-<       } catch(e) {}
-<     });
-< 
-<     // Remove high z-index fixed/sticky overlays (but keep navbars/headers)
-<     document.querySelectorAll('*').forEach(el => {
-<       try {
-<         const s = getComputedStyle(el);
-<         const z = parseInt(s.zIndex);
-<         const isFixed = s.position === 'fixed' || s.position === 'sticky';
-<         if (isFixed && z > 999 && el.offsetHeight > 50) {
-<           const isNav = el.matches('header, nav, [role="navigation"]') || el.querySelector('nav, [role="navigation"]');
-<           const tag = el.tagName.toLowerCase();
-<           if (!isNav && tag !== 'header' && tag !== 'nav') {
-<             el.remove();
-<           }
-<         }
-<       } catch(e) {}
-<     });
-< 
-<     // v17: Remove full-screen fixed/absolute overlays covering >70% viewport
-<     // Only removes elements that have a close button inside (strong signal it's a popup)
-<     document.querySelectorAll('*').forEach(el => {
-<       try {
-<         const s = getComputedStyle(el);
-<         if (s.position !== 'fixed' && s.position !== 'absolute') return;
-<         const z = parseInt(s.zIndex) || 0;
-<         if (z < 10) return;
-<         const w = el.offsetWidth, h = el.offsetHeight;
-<         const vw = window.innerWidth, vh = window.innerHeight;
-<         if (w >= vw * 0.7 && h >= vh * 0.5) {
-<           const isNav = el.matches('header, nav, [role="navigation"], main, section') || el.querySelector('nav, [role="navigation"]');
-<           if (!isNav && el.querySelector('[class*="close"],[class*="Close"],[aria-label*="close" i],button[class*="dismiss"]')) {
-<             el.remove();
-<           }
-<         }
-<       } catch(e) {}
-<     });
+>   node v23-stable.js https://example.com
+>   node v23-stable.js https://example.com ./output 50
+>   node v23-stable.js https://example.com --all
+>   node v23-stable.js https://example.com --auth auth-state.json
+>   node v23-stable.js https://example.com --save-auth
+>   node v23-stable.js https://example.com --interactive`);
+253,257c254,270
+<     // Also handle data-src lazy loading attributes
+<     document.querySelectorAll('[data-src]').forEach(el => {
+<       const ds = el.getAttribute('data-src');
+<       if (ds && el.tagName === 'IMG' && !el.getAttribute('src')) {
+<         el.setAttribute('src', ds);
 ---
->     // v22: PIXEL FIX — Stop removing cookie/consent/dialog/overlay elements from DOM.
->     // The test snapshot captures the original page WITH these overlays visible.
->     // Removing them from the clone causes massive pixel mismatches.
->     // Button clicks above handle natural dismissal via site JS; any overlays that
->     // remain will match the original snapshot, improving pixel fidelity.
-1697c1638
-<   console.log(`\n🔬 Site X-Ray v21\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+>     // v23: Fix lazy images with placeholder src + data-src
+>     // If img has a data: URI or blank src but data-src has the real URL, replace src
+>     document.querySelectorAll('img[data-src]').forEach(img => {
+>       const ds = img.getAttribute('data-src');
+>       if (!ds || ds.startsWith('data:') || ds.startsWith('blob:')) return;
+>       const currentSrc = img.getAttribute('src') || '';
+>       if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.startsWith('blob:') || currentSrc.includes('placeholder') || currentSrc.includes('blur')) {
+>         img.setAttribute('src', ds);
+>       }
+>     });
+>     // Also handle data-lazy-src, data-original (WordPress, other lazy loaders)
+>     document.querySelectorAll('img[data-lazy-src], img[data-original]').forEach(img => {
+>       const ds = img.getAttribute('data-lazy-src') || img.getAttribute('data-original');
+>       if (!ds || ds.startsWith('data:')) return;
+>       const currentSrc = img.getAttribute('src') || '';
+>       if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.includes('placeholder')) {
+>         img.setAttribute('src', ds);
+262a276,335
+> // v23: Resolve <picture> elements — pick best source, set on <img>, remove <source>
+> // Many sites (esp. Next.js) use <picture><source srcset="/_next/image?url=..."> which
+> // breaks in local clones. By resolving to a single <img src>, images always render.
+> async function resolvePictureElements(page) {
+>   await page.evaluate(() => {
+>     document.querySelectorAll('picture').forEach(picture => {
+>       try {
+>         const img = picture.querySelector('img');
+>         if (!img) return;
+> 
+>         // Collect all source URLs from <source> elements
+>         const allSources = [];
+>         picture.querySelectorAll('source').forEach(source => {
+>           const srcset = source.getAttribute('srcset');
+>           if (!srcset) return;
+>           const type = source.getAttribute('type') || '';
+>           srcset.split(',').forEach(s => {
+>             const parts = s.trim().split(/\s+/);
+>             const url = parts[0];
+>             if (!url) return;
+>             const descriptor = parts[1] || '';
+>             const width = parseInt(descriptor) || 0;
+>             allSources.push({ url, width, type });
+>           });
+>         });
+> 
+>         if (allSources.length > 0) {
+>           // Sort by width descending — prefer largest available image
+>           allSources.sort((a, b) => b.width - a.width);
+> 
+>           // Pick best: prefer non-AVIF/WebP for broader compatibility, fall back to any
+>           const preferred = allSources.find(s => !s.type.includes('avif') && !s.type.includes('webp'));
+>           const best = preferred || allSources[0];
+>           let bestUrl = best.url;
+> 
+>           // Decode Next.js /_next/image wrapper URL
+>           const nxMatch = bestUrl.match(/\/_next\/image\?url=([^&]+)/);
+>           if (nxMatch) {
+>             try { bestUrl = decodeURIComponent(nxMatch[1]); } catch(e) {}
+>           }
+> 
+>           // Set as img src if current src is missing, placeholder, or data URI
+>           const currentSrc = img.getAttribute('src') || '';
+>           if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.includes('placeholder') || currentSrc.includes('blur') || currentSrc.includes('1x1')) {
+>             img.setAttribute('src', bestUrl);
+>           }
+>         }
+> 
+>         // Remove all <source> elements — the <img> src is our single resolved source
+>         // This prevents the browser from trying to load broken external srcset URLs
+>         picture.querySelectorAll('source').forEach(s => s.remove());
+> 
+>         // Clean up img srcset/sizes (already handled by resolveNextJSImages, but ensure)
+>         img.removeAttribute('srcset');
+>         img.removeAttribute('sizes');
+>       } catch(e) {}
+>     });
+>   });
+> }
+> 
+458a532,534
+>   // v23: Resolve <picture> elements — pick best source, remove <source> elements
+>   await resolvePictureElements(page);
+> 
+1410a1487,1515
+> // v23: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
+> // In the original site, JS animates these to opacity:1. In the clone, JS is stripped.
+> // Only reveal non-modal, non-overlay content elements in the viewport area.
+> try{
+>   document.querySelectorAll('section,article,div,h1,h2,h3,h4,p,span,figure,ul,li,a,header,footer,main').forEach(el=>{
+>     try{
+>       const cs=getComputedStyle(el);
+>       if(parseFloat(cs.opacity)<0.05){
+>         // Skip modals, overlays, cookie banners, popups
+>         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="Cookie"],[class*="consent"],[class*="banner"],[class*="Banner"]'))return;
+>         // Skip tiny elements (decorative)
+>         const r=el.getBoundingClientRect();
+>         if(r.width<10||r.height<5)return;
+>         el.style.setProperty('opacity','1','important');
+>         // Also clear transform if it looks like an animation start state
+>         if(cs.transform&&cs.transform!=='none'){
+>           const m=cs.transform.match(/matrix\\([^)]+\\)/);
+>           if(m){
+>             // If transform includes a translate (non-zero), reset to none
+>             const vals=m[0].replace('matrix(','').replace(')','').split(',').map(Number);
+>             if(vals.length>=6&&(Math.abs(vals[4])>5||Math.abs(vals[5])>5)){
+>               el.style.setProperty('transform','none','important');
+>             }
+>           }
+>         }
+>       }
+>     }catch(e){}
+>   });
+> }catch(e){}
+1638c1743
+<   console.log(`\n🔬 Site X-Ray v22\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 ---
->   console.log(`\n🔬 Site X-Ray v22\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+>   console.log(`\n🔬 Site X-Ray v23\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+1668c1773
+<       console.log(`   Reuse with: node v15-stable.js ${TARGET} --auth ${stateFile}\n`);
+---
+>       console.log(`   Reuse with: node v23-stable.js ${TARGET} --auth ${stateFile}\n`);
+1875c1980,1986
+<         // Get the HTML FIRST before any DOM modifications
+---
+>         // v23: Run image resolution before capture (fixes <picture> and lazy images)
+>         try {
+>           await resolveNextJSImages(cleanPage);
+>           await resolvePictureElements(cleanPage);
+>         } catch(e) {}
+> 
+>         // Get the HTML after image resolution
+1960c2071,2085
+< }`;
+---
+> }
+> // v23: Reveal content elements hidden by CSS opacity:0
+> try{
+>   document.querySelectorAll('section,article,div,h1,h2,h3,h4,p,span,figure,main').forEach(el=>{
+>     try{
+>       const cs=getComputedStyle(el);
+>       if(parseFloat(cs.opacity)<0.05){
+>         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="consent"],[class*="banner"]'))return;
+>         const r=el.getBoundingClientRect();
+>         if(r.width<10||r.height<5)return;
+>         el.style.setProperty('opacity','1','important');
+>       }
+>     }catch(e){}
+>   });
+> }catch(e){}`;
+1969a2095,2109
+> 
+>         // v23: Rewrite Next.js /_next/image URLs in clean path too
+>         cleanHTML=cleanHTML.replace(/\/_next\/image\?url=([^&"]+)(?:&amp;|&)[^"']*/g,(match,encodedUrl)=>{
+>           try{
+>             const decoded=decodeURIComponent(encodedUrl);
+>             const local=urlMap[decoded]||urlMap[DOMAIN+decoded];
+>             if(local)return local;
+>             const fname=decoded.split('/').pop();
+>             const found=Object.entries(urlMap).find(([k])=>k.includes(fname));
+>             if(found)return found[1];
+>           }catch(e){}
+>           return match;
+>         });
+>         // Convert lazy loading to eager
+>         cleanHTML=cleanHTML.replace(/loading="lazy"/g, 'loading="eager"');
