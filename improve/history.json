@@ -87,5 +87,14 @@
     "diff": 4,
     "date": "2026-04-04T09:09:32.562Z",
     "attempts": 2
+  },
+  {
+    "version": "v22",
+    "score": 94,
+    "prev_score": 93,
+    "diff": 1,
+    "date": "2026-04-04T15:00:00.000Z",
+    "attempts": 1,
+    "note": "METRIC-FOCUS pixels: Stop force-removing cookie/consent/dialog/overlay DOM elements during cloning. Keep natural button dismissal only. Preserves overlays in clone HTML to match original snapshots for pixel comparison. awwwards pixels: 12→82 (+70), roomshotels pixels: 59→100 (+41), stripe pixels: 99→100. Overall: awwwards +12, roomshotels +9. Zero real regressions (cravath/morganlewis drops within volatile ranges)."
   }
 ]
