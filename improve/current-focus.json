@@ -1,14 +1,9 @@
 {
   "consecutive_failures": 0,
-  "last_approaches": [
-    {
-      "version": "v21",
-      "approach": "universal: unhide buttons with display:none ancestors for interaction scoring + expand <details> elements",
-      "result": "morganlewis +6 (89→95), interactions 57→100, layout 84→89, zero code-caused regressions"
-    }
-  ],
+  "last_approaches": [],
   "regressions_seen": [],
   "current_strategy": "universal",
-  "last_success_date": "2026-04-04T08:00:00.000Z",
-  "notes": "vercel.com regressed to 96 but this is site-side (v20 also scores 95 on vercel now)"
+  "last_success_date": "2026-04-04T09:09:32.615Z",
+  "last_success_version": "v21",
+  "last_success_score": 93
 }

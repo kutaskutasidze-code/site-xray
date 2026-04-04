@@ -2490,5 +2490,152 @@
     "system": "xray",
     "message": "Fixed: Killed stuck browser processes and cleared lock",
     "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:07:52.658Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SCRAPE: OK (1129s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:07:52.671Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (scrape): ALL OK — 18.8m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:12:00.210Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "EXTRACT BRANDS: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:12:00.216Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (extract): ALL OK — 0.0m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:28:48.401Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "EXTRACT BRANDS: OK (12s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:28:48.403Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (extract): ALL OK — 0.2m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:28:50.933Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SWAP: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:28:50.936Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (swap): ALL OK — 0.0m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:29:33.815Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "QUALITY GATE: OK (42s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T21:29:33.817Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (quality): ALL OK — 0.7m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T22:32:52.576Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T22:32:52.578Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (deploy): ALL OK — 0.0m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T22:34:02.276Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-03T22:34:02.278Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (deploy): ALL OK — 0.0m",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:16:29.651Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SCRAPE: OK (987s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:16:31.630Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "EXTRACT BRANDS: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:31:31.664Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "BUILD TEMPLATES: FAILED (900s)",
+    "status": "error"
+  },
+  {
+    "timestamp": "2026-04-04T02:31:33.649Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SWAP: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:31:35.018Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "QUALITY GATE: OK (1s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:31:37.025Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-04T02:31:37.028Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (full): HAS FAILURES — 31.6m",
+    "status": "warning"
   }
 ]
