@@ -138,5 +138,14 @@
     "diff": 1,
     "date": "2026-04-05T01:34:37.482Z",
     "attempts": 1
+  },
+  {
+    "version": "v25",
+    "score": 96,
+    "prev_score": 96,
+    "diff": 0,
+    "date": "2026-04-05T06:00:00.000Z",
+    "attempts": 1,
+    "note": "METRIC-FOCUS pixels: Capture CSS custom properties from :root/html/body (preserves JS-set themes), freeze CSS transitions in clone (prevents on-load glitches), freeze clip-path on visible content elements (reveals CSS entrance animation end state), capture animated visual state (opacity/transform/background/filter) before DOM capture. Defensive improvements — no regressions, score stable at 96."
   }
 ]
