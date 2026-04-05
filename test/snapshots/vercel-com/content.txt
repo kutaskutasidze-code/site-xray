@@ -278,67 +278,67 @@ and
 
 many more
 
-Top models on Apr 3, 2026
+Top models on Apr 5, 2026
 
 1
 
 Gemini 3 Flash
 
-33.8%
+42.1%
 
 2
 
 Claude Opus 4.6
 
-20.8%
+8.7%
 
 3
 
-Claude Sonnet 4.6
+Grok 4.1 Fast Non-Reasoning
 
 7.4%
 
 4
 
-Grok 4.1 Fast Non-Reasoning
+GPT 5.4 Mini
 
-6.7%
+6.2%
 
 5
 
-Gemini 2.5 Flash Lite
+Claude Sonnet 4.6
 
-4.3%
+5.7%
 
 6
 
-MiniMax M2.5
+Minimax M2.7
 
-3.1%
+4.3%
 
 7
 
-Minimax M2.7
+Gemini 2.5 Flash Lite
 
-2.7%
+4.0%
 
 8
 
-KAT-Coder-Pro V1
+MiniMax M2.5
 
-2.6%
+2.8%
 
 9
 
-GPT 5.4 Mini
+Claude Haiku 4.5
 
-2.6%
+2.8%
 
 10
 
-Grok 4.1 Fast Reasoning
+KAT-Coder-Pro V1
 
-2.2%
+2.4%
 
 Deploy your first app in seconds.
 Deploy automatically from git or with our CLI

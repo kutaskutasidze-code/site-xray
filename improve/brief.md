@@ -1,45 +1,45 @@
-## IMPROVEMENT BRIEF — v23
-Current: v22, 94/100, 2390 lines
+## IMPROVEMENT BRIEF — v24
+Current: v23, 95/100, 2530 lines
 Strategy: **METRIC-FOCUS**
 Consecutive failures: 0
 Mastered: 3 | Active: 8 | Queue: 7
 
 ### FOCUS: pixels metric (avg 80/100)
 This is METRIC-FOCUS mode. Improve the "pixels" metric across all sites.
-Worst: pentagram.com at 41/100
+Worst: pentagram.com at 39/100
 
 All metrics ranked by average:
-  pixels          avg:80  worst:41 (pentagram.com)
-  layout          avg:91  worst:59 (vercel.com)
+  pixels          avg:80  worst:39 (pentagram.com)
   interactions    avg:92  worst:42 (www.roomshotels.com)
+  layout          avg:93  worst:59 (vercel.com)
   content         avg:95  worst:72 (notion.so)
-  images          avg:97  worst:63 (pentagram.com)
   links           avg:98  worst:84 (www.awwwards.com)
+  images          avg:100  worst:100 ()
   css             avg:100  worst:100 ()
   console         avg:100  worst:100 ()
   manifest        avg:100  worst:100 ()
 
 
 ### SITE SCORES (worst → best)
-[NEEDS_WORK] pentagram.com             85/100
 [NEEDS_WORK] notion.so                 88/100
-[OK        ] www.morganlewis.com       92/100
-[OK        ] www.cravath.com           93/100
+[OK        ] pentagram.com             90/100
 [OK        ] www.awwwards.com          93/100
+[OK        ] www.morganlewis.com       94/100
 [OK        ] cuberto.com               95/100
 [OK        ] www.roomshotels.com       95/100
-[OK        ] vercel.com                96/100
+[OK        ] vercel.com                95/100
+[OK        ] www.cravath.com           96/100
 [PERFECT   ] www.apple.com             98/100
+[PERFECT   ] linear.app                99/100
 [PERFECT   ] stripe.com                100/100
-[PERFECT   ] linear.app                100/100
 
 ### METRIC AVERAGES
-  pixels          avg:80  worst:41 (pentagram.com)
-  layout          avg:91  worst:59 (vercel.com)
+  pixels          avg:80  worst:39 (pentagram.com)
   interactions    avg:92  worst:42 (www.roomshotels.com)
+  layout          avg:93  worst:59 (vercel.com)
   content         avg:95  worst:72 (notion.so)
-  images          avg:97  worst:63 (pentagram.com)
   links           avg:98  worst:84 (www.awwwards.com)
+  images          avg:100  worst:100 ()
   css             avg:100  worst:100 ()
   console         avg:100  worst:100 ()
   manifest        avg:100  worst:100 ()
@@ -67,8 +67,8 @@ All metrics ranked by average:
   notion.so pixels: ±13 (NON-DETERMINISTIC, don't try to fix)
 
 ### INSTRUCTIONS
-1. Read v22-stable.js (the current code)
+1. Read v23-stable.js (the current code)
 2. Based on the strategy above, implement 2-4 targeted fixes
-3. Test on the worst site: node v23-stable.js <worst-url> /tmp/test-v23 3
-4. Quick single-site test available: node test/suite.js v23 --site <hostname>
+3. Test on the worst site: node v24-stable.js <worst-url> /tmp/test-v24 3
+4. Quick single-site test available: node test/suite.js v24 --site <hostname>
 5. Read improve/CLAUDE.md for rules

@@ -1,12 +1,6 @@
 {
   "active": [
     {
-      "url": "https://cuberto.com",
-      "category": "webflow",
-      "difficulty": "medium",
-      "pages": 3
-    },
-    {
       "url": "https://www.morganlewis.com",
       "category": "corporate",
       "difficulty": "medium",
@@ -47,6 +41,12 @@
       "category": "nextjs",
       "difficulty": "hard",
       "pages": 3
+    },
+    {
+      "url": "https://lusion.co",
+      "category": "webgl",
+      "difficulty": "extreme",
+      "pages": 2
     }
   ],
   "mastered": [
@@ -73,15 +73,17 @@
       "pages": 2,
       "mastered_at": "2026-04-03T21:20:21.784Z",
       "mastered_version": "v19"
+    },
+    {
+      "url": "https://cuberto.com",
+      "category": "webflow",
+      "difficulty": "medium",
+      "pages": 3,
+      "mastered_at": "2026-04-05T01:07:03.519Z",
+      "mastered_version": "v24"
     }
   ],
   "queue": [
-    {
-      "url": "https://lusion.co",
-      "category": "webgl",
-      "difficulty": "extreme",
-      "pages": 2
-    },
     {
       "url": "https://www.shopify.com",
       "category": "ecommerce",

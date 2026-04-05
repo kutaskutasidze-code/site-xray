@@ -45,23 +45,26 @@ karri
 Right now we show a spinner forever, which makes it look like the car disappeared...
 jori
 · just now
-@Codex can you take a stab at this?
-jori connected Codex · just now
-Codex
+@Cursor can you take a stab at this?
+jori connected Cursor · just now
+Cursor
 Examining issue ENG-2703
-Codex moved from Todo to In Progress · just now
-Codex
-On it! I've received your request.
-Kicked off a task in kinetic/kinetic-iOS environment.
-Searching for root AGENTS file
-kinetic/kinetic-iOS$ /bin/bash -lc rg --files -g 'AGENTS.md' AGENTS.md
-Locating initialization logic for vehicle_state
+Cursor moved from Todo to In Progress · just now
+Cursor
+Examining issue ENG-2703
+Started cloud agent kinetic/kinetic-iOS@master
+claude-4.5-sonnet-thinking
+Let me break down the task:
+1.
+I need to understand why iOS launch is blocking on vehicle_state sync
+2.
+Find where the app waits on vehicle state during startup
 Thinking...
 ENG-2703
 In Progress
 High
 jori
-Codex
+Cursor
 Labels
 Performance
 iOS
@@ -149,16 +152,16 @@ ENG-1991
 Improve rider visibility into veh...
 Thread in #feedback
 didier
-9:20 PM
+1:06 AM
 Has anyone been looking into the iOS startup performance issues?
 lena
-9:20 PM
+1:06 AM
 Anyone else noticing the iOS app feels slow to open if you haven't used it in a bit?
 didier
-9:20 PM
+1:06 AM
 Yea, we're still blocking initial render on a full vehicle_state sync every time...
 andreas
-9:20 PM
+1:06 AM
 Feels like we could render sooner and load the rest in the background. Probably also worth tracking startup timing so we know how often this happens!
 @Linear
 create urgent issues and assign to me
@@ -353,7 +356,7 @@ Cycle time by agent
 Cursor
 Codex
 No Agent
-Weekly Pulse for Apr 3
+Weekly Pulse for Apr 5
 Listen
 1.0×
 Projects

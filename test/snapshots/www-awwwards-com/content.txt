@@ -9,25 +9,30 @@ Sign Up
 Be Pro
 Submit Website
 Site of the Day
-Apr 3, 2026
-Score 7.63 of 10
-ARTEFAKT
-Greg Lallé PRO
-Thomas Monavon PRO
+Apr 4, 2026
+Score 7.36 of 10
+SŌM
+.RAW PRO
 Latest
 NOMINEES
 Vote for the latest websites on awwwards
-Oryzo AI
+Studio X
 by
-Lusion PRO
-Aptos Network
+Jordan Gilroy PRO
+Ibrahem Ghareib – Portfolio
 by
-Ashfall Studio PRO
+Zhenya Shterlyayeva PRO
 Check out all submitted websites
 View Nominees
 Winners
 Recent Sites
 of the Day.
+SŌM
+by
+.RAW PRO
+Artefakt
+by
+Greg Lallé PRO
 iyO
 by
 Matteo Donini PRO
@@ -40,12 +45,6 @@ San Rita PRO
 Fluid Glass
 by
 Exo Ape PRO
-Utopia Tokyo
-by
-spotheroz PRO
-SUTÉRA
-by
-Okey Studio PRO
 Check out all submitted websites
 View Winners
 Academy
@@ -68,12 +67,12 @@ View Academy
 Collections
 Explore a wide
 variety of collections.
-Pastel colors
+Handy Tools and Apps for De...
 followed by
-+144
-Footer Design Best Practices
++1005
+Transitions
 followed by
-+1395
++2055
 Find inspiration for your projects
 View Collections
 Directory
@@ -82,19 +81,19 @@ Active creators in your country.
 
 International
 
-UPQODE
+Positioner - Hotel Agency
 Works
-153
-upqode.com
-17 awards
+29
+positioner.com
+23 awards
 
 International
 
-Spring/Summer
+&why
 Works
-31
-springsummer.dk
-31 awards
+07
+why.de
+4 awards
 Name	Profile	Awards	Categories	
 
 &why INT
@@ -104,25 +103,25 @@ Web Design , Web Development , UX/UI , Interactive , Art Direction
 View
 
 
-fio.ai PRO
-	Freelance	0	
-	
-View
-
-
-wagemut PRO
-	Studio	2	
-Web Design , UX/UI , Interactive
-	
-View
-
-
-Exportarts PRO
+Hype PRO
 	Agency	0	
-Web Design , SEO/SEM , Social Media
 	
 View
-Connect with over 6,049 Agencies and Professionals
+
+
+Astral PRO
+	Studio	10	
+Web Development , UX/UI , Interactive
+	
+View
+
+
+wusagency PRO
+	Agency	1	
+Web Design , Web Development , UX/UI
+	
+View
+Connect with over 6,047 Agencies and Professionals
 View Directory
 Blog
 Explore these
@@ -141,20 +140,18 @@ Market
 A curated marketplace
 for digital & physical products
 Digital Product
+Knotch - Free AI Automation Website template
+By Royece
+View Product
+Digital Product
+[FREE] Jankis - Portfolio Framer Template
+By D14
+View Product
+Digital Product
 Kora - Framer template for consultants & agencies
 By Joseph Alexander
 from
 129USD
-View Product
-Digital Product
-Aeline | Technology Webflow template (FREE FIGMA)
-By Temlis
-from
-169USD
-View Product
-Digital Product
-Zentro — Free Modern Creative Agency Template
-By Shaig
 View Product
 Browse specially curated products
 View Market
