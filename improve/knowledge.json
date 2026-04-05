@@ -107,6 +107,14 @@
       "diff": 1,
       "date": "2026-04-04T20:23:55.423Z",
       "log_tail": "Full suite completed — v23 average 95/100 (up from 94). Already committed with all results verified.\n"
+    },
+    {
+      "version": "v24",
+      "score": 96,
+      "prev_score": 95,
+      "diff": 1,
+      "date": "2026-04-05T01:34:37.509Z",
+      "log_tail": "All background tasks are finished. v24 is fully committed and verified — score 95→96, pentagram pixels 39→100.\n"
     }
   ],
   "failed_approaches": [

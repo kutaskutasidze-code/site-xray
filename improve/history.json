@@ -130,5 +130,13 @@
     "date": "2026-04-05T01:07:03.520Z",
     "attempts": 1,
     "note": "METRIC-FOCUS pixels: Exclude carousel/slider slides (Swiper, Flickity, Slick, etc.) from opacity:0 reveal — these elements use opacity intentionally to hide inactive slides. Reset carousel to initial state (slide 0) before DOM capture in both main and clean-recapture paths. Pentagram pixels: 39→100 (+61), pentagram overall: 90→95 (+5), cuberto: 95→99 (+4, mastered!), awwwards: 93→97 (+4), roomshotels: 95→96 (+1), morganlewis: 94→95 (+1). Zero real regressions (cravath -1 within volatile ±19)."
+  },
+  {
+    "version": "v24",
+    "score": 96,
+    "prev_score": 95,
+    "diff": 1,
+    "date": "2026-04-05T01:34:37.482Z",
+    "attempts": 1
   }
 ]

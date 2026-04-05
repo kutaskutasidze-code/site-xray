@@ -1,32 +1,14 @@
 [
   {
-    "site": "https://vercel.com",
+    "site": "https://www.cravath.com",
     "old": 96,
     "new": 95,
     "diff": -1
   },
   {
-    "site": "https://linear.app",
-    "old": 100,
-    "new": 99,
-    "diff": -1
-  },
-  {
-    "site": "https://cuberto.com",
-    "old": 95,
-    "new": 95,
-    "diff": 0
-  },
-  {
     "site": "https://www.roomshotels.com",
     "old": 95,
     "new": 95,
-    "diff": 0
-  },
-  {
-    "site": "https://www.awwwards.com",
-    "old": 93,
-    "new": 93,
     "diff": 0
   },
   {
@@ -42,27 +24,45 @@
     "diff": 0
   },
   {
+    "site": "https://vercel.com",
+    "old": 95,
+    "new": 95,
+    "diff": 0
+  },
+  {
     "site": "https://stripe.com",
     "old": 100,
     "new": 100,
     "diff": 0
   },
   {
-    "site": "https://www.morganlewis.com",
-    "old": 92,
-    "new": 94,
-    "diff": 2
+    "site": "https://linear.app",
+    "old": 99,
+    "new": 99,
+    "diff": 0
   },
   {
-    "site": "https://www.cravath.com",
+    "site": "https://cuberto.com",
+    "old": 95,
+    "new": 96,
+    "diff": 1
+  },
+  {
+    "site": "https://www.morganlewis.com",
+    "old": 94,
+    "new": 97,
+    "diff": 3
+  },
+  {
+    "site": "https://www.awwwards.com",
     "old": 93,
     "new": 96,
     "diff": 3
   },
   {
     "site": "https://pentagram.com",
-    "old": 85,
-    "new": 90,
-    "diff": 5
+    "old": 90,
+    "new": 99,
+    "diff": 9
   }
 ]

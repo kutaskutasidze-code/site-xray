@@ -1,206 +1,107 @@
-3,6c3,7
-<  * Site X-Ray v22 — Universal precision cloner.
-<  * Builds on v21 with METRIC-FOCUS on pixels:
-<  *   - Preserve cookie/consent/dialog overlays in clone for pixel fidelity
-<  *   - Stop force-removing overlay DOM elements (keep natural button dismissal only)
+3,7c3,7
+<  * Site X-Ray v23 — Universal precision cloner.
+<  * Builds on v22 with METRIC-FOCUS on pixels:
+<  *   - Resolve <picture><source> elements → best src on <img>, remove <source> (fixes broken images)
+<  *   - Fix lazy images with placeholder src + data-src (duplicate src bug)
+<  *   - Reveal content elements with CSS opacity:0 that JS would normally animate
 ---
->  * Site X-Ray v23 — Universal precision cloner.
->  * Builds on v22 with METRIC-FOCUS on pixels:
->  *   - Resolve <picture><source> elements → best src on <img>, remove <source> (fixes broken images)
->  *   - Fix lazy images with placeholder src + data-src (duplicate src bug)
->  *   - Reveal content elements with CSS opacity:0 that JS would normally animate
-10c11
-<  * Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v24 — Universal precision cloner.
+>  * Builds on v23 with METRIC-FOCUS on pixels:
+>  *   - Exclude carousel/slider slides from opacity reveal (fixes pixel mismatch on Swiper/Flickity sites)
+>  *   - Skip opacity reveal on elements with large translateX (intentionally off-screen)
+>  *   - Preserves carousel initial state for pixel-accurate snapshots
+11c11
+<  * Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
-36,37c37,38
-<   console.log(`Site X-Ray v22
-< Usage: node v22-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v24-stable.js <url> [output-dir] [max-pages] [flags]
+37,38c37,38
+<   console.log(`Site X-Ray v23
+< Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v23
-> Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
-47,52c48,53
-<   node v22-stable.js https://example.com
-<   node v22-stable.js https://example.com ./output 50
-<   node v22-stable.js https://example.com --all
-<   node v22-stable.js https://example.com --auth auth-state.json
-<   node v22-stable.js https://example.com --save-auth
-<   node v22-stable.js https://example.com --interactive`);
+>   console.log(`Site X-Ray v24
+> Usage: node v24-stable.js <url> [output-dir] [max-pages] [flags]
+1105a1106
+>       // v24: Exclude carousel/slider slides — they're intentionally hidden by carousel libraries
+1108c1109,1112
+<       animScript += `  if(!el.closest('[class*="modal"],[class*="Modal"]'))el.style.opacity="1";\n`;
 ---
->   node v23-stable.js https://example.com
->   node v23-stable.js https://example.com ./output 50
->   node v23-stable.js https://example.com --all
->   node v23-stable.js https://example.com --auth auth-state.json
->   node v23-stable.js https://example.com --save-auth
->   node v23-stable.js https://example.com --interactive`);
-253,257c254,270
-<     // Also handle data-src lazy loading attributes
-<     document.querySelectorAll('[data-src]').forEach(el => {
-<       const ds = el.getAttribute('data-src');
-<       if (ds && el.tagName === 'IMG' && !el.getAttribute('src')) {
-<         el.setAttribute('src', ds);
----
->     // v23: Fix lazy images with placeholder src + data-src
->     // If img has a data: URI or blank src but data-src has the real URL, replace src
->     document.querySelectorAll('img[data-src]').forEach(img => {
->       const ds = img.getAttribute('data-src');
->       if (!ds || ds.startsWith('data:') || ds.startsWith('blob:')) return;
->       const currentSrc = img.getAttribute('src') || '';
->       if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.startsWith('blob:') || currentSrc.includes('placeholder') || currentSrc.includes('blur')) {
->         img.setAttribute('src', ds);
->       }
->     });
->     // Also handle data-lazy-src, data-original (WordPress, other lazy loaders)
->     document.querySelectorAll('img[data-lazy-src], img[data-original]').forEach(img => {
->       const ds = img.getAttribute('data-lazy-src') || img.getAttribute('data-original');
->       if (!ds || ds.startsWith('data:')) return;
->       const currentSrc = img.getAttribute('src') || '';
->       if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.includes('placeholder')) {
->         img.setAttribute('src', ds);
-262a276,335
-> // v23: Resolve <picture> elements — pick best source, set on <img>, remove <source>
-> // Many sites (esp. Next.js) use <picture><source srcset="/_next/image?url=..."> which
-> // breaks in local clones. By resolving to a single <img src>, images always render.
-> async function resolvePictureElements(page) {
+>       animScript += `  if(el.closest('[class*="modal"],[class*="Modal"]'))return;\n`;
+>       animScript += `  if(el.closest('.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]'))return;\n`;
+>       animScript += `  if(el.matches('.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide'))return;\n`;
+>       animScript += `  el.style.opacity="1";\n`;
+1227a1232,1259
+>   // v24: Reset carousel/slider slides to initial state before DOM capture
+>   // Carousels auto-advance via JS; by capture time, a non-first slide may be active.
+>   // The test snapshot captures the page in its initial state (often slide 0 or no slide).
+>   // Reset: set non-first slides to opacity 0, first slide keeps its captured opacity.
+>   // Also reset active/prev/next classes to match initial state.
 >   await page.evaluate(() => {
->     document.querySelectorAll('picture').forEach(picture => {
->       try {
->         const img = picture.querySelector('img');
->         if (!img) return;
-> 
->         // Collect all source URLs from <source> elements
->         const allSources = [];
->         picture.querySelectorAll('source').forEach(source => {
->           const srcset = source.getAttribute('srcset');
->           if (!srcset) return;
->           const type = source.getAttribute('type') || '';
->           srcset.split(',').forEach(s => {
->             const parts = s.trim().split(/\s+/);
->             const url = parts[0];
->             if (!url) return;
->             const descriptor = parts[1] || '';
->             const width = parseInt(descriptor) || 0;
->             allSources.push({ url, width, type });
->           });
->         });
-> 
->         if (allSources.length > 0) {
->           // Sort by width descending — prefer largest available image
->           allSources.sort((a, b) => b.width - a.width);
-> 
->           // Pick best: prefer non-AVIF/WebP for broader compatibility, fall back to any
->           const preferred = allSources.find(s => !s.type.includes('avif') && !s.type.includes('webp'));
->           const best = preferred || allSources[0];
->           let bestUrl = best.url;
-> 
->           // Decode Next.js /_next/image wrapper URL
->           const nxMatch = bestUrl.match(/\/_next\/image\?url=([^&]+)/);
->           if (nxMatch) {
->             try { bestUrl = decodeURIComponent(nxMatch[1]); } catch(e) {}
->           }
-> 
->           // Set as img src if current src is missing, placeholder, or data URI
->           const currentSrc = img.getAttribute('src') || '';
->           if (!currentSrc || currentSrc.startsWith('data:') || currentSrc.includes('placeholder') || currentSrc.includes('blur') || currentSrc.includes('1x1')) {
->             img.setAttribute('src', bestUrl);
->           }
+>     try {
+>       // Swiper slides: reset all except index 0 to opacity 0
+>       document.querySelectorAll('.swiper-slide').forEach(slide => {
+>         const idx = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
+>         if (idx !== 0) {
+>           slide.style.opacity = '0';
+>           slide.classList.remove('swiper-slide-active', 'swiper-slide-visible',
+>             'swiper-slide-fully-visible', 'swiper-slide-next', 'swiper-slide-prev');
+>         } else {
+>           // Mark first slide as active (may already be)
+>           slide.classList.add('swiper-slide-active', 'swiper-slide-visible', 'swiper-slide-fully-visible');
 >         }
-> 
->         // Remove all <source> elements — the <img> src is our single resolved source
->         // This prevents the browser from trying to load broken external srcset URLs
->         picture.querySelectorAll('source').forEach(s => s.remove());
-> 
->         // Clean up img srcset/sizes (already handled by resolveNextJSImages, but ensure)
->         img.removeAttribute('srcset');
->         img.removeAttribute('sizes');
->       } catch(e) {}
->     });
->   });
-> }
-> 
-458a532,534
->   // v23: Resolve <picture> elements — pick best source, remove <source> elements
->   await resolvePictureElements(page);
-> 
-1410a1487,1515
-> // v23: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
-> // In the original site, JS animates these to opacity:1. In the clone, JS is stripped.
-> // Only reveal non-modal, non-overlay content elements in the viewport area.
-> try{
->   document.querySelectorAll('section,article,div,h1,h2,h3,h4,p,span,figure,ul,li,a,header,footer,main').forEach(el=>{
->     try{
->       const cs=getComputedStyle(el);
->       if(parseFloat(cs.opacity)<0.05){
->         // Skip modals, overlays, cookie banners, popups
->         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="Cookie"],[class*="consent"],[class*="banner"],[class*="Banner"]'))return;
->         // Skip tiny elements (decorative)
->         const r=el.getBoundingClientRect();
->         if(r.width<10||r.height<5)return;
->         el.style.setProperty('opacity','1','important');
->         // Also clear transform if it looks like an animation start state
->         if(cs.transform&&cs.transform!=='none'){
->           const m=cs.transform.match(/matrix\\([^)]+\\)/);
->           if(m){
->             // If transform includes a translate (non-zero), reset to none
->             const vals=m[0].replace('matrix(','').replace(')','').split(',').map(Number);
->             if(vals.length>=6&&(Math.abs(vals[4])>5||Math.abs(vals[5])>5)){
->               el.style.setProperty('transform','none','important');
->             }
->           }
+>       });
+>       // Flickity: reset to first cell
+>       document.querySelectorAll('.flickity-cell, .flickity-slider > *').forEach((cell, i) => {
+>         if (i > 0 && cell.style.opacity !== undefined) {
+>           cell.classList.remove('is-selected');
 >         }
->       }
->     }catch(e){}
->   });
-> }catch(e){}
-1638c1743
-<   console.log(`\n🔬 Site X-Ray v22\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+>       });
+>     } catch(e) {}
+>   }).catch(() => {});
+> 
+1487c1519
+< // v23: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
 ---
->   console.log(`\n🔬 Site X-Ray v23\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
-1668c1773
-<       console.log(`   Reuse with: node v15-stable.js ${TARGET} --auth ${stateFile}\n`);
+> // v24: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
+1489a1522
+> // v24: EXCLUDE carousel/slider slides — they use opacity:0 intentionally to hide inactive slides.
+1490a1524,1525
+>   const carouselWrapperSel='.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]';
+>   const carouselSlideSel='.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide';
+1496a1532,1533
+>         // v24: Skip carousel/slider slides and their children
+>         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
+1743c1780
+<   console.log(`\n🔬 Site X-Ray v23\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 ---
->       console.log(`   Reuse with: node v23-stable.js ${TARGET} --auth ${stateFile}\n`);
-1875c1980,1986
-<         // Get the HTML FIRST before any DOM modifications
----
->         // v23: Run image resolution before capture (fixes <picture> and lazy images)
+>   console.log(`\n🔬 Site X-Ray v24\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+1985a2023,2043
+>         // v24: Reset carousel slides to initial state before capture
 >         try {
->           await resolveNextJSImages(cleanPage);
->           await resolvePictureElements(cleanPage);
+>           await cleanPage.evaluate(() => {
+>             document.querySelectorAll('.swiper-slide').forEach(slide => {
+>               const idx = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
+>               if (idx !== 0) {
+>                 slide.style.opacity = '0';
+>                 slide.classList.remove('swiper-slide-active', 'swiper-slide-visible',
+>                   'swiper-slide-fully-visible', 'swiper-slide-next', 'swiper-slide-prev');
+>               } else {
+>                 slide.classList.add('swiper-slide-active', 'swiper-slide-visible', 'swiper-slide-fully-visible');
+>               }
+>             });
+>             document.querySelectorAll('.flickity-cell, .flickity-slider > *').forEach((cell, i) => {
+>               if (i > 0 && cell.style.opacity !== undefined) {
+>                 cell.classList.remove('is-selected');
+>               }
+>             });
+>           });
 >         } catch(e) {}
 > 
->         // Get the HTML after image resolution
-1960c2071,2085
-< }`;
+2072c2130
+< // v23: Reveal content elements hidden by CSS opacity:0
 ---
-> }
-> // v23: Reveal content elements hidden by CSS opacity:0
-> try{
->   document.querySelectorAll('section,article,div,h1,h2,h3,h4,p,span,figure,main').forEach(el=>{
->     try{
->       const cs=getComputedStyle(el);
->       if(parseFloat(cs.opacity)<0.05){
->         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="consent"],[class*="banner"]'))return;
->         const r=el.getBoundingClientRect();
->         if(r.width<10||r.height<5)return;
->         el.style.setProperty('opacity','1','important');
->       }
->     }catch(e){}
->   });
-> }catch(e){}`;
-1969a2095,2109
-> 
->         // v23: Rewrite Next.js /_next/image URLs in clean path too
->         cleanHTML=cleanHTML.replace(/\/_next\/image\?url=([^&"]+)(?:&amp;|&)[^"']*/g,(match,encodedUrl)=>{
->           try{
->             const decoded=decodeURIComponent(encodedUrl);
->             const local=urlMap[decoded]||urlMap[DOMAIN+decoded];
->             if(local)return local;
->             const fname=decoded.split('/').pop();
->             const found=Object.entries(urlMap).find(([k])=>k.includes(fname));
->             if(found)return found[1];
->           }catch(e){}
->           return match;
->         });
->         // Convert lazy loading to eager
->         cleanHTML=cleanHTML.replace(/loading="lazy"/g, 'loading="eager"');
+> // v24: Reveal content elements hidden by CSS opacity:0 (exclude carousel slides)
+2073a2132,2133
+>   const carouselWrapperSel='.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]';
+>   const carouselSlideSel='.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide';
+2078a2139
+>         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
