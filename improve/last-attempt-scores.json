@@ -12,9 +12,21 @@
     "diff": 0
   },
   {
+    "site": "https://bruno-simon.com",
+    "old": 79,
+    "new": 79,
+    "diff": 0
+  },
+  {
     "site": "https://resn.co.nz",
     "old": 80,
     "new": 80,
+    "diff": 0
+  },
+  {
+    "site": "https://www.awwwards.com/websites",
+    "old": 88,
+    "new": 88,
     "diff": 0
   },
   {
@@ -36,21 +48,15 @@
     "diff": 0
   },
   {
-    "site": "https://lusion.co",
-    "old": 82,
-    "new": 83,
-    "diff": 1
-  },
-  {
     "site": "https://www.freezpak.com",
-    "old": 98,
+    "old": 100,
     "new": 100,
-    "diff": 2
+    "diff": 0
   },
   {
-    "site": "https://bruno-simon.com",
-    "old": 75,
-    "new": 79,
-    "diff": 4
+    "site": "https://lusion.co",
+    "old": 83,
+    "new": 86,
+    "diff": 3
   }
 ]

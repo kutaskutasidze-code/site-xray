@@ -1,84 +1,103 @@
-3,6c3,6
-<  * Site X-Ray v27 — Universal precision cloner.
-<  * Builds on v24 with METRIC-FOCUS on interactions/pixels:
-<  *   - Fix nav detection for hamburger/hidden menus (count all links, not just visible)
-<  *   - Improves interactions score on sites with collapsed mobile navigation
+3,6c3,7
+<  * Site X-Ray v28 — Universal precision cloner.
+<  * Builds on v27 with PER-SITE focus on bruno-simon.com:
+<  *   - Fix button visibility for WebGL/3D sites where canvas blocks ancestor unhiding
+<  *   - Clone invisible buttons to body as zero-size elements so they register as clickable
 ---
->  * Site X-Ray v28 — Universal precision cloner.
->  * Builds on v27 with PER-SITE focus on bruno-simon.com:
->  *   - Fix button visibility for WebGL/3D sites where canvas blocks ancestor unhiding
->  *   - Clone invisible buttons to body as zero-size elements so they register as clickable
-10c10
-<  * Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v29 — Universal precision cloner.
+>  * Builds on v28 with PER-SITE focus on bruno-simon.com:
+>  *   - Fix canvas→image replacement in post-processing (canvas-0.png captured but not referenced)
+>  *   - Capture canvas parent background colors for WebGL/3D sites
+>  *   - Ensure body background matches original for canvas-heavy pages
+10c11
+<  * Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
-37c37
-< Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v29-stable.js <url> [output-dir] [max-pages] [flags]
+36,37c37,38
+<   console.log(`Site X-Ray v27
+< Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
 ---
-> Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
-47,52c47,52
-<   node v27-stable.js https://example.com
-<   node v27-stable.js https://example.com ./output 50
-<   node v27-stable.js https://example.com --all
-<   node v27-stable.js https://example.com --auth auth-state.json
-<   node v27-stable.js https://example.com --save-auth
-<   node v27-stable.js https://example.com --interactive`);
+>   console.log(`Site X-Ray v29
+> Usage: node v29-stable.js <url> [output-dir] [max-pages] [flags]
+582a584
+>     // v29: Also check html element and canvas container for WebGL sites with transparent body
+585,588c587,603
+<         const bg = getComputedStyle(document.body).backgroundColor;
+<         // If transparent/default, use white (most common)
+<         if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') return '#ffffff';
+<         return bg;
 ---
->   node v28-stable.js https://example.com
->   node v28-stable.js https://example.com ./output 50
->   node v28-stable.js https://example.com --all
->   node v28-stable.js https://example.com --auth auth-state.json
->   node v28-stable.js https://example.com --save-auth
->   node v28-stable.js https://example.com --interactive`);
-1594c1594,1609
-<       btn.style.pointerEvents='auto';
----
->       // v28: If button is STILL invisible after ancestor walk (e.g. WebGL sites with canvas
->       // blocking parent unhide), clone it to body as a zero-size accessible element.
->       // This ensures the interaction scorer sees it as clickable (offsetParent !== null).
->       if(btn.offsetParent===null){
->         try{
->           const ghost=document.createElement(btn.tagName.toLowerCase());
->           ghost.setAttribute('role',btn.getAttribute('role')||'button');
->           ghost.className=btn.className;
->           ghost.textContent=btn.textContent;
->           ghost.style.cssText='position:absolute;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:auto;opacity:0;';
->           document.body.appendChild(ghost);
->           btn.remove();
->         }catch(e2){}
->       } else {
->         btn.style.pointerEvents='auto';
->       }
-2228a2244,2275
->   });
-> }catch(e){}
-> // v28: Unhide buttons hidden in display:none ancestors (same as main path v21+v28)
-> try{
->   document.querySelectorAll('button,[role="button"]').forEach(btn=>{
->     if(btn.offsetParent===null&&btn.getClientRects().length===0){
->       let el=btn;
->       while(el&&el!==document.body){
->         const st=getComputedStyle(el);
->         if(st.display==='none'){
->           const r=el.getBoundingClientRect();
->           if(r.width>window.innerWidth*0.8&&r.height>window.innerHeight*0.8)break;
->           const hasContent=el.querySelectorAll('img, video, canvas').length>0||el.children.length>3;
->           if(hasContent){el=el.parentElement;continue}
->           el.style.display='block';el.style.position='absolute';
->           el.style.width='0';el.style.height='0';el.style.overflow='hidden';
->           el.style.opacity='0';el.style.pointerEvents='auto';
+>         const isTransparent = (c) => !c || c === 'rgba(0, 0, 0, 0)' || c === 'transparent';
+>         const bodyBg = getComputedStyle(document.body).backgroundColor;
+>         if (!isTransparent(bodyBg)) return bodyBg;
+>         // Check html element
+>         const htmlBg = getComputedStyle(document.documentElement).backgroundColor;
+>         if (!isTransparent(htmlBg)) return htmlBg;
+>         // v29: For WebGL/3D sites, check the canvas parent's background
+>         const canvas = document.querySelector('canvas');
+>         if (canvas) {
+>           let el = canvas.parentElement;
+>           while (el && el !== document.body) {
+>             const bg = getComputedStyle(el).backgroundColor;
+>             if (!isTransparent(bg)) return bg;
+>             el = el.parentElement;
+>           }
 >         }
->         el=el.parentElement;
+>         return '#ffffff';
+2299a2315,2336
+>         // v29: Canvas→image replacement in clean recapture path
+>         try {
+>           let cleanCanvasIdx = 0;
+>           cleanHTML = cleanHTML.replace(/<canvas([^>]*)>[\s\S]*?<\/canvas>/g, (match, attrs) => {
+>             const idx = cleanCanvasIdx++;
+>             const imgPath = `${OUT}/images/canvas-${idx}.png`;
+>             if (fs.existsSync(imgPath) && fs.statSync(imgPath).size > 1000) {
+>               const wMatch = attrs.match(/width="(\d+)"/);
+>               const hMatch = attrs.match(/height="(\d+)"/);
+>               const w = wMatch ? parseInt(wMatch[1]) : 0;
+>               const hVal = hMatch ? parseInt(hMatch[1]) : 0;
+>               const isFullViewport = w >= 1200 && hVal >= 600;
+>               const styleMatch = attrs.match(/style="([^"]*)"/);
+>               const origStyle = styleMatch ? styleMatch[1] : '';
+>               if (isFullViewport) {
+>                 return `<img src="/images/canvas-${idx}.png" style="${origStyle};object-fit:cover;display:block"/>`;
+>               }
+>               return `<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;
+>             }
+>             return match;
+>           });
+>         } catch(e) {}
+2530a2568,2600
+> 
+>   // v29: Post-process canvas→image replacement (backup for when capturePage's replacement didn't survive)
+>   // This ensures captured canvas screenshots are always displayed in the final HTML
+>   try {
+>     for (const file of allHtmlFiles) {
+>       let h = fs.readFileSync(file, 'utf-8');
+>       if (!h.includes('<canvas')) continue;
+>       const before = h;
+>       let canvasIdx = 0;
+>       h = h.replace(/<canvas([^>]*)>[\s\S]*?<\/canvas>/g, (match, attrs) => {
+>         const idx = canvasIdx++;
+>         const imgPath = `${OUT}/images/canvas-${idx}.png`;
+>         if (fs.existsSync(imgPath) && fs.statSync(imgPath).size > 1000) {
+>           const wMatch = attrs.match(/width="(\d+)"/);
+>           const hMatch = attrs.match(/height="(\d+)"/);
+>           const w = wMatch ? parseInt(wMatch[1]) : 0;
+>           const hVal = hMatch ? parseInt(hMatch[1]) : 0;
+>           const isFullViewport = w >= 1200 && hVal >= 600;
+>           const styleMatch = attrs.match(/style="([^"]*)"/);
+>           const origStyle = styleMatch ? styleMatch[1] : '';
+>           if (isFullViewport) {
+>             return `<img src="/images/canvas-${idx}.png" style="${origStyle};object-fit:cover;display:block"/>`;
+>           }
+>           return `<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;
+>         }
+>         return match; // No captured image, keep canvas tag
+>       });
+>       if (h !== before) {
+>         fs.writeFileSync(file, h);
+>         console.log(`     ✅ Canvas→image replacement applied in ${path.basename(file)}`);
 >       }
->       if(btn.offsetParent===null){
->         try{
->           const ghost=document.createElement(btn.tagName.toLowerCase());
->           ghost.setAttribute('role',btn.getAttribute('role')||'button');
->           ghost.className=btn.className;
->           ghost.textContent=btn.textContent;
->           ghost.style.cssText='position:absolute;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:auto;opacity:0;';
->           document.body.appendChild(ghost);
->           btn.remove();
->         }catch(e2){}
->       }else{btn.style.pointerEvents='auto'}
 >     }
+>   } catch(e) { console.log(`     ⚠ Canvas post-process: ${e.message?.slice(0,60)}`); }

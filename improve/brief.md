@@ -1,27 +1,27 @@
-## IMPROVEMENT BRIEF — v28
-Current: v27, 90/100, 2675 lines
+## IMPROVEMENT BRIEF — v29
+Current: v28, 91/100, 2722 lines
 Strategy: **PER-SITE**
-Consecutive failures: 1
-Mastered: 3 | Active: 6 | Queue: 1
+Consecutive failures: 0
+Mastered: 4 | Active: 6 | Queue: 0
 
-### FOCUS: bruno-simon.com (75/100)
+### FOCUS: bruno-simon.com (79/100)
 This is PER-SITE mode. Fix ONLY bruno-simon.com. Other sites must not regress.
 The "3+ sites" universality rule is RELAXED — site-specific fixes are OK.
 
 Per-metric breakdown:
-  images: 98/100
+  images: 95/100
   css: 100/100
   links: 100/100
   content: 50/100 ← FIX THIS
   layout: 100/100
-  interactions: 43/100 ← FIX THIS
+  interactions: 100/100
   console: 100/100
   pixels: 3/100 ← FIX THIS
   manifest: 100/100
 
 Analysis for bruno-simon.com:
 # Analysis: https://bruno-simon.com
-**Category:** 3d-portfolio | **Score:** 75/100 | **Perfect:** false
+**Category:** 3d-portfolio | **Score:** 79/100 | **Perfect:** false
 
 ## Tech Stack (Original)
 - Framework: Unknown
@@ -34,24 +34,24 @@ Analysis for bruno-simon.com:
 ## Element Comparison (Original → Clone)
 | Element | Original | Clone | Delta |
 |---------|----------|-------|-------|
-| Visible | 19 | 19 | 0 |
-| Images (rendered) | 1 | 46 | 45 |
+| Visible | 19 | 53 | 34 |
+| Images (rendered) | 1 | 20 | 19 |
 | Links | 21 | 21 | 0 |
 | Buttons | 42 | 42 | 0 |
 | Headings | 6 | 6 | 0 |
 | Grids | 0 | 0 | 0 |
-| Flexes | 58 | 58 | 0 |
+| Flexes | 58 | 34 | -24 |
 
 ## Scores
 | Metric | Score | Perfect |
 |--------|-------|---------|
-| Images | 98/100 | NO |
+| Images | 95/100 | NO |
 | CSS | 100/100 | YES |
 | Links | 100/100 | YES |
 | Content | 50/100 | NO |
 | Layout | 100/100 | YES |
 | Pixels | 3/100 | NO |
-| Interactions | 43/100 | NO |
+| Interactions | 100/100 | YES |
 | Console | 100/100 | YES |
 | Manifest | 100/100 | YES |
 
@@ -62,38 +62,41 @@ Analysis for bruno-simon.com:
 
 ## Capture Manifest
 - HTML pages: 1
-- Images: 64 (avg 22536 bytes)
+- Images: 64 (avg 25581 bytes)
 - Fonts: 25
-- Total size: 4601 KB
+- Total size: 4899 KB
 - External refs remaining: 0
 - Issues: none
 
 ## Root Causes
-- IMAGES: 46/1 rendered (-45 missing). Strategy: lazy-loading. Broken: 
+- IMAGES: 20/1 rendered (-19 missing). Strategy: lazy-loading. Broken: 
 - CONTENT: undefined/undefined words matched (50%). Clone has undefined words.
-- INTERACTIONS: 2/42 buttons clickable, nav: true
 
 ## Suggested Fixes (universal)
-- Handle lazy-loading: scroll to trigger lazy images before capture, or rewrite data-sr
+- Handle lazy-loading: scroll to trigger lazy images before capture, or rewrite data-src to src
+
+## Screenshots
+- Original: `bruno-s
 
 ### SITE SCORES (worst → best)
-[NEEDS_WORK] bruno-simon.com           75/100
+[NEEDS_WORK] bruno-simon.com           79/100
 [NEEDS_WORK] resn.co.nz                80/100
-[NEEDS_WORK] lusion.co                 82/100
 [NEEDS_WORK] www.locomotive.ca         83/100
+[NEEDS_WORK] lusion.co                 83/100
+[NEEDS_WORK] www.awwwards.com          88/100
 [OK        ] cuberto.com               96/100
-[PERFECT   ] www.freezpak.com          98/100
 [PERFECT   ] basement.studio           98/100
 [PERFECT   ] ingamana.com              99/100
 [PERFECT   ] pentagram.com             99/100
+[PERFECT   ] www.freezpak.com          100/100
 
 ### METRIC AVERAGES
-  pixels          avg:66  worst:3 (bruno-simon.com)
-  content         avg:79  worst:0 (resn.co.nz)
-  interactions    avg:84  worst:43 (bruno-simon.com)
+  pixels          avg:68  worst:3 (bruno-simon.com)
+  content         avg:78  worst:0 (resn.co.nz)
   links           avg:92  worst:64 (www.locomotive.ca)
-  layout          avg:97  worst:71 (www.locomotive.ca)
-  images          avg:100  worst:98 (bruno-simon.com)
+  layout          avg:94  worst:67 (www.awwwards.com)
+  interactions    avg:95  worst:50 (resn.co.nz)
+  images          avg:100  worst:95 (bruno-simon.com)
   css             avg:100  worst:100 ()
   console         avg:100  worst:100 ()
   manifest        avg:100  worst:100 ()
@@ -108,8 +111,8 @@ Analysis for bruno-simon.com:
   lusion.co content: ±28 (NON-DETERMINISTIC, don't try to fix)
 
 ### INSTRUCTIONS
-1. Read v27-stable.js (the current code)
+1. Read v28-stable.js (the current code)
 2. Based on the strategy above, implement 2-4 targeted fixes
-3. Test on the worst site: node v28-stable.js <worst-url> /tmp/test-v28 3
-4. Quick single-site test available: node test/suite.js v28 --site <hostname>
+3. Test on the worst site: node v29-stable.js <worst-url> /tmp/test-v29 3
+4. Quick single-site test available: node test/suite.js v29 --site <hostname>
 5. Read improve/CLAUDE.md for rules
