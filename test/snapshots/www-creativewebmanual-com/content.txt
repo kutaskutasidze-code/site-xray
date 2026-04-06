@@ -1,0 +1,347 @@
+[STATUS:ACTIVE]
+
+100
+%
+
+MENU [+]
+
+[X].0PX
+
+[Y].0PX
+
+PROJECT BY
+
+HUY
+
++
+
+IVOR
+
+The creative process of
+crafting stand-out websites
+
+ACTIVE INGREDIENTS
+
+WEBFLOW
+
+GSAP
+
+CHAPTERS
+
+01. ABOUT
+
+02. DESIGN + DEV
+
+CHAPTER 1:
+
+ABOUT
+
+WHY CREATIVE WEBSITES?
+
+←
+
+CREATIVITY
+ <_<
+Creative
+ websites
+ are
+ the
+intersection
+ of
+ creativity
+and
+ technicality
+ to
+ form
+bespoke
+ digital
+ expierences
+that
+ spark
+ emotion
+.
+
+ABOUT
+
+This project is dedicated to the methodology behind crafting websites that pushes boundaries. Our process values curiosity iteration, and experimentation. View some of our techniques on creating projects that leave a lasting impression.
+Design &
+Development
+
+CHAPTER:
+
+02
+
+CHAPTERS
+2.1
+GRIDS & LAYOUTS
+2.2
+TYPOGRAPHY
+2.3
+COLOR
+2.4
+ANIMATION
+
+CHAPTER 2.1: GRIDS & LAYOUTS
+
+CURRENT GRID SPECS
+COLUMNS
+12
+ROWS
+NONE
+GUTTER / GAP
+1REM / 16PX
+Grids & Layouts
+
+Using a grid can assist in creative cohesive,
+precise and satisfying layouts by aligning
+and grouping elements within the grid.
+
+There are different types of grids, but the 12 column grid is the most commonly used grid because of it’s flexibility.
+
+TRY THESE DIFFERENT LAYOUTS
+
+↓
+
+Button Text
+1
+LAYOUT 1
+Button Text
+2
+LAYOUT 2
+Button Text
+3
+LAYOUT 3
+See projects
+
+We are a multidisciplinary design studio specializing in bespoke residential projects.
+
+However, grids are just guidelines
+and breaking out of a grid can form completely different designs.
+↘
+#@$
+
+CHAPTER 2.2 TYPE FUNDAMENTALS
+
+Typography.
+Typography.
+Typography.
+
+Typography sets the foundation of any creative websites, period. Whether you’re trying to establish a strong first impression or communicating a message to a target audience, your type has to be dialed in and align with your story and identity.
+
+TYPEFACE
+PP NEUE MONTREAL
+LETTER SPACING
+-3%
+LINE HEIGHT
+1.1 EM
+Type usage in
+award winning sites
+
+A brief breakdown behind typefaces behind our projects.
+
+SUPERSOLID
+
+For Supersolid, we used Montserrat as the base typeface, then applied a WebGL flowmap effect with chromatic aberration—creating kinetic, distorted typography that became the brand's signature and made it instantly memorable.
+
+TYPEFACES:
+JOYRIDE, MONTSERRAT, & SONO
+TRAITS:
+1.5SEC
+
+S-2K
+
+For S-2K, the goal was to express the car’s duality of technical precision and raw emotion. A combination of contemporary sans-serif and a monospace typeface to mirrors its multifaceted character that’s inspired directly from the car’s design language.
+
+TYPEFACES:
+PP NEUE MONTREAL, PP FORMULA, IBM PLEX MONO
+TRAITS:
+1.5SEC
+
+MAMMOTH MURALS
+
+For Mammoth Murals, we used Obviously Condensed Black to position them as the bold choice in a safe market, creating strong hierarchy that guided users to inquiry points. Suisse for body copy balanced impact with readability and professionalism.
+
+TYPEFACES:
+OBVIOUSLY CONDENSED BLACK & SUISSE
+TRAITS:
+1.5SEC
+
+CHAPTER 2.3
+
+Colors
+Every award-winning site shares one thing: intentional color. It’s not picked from a palette, it’s designed to evoke, to direct, and to tell a story.
+Cool tones
+EVOKE EMOTIONS SUCH AS CALM, SOPHISTICATION, AND TRUST.
+Warm tones
+EVOKE EMOTIONS SUCH AS ENERGY, PASSION, AND ANGER.
+Examples
+
+Colors on a website are rarely picked from colors or any typical palettes. Rather it’s a combination of carefully using the right accent colors to highlight a specific element or emotion and using secondary and primary colors to support it.
+
+OH ARCHITECTURE
+
+We used a monochromatic system to reflect OH Architecture's minimalist design philosophy. Subtle shade variations added dimension while maintaining the refined, gallery-like experience their work demands.
+
+MAMMOTH MURALS
+
+To elevate Mammoth Murals beyond typical mural contractors, we built a monochrome foundation that positions their work as fine art. Yellow and blue accents inject the brand's playful energy at critical moments.
+
+SOGAI™
+
+SOGAI explores generative AI in fine arts. We used rich teals and dark tones for depth and contemplation, balanced with warm creams to soften the tech-forward subject and make it approachable.
+
+CHAPTER 2.4
+
+Motion
+Animation
+Interaction
+Motion
+Animation
+Interaction
+Motion
+Animation
+Interaction
+Animations can truly make a website come to life. It can tastefully enhance the user experience by drawing attention and establishing a feeling of a website.
+Methods
+
+Any element can be animated, but here are some of the most common ways to  implement motion for the web.
+
+01
+
+50
+
+TEXT
+
+02
+
+HOVER
+
+03
+
+ICONS
+
+04
+
+SCROLLING
+
+Use delays, staggers, and easings to make more organic animations.
+
+Just like in nature, nothing moves in straight lines, every motion influences the next. Delays and easings create that organic rhythm, turning motion into flow.
+
+DURATION
+1.5 SEC
+EASING
+0.23, 0.32, 0.23, 0.2
+STAGGER
+0.025 SEC
+
+EXAMPLES OF MICRO-INTERACTIONS
+
+Well-crafted micro interactions can turn a plain website into an engaging, memorable experience—making every click, hover, and scroll feel smoother, smarter, and more delightful for your users.
+
+HOVER ME
+DURATION
+.6 SEC
+EASING
+0.87, 0, 0.13, 1
+METHOD
+SPLIT-TEXT (GSAP)
+HOVER ME
+HOVER ME
+DURATION
+.45 SEC
+EASING
+0.16, 1, 0.3, 1
+METHOD
+OVERLAP & FOLLOW THROUGH (CSS)
+
+CHAPTER 3: FINAL WORD
+
+And last but not least,  it is important for you to constantly...
+
+PUT IN THE REPS
+
+Create passion projects, experiment with animations, and explore new design ideas. The more you build, break, and refine, the sharper your creative instincts get. Make connections, refine your taste, and have fun making websites.
+
+We understand the process of a creative website can be overwhelming so here are is a collection of resources for you to learn and use.
+RESOURCES CURATED BY HUY AND IVOR
+Books
+SANS-IN-USE BY VICTIONARY
+↗
+DISPLAY-IN-USE BY VICTIONARY
+↗
+SERIF-IN-USE BY VICTIONARY
+↗
+GRID SYSTEMS IN GRAPHIC DESIGN BY JOSEF MÜLLER-BROCKMANN
+↗
+NEW UTILITARIAN BY VICTIONARY
+↗
+THINKING WITH TYPE BY ELLEN LUPTON
+↗
+THE DESIGN OF EVERYDAY THINGS BY DON NORMAN
+↗
+DON’T MAKE ME THINK BY STEVE KRUG
+↗
+Courses and Communities
+MAXIME HECKEL’S BLOG (3D BLOGS)
+↗
+THREE.JS JOURNEY
+↗
+OLIVER LAROSE’S YOUTUBE
+↗
+ILJA VAN ECKS’S YOUTUBE
+↗
+OSMO
+↗
+MADE WITH GSAP
+↗
+12 PRINCIPLE OF ANIMATIONS
+↗
+Inspiration
+INSPO.PAGE
+↗
+AWWWARDS.COM
+↗
+FOOTER.DESIGN
+↗
+MINIMAL.GALLERY
+↗
+MAXIBESTOF
+↗
+MUZLI.ME
+↗
+FONTSINUSE.COM
+↗
+GRIDS BY OBYS AGENCY
+↗
+MOTION BY ZAJNO
+↗
+SAVEE.COM
+↗
+
+[X].0PX
+
+[Y].0PX
+
+PROJECT BY
+
+HUY
+
++
+
+IVOR
+
+The creative process of
+crafting stand-out websites
+
+ACTIVE INGREDIENTS
+
+WEBFLOW
+
+GSAP
+
+CHAPTERS
+
+01. ABOUT
+
+02. DESIGN + DEV

@@ -1,12 +1,62 @@
 [
-  {"site": "https://lusion.co", "old": 86, "new": 83, "diff": -3},
-  {"site": "https://www.locomotive.ca", "old": 83, "new": 83, "diff": 0},
-  {"site": "https://ingamana.com", "old": 99, "new": 99, "diff": 0},
-  {"site": "https://resn.co.nz", "old": 80, "new": 80, "diff": 0},
-  {"site": "https://www.awwwards.com/websites", "old": 88, "new": 88, "diff": 0},
-  {"site": "https://basement.studio", "old": 98, "new": 98, "diff": 0},
-  {"site": "https://cuberto.com", "old": 96, "new": 96, "diff": 0},
-  {"site": "https://pentagram.com", "old": 99, "new": 99, "diff": 0},
-  {"site": "https://www.freezpak.com", "old": 100, "new": 100, "diff": 0},
-  {"site": "https://bruno-simon.com", "old": 79, "new": 90, "diff": 11}
+  {
+    "site": "https://lusion.co",
+    "old": 86,
+    "new": 83,
+    "diff": -3
+  },
+  {
+    "site": "https://www.locomotive.ca",
+    "old": 83,
+    "new": 83,
+    "diff": 0
+  },
+  {
+    "site": "https://ingamana.com",
+    "old": 99,
+    "new": 99,
+    "diff": 0
+  },
+  {
+    "site": "https://resn.co.nz",
+    "old": 80,
+    "new": 80,
+    "diff": 0
+  },
+  {
+    "site": "https://www.awwwards.com/websites",
+    "old": 88,
+    "new": 88,
+    "diff": 0
+  },
+  {
+    "site": "https://basement.studio",
+    "old": 98,
+    "new": 98,
+    "diff": 0
+  },
+  {
+    "site": "https://cuberto.com",
+    "old": 96,
+    "new": 96,
+    "diff": 0
+  },
+  {
+    "site": "https://pentagram.com",
+    "old": 99,
+    "new": 99,
+    "diff": 0
+  },
+  {
+    "site": "https://www.freezpak.com",
+    "old": 100,
+    "new": 100,
+    "diff": 0
+  },
+  {
+    "site": "https://bruno-simon.com",
+    "old": 79,
+    "new": 90,
+    "diff": 11
+  }
 ]
