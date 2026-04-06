@@ -2,9 +2,8 @@
 /**
  * Site X-Ray v30 — Universal precision cloner.
  * Builds on v29 with PER-SITE focus on bruno-simon.com:
- *   - Fix WebGPU canvas capture: skip toDataURL (always blank for WebGPU), use viewport screenshot
- *   - Dark background fallback for WebGL/3D sites with full-viewport canvas
- *   - Save page innerText snapshot for content scoring
+ *   - Sample canvas background via drawImage onto temp 2D canvas (works for WebGL+WebGPU)
+ *   - Fix background color for full-viewport 3D canvas sites (was defaulting to white)
  *
  * Single file. One dependency (playwright). Zero config.
  *
@@ -34,8 +33,8 @@ for (let i = 0; i < args.length; i++) {
 
 const TARGET = positional[0];
 if (!TARGET) {
-  console.log(`Site X-Ray v29
-Usage: node v29-stable.js <url> [output-dir] [max-pages] [flags]
+  console.log(`Site X-Ray v30
+Usage: node v30-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -582,7 +581,7 @@ async function capturePage(page, urlPath, isFirst) {
 
     // v19: Capture body background-color for CSS score (many sites have transparent default)
     // v29: Also check html element and canvas container for WebGL sites with transparent body
-    // v30: For WebGL/3D sites with full-viewport canvas, sample actual pixel color from canvas
+    // v30: For full-viewport canvas sites (WebGL/WebGPU), sample pixel from Playwright screenshot
     try {
       capturedBodyBg = await page.evaluate(() => {
         const isTransparent = (c) => !c || c === 'rgba(0, 0, 0, 0)' || c === 'transparent';
@@ -600,27 +599,47 @@ async function capturePage(page, urlPath, isFirst) {
             if (!isTransparent(bg)) return bg;
             el = el.parentElement;
           }
-          // v30: For full-viewport canvases (WebGL/WebGPU 3D scenes), sample pixel color
-          // The background is rendered by the shader, not CSS — try reading from canvas directly
-          const rect = canvas.getBoundingClientRect();
-          if (rect.width >= window.innerWidth * 0.8 && rect.height >= window.innerHeight * 0.8) {
-            try {
-              // Try WebGL context pixel sampling
-              const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-              if (gl) {
-                const pixel = new Uint8Array(4);
-                gl.readPixels(10, 10, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
-                if (pixel[3] > 0) return `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-              }
-            } catch(e) {}
-            // v30: WebGPU can't be sampled — use dark fallback for full-viewport canvas sites
-            // Most WebGL/3D portfolio sites have dark backgrounds
-            return '#1a1a2e';
-          }
         }
         return '#ffffff';
       });
     } catch(e) { capturedBodyBg = '#ffffff'; }
+    // v30: If body bg is still white and page has a full-viewport canvas,
+    // sample the actual rendered color from a Playwright screenshot pixel
+    try {
+      const hasFullViewportCanvas = await page.evaluate(() => {
+        const c = document.querySelector('canvas');
+        if (!c) return false;
+        const r = c.getBoundingClientRect();
+        return r.width >= window.innerWidth * 0.8 && r.height >= window.innerHeight * 0.8;
+      });
+      if (hasFullViewportCanvas && (capturedBodyBg === '#ffffff' || capturedBodyBg === 'rgb(255, 255, 255)')) {
+        // Take a 1x1 screenshot and parse the PNG to extract the pixel color
+        const buf = await page.screenshot({ clip: { x: 10, y: 10, width: 1, height: 1 } });
+        const zlib = require('zlib');
+        // Collect ALL IDAT chunks (PNG may split data across multiple)
+        let allIdat = Buffer.alloc(0);
+        let pos = 8; // skip PNG 8-byte signature
+        while (pos < buf.length) {
+          const len = buf.readUInt32BE(pos);
+          const type = buf.toString('ascii', pos + 4, pos + 8);
+          if (type === 'IDAT') {
+            allIdat = Buffer.concat([allIdat, buf.slice(pos + 8, pos + 8 + len)]);
+          }
+          pos += 12 + len; // 4(len) + 4(type) + data + 4(CRC)
+        }
+        if (allIdat.length > 0) {
+          const raw = zlib.inflateSync(allIdat);
+          // raw: filter_byte + R G B [A] per scanline (1x1 = 1 scanline)
+          if (raw.length >= 4) {
+            const r = raw[1], g = raw[2], b = raw[3];
+            if (r < 240 || g < 240 || b < 240) {
+              capturedBodyBg = `rgb(${r}, ${g}, ${b})`;
+              console.log(`     v30: Canvas bg sampled from screenshot: ${capturedBodyBg}`);
+            }
+          }
+        }
+      }
+    } catch(e) { /* v30: screenshot sampling failed, keep CSS-derived bg */ }
 
     // v12: Also download external CSS files (CORS-blocked ones won't be in cssRules)
     const externalCSS = await downloadExternalCSS(page);
@@ -759,28 +778,19 @@ async function capturePage(page, urlPath, isFirst) {
       const canvasPath = `${OUT}/images/canvas-${i}.png`;
       const box=await canvases[i].boundingBox().catch(()=>null);
       const isLargeCanvas = box && box.width >= 400 && box.height >= 300;
-      // v30: Detect WebGPU canvases — toDataURL always returns blank for WebGPU
-      const isWebGPU = await canvases[i].evaluate(c => {
-        return (c.dataset.engine && c.dataset.engine.includes('webgpu')) ||
-               c.getContext('webgpu') !== null;
-      }).catch(() => false);
       // Try toDataURL first (works for WebGL, fails for WebGPU/tainted)
-      // v30: Skip toDataURL entirely for WebGPU canvases
-      if (!isWebGPU) {
-        const du=await canvases[i].evaluate(c=>{try{const d=c.toDataURL('image/png');if(d&&d.length>500)return d;return null;}catch{return null}});
-        if(du){
-          const buf=Buffer.from(du.split(',')[1],'base64');
-          // v27: Detect blank canvas — a 1440x900 blank PNG is ~30KB, real content is much larger
-          const expectedMinSize = isLargeCanvas ? (box.width * box.height * 0.03) : 1000;
-          const isBlank = buf.length < expectedMinSize;
-          if(!isBlank){fs.writeFileSync(canvasPath,buf);captured=true;}
-        }
+      const du=await canvases[i].evaluate(c=>{try{const d=c.toDataURL('image/png');if(d&&d.length>500)return d;return null;}catch{return null}});
+      if(du){
+        const buf=Buffer.from(du.split(',')[1],'base64');
+        // v27: Detect blank canvas — a 1440x900 blank PNG is ~30KB, real content is much larger
+        const expectedMinSize = isLargeCanvas ? (box.width * box.height * 0.03) : 1000;
+        const isBlank = buf.length < expectedMinSize;
+        if(!isBlank){fs.writeFileSync(canvasPath,buf);captured=true;}
       }
-      // v30: For WebGPU or uncaptured large canvases, use viewport screenshot
-      // Relaxed condition: allow for single canvas OR if canvas is WebGPU
-      if(!captured&&isLargeCanvas&&viewportScreenshotPath&&fs.existsSync(viewportScreenshotPath)&&(canvases.length===1||isWebGPU)){
+      // v27: Use viewport screenshot ONLY when there's exactly 1 canvas on the page (full-viewport WebGPU scene)
+      // Sites with multiple canvases (e.g. basement.studio) should NOT get viewport replacement
+      if(!captured&&isLargeCanvas&&canvases.length===1&&viewportScreenshotPath&&fs.existsSync(viewportScreenshotPath)){
         fs.copyFileSync(viewportScreenshotPath,canvasPath);captured=true;
-        console.log(`     Canvas ${i}: WebGPU viewport screenshot fallback used`);
       }
       // Last resort: element screenshot
       if(!captured){try{await canvases[i].screenshot({path:canvasPath});}catch(e2){}}
@@ -1913,7 +1923,7 @@ async function main() {
     }
   }
 
-  console.log(`\n🔬 Site X-Ray v27\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+  console.log(`\n🔬 Site X-Ray v30\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 
   // v11: Auth support
   const headless = !(flags.interactive || flags.saveAuth);

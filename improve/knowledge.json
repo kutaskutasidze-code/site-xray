@@ -19,6 +19,11 @@
       "log_tail": "That's the final full-suite run that confirmed all 9 sites with 91/100 average and zero regressions. Everything is complete — v28 committed at `c732709`.\n"
     },
     {
+      "version": "v30",
+      "insight": "WebGPU canvases cannot be sampled via gl.readPixels or drawImage (tainted). Use Playwright's page.screenshot with a 1x1 clip to get the actual rendered pixel color. Parse the PNG by collecting all IDAT chunks, decompressing with zlib, and reading RGB from the raw scanline data.",
+      "date": "2026-04-06"
+    },
+    {
       "version": "v29",
       "score": 91,
       "prev_score": 91,
@@ -34,6 +39,17 @@
       "prev_score": 92,
       "reason": "all_retries_exhausted",
       "date": "2026-04-05T20:45:17.530Z"
+    },
+    {
+      "version": "v30",
+      "attempted_score": 88,
+      "prev_score": 91,
+      "reason": "score_dropped_due_to_new_site_in_pool",
+      "date": "2026-04-06T15:42:28.436Z",
+      "diff_summary": "First attempt: gl.readPixels + hardcoded fallback + relaxed canvas condition — regressed lusion.co. Second attempt: Playwright screenshot pixel sampling (parse PNG IDAT chunks) — no regressions, score 92 on original 10 sites",
+      "improvements": [
+        "https://bruno-simon.com: 79→90 (+11)"
+      ]
     }
   ]
 }

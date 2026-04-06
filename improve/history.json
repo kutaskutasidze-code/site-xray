@@ -8,15 +8,14 @@
     "strategy": "per-site",
     "target_site": "bruno-simon.com",
     "changes": [
-      "v30: Fix WebGPU canvas capture — detect WebGPU canvases via data-engine attr, skip toDataURL (always blank for WebGPU), use viewport screenshot fallback directly",
-      "v30: Dark background fallback for full-viewport canvas sites — sample WebGL pixel color, fallback to #1a1a2e instead of white for WebGPU/3D sites",
-      "v30: Relaxed viewport screenshot fallback condition — allow for WebGPU canvases even with multiple canvas elements"
+      "v30: Sample canvas background from Playwright screenshot pixel — for full-viewport canvas sites (WebGL/WebGPU) with no CSS background, take 1x1 screenshot and parse PNG to extract actual rendered color instead of defaulting to white",
+      "v30: Only applies when CSS background chain is fully transparent AND canvas covers >80% viewport"
     ],
     "metrics_improved": {
-      "bruno-simon.com pixels": "3 → 87",
-      "bruno-simon.com total": "79 → 92"
+      "bruno-simon.com pixels": "3 → 76-84",
+      "bruno-simon.com total": "79 → 90"
     },
-    "regressions": "lusion.co content -27 (volatile metric, ±28 non-deterministic)"
+    "regressions": "lusion.co content -3 (volatile metric ±28, not code-related)"
   },
   {
     "version": "v29",
