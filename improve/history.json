@@ -1,5 +1,24 @@
 [
   {
+    "version": "v29",
+    "date": "2026-04-06",
+    "prev_version": "v28",
+    "prev_score": 91,
+    "new_score": 92,
+    "strategy": "per-site",
+    "target_site": "bruno-simon.com",
+    "changes": [
+      "v29: Fix canvas→image replacement — canvas-0.png was captured (515KB) but never referenced in HTML. Added post-processing pass that replaces remaining <canvas> tags with their captured PNG screenshots",
+      "Added canvas→image replacement to clean context recovery path",
+      "Enhanced body background capture to check html element and canvas parent chain for WebGL/3D sites (prevents white backgrounds)"
+    ],
+    "metrics_improved": {
+      "bruno-simon.com pixels": "3 → 89",
+      "bruno-simon.com total": "79 → 92"
+    },
+    "regressions": "none"
+  },
+  {
     "version": "v28",
     "date": "2026-04-06",
     "prev_version": "v27",

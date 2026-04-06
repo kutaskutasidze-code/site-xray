@@ -2,8 +2,8 @@
   "consecutive_failures": 0,
   "last_approaches": [],
   "regressions_seen": [],
-  "current_strategy": "universal",
-  "last_success_date": "2026-04-06T06:48:49.781Z",
-  "last_success_version": "v28",
-  "last_success_score": 91
+  "current_strategy": "per-site",
+  "last_success_date": "2026-04-06T09:00:00.000Z",
+  "last_success_version": "v29",
+  "last_success_score": 92
 }
