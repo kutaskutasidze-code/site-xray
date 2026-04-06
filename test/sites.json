@@ -1,124 +1,75 @@
 {
   "active": [
     {
-      "url": "https://www.morganlewis.com",
-      "category": "corporate",
-      "difficulty": "medium",
-      "pages": 5
-    },
-    {
-      "url": "https://pentagram.com",
-      "category": "portfolio",
-      "difficulty": "medium",
-      "pages": 3
-    },
-    {
-      "url": "https://www.cravath.com",
-      "category": "corporate",
-      "difficulty": "easy",
-      "pages": 3
-    },
-    {
-      "url": "https://www.roomshotels.com",
-      "category": "hospitality",
-      "difficulty": "medium",
-      "pages": 3
-    },
-    {
-      "url": "https://www.awwwards.com",
-      "category": "heavy-js",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://www.apple.com",
-      "category": "corporate",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://notion.so",
-      "category": "nextjs",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://lusion.co",
-      "category": "webgl",
-      "difficulty": "extreme",
-      "pages": 2
-    }
-  ],
-  "mastered": [
-    {
-      "url": "https://vercel.com",
-      "category": "nextjs",
-      "difficulty": "medium",
-      "pages": 3,
-      "mastered_at": "2026-04-02T12:30:33.244Z",
-      "mastered_version": "v17"
-    },
-    {
-      "url": "https://linear.app",
-      "category": "nextjs",
-      "difficulty": "medium",
-      "pages": 3,
-      "mastered_at": "2026-04-02T12:42:14.361Z",
-      "mastered_version": "v17"
-    },
-    {
-      "url": "https://stripe.com",
-      "category": "heavy-js",
-      "difficulty": "hard",
-      "pages": 2,
-      "mastered_at": "2026-04-03T21:20:21.784Z",
-      "mastered_version": "v19"
-    },
-    {
-      "url": "https://cuberto.com",
-      "category": "webflow",
-      "difficulty": "medium",
-      "pages": 3,
-      "mastered_at": "2026-04-05T01:07:03.519Z",
-      "mastered_version": "v24"
-    }
-  ],
-  "queue": [
-    {
-      "url": "https://www.shopify.com",
-      "category": "ecommerce",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://resn.co.nz",
-      "category": "webgl",
-      "difficulty": "extreme",
-      "pages": 2
-    },
-    {
-      "url": "https://www.tesla.com",
-      "category": "corporate",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://basement.studio",
+      "url": "https://ingamana.com",
       "category": "creative-agency",
-      "difficulty": "hard",
-      "pages": 3
-    },
-    {
-      "url": "https://www.freezpak.com",
-      "category": "lottie-scroll",
-      "difficulty": "hard",
-      "pages": 2
+      "difficulty": "medium",
+      "pages": 1
     },
     {
       "url": "https://www.locomotive.ca",
       "category": "creative-agency",
       "difficulty": "medium",
-      "pages": 3
+      "pages": 1
+    },
+    {
+      "url": "https://bruno-simon.com",
+      "category": "3d-portfolio",
+      "difficulty": "extreme",
+      "pages": 1
+    },
+    {
+      "url": "https://lusion.co",
+      "category": "webgl",
+      "difficulty": "extreme",
+      "pages": 1
+    },
+    {
+      "url": "https://resn.co.nz",
+      "category": "webgl",
+      "difficulty": "extreme",
+      "pages": 1
+    },
+    {
+      "url": "https://www.awwwards.com/websites",
+      "category": "design-gallery",
+      "difficulty": "hard",
+      "pages": 1
     }
-  ]
+  ],
+  "mastered": [
+    {
+      "url": "https://basement.studio",
+      "category": "creative-agency",
+      "difficulty": "hard",
+      "pages": 1,
+      "mastered_at": "2026-04-05T17:45:16.030Z",
+      "mastered_version": "v26"
+    },
+    {
+      "url": "https://cuberto.com",
+      "category": "creative-agency",
+      "difficulty": "medium",
+      "pages": 1,
+      "mastered_at": "2026-04-05T19:23:24.903Z",
+      "mastered_version": "v27"
+    },
+    {
+      "url": "https://pentagram.com",
+      "category": "design-agency",
+      "difficulty": "medium",
+      "pages": 1,
+      "mastered_at": "2026-04-05T20:30:56.817Z",
+      "mastered_version": "v27"
+    },
+    {
+      "url": "https://www.freezpak.com",
+      "category": "lottie-scroll",
+      "difficulty": "hard",
+      "pages": 1,
+      "mastered_at": "2026-04-06T06:25:04.114Z",
+      "mastered_version": "v28"
+    }
+  ],
+  "queue": []
 }

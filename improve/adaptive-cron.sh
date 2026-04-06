@@ -12,7 +12,7 @@
 # Usage: Run from crontab every hour. Self-skips when not due.
 # ═══════════════════════════════════════
 
-XRAY_DIR="/opt/site-xray"
+XRAY_DIR="/opt/site-xray-creative"
 SCHEDULE_FILE="$XRAY_DIR/improve/next-run.txt"
 
 # Check if it's time to run
@@ -27,7 +27,7 @@ fi
 
 # Run the cycle
 cd "$XRAY_DIR"
-./improve/cycle.sh --auto --notify >> /var/log/site-xray/cycle.log 2>&1
+./improve/cycle.sh --auto --notify >> /var/log/site-xray-creative/cycle.log 2>&1
 EXIT_CODE=$?
 
 # Determine next run delay based on result
@@ -38,7 +38,7 @@ if [ -f "$FOCUS_FILE" ]; then
 fi
 
 # Check for rate limiting
-if grep -qi "rate limit\|hit your limit" /var/log/site-xray/cycle.log 2>/dev/null | tail -5 | grep -qi "rate limit"; then
+if grep -qi "rate limit\|hit your limit" /var/log/site-xray-creative/cycle.log 2>/dev/null | tail -5 | grep -qi "rate limit"; then
   # Rate limited — wait 6 hours from now
   DELAY=21600
   echo "   Adaptive: rate limited, next run in 6h"

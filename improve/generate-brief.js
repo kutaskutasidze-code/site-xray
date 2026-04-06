@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const XRAY_DIR = process.argv[2] || '/opt/site-xray';
+const XRAY_DIR = process.argv[2] || '/opt/site-xray-creative';
 const version = process.argv[3] || fs.readFileSync(path.join(XRAY_DIR, 'VERSION'), 'utf-8').trim();
 const strategy = process.argv[4] || 'universal';
 

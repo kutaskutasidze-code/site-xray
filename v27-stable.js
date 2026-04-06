@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Site X-Ray v25 — Universal precision cloner.
+ * Site X-Ray v27 — Universal precision cloner.
  * Builds on v24 with METRIC-FOCUS on interactions/pixels:
  *   - Fix nav detection for hamburger/hidden menus (count all links, not just visible)
  *   - Improves interactions score on sites with collapsed mobile navigation
  *
  * Single file. One dependency (playwright). Zero config.
  *
- * Usage: node v25-stable.js <url> [output-dir] [max-pages] [flags]
+ * Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
  * Default max-pages: 20
  */
 
@@ -33,8 +33,8 @@ for (let i = 0; i < args.length; i++) {
 
 const TARGET = positional[0];
 if (!TARGET) {
-  console.log(`Site X-Ray v25
-Usage: node v25-stable.js <url> [output-dir] [max-pages] [flags]
+  console.log(`Site X-Ray v27
+Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -44,12 +44,12 @@ Flags:
   --interactive      Open visible browser, wait for manual sign-in
 
 Examples:
-  node v25-stable.js https://example.com
-  node v25-stable.js https://example.com ./output 50
-  node v25-stable.js https://example.com --all
-  node v25-stable.js https://example.com --auth auth-state.json
-  node v25-stable.js https://example.com --save-auth
-  node v25-stable.js https://example.com --interactive`);
+  node v27-stable.js https://example.com
+  node v27-stable.js https://example.com ./output 50
+  node v27-stable.js https://example.com --all
+  node v27-stable.js https://example.com --auth auth-state.json
+  node v27-stable.js https://example.com --save-auth
+  node v27-stable.js https://example.com --interactive`);
   process.exit(0);
 }
 
@@ -709,9 +709,40 @@ async function capturePage(page, urlPath, isFirst) {
       }
     } catch {}
 
-    // Canvas capture
+    // Canvas capture (v27: viewport screenshot fallback for WebGPU/tainted canvases)
     const canvases=await page.$$('canvas');
-    for(let i=0;i<canvases.length;i++){try{const du=await canvases[i].evaluate(c=>{try{return c.toDataURL('image/png')}catch{return null}});if(du)fs.writeFileSync(`${OUT}/images/canvas-${i}.png`,Buffer.from(du.split(',')[1],'base64'));else await canvases[i].screenshot({path:`${OUT}/images/canvas-${i}.png`});}catch(e){}}
+    // v27: Take a viewport screenshot first as fallback for canvases that can't be captured via toDataURL
+    let viewportScreenshotPath = null;
+    if (canvases.length > 0) {
+      try {
+        viewportScreenshotPath = `${OUT}/images/viewport-capture.png`;
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.waitForTimeout(500);
+        await page.screenshot({ path: viewportScreenshotPath, fullPage: false });
+      } catch(e) { viewportScreenshotPath = null; }
+    }
+    for(let i=0;i<canvases.length;i++){try{
+      let captured = false;
+      const canvasPath = `${OUT}/images/canvas-${i}.png`;
+      const box=await canvases[i].boundingBox().catch(()=>null);
+      const isLargeCanvas = box && box.width >= 400 && box.height >= 300;
+      // Try toDataURL first (works for WebGL, fails for WebGPU/tainted)
+      const du=await canvases[i].evaluate(c=>{try{const d=c.toDataURL('image/png');if(d&&d.length>500)return d;return null;}catch{return null}});
+      if(du){
+        const buf=Buffer.from(du.split(',')[1],'base64');
+        // v27: Detect blank canvas — a 1440x900 blank PNG is ~30KB, real content is much larger
+        const expectedMinSize = isLargeCanvas ? (box.width * box.height * 0.03) : 1000;
+        const isBlank = buf.length < expectedMinSize;
+        if(!isBlank){fs.writeFileSync(canvasPath,buf);captured=true;}
+      }
+      // v27: Use viewport screenshot ONLY when there's exactly 1 canvas on the page (full-viewport WebGPU scene)
+      // Sites with multiple canvases (e.g. basement.studio) should NOT get viewport replacement
+      if(!captured&&isLargeCanvas&&canvases.length===1&&viewportScreenshotPath&&fs.existsSync(viewportScreenshotPath)){
+        fs.copyFileSync(viewportScreenshotPath,canvasPath);captured=true;
+      }
+      // Last resort: element screenshot
+      if(!captured){try{await canvases[i].screenshot({path:canvasPath});}catch(e2){}}
+    }catch(e){}}
 
     // ── WebGL shader extraction ──
     const shaderData=await page.evaluate(()=>{
@@ -1191,17 +1222,49 @@ async function capturePage(page, urlPath, isFirst) {
     } catch {}
   }
 
-  // v13: Freeze computed layout BEFORE capturing DOM
-  // This preserves JS-initialized grids, flex layouts, and responsive states
+  // v26: SMART layout freeze — auto-detect whether site needs it
+  // Responsive sites (calc/clamp, many @media queries, lenis/gsap) → skip freeze entirely
+  // JS-stripped sites (CSS-in-JS, no @media, React/Vue runtime layouts) → freeze full layout
+  // Mixed sites → freeze only display property (minimal, safe)
   await page.evaluate(() => {
-    const layoutProps = ['display','grid-template-columns','grid-template-rows','gap','column-gap','row-gap',
-      'flex-direction','flex-wrap','justify-content','align-items','grid-column','grid-row',
-      'max-width','width','min-height','columns','column-count'];
+    // Detect site type
+    const detectMode = () => {
+      const allCSS = [...document.styleSheets].map(s => { try { return [...s.cssRules].map(r=>r.cssText).join(''); } catch { return ''; } }).join('');
+      const htmlClass = document.documentElement.className + ' ' + document.body.className;
+      
+      // Signals for RESPONSIVE site (skip freeze)
+      const hasResponsiveFuncs = /calc\(|min\(|max\(|clamp\(/.test(allCSS);
+      const mediaQueryCount = (allCSS.match(/@media/g) || []).length;
+      const hasResponsiveFramework = /lenis|locomotive|smooth-scroll/i.test(htmlClass);
+      const responsiveSignals = (hasResponsiveFuncs ? 2 : 0) + (mediaQueryCount >= 5 ? 2 : mediaQueryCount >= 2 ? 1 : 0) + (hasResponsiveFramework ? 2 : 0);
+      
+      // Signals for JS-STRIPPED site (need full freeze)
+      const hasCSSinJS = /data-emotion|css-[a-z0-9]{6,}|sc-[a-zA-Z0-9]+/.test(document.body.innerHTML);
+      const hasFrameworkMarkers = !!document.querySelector('[data-reactroot],#__next,#__nuxt,[data-v-app]');
+      const cssRulesCount = allCSS.length;
+      const lowCSSVolume = cssRulesCount < 5000 && hasFrameworkMarkers;  // tiny CSS + framework = CSS-in-JS
+      const jsStrippedSignals = (hasCSSinJS ? 2 : 0) + (lowCSSVolume ? 2 : 0);
+      
+      if (responsiveSignals >= 3) return 'skip';           // responsive-first site
+      if (jsStrippedSignals >= 2) return 'full';            // JS-stripped needs rescue
+      return 'display-only';                                // safe minimal freeze
+    };
+
+    const mode = detectMode();
+    console.log('[layout-freeze] mode:', mode);
+    if (mode === 'skip') return;
+
+    // display-only: just freeze display property to preserve JS-set layouts
+    // full: freeze everything including widths (old behavior for JS-stripped sites)
+    const layoutProps = mode === 'full'
+      ? ['display','grid-template-columns','grid-template-rows','gap','column-gap','row-gap',
+         'flex-direction','flex-wrap','justify-content','align-items','grid-column','grid-row',
+         'max-width','width','min-height','columns','column-count']
+      : ['display','grid-template-columns','grid-template-rows','flex-direction','justify-content','align-items'];
 
     document.querySelectorAll('*').forEach(el => {
       const cs = getComputedStyle(el);
       const display = cs.display;
-      // Only process grid/flex containers and their children
       if (display === 'grid' || display === 'inline-grid' || display === 'flex' || display === 'inline-flex') {
         const overrides = [];
         for (const prop of layoutProps) {
@@ -1211,7 +1274,6 @@ async function capturePage(page, urlPath, isFirst) {
           }
         }
         if (overrides.length > 0) {
-          // Append to existing inline style, don't overwrite
           const existing = el.getAttribute('style') || '';
           el.setAttribute('style', existing + (existing ? ';' : '') + overrides.join(';'));
         }
@@ -1378,7 +1440,8 @@ async function capturePage(page, urlPath, isFirst) {
   let ci=0;
   const logoVid = Object.entries(urlMap).find(([k,v])=>v.startsWith('/videos/')&&(k.includes('logo')||k.includes('animation')))?.[1];
   const anyVid = Object.values(urlMap).find(v=>v.startsWith('/videos/'));
-  html=html.replace(/<canvas[^>]*>[\s\S]*?<\/canvas>/g,()=>{const idx=ci++;if(logoVid){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${logoVid}"></video>`;}if(anyVid&&idx===0){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${anyVid}"></video>`;}if(fs.existsSync(`${OUT}/images/canvas-${idx}.png`))return`<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;return'';});
+  html=html.replace(/<canvas([^>]*)>[\s\S]*?<\/canvas>/g,(match,attrs)=>{const idx=ci++;if(logoVid){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${logoVid}"></video>`;}if(anyVid&&idx===0){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${anyVid}"></video>`;}if(fs.existsSync(`${OUT}/images/canvas-${idx}.png`)){// v27: Detect full-viewport canvases (WebGL/WebGPU 3D scenes) — preserve their position/size
+      const wMatch=attrs.match(/width="(\d+)"/);const hMatch=attrs.match(/height="(\d+)"/);const w=wMatch?parseInt(wMatch[1]):0;const h=hMatch?parseInt(hMatch[1]):0;const isFullViewport=w>=1200&&h>=600;const styleMatch=attrs.match(/style="([^"]*)"/);const origStyle=styleMatch?styleMatch[1]:'';if(isFullViewport){return`<img src="/images/canvas-${idx}.png" style="${origStyle};object-fit:cover;display:block"/>`;}return`<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;}return'';});
 
   // Also: empty Logo_container divs (JS-injected content that wasn't rendered) → inject video
   if (logoVid) {
@@ -1417,12 +1480,12 @@ async function capturePage(page, urlPath, isFirst) {
   // Inject CSS + fixes
   html=html.replace('</head>',`
 <style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 
   // Inject CDN + animation script + v13 UI interactivity
-  const scriptContent = sharedAnimScript || `document.querySelectorAll('button,a,[role="button"],[class*="element"],[class*="card"]').forEach(el=>{el.style.pointerEvents='auto';if(el.tagName==='A'||el.tagName==='BUTTON')el.style.cursor='pointer'});`;
+  const scriptContent = sharedAnimScript || `document.querySelectorAll('button,a,[role="button"],[class*="element"],[class*="card"]').forEach(el=>{el.style.setProperty('pointer-events','auto','important');if(el.tagName==='A'||el.tagName==='BUTTON')el.style.setProperty('cursor','pointer','important')});`;
 
   // v16: Enhanced UI script — better nav detection, dropdown menus, button interactivity
   const uiScript = `
@@ -1516,6 +1579,9 @@ try{
           // Don't unhide full-screen overlays or modals (likely cookie/popup containers)
           const r=el.getBoundingClientRect();
           if(r.width>window.innerWidth*0.8&&r.height>window.innerHeight*0.8)break;
+          // v26: Don't collapse ancestor if it contains content (images/grid/many children)
+          const hasContent = el.querySelectorAll('img, video, canvas').length > 0 || el.children.length > 3;
+          if (hasContent) { el=el.parentElement; continue; }
           el.style.display='block';
           el.style.position='absolute';
           el.style.width='0';el.style.height='0';
@@ -1790,7 +1856,7 @@ async function main() {
     }
   }
 
-  console.log(`\n🔬 Site X-Ray v25\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+  console.log(`\n🔬 Site X-Ray v27\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 
   // v11: Auth support
   const headless = !(flags.interactive || flags.saveAuth);
@@ -2126,7 +2192,7 @@ async function main() {
         // Inject CSS
         cleanHTML=cleanHTML.replace('</head>',`
 <style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 

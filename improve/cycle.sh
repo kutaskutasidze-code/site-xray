@@ -14,13 +14,13 @@ XRAY_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$XRAY_DIR"
 
 # ── Config ──
-LOCK_FILE="/tmp/site-xray-cycle.lock"
+LOCK_FILE="/tmp/site-xray-creative-cycle.lock"
 MAX_CYCLE_TIME=5400  # 90 minutes max per cycle
 MAX_RETRIES=2        # retry up to 2 times if improvement fails
 KEEP_RESULTS=5       # keep last N test result directories
 MIN_DISK_GB=5        # minimum free disk space in GB
 WEBHOOK_URL=""       # set to Discord/Slack webhook URL for notifications
-LOG_DIR="/var/log/site-xray"
+LOG_DIR="/var/log/site-xray-creative"
 
 AUTO=false
 NOTIFY=false
@@ -85,7 +85,7 @@ health_check() {
   fi
 
   if [ "$ok" = false ]; then
-    send_notification "❌ Site X-Ray health check FAILED — cycle skipped"
+    send_notification "❌ Site X-Ray CREATIVE health check FAILED — cycle skipped"
     exit 1
   fi
   echo "✓ Health check passed (${free_gb}GB free)"
@@ -423,7 +423,7 @@ VERSION_EOF
       if grep -qi "rate limit\|hit your limit\|resets.*UTC\|too many requests\|429" "improve/cycle-v${NEXT_V}.log" 2>/dev/null; then
         echo "   ⚠ Claude Code hit rate limit. Aborting cycle — will retry next cron window."
         FAILURE_REASONS="Claude Code rate limited. Waiting for limit reset."
-        send_notification "⚠️ X-Ray cycle: Claude rate-limited. Will retry next cron window (6h)."
+        send_notification "⚠️ X-Ray CREATIVE cycle: Claude rate-limited. Will retry next cron window (6h)."
         # Break out of retry loop entirely — no point retrying rate limits
         break
       fi
@@ -580,7 +580,7 @@ if [ "$SUCCESS" = true ]; then
   echo "═══════════════════════════════════════"
 
   if [ "$NOTIFY" = true ]; then
-    send_notification "✅ Site X-Ray v${NEXT_V}: ${CURRENT_SCORE}→${NEW_SCORE} (+${DIFF}) in ${ATTEMPT} attempt(s)"
+    send_notification "✅ Site X-Ray CREATIVE v${NEXT_V}: ${CURRENT_SCORE}→${NEW_SCORE} (+${DIFF}) in ${ATTEMPT} attempt(s)"
   fi
 else
   echo ""
@@ -619,11 +619,11 @@ else
     echo "  ⚠ PLATEAU DETECTED: Last 3 cycles improved ≤1 point each."
     echo "  Patching is no longer effective. Architecture review needed."
     if [ "$NOTIFY" = true ]; then
-      send_notification "⚠ Site X-Ray PLATEAU at ${CURRENT_SCORE}/100 — architecture review needed"
+      send_notification "⚠ Site X-Ray CREATIVE PLATEAU at ${CURRENT_SCORE}/100 — architecture review needed"
     fi
   else
     if [ "$NOTIFY" = true ]; then
-      send_notification "❌ Site X-Ray cycle failed after ${MAX_RETRIES} attempts. Score: ${CURRENT_SCORE}/100"
+      send_notification "❌ Site X-Ray CREATIVE cycle failed after ${MAX_RETRIES} attempts. Score: ${CURRENT_SCORE}/100"
     fi
   fi
 fi

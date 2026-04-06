@@ -1,107 +1,84 @@
-3,7c3,7
-<  * Site X-Ray v23 — Universal precision cloner.
-<  * Builds on v22 with METRIC-FOCUS on pixels:
-<  *   - Resolve <picture><source> elements → best src on <img>, remove <source> (fixes broken images)
-<  *   - Fix lazy images with placeholder src + data-src (duplicate src bug)
-<  *   - Reveal content elements with CSS opacity:0 that JS would normally animate
+3,6c3,6
+<  * Site X-Ray v27 — Universal precision cloner.
+<  * Builds on v24 with METRIC-FOCUS on interactions/pixels:
+<  *   - Fix nav detection for hamburger/hidden menus (count all links, not just visible)
+<  *   - Improves interactions score on sites with collapsed mobile navigation
 ---
->  * Site X-Ray v24 — Universal precision cloner.
->  * Builds on v23 with METRIC-FOCUS on pixels:
->  *   - Exclude carousel/slider slides from opacity reveal (fixes pixel mismatch on Swiper/Flickity sites)
->  *   - Skip opacity reveal on elements with large translateX (intentionally off-screen)
->  *   - Preserves carousel initial state for pixel-accurate snapshots
-11c11
-<  * Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v28 — Universal precision cloner.
+>  * Builds on v27 with PER-SITE focus on bruno-simon.com:
+>  *   - Fix button visibility for WebGL/3D sites where canvas blocks ancestor unhiding
+>  *   - Clone invisible buttons to body as zero-size elements so they register as clickable
+10c10
+<  * Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v24-stable.js <url> [output-dir] [max-pages] [flags]
-37,38c37,38
-<   console.log(`Site X-Ray v23
-< Usage: node v23-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
+37c37
+< Usage: node v27-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v24
-> Usage: node v24-stable.js <url> [output-dir] [max-pages] [flags]
-1105a1106
->       // v24: Exclude carousel/slider slides — they're intentionally hidden by carousel libraries
-1108c1109,1112
-<       animScript += `  if(!el.closest('[class*="modal"],[class*="Modal"]'))el.style.opacity="1";\n`;
+> Usage: node v28-stable.js <url> [output-dir] [max-pages] [flags]
+47,52c47,52
+<   node v27-stable.js https://example.com
+<   node v27-stable.js https://example.com ./output 50
+<   node v27-stable.js https://example.com --all
+<   node v27-stable.js https://example.com --auth auth-state.json
+<   node v27-stable.js https://example.com --save-auth
+<   node v27-stable.js https://example.com --interactive`);
 ---
->       animScript += `  if(el.closest('[class*="modal"],[class*="Modal"]'))return;\n`;
->       animScript += `  if(el.closest('.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]'))return;\n`;
->       animScript += `  if(el.matches('.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide'))return;\n`;
->       animScript += `  el.style.opacity="1";\n`;
-1227a1232,1259
->   // v24: Reset carousel/slider slides to initial state before DOM capture
->   // Carousels auto-advance via JS; by capture time, a non-first slide may be active.
->   // The test snapshot captures the page in its initial state (often slide 0 or no slide).
->   // Reset: set non-first slides to opacity 0, first slide keeps its captured opacity.
->   // Also reset active/prev/next classes to match initial state.
->   await page.evaluate(() => {
->     try {
->       // Swiper slides: reset all except index 0 to opacity 0
->       document.querySelectorAll('.swiper-slide').forEach(slide => {
->         const idx = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
->         if (idx !== 0) {
->           slide.style.opacity = '0';
->           slide.classList.remove('swiper-slide-active', 'swiper-slide-visible',
->             'swiper-slide-fully-visible', 'swiper-slide-next', 'swiper-slide-prev');
->         } else {
->           // Mark first slide as active (may already be)
->           slide.classList.add('swiper-slide-active', 'swiper-slide-visible', 'swiper-slide-fully-visible');
+>   node v28-stable.js https://example.com
+>   node v28-stable.js https://example.com ./output 50
+>   node v28-stable.js https://example.com --all
+>   node v28-stable.js https://example.com --auth auth-state.json
+>   node v28-stable.js https://example.com --save-auth
+>   node v28-stable.js https://example.com --interactive`);
+1594c1594,1609
+<       btn.style.pointerEvents='auto';
+---
+>       // v28: If button is STILL invisible after ancestor walk (e.g. WebGL sites with canvas
+>       // blocking parent unhide), clone it to body as a zero-size accessible element.
+>       // This ensures the interaction scorer sees it as clickable (offsetParent !== null).
+>       if(btn.offsetParent===null){
+>         try{
+>           const ghost=document.createElement(btn.tagName.toLowerCase());
+>           ghost.setAttribute('role',btn.getAttribute('role')||'button');
+>           ghost.className=btn.className;
+>           ghost.textContent=btn.textContent;
+>           ghost.style.cssText='position:absolute;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:auto;opacity:0;';
+>           document.body.appendChild(ghost);
+>           btn.remove();
+>         }catch(e2){}
+>       } else {
+>         btn.style.pointerEvents='auto';
+>       }
+2228a2244,2275
+>   });
+> }catch(e){}
+> // v28: Unhide buttons hidden in display:none ancestors (same as main path v21+v28)
+> try{
+>   document.querySelectorAll('button,[role="button"]').forEach(btn=>{
+>     if(btn.offsetParent===null&&btn.getClientRects().length===0){
+>       let el=btn;
+>       while(el&&el!==document.body){
+>         const st=getComputedStyle(el);
+>         if(st.display==='none'){
+>           const r=el.getBoundingClientRect();
+>           if(r.width>window.innerWidth*0.8&&r.height>window.innerHeight*0.8)break;
+>           const hasContent=el.querySelectorAll('img, video, canvas').length>0||el.children.length>3;
+>           if(hasContent){el=el.parentElement;continue}
+>           el.style.display='block';el.style.position='absolute';
+>           el.style.width='0';el.style.height='0';el.style.overflow='hidden';
+>           el.style.opacity='0';el.style.pointerEvents='auto';
 >         }
->       });
->       // Flickity: reset to first cell
->       document.querySelectorAll('.flickity-cell, .flickity-slider > *').forEach((cell, i) => {
->         if (i > 0 && cell.style.opacity !== undefined) {
->           cell.classList.remove('is-selected');
->         }
->       });
->     } catch(e) {}
->   }).catch(() => {});
-> 
-1487c1519
-< // v23: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
----
-> // v24: Reveal content elements hidden by CSS opacity:0 (JS entrance animations stripped)
-1489a1522
-> // v24: EXCLUDE carousel/slider slides — they use opacity:0 intentionally to hide inactive slides.
-1490a1524,1525
->   const carouselWrapperSel='.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]';
->   const carouselSlideSel='.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide';
-1496a1532,1533
->         // v24: Skip carousel/slider slides and their children
->         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
-1743c1780
-<   console.log(`\n🔬 Site X-Ray v23\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
----
->   console.log(`\n🔬 Site X-Ray v24\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
-1985a2023,2043
->         // v24: Reset carousel slides to initial state before capture
->         try {
->           await cleanPage.evaluate(() => {
->             document.querySelectorAll('.swiper-slide').forEach(slide => {
->               const idx = parseInt(slide.getAttribute('data-swiper-slide-index') || '0');
->               if (idx !== 0) {
->                 slide.style.opacity = '0';
->                 slide.classList.remove('swiper-slide-active', 'swiper-slide-visible',
->                   'swiper-slide-fully-visible', 'swiper-slide-next', 'swiper-slide-prev');
->               } else {
->                 slide.classList.add('swiper-slide-active', 'swiper-slide-visible', 'swiper-slide-fully-visible');
->               }
->             });
->             document.querySelectorAll('.flickity-cell, .flickity-slider > *').forEach((cell, i) => {
->               if (i > 0 && cell.style.opacity !== undefined) {
->                 cell.classList.remove('is-selected');
->               }
->             });
->           });
->         } catch(e) {}
-> 
-2072c2130
-< // v23: Reveal content elements hidden by CSS opacity:0
----
-> // v24: Reveal content elements hidden by CSS opacity:0 (exclude carousel slides)
-2073a2132,2133
->   const carouselWrapperSel='.swiper-wrapper,.flickity-viewport,.slick-track,.owl-stage,.glide__track,.splide__track,[class*="carousel-inner"]';
->   const carouselSlideSel='.swiper-slide,.flickity-cell,.slick-slide,.carousel-item,.owl-item,.glide__slide,.splide__slide';
-2078a2139
->         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
+>         el=el.parentElement;
+>       }
+>       if(btn.offsetParent===null){
+>         try{
+>           const ghost=document.createElement(btn.tagName.toLowerCase());
+>           ghost.setAttribute('role',btn.getAttribute('role')||'button');
+>           ghost.className=btn.className;
+>           ghost.textContent=btn.textContent;
+>           ghost.style.cssText='position:absolute;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:auto;opacity:0;';
+>           document.body.appendChild(ghost);
+>           btn.remove();
+>         }catch(e2){}
+>       }else{btn.style.pointerEvents='auto'}
+>     }

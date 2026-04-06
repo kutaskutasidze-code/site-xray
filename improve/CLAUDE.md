@@ -1,5 +1,32 @@
 # Site X-Ray Self-Improvement Instructions
 
+
+## CREATIVE TRACK — READ THIS FIRST
+You are working on the CREATIVE track of X-Ray evolution. This is a PARALLEL system to the main X-Ray.
+
+**Your test sites are ALL creative/design/WebGL sites**, not corporate sites:
+- ingamana.com (design agency, Next.js)
+- basement.studio (creative agency)  
+- locomotive.ca (creative studio, smooth scroll)
+- cuberto.com (creative agency)
+- bruno-simon.com (3D Three.js portfolio)
+- pentagram.com (design firm)
+
+**Different optimization goals than main X-Ray:**
+- Preserve visual fidelity over link integrity
+- Keep external CDN resources (fonts, videos, scripts)
+- Don't freeze dynamic layouts — creative sites use calc()/clamp() responsively
+- Don't remove overlays aggressively — creative sites use full-viewport elements intentionally
+- Preserve opacity:0 reveal states — they're part of scroll animations
+- Prioritize: images rendering in correct positions, custom fonts loading, brand colors preserved
+
+**v25 baseline issues observed on these sites:**
+- Images load but don't render in grid containers (especially ingamana project cards)
+- Layout freeze breaks responsive CSS (calc/min/max functions)
+- Aggressive external ref cleanup strips CDN-hosted assets
+
+Start with SIMPLER fixes. A creative site clone that looks right is worth more than one with perfect link scores.
+
 You are improving site-xray, a universal web cloning tool.
 
 ## Quick Reference

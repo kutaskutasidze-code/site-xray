@@ -2679,5 +2679,54 @@
     "system": "lead-machine",
     "message": "Pipeline (deploy): ALL OK — 0.0m",
     "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:16:12.118Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SCRAPE: OK (969s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:16:14.165Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "EXTRACT BRANDS: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:31:14.262Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "BUILD TEMPLATES: FAILED (900s)",
+    "status": "error"
+  },
+  {
+    "timestamp": "2026-04-05T02:31:16.440Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "SWAP: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:31:17.822Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "QUALITY GATE: OK (1s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:31:19.620Z",
+    "type": "pipeline_step",
+    "system": "lead-machine",
+    "message": "DEPLOY + EMAIL: OK (2s)",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-04-05T02:31:19.630Z",
+    "type": "pipeline_complete",
+    "system": "lead-machine",
+    "message": "Pipeline (full): HAS FAILURES — 31.3m",
+    "status": "warning"
   }
 ]

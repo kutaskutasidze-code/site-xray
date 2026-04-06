@@ -1191,17 +1191,49 @@ async function capturePage(page, urlPath, isFirst) {
     } catch {}
   }
 
-  // v13: Freeze computed layout BEFORE capturing DOM
-  // This preserves JS-initialized grids, flex layouts, and responsive states
+  // v26: SMART layout freeze — auto-detect whether site needs it
+  // Responsive sites (calc/clamp, many @media queries, lenis/gsap) → skip freeze entirely
+  // JS-stripped sites (CSS-in-JS, no @media, React/Vue runtime layouts) → freeze full layout
+  // Mixed sites → freeze only display property (minimal, safe)
   await page.evaluate(() => {
-    const layoutProps = ['display','grid-template-columns','grid-template-rows','gap','column-gap','row-gap',
-      'flex-direction','flex-wrap','justify-content','align-items','grid-column','grid-row',
-      'max-width','width','min-height','columns','column-count'];
+    // Detect site type
+    const detectMode = () => {
+      const allCSS = [...document.styleSheets].map(s => { try { return [...s.cssRules].map(r=>r.cssText).join(''); } catch { return ''; } }).join('');
+      const htmlClass = document.documentElement.className + ' ' + document.body.className;
+      
+      // Signals for RESPONSIVE site (skip freeze)
+      const hasResponsiveFuncs = /calc\(|min\(|max\(|clamp\(/.test(allCSS);
+      const mediaQueryCount = (allCSS.match(/@media/g) || []).length;
+      const hasResponsiveFramework = /lenis|locomotive|smooth-scroll/i.test(htmlClass);
+      const responsiveSignals = (hasResponsiveFuncs ? 2 : 0) + (mediaQueryCount >= 5 ? 2 : mediaQueryCount >= 2 ? 1 : 0) + (hasResponsiveFramework ? 2 : 0);
+      
+      // Signals for JS-STRIPPED site (need full freeze)
+      const hasCSSinJS = /data-emotion|css-[a-z0-9]{6,}|sc-[a-zA-Z0-9]+/.test(document.body.innerHTML);
+      const hasFrameworkMarkers = !!document.querySelector('[data-reactroot],#__next,#__nuxt,[data-v-app]');
+      const cssRulesCount = allCSS.length;
+      const lowCSSVolume = cssRulesCount < 5000 && hasFrameworkMarkers;  // tiny CSS + framework = CSS-in-JS
+      const jsStrippedSignals = (hasCSSinJS ? 2 : 0) + (lowCSSVolume ? 2 : 0);
+      
+      if (responsiveSignals >= 3) return 'skip';           // responsive-first site
+      if (jsStrippedSignals >= 2) return 'full';            // JS-stripped needs rescue
+      return 'display-only';                                // safe minimal freeze
+    };
+
+    const mode = detectMode();
+    console.log('[layout-freeze] mode:', mode);
+    if (mode === 'skip') return;
+
+    // display-only: just freeze display property to preserve JS-set layouts
+    // full: freeze everything including widths (old behavior for JS-stripped sites)
+    const layoutProps = mode === 'full'
+      ? ['display','grid-template-columns','grid-template-rows','gap','column-gap','row-gap',
+         'flex-direction','flex-wrap','justify-content','align-items','grid-column','grid-row',
+         'max-width','width','min-height','columns','column-count']
+      : ['display','grid-template-columns','grid-template-rows','flex-direction','justify-content','align-items'];
 
     document.querySelectorAll('*').forEach(el => {
       const cs = getComputedStyle(el);
       const display = cs.display;
-      // Only process grid/flex containers and their children
       if (display === 'grid' || display === 'inline-grid' || display === 'flex' || display === 'inline-flex') {
         const overrides = [];
         for (const prop of layoutProps) {
@@ -1211,7 +1243,6 @@ async function capturePage(page, urlPath, isFirst) {
           }
         }
         if (overrides.length > 0) {
-          // Append to existing inline style, don't overwrite
           const existing = el.getAttribute('style') || '';
           el.setAttribute('style', existing + (existing ? ';' : '') + overrides.join(';'));
         }
@@ -1516,6 +1547,9 @@ try{
           // Don't unhide full-screen overlays or modals (likely cookie/popup containers)
           const r=el.getBoundingClientRect();
           if(r.width>window.innerWidth*0.8&&r.height>window.innerHeight*0.8)break;
+          // v26: Don't collapse ancestor if it contains content (images/grid/many children)
+          const hasContent = el.querySelectorAll('img, video, canvas').length > 0 || el.children.length > 3;
+          if (hasContent) { el=el.parentElement; continue; }
           el.style.display='block';
           el.style.position='absolute';
           el.style.width='0';el.style.height='0';
