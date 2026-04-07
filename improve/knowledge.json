@@ -71,6 +71,19 @@
       "improvements": [
         "https://bruno-simon.com: 79→90 (+11)"
       ]
+    },
+    {
+      "version": "v32",
+      "attempted_score": 99,
+      "prev_score": 99,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-07T10:32:42.177Z",
+      "diff_lines_added": 75,
+      "diff_lines_removed": 13,
+      "diff_summary": "let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions; // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages; // v32: Capture text from attributes that contain real content; const alt = el.getAttribute('alt');; const title = el.getAttribute('title');; const ariaLabel = el.getAttribute('aria-label');; const placeholder = el.getAttribute('placeholder');; // v32: Always capture text from every crawled page (not just first)",
+      "improvements": [
+        "https://bruno-simon.com: 79→90 (+11)"
+      ]
     }
   ],
   "successful_approaches": [
@@ -83,6 +96,17 @@
       "approach": "metric-focus on content: capture alt/title/aria-label attributes, post-scroll text capture, accumulate text from all crawled pages",
       "improvements": [
         "pentagram.com content: 90→100"
+      ]
+    },
+    {
+      "version": "v33",
+      "score": 96,
+      "prev_score": 95,
+      "diff": 1,
+      "date": "2026-04-07",
+      "approach": "metric-focus on links: handle relative links (href without leading /) in stub generation and rewriting, prevent nested stub creation",
+      "improvements": [
+        "www.locomotive.ca links: 64→100 (+5 total)"
       ]
     }
   ]

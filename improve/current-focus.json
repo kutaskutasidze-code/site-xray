@@ -3,9 +3,7 @@
   "last_approaches": [],
   "regressions_seen": [],
   "current_strategy": "metric-focus",
-  "last_success_date": "2026-04-07T08:00:00.000Z",
-  "last_success_version": "v32",
-  "last_success_score": 100,
-  "last_failure_date": "2026-04-07T00:30:02.849Z",
-  "last_failure_reason": "Claude Code timed out or crashed. Try simpler, more focused fixes."
+  "last_success_date": "2026-04-07T19:49:00.000Z",
+  "last_success_version": "v33",
+  "last_success_score": 96
 }
