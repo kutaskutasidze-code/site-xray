@@ -58,6 +58,32 @@
       "improvements": [
         "https://bruno-simon.com: 79→90 (+11)"
       ]
+    },
+    {
+      "version": "v31",
+      "attempted_score": 92,
+      "prev_score": 92,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-07T00:30:02.794Z",
+      "diff_lines_added": 46,
+      "diff_lines_removed": 9,
+      "diff_summary": "// v30: For full-viewport canvas sites (WebGL/WebGPU), sample pixel from Playwright screenshot; // v30: If body bg is still white and page has a full-viewport canvas,; // sample the actual rendered color from a Playwright screenshot pixel; const hasFullViewportCanvas = await page.evaluate(() => {; const c = document.querySelector('canvas');; const r = c.getBoundingClientRect();; // Take a 1x1 screenshot and parse the PNG to extract the pixel color; const buf = await page.screenshot({ clip: { x: 10, y: 10, width: 1, height: 1 } });",
+      "improvements": [
+        "https://bruno-simon.com: 79→90 (+11)"
+      ]
+    }
+  ],
+  "successful_approaches": [
+    {
+      "version": "v32",
+      "score": 100,
+      "prev_score": 99,
+      "diff": 1,
+      "date": "2026-04-07",
+      "approach": "metric-focus on content: capture alt/title/aria-label attributes, post-scroll text capture, accumulate text from all crawled pages",
+      "improvements": [
+        "pentagram.com content: 90→100"
+      ]
     }
   ]
 }

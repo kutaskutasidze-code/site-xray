@@ -33,6 +33,9 @@ Best selection of Winning websites. Web Design Inspiration for your inspiration.
 
 Discover the best website designs of the world. Awwwards recognizes the talent and effort of the best designers, web developers and digital agencies.
 
+Louis Paquet PRO
+DEV
+SOTD
 Double Play PRO
 DEV
 SOTD
@@ -44,16 +47,27 @@ SOTD
 Greg Lallé PRO
 DEV
 SOTD
+PROMOTED
 Matteo Donini PRO
 DEV
 SOTD
 Antinomy Studio
 DEV
 SOTD
-PROMOTED
+Lusion PRO
+HM
+DEV
 San Rita PRO
 DEV
 SOTD
+Ashfall Studio PRO
+HM
+Dave Holloway PRO
+HM
+keng-fu-chu
+HM
+PRIME CROSS
+HM
 Exo Ape PRO
 DEV
 SOTD
@@ -93,18 +107,6 @@ HM
 Just Happiness PRO
 HM
 Douglus Nguyen
-HM
-Digital Present PRO
-HM
-Vlad Burca
-HM
-Lev Nikolaev PRO
-HM
-NaughtyDuk PRO
-HM
-CstudiosDigital
-HM
-Fol
 HM
 
 Websites
