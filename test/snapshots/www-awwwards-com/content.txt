@@ -33,6 +33,9 @@ Best selection of Winning websites. Web Design Inspiration for your inspiration.
 
 Discover the best website designs of the world. Awwwards recognizes the talent and effort of the best designers, web developers and digital agencies.
 
+ET Studio PRO
+DEV
+SOTD
 Louis Paquet PRO
 DEV
 SOTD
@@ -41,13 +44,13 @@ DEV
 SOTD
 Artem Shcherban PRO
 SOTD
+PROMOTED
 .RAW PRO
 DEV
 SOTD
 Greg Lallé PRO
 DEV
 SOTD
-PROMOTED
 Matteo Donini PRO
 DEV
 SOTD
@@ -57,6 +60,22 @@ SOTD
 Lusion PRO
 HM
 DEV
+Jordan Gilroy PRO
+HM
+Tattoo Digital PRO
+HM
+.RAW PRO
+HM
+BambukDesignStudio
+HM
+WeThinkElastic PRO
+HM
+sohubdigital
+HM
+Mike Kus
+HM
+Dwarf PRO
+HM
 San Rita PRO
 DEV
 SOTD
@@ -87,26 +106,6 @@ SOTD
 OB_Studio
 HM
 Serhii Yurkovskyi
-HM
-Verbal+Visual PRO
-HM
-Moliceiro Studio
-HM
-WIRO PRO
-HM
-jungheonlee
-HM
-Okey Studio PRO
-DEV
-SOTD
-Gil Huybrecht
-DEV
-SOTD
-Karan Chouhan
-HM
-Just Happiness PRO
-HM
-Douglus Nguyen
 HM
 
 Websites

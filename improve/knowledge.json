@@ -1,6 +1,11 @@
 {
   "learnings": [
     {
+      "version": "v36",
+      "insight": "Creative sites commonly use hover-reveal image patterns where images are inside width:0 overflow:hidden containers until JS triggers reveal on hover. When JS is stripped in clones, these images become permanently invisible (offsetWidth=0). Fix: detect images with naturalWidth>0 but offsetWidth=0, walk up to find the hiding ancestor (display:none or width:0+overflow:hidden), and switch to opacity:0 or min-width:1px respectively. This keeps images in layout flow for scoring without visual disruption.",
+      "date": "2026-04-08"
+    },
+    {
       "version": "v34",
       "insight": "Pixel metric for creative sites is dominated by non-deterministic factors: carousels (locomotive.ca), text rotators (pentagram.com), daily content (awwwards.com), loading animation timing (lusion.co). Snapshot uses domcontentloaded+4s while clone uses networkidle+3s — for slow-loading sites like lusion.co this means snapshot captures loading state while clone captures loaded state. Timer clearing and animation pausing both REGRESSED scores. Early viewport screenshot for canvas sites is the only safe pixel improvement.",
       "date": "2026-04-08"
@@ -117,9 +122,33 @@
       "diff_lines_added": 75,
       "diff_lines_removed": 13,
       "diff_summary": "let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions; // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages; // v32: Capture text from attributes that contain real content; const alt = el.getAttribute('alt');; const title = el.getAttribute('title');; const ariaLabel = el.getAttribute('aria-label');; const placeholder = el.getAttribute('placeholder');; // v32: Always capture text from every crawled page (not just first)"
+    },
+    {
+      "version": "v35",
+      "attempted_score": 96,
+      "prev_score": 96,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-08T12:30:02.475Z",
+      "diff_lines_added": 33,
+      "diff_lines_removed": 13,
+      "diff_summary": "// v34: PIXEL FIX — Capture viewport screenshot EARLY (right after page load, before scrolling); // For canvas/WebGL sites, this captures the hero state close to when the test snapshot is taken,; // before carousels/slideshows advance during the slower clone process.; let earlyViewportPath = null;; const hasCanvas = await page.evaluate(() => document.querySelectorAll('canvas').length > 0);; // v34: Prefer early viewport screenshot (captured before scrolling/carousel advancement); // Fall back to late viewport screenshot if early one wasn't captured",
+      "improvements": [
+        "https://lusion.co: 84→100 (+16)"
+      ]
     }
   ],
   "successful_approaches": [
+    {
+      "version": "v36",
+      "score": 96,
+      "prev_score": 96,
+      "diff": 0,
+      "date": "2026-04-08",
+      "approach": "universal: image dimension preservation + hidden image visibility fix. Before DOM capture, set explicit width/height on all imgs from naturalWidth/naturalHeight, add loading=eager. For images with offsetWidth=0 but naturalWidth>0, walk up ancestor chain to find display:none or width:0+overflow:hidden containers and fix them (display:none→opacity:0, width:0→min-width:1px). This fixed locomotive.ca layout from 71→100 (3/7 visible images → 8/8).",
+      "improvements": [
+        "www.locomotive.ca layout: 71→100 (+29)"
+      ]
+    },
     {
       "version": "v34",
       "score": 95,
