@@ -1,50 +1,56 @@
 [
   {
-    "site": "https://lusion.co",
-    "old": 86,
-    "new": 83,
-    "diff": -3
+    "site": "https://ingamana.com",
+    "old": 99,
+    "new": 98,
+    "diff": -1
   },
   {
     "site": "https://www.locomotive.ca",
-    "old": 83,
-    "new": 83,
-    "diff": 0
+    "old": 89,
+    "new": 86,
+    "diff": -3
   },
   {
-    "site": "https://ingamana.com",
-    "old": 99,
-    "new": 99,
-    "diff": 0
+    "site": "https://bruno-simon.com",
+    "old": 91,
+    "new": 93,
+    "diff": 2
   },
   {
     "site": "https://resn.co.nz",
-    "old": 80,
-    "new": 80,
+    "old": 100,
+    "new": 100,
     "diff": 0
   },
   {
     "site": "https://www.awwwards.com/websites",
-    "old": 88,
-    "new": 88,
+    "old": 91,
+    "new": 91,
     "diff": 0
   },
   {
+    "site": "https://lusion.co",
+    "old": 100,
+    "new": 86,
+    "diff": -14
+  },
+  {
     "site": "https://basement.studio",
-    "old": 98,
-    "new": 98,
+    "old": 97,
+    "new": 97,
     "diff": 0
   },
   {
     "site": "https://cuberto.com",
-    "old": 96,
-    "new": 96,
+    "old": 99,
+    "new": 99,
     "diff": 0
   },
   {
     "site": "https://pentagram.com",
-    "old": 99,
-    "new": 99,
+    "old": 98,
+    "new": 98,
     "diff": 0
   },
   {
@@ -52,11 +58,5 @@
     "old": 100,
     "new": 100,
     "diff": 0
-  },
-  {
-    "site": "https://bruno-simon.com",
-    "old": 79,
-    "new": 90,
-    "diff": 11
   }
 ]

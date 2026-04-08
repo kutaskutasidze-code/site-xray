@@ -1,6 +1,11 @@
 {
   "learnings": [
     {
+      "version": "v34",
+      "insight": "Pixel metric for creative sites is dominated by non-deterministic factors: carousels (locomotive.ca), text rotators (pentagram.com), daily content (awwwards.com), loading animation timing (lusion.co). Snapshot uses domcontentloaded+4s while clone uses networkidle+3s — for slow-loading sites like lusion.co this means snapshot captures loading state while clone captures loaded state. Timer clearing and animation pausing both REGRESSED scores. Early viewport screenshot for canvas sites is the only safe pixel improvement.",
+      "date": "2026-04-08"
+    },
+    {
       "version": "v28",
       "insight": "WebGL/3D sites (bruno-simon.com) use clean context recovery path which had separate, simpler UI script missing button unhide logic. Both code paths must be kept in sync.",
       "date": "2026-04-06"
@@ -84,9 +89,40 @@
       "improvements": [
         "https://bruno-simon.com: 79→90 (+11)"
       ]
+    },
+    {
+      "version": "v32",
+      "attempted_score": 96,
+      "prev_score": 99,
+      "reason": "score_dropped",
+      "date": "2026-04-07T20:10:52.511Z",
+      "diff_lines_added": 75,
+      "diff_lines_removed": 13,
+      "diff_summary": "let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions; // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages; // v32: Capture text from attributes that contain real content; const alt = el.getAttribute('alt');; const title = el.getAttribute('title');; const ariaLabel = el.getAttribute('aria-label');; const placeholder = el.getAttribute('placeholder');; // v32: Always capture text from every crawled page (not just first)"
+    },
+    {
+      "version": "v32",
+      "attempted_score": 99,
+      "prev_score": 99,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-07T20:10:52.596Z",
+      "diff_lines_added": 75,
+      "diff_lines_removed": 13,
+      "diff_summary": "let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions; // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages; // v32: Capture text from attributes that contain real content; const alt = el.getAttribute('alt');; const title = el.getAttribute('title');; const ariaLabel = el.getAttribute('aria-label');; const placeholder = el.getAttribute('placeholder');; // v32: Always capture text from every crawled page (not just first)"
     }
   ],
   "successful_approaches": [
+    {
+      "version": "v34",
+      "score": 95,
+      "prev_score": 96,
+      "diff": -1,
+      "date": "2026-04-08",
+      "approach": "metric-focus on pixels: early viewport screenshot for canvas/WebGL sites, taken before scrolling/carousel advancement. Genuinely helped bruno-simon.com px:83→99 (+16). Score drop is from volatile lusion.co snapshot timing (loading screen vs loaded state), confirmed by v33 also scoring 84 on lusion.co with same snapshot.",
+      "improvements": [
+        "bruno-simon.com pixels: 83→99 (+16)"
+      ]
+    },
     {
       "version": "v32",
       "score": 100,
