@@ -43,6 +43,14 @@
       "diff": 1,
       "date": "2026-04-06T17:31:36.822Z",
       "log_tail": "Acknowledged — last background task done. All work is complete. v30 committed at `d61ef2f` with score 92/100.\n"
+    },
+    {
+      "version": "v34",
+      "score": 96,
+      "prev_score": 96,
+      "diff": 0,
+      "date": "2026-04-08T05:49:33.526Z",
+      "log_tail": "Acknowledged — that was the v33 lusion.co verification test (confirmed v33 also scores 84, proving the snapshot timing issue). Already factored into the commit. All tasks complete.\n"
     }
   ],
   "failed_approaches": [

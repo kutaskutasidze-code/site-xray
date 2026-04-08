@@ -1,17 +1,9 @@
 {
-  "consecutive_failures": 1,
-  "last_approaches": [
-    {
-      "attempt": 1,
-      "summary": "let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions\n  // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages\n            // v32: Capture text from attributes that contain real content\n            const alt = el.getAttribute('alt');\n            const title = el.getAttribute('title');",
-      "date": "2026-04-07T20:10:52.561Z"
-    }
-  ],
+  "consecutive_failures": 0,
+  "last_approaches": [],
   "regressions_seen": [],
-  "current_strategy": "metric-focus",
-  "last_success_date": "2026-04-07T19:49:00.000Z",
-  "last_success_version": "v33",
-  "last_success_score": 96,
-  "last_failure_date": "2026-04-07T20:10:52.632Z",
-  "last_failure_reason": "Overall score dropped from 99 to 96. Fixes may have hurt more sites than they helped."
+  "current_strategy": "universal",
+  "last_success_date": "2026-04-08T05:49:33.561Z",
+  "last_success_version": "v34",
+  "last_success_score": 96
 }

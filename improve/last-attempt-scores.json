@@ -1,62 +1,8 @@
 [
   {
-    "site": "https://ingamana.com",
-    "old": 99,
-    "new": 98,
-    "diff": -1
-  },
-  {
-    "site": "https://www.locomotive.ca",
-    "old": 89,
-    "new": 86,
-    "diff": -3
-  },
-  {
-    "site": "https://bruno-simon.com",
-    "old": 91,
-    "new": 93,
-    "diff": 2
-  },
-  {
-    "site": "https://resn.co.nz",
-    "old": 100,
-    "new": 100,
-    "diff": 0
-  },
-  {
-    "site": "https://www.awwwards.com/websites",
-    "old": 91,
-    "new": 91,
-    "diff": 0
-  },
-  {
     "site": "https://lusion.co",
-    "old": 100,
-    "new": 86,
-    "diff": -14
-  },
-  {
-    "site": "https://basement.studio",
-    "old": 97,
-    "new": 97,
-    "diff": 0
-  },
-  {
-    "site": "https://cuberto.com",
-    "old": 99,
-    "new": 99,
-    "diff": 0
-  },
-  {
-    "site": "https://pentagram.com",
-    "old": 98,
-    "new": 98,
-    "diff": 0
-  },
-  {
-    "site": "https://www.freezpak.com",
-    "old": 100,
+    "old": 84,
     "new": 100,
-    "diff": 0
+    "diff": 16
   }
 ]

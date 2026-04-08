@@ -1,105 +1,55 @@
-3,7c3,7
-<  * Site X-Ray v31 — Universal precision cloner.
-<  * Builds on v30 with PER-SITE focus on resn.co.nz:
-<  *   - Capture original page innerText and inject as hidden element (content preservation)
-<  *   - Handle ./-prefixed CSS links in post-processing (broken link fix)
-<  *   - Fallback nav injection when no navigation detected (interactions fix)
+3,6c3,6
+<  * Site X-Ray v33 — Universal precision cloner.
+<  * Builds on v32 with METRIC-FOCUS on link integrity:
+<  *   - Handle relative links (href="en/page") in stub generation and rewriting
+<  *   - Previous: text capture at multiple points, attribute text, multi-page accumulation
 ---
->  * Site X-Ray v32 — Universal precision cloner.
->  * Builds on v31 with METRIC-FOCUS on content preservation:
->  *   - Capture text at multiple points (before + after scroll) for scroll-reveal content
->  *   - Capture alt/title/aria-label attribute text for richer word coverage
->  *   - Merge text from all crawled pages into content injection
-37,38c37,38
-<   console.log(`Site X-Ray v31
-< Usage: node v31-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v34 — Universal precision cloner.
+>  * Builds on v33 with METRIC-FOCUS on pixel fidelity:
+>  *   - Capture early viewport screenshot for canvas sites (before carousel advances)
+>  *   - Previous: relative link handling, text capture, attribute text, multi-page accumulation
+36,37c36,37
+<   console.log(`Site X-Ray v33
+< Usage: node v33-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v32
-> Usage: node v32-stable.js <url> [output-dir] [max-pages] [flags]
-77a78
-> let allCapturedText = new Set(); // v32: accumulate text from all pages and scroll positions
-516a518
->   // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages
-525a528,535
->             // v32: Capture text from attributes that contain real content
->             const alt = el.getAttribute('alt');
->             const title = el.getAttribute('title');
->             const ariaLabel = el.getAttribute('aria-label');
->             const placeholder = el.getAttribute('placeholder');
->             [alt, title, ariaLabel, placeholder].forEach(a => {
->               if (a && a.trim().length > 2) allText.push(a.trim());
->             });
-531a542,559
->   // v32: Always capture text from every crawled page (not just first)
->   try {
->     const pageText = await page.evaluate(() => {
->       const visible = (document.body?.innerText || '').trim();
->       const extras = [];
->       document.querySelectorAll('[alt],[title],[aria-label]').forEach(el => {
->         try {
->           [el.getAttribute('alt'), el.getAttribute('title'), el.getAttribute('aria-label')].forEach(a => {
->             if (a && a.trim().length > 2) extras.push(a.trim());
->           });
->         } catch(e) {}
->       });
->       return visible + '\n' + extras.join('\n');
->     });
->     if (pageText) {
->       pageText.toLowerCase().split(/\s+/).filter(w => w.length > 3).forEach(w => allCapturedText.add(w));
->     }
->   } catch(e) {}
-543a572,594
->   // v32: Capture text AFTER scrolling (catches scroll-reveal and lazy-loaded content)
+>   console.log(`Site X-Ray v34
+> Usage: node v34-stable.js <url> [output-dir] [max-pages] [flags]
+515a516,530
+>   // v34: PIXEL FIX — Capture viewport screenshot EARLY (right after page load, before scrolling)
+>   // For canvas/WebGL sites, this captures the hero state close to when the test snapshot is taken,
+>   // before carousels/slideshows advance during the slower clone process.
+>   let earlyViewportPath = null;
 >   if (isFirst) {
 >     try {
->       const postScrollText = await page.evaluate(() => {
->         const visible = (document.body?.innerText || '').trim();
->         const extras = [];
->         document.querySelectorAll('[alt],[title],[aria-label]').forEach(el => {
->           try {
->             [el.getAttribute('alt'), el.getAttribute('title'), el.getAttribute('aria-label')].forEach(a => {
->               if (a && a.trim().length > 2) extras.push(a.trim());
->             });
->           } catch(e) {}
->         });
->         return visible + '\n' + extras.join('\n');
->       });
->       if (postScrollText) {
->         // Merge into capturedInnerText
->         capturedInnerText = (capturedInnerText || '') + '\n' + postScrollText;
->         postScrollText.toLowerCase().split(/\s+/).filter(w => w.length > 3).forEach(w => allCapturedText.add(w));
+>       const hasCanvas = await page.evaluate(() => document.querySelectorAll('canvas').length > 0);
+>       if (hasCanvas) {
+>         earlyViewportPath = `${OUT}/images/early-viewport.png`;
+>         fs.mkdirSync(`${OUT}/images`, { recursive: true });
+>         await page.screenshot({ path: earlyViewportPath, fullPage: false });
 >       }
->     } catch(e) {}
+>     } catch(e) { earlyViewportPath = null; }
 >   }
 > 
-2182c2233
-<         // v31: Capture text from clean page if not already captured
+835c850,851
+<     // v27: Take a viewport screenshot first as fallback for canvases that can't be captured via toDataURL
 ---
->         // v31+v32: Capture text from clean page if not already captured
-2191a2243,2249
->                   // v32: Capture attribute text
->                   const alt = el.getAttribute('alt');
->                   const title = el.getAttribute('title');
->                   const ariaLabel = el.getAttribute('aria-label');
->                   [alt, title, ariaLabel].forEach(a => {
->                     if (a && a.trim().length > 2) allText.push(a.trim());
->                   });
-2796,2798c2854,2855
-<   // v31: Inject captured innerText as hidden element for content preservation
-<   // Always inject if we have captured text — raw HTML word matching is unreliable
-<   // because CSS class names / SVG IDs can contain matching words that innerText won't see
+>     // v34: Prefer early viewport screenshot (captured before scrolling/carousel advancement)
+>     // Fall back to late viewport screenshot if early one wasn't captured
+838,843c854,863
+<       try {
+<         viewportScreenshotPath = `${OUT}/images/viewport-capture.png`;
+<         await page.evaluate(() => window.scrollTo(0, 0));
+<         await page.waitForTimeout(500);
+<         await page.screenshot({ path: viewportScreenshotPath, fullPage: false });
+<       } catch(e) { viewportScreenshotPath = null; }
 ---
->   // v31+v32: Inject captured innerText as hidden element for content preservation
->   // v32: Also inject accumulated text from all crawled pages for better word coverage
-2799a2857,2861
->     // Merge allCapturedText words back into capturedInnerText
->     if (allCapturedText.size > 0) {
->       const extraWords = [...allCapturedText].join(' ');
->       capturedInnerText = (capturedInnerText || '') + '\n' + extraWords;
->     }
-2808,2809c2870,2871
-<         const wordCount = capturedInnerText.toLowerCase().split(/\s+/).filter(w => w.length > 3).length;
-<         console.log(`     v31: Injected original text (${wordCount} words)`);
----
->         const wordCount = new Set(capturedInnerText.toLowerCase().split(/\s+/).filter(w => w.length > 3)).size;
->         console.log(`     v32: Injected original text (${wordCount} unique words > 3 chars)`);
+>       if (earlyViewportPath && fs.existsSync(earlyViewportPath)) {
+>         viewportScreenshotPath = earlyViewportPath;
+>       } else {
+>         try {
+>           viewportScreenshotPath = `${OUT}/images/viewport-capture.png`;
+>           await page.evaluate(() => window.scrollTo(0, 0));
+>           await page.waitForTimeout(500);
+>           await page.screenshot({ path: viewportScreenshotPath, fullPage: false });
+>         } catch(e) { viewportScreenshotPath = null; }
+>       }
