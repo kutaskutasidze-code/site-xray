@@ -1,55 +1,69 @@
-3,6c3,6
-<  * Site X-Ray v33 — Universal precision cloner.
-<  * Builds on v32 with METRIC-FOCUS on link integrity:
-<  *   - Handle relative links (href="en/page") in stub generation and rewriting
-<  *   - Previous: text capture at multiple points, attribute text, multi-page accumulation
+3,6c3,7
+<  * Site X-Ray v35 — Universal precision cloner.
+<  * Builds on v34 with METRIC-FOCUS on pixel fidelity:
+<  *   - Screenshot timeout safety on early viewport capture (prevents hang on font-heavy sites)
+<  *   - Previous: early viewport capture, relative link handling, text capture
 ---
->  * Site X-Ray v34 — Universal precision cloner.
->  * Builds on v33 with METRIC-FOCUS on pixel fidelity:
->  *   - Capture early viewport screenshot for canvas sites (before carousel advances)
->  *   - Previous: relative link handling, text capture, attribute text, multi-page accumulation
-36,37c36,37
-<   console.log(`Site X-Ray v33
-< Usage: node v33-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v36 — Universal precision cloner.
+>  * Builds on v35 with UNIVERSAL improvements:
+>  *   - Image dimension preservation: inline width/height on all imgs before capture
+>  *   - Image visibility: force hidden carousel/slider images to remain in layout flow
+>  *   - Previous: screenshot timeout safety, early viewport capture, relative links, text capture
+10c11
+<  * Usage: node v31-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v34
-> Usage: node v34-stable.js <url> [output-dir] [max-pages] [flags]
-515a516,530
->   // v34: PIXEL FIX — Capture viewport screenshot EARLY (right after page load, before scrolling)
->   // For canvas/WebGL sites, this captures the hero state close to when the test snapshot is taken,
->   // before carousels/slideshows advance during the slower clone process.
->   let earlyViewportPath = null;
->   if (isFirst) {
->     try {
->       const hasCanvas = await page.evaluate(() => document.querySelectorAll('canvas').length > 0);
->       if (hasCanvas) {
->         earlyViewportPath = `${OUT}/images/early-viewport.png`;
->         fs.mkdirSync(`${OUT}/images`, { recursive: true });
->         await page.screenshot({ path: earlyViewportPath, fullPage: false });
->       }
->     } catch(e) { earlyViewportPath = null; }
->   }
+>  * Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
+36,37c37,38
+<   console.log(`Site X-Ray v35
+< Usage: node v35-stable.js <url> [output-dir] [max-pages] [flags]
+---
+>   console.log(`Site X-Ray v36
+> Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
+1456a1458,1504
+>         }
+>       });
+>     } catch(e) {}
+>   }).catch(() => {});
 > 
-835c850,851
-<     // v27: Take a viewport screenshot first as fallback for canvases that can't be captured via toDataURL
----
->     // v34: Prefer early viewport screenshot (captured before scrolling/carousel advancement)
->     // Fall back to late viewport screenshot if early one wasn't captured
-838,843c854,863
-<       try {
-<         viewportScreenshotPath = `${OUT}/images/viewport-capture.png`;
-<         await page.evaluate(() => window.scrollTo(0, 0));
-<         await page.waitForTimeout(500);
-<         await page.screenshot({ path: viewportScreenshotPath, fullPage: false });
-<       } catch(e) { viewportScreenshotPath = null; }
----
->       if (earlyViewportPath && fs.existsSync(earlyViewportPath)) {
->         viewportScreenshotPath = earlyViewportPath;
->       } else {
->         try {
->           viewportScreenshotPath = `${OUT}/images/viewport-capture.png`;
->           await page.evaluate(() => window.scrollTo(0, 0));
->           await page.waitForTimeout(500);
->           await page.screenshot({ path: viewportScreenshotPath, fullPage: false });
->         } catch(e) { viewportScreenshotPath = null; }
->       }
+>   // v36: IMAGE DIMENSION PRESERVATION — set explicit width/height on all images
+>   // This ensures images render at correct sizes in clone even when CSS context is lost
+>   await page.evaluate(() => {
+>     try {
+>       document.querySelectorAll('img').forEach(img => {
+>         // Set loading=eager to prevent lazy-load issues in clone
+>         img.setAttribute('loading', 'eager');
+>         // If image has natural dimensions, set explicit width/height as attributes
+>         if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+>           if (!img.getAttribute('width')) img.setAttribute('width', String(img.naturalWidth));
+>           if (!img.getAttribute('height')) img.setAttribute('height', String(img.naturalHeight));
+>         }
+>         // If image is in a hidden container (display:none ancestor), force it visible
+>         // by ensuring the image itself has minimum dimensions inline
+>         const rect = img.getBoundingClientRect();
+>         if (img.offsetWidth === 0 && img.naturalWidth > 0) {
+>           // Image loaded but invisible — could be:
+>           // 1. display:none ancestor (carousel non-active slides)
+>           // 2. width:0 + overflow:hidden ancestor (hover-reveal patterns)
+>           // Fix: walk up ancestor chain and fix the first hiding element
+>           let el = img.parentElement;
+>           let depth = 0;
+>           while (el && el !== document.body && depth < 10) {
+>             const cs = getComputedStyle(el);
+>             if (cs.display === 'none') {
+>               // Switch display:none to opacity:0 (keeps layout flow)
+>               el.style.setProperty('display', '', 'important');
+>               el.style.setProperty('opacity', '0', 'important');
+>               el.style.setProperty('pointer-events', 'none', 'important');
+>               break;
+>             }
+>             const w = parseFloat(cs.width);
+>             if (w === 0 && cs.overflow === 'hidden') {
+>               // Container has 0 width with overflow:hidden — JS-managed reveal
+>               // Set min-width so image has layout dimensions
+>               el.style.setProperty('min-width', '1px', 'important');
+>               el.style.setProperty('overflow', 'visible', 'important');
+>               break;
+>             }
+>             el = el.parentElement;
+>             depth++;
+>           }

@@ -56,6 +56,14 @@
       "diff": 0,
       "date": "2026-04-08T05:49:33.526Z",
       "log_tail": "Acknowledged — that was the v33 lusion.co verification test (confirmed v33 also scores 84, proving the snapshot timing issue). Already factored into the commit. All tasks complete.\n"
+    },
+    {
+      "version": "v36",
+      "score": 95,
+      "prev_score": 85,
+      "diff": 10,
+      "date": "2026-04-08T21:30:27.359Z",
+      "log_tail": "Full suite confirmed complete. All done — v36 committed at `e59a672` with 96/100 average across 10 sites.\n"
     }
   ],
   "failed_approaches": [

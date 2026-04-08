@@ -3,9 +3,7 @@
   "last_approaches": [],
   "regressions_seen": [],
   "current_strategy": "universal",
-  "last_success_date": "2026-04-08T20:30:00.000Z",
+  "last_success_date": "2026-04-08T21:30:27.380Z",
   "last_success_version": "v36",
-  "last_success_score": 96,
-  "last_failure_date": "2026-04-08T12:30:02.742Z",
-  "last_failure_reason": "Claude Code timed out or crashed. Try simpler, more focused fixes."
+  "last_success_score": 95
 }
