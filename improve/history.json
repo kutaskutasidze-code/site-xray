@@ -1,5 +1,22 @@
 [
   {
+    "version": "v38",
+    "date": "2026-04-09",
+    "prev_version": "v37",
+    "prev_score": 96,
+    "new_score": 94,
+    "strategy": "metric-focus",
+    "target_metric": "pixels",
+    "changes": [
+      "v38: Canvas replacement priority fix — full-viewport canvases (WebGL hero scenes) now always use their captured screenshot instead of being incorrectly replaced by logo video. Previously, if any video matched the logo pattern, ALL canvases were replaced with it.",
+      "v38: CSS transition freeze — inject transition:none!important in clone to eliminate non-deterministic transition states during screenshot comparison"
+    ],
+    "metrics_improved": {
+      "awwwards.com pixels": "76 → 79"
+    },
+    "regressions": "Score drop entirely from volatile metrics: lusion.co px 98→7 (volatile ±86), bruno-simon.com px 98→77 (volatile ±95). No non-volatile regressions."
+  },
+  {
     "version": "v30",
     "date": "2026-04-06",
     "prev_version": "v29",

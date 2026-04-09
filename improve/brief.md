@@ -1,15 +1,15 @@
-## IMPROVEMENT BRIEF — v37
-Current: v36, 95/100, 3107 lines
+## IMPROVEMENT BRIEF — v38
+Current: v37, 96/100, 3160 lines
 Strategy: **METRIC-FOCUS**
 Consecutive failures: 0
 Mastered: 4 | Active: 6 | Queue: 0
 
-### FOCUS: pixels metric (avg 74/100)
+### FOCUS: pixels metric (avg 83/100)
 This is METRIC-FOCUS mode. Improve the "pixels" metric across all sites.
-Worst: bruno-simon.com at 3/100
+Worst: www.locomotive.ca at 17/100
 
 All metrics ranked by average:
-  pixels          avg:74  worst:3 (bruno-simon.com)
+  pixels          avg:83  worst:17 (www.locomotive.ca)
   content         avg:94  worst:50 (bruno-simon.com)
   layout          avg:97  worst:66 (www.awwwards.com)
   links           avg:99  worst:86 (www.awwwards.com)
@@ -21,19 +21,19 @@ All metrics ranked by average:
 
 
 ### SITE SCORES (worst → best)
-[NEEDS_WORK] bruno-simon.com           79/100
-[NEEDS_WORK] www.locomotive.ca         89/100
+[NEEDS_WORK] www.locomotive.ca         88/100
 [OK        ] www.awwwards.com          91/100
+[OK        ] bruno-simon.com           93/100
 [OK        ] cuberto.com               96/100
 [OK        ] basement.studio           97/100
-[PERFECT   ] lusion.co                 98/100
 [PERFECT   ] ingamana.com              99/100
 [PERFECT   ] pentagram.com             99/100
+[PERFECT   ] lusion.co                 100/100
 [PERFECT   ] resn.co.nz                100/100
 [PERFECT   ] www.freezpak.com          100/100
 
 ### METRIC AVERAGES
-  pixels          avg:74  worst:3 (bruno-simon.com)
+  pixels          avg:83  worst:17 (www.locomotive.ca)
   content         avg:94  worst:50 (bruno-simon.com)
   layout          avg:97  worst:66 (www.awwwards.com)
   links           avg:99  worst:86 (www.awwwards.com)
@@ -58,16 +58,15 @@ All metrics ranked by average:
   basement.studio console: ±100 (NON-DETERMINISTIC, don't try to fix)
   basement.studio pixels: ±83 (NON-DETERMINISTIC, don't try to fix)
   basement.studio manifest: ±100 (NON-DETERMINISTIC, don't try to fix)
-  www.locomotive.ca layout: ±29 (NON-DETERMINISTIC, don't try to fix)
+  www.locomotive.ca layout: ±36 (NON-DETERMINISTIC, don't try to fix)
   cuberto.com pixels: ±22 (NON-DETERMINISTIC, don't try to fix)
-  bruno-simon.com pixels: ±82 (NON-DETERMINISTIC, don't try to fix)
-  lusion.co content: ±27 (NON-DETERMINISTIC, don't try to fix)
-  lusion.co pixels: ±80 (NON-DETERMINISTIC, don't try to fix)
+  bruno-simon.com pixels: ±95 (NON-DETERMINISTIC, don't try to fix)
+  lusion.co pixels: ±86 (NON-DETERMINISTIC, don't try to fix)
   resn.co.nz content: ±100 (NON-DETERMINISTIC, don't try to fix)
 
 ### INSTRUCTIONS
-1. Read v36-stable.js (the current code)
+1. Read v37-stable.js (the current code)
 2. Based on the strategy above, implement 2-4 targeted fixes
-3. Test on the worst site: node v37-stable.js <worst-url> /tmp/test-v37 3
-4. Quick single-site test available: node test/suite.js v37 --site <hostname>
+3. Test on the worst site: node v38-stable.js <worst-url> /tmp/test-v38 3
+4. Quick single-site test available: node test/suite.js v38 --site <hostname>
 5. Read improve/CLAUDE.md for rules
