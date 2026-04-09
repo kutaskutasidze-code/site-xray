@@ -2,8 +2,8 @@
 /**
  * Site X-Ray v38 — Universal precision cloner.
  * Builds on v37 with PIXEL-FOCUS improvements:
- *   - Canvas replacement priority: full-viewport canvases always use captured screenshot, not logo video
- *   - CSS transition freeze: removes CSS transitions in clone for deterministic rendering
+ *   - Content capture: extract text from meta tags and JSON-LD structured data
+ *   - Content capture: meta description, og:description, schema.org text for better word coverage
  *   - Previous: scroll-triggered video autoplay, font preloading, font-display:swap
  *
  * Single file. One dependency (playwright). Zero config.
@@ -35,7 +35,7 @@ for (let i = 0; i < args.length; i++) {
 const TARGET = positional[0];
 if (!TARGET) {
   console.log(`Site X-Ray v38
-Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
+Usage: node v38-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -550,6 +550,33 @@ async function capturePage(page, urlPath, isFirst) {
             });
           } catch(e) {}
         });
+        // v38: CONTENT FIX — Capture text from meta tags (description, og:description, etc.)
+        // These contain real content words that may not appear in innerText
+        try {
+          document.querySelectorAll('meta[name="description"],meta[property="og:description"],meta[property="og:title"],meta[name="twitter:description"],meta[name="twitter:title"]').forEach(m => {
+            const c = m.getAttribute('content');
+            if (c && c.trim().length > 2) allText.push(c.trim());
+          });
+          // v38: Capture text from JSON-LD structured data (schema.org)
+          document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+            try {
+              const data = JSON.parse(s.textContent);
+              const extract = (obj) => {
+                if (!obj || typeof obj !== 'object') return;
+                for (const [k, v] of Object.entries(obj)) {
+                  if (typeof v === 'string' && v.length > 3 && v.length < 500 && !v.startsWith('http') && !v.startsWith('{')) {
+                    allText.push(v);
+                  } else if (Array.isArray(v)) {
+                    v.forEach(item => extract(item));
+                  } else if (typeof v === 'object') {
+                    extract(v);
+                  }
+                }
+              };
+              extract(data);
+            } catch(e) {}
+          });
+        } catch(e) {}
         return visible + '\n' + allText.join('\n');
       });
     } catch(e) { capturedInnerText = ''; }
@@ -1629,24 +1656,8 @@ async function capturePage(page, urlPath, isFirst) {
   let ci=0;
   const logoVid = Object.entries(urlMap).find(([k,v])=>v.startsWith('/videos/')&&(k.includes('logo')||k.includes('animation')))?.[1];
   const anyVid = Object.values(urlMap).find(v=>v.startsWith('/videos/'));
-  // v38: PIXEL FIX — Canvas replacement with correct priority:
-  // Full-viewport canvases (WebGL hero scenes) ALWAYS use their captured screenshot for best pixel match.
-  // Logo video is only used for small canvases (actual logo animations).
-  // Previously, logo video replaced ALL canvases including full-viewport WebGL scenes.
-  html=html.replace(/<canvas([^>]*)>[\s\S]*?<\/canvas>/g,(match,attrs)=>{const idx=ci++;
-      const canvasPath=`${OUT}/images/canvas-${idx}.png`;
-      const wMatch=attrs.match(/width="(\d+)"/);const hMatch=attrs.match(/height="(\d+)"/);
-      const w=wMatch?parseInt(wMatch[1]):0;const h=hMatch?parseInt(hMatch[1]):0;
-      const isFullViewport=w>=1200&&h>=600;
-      const styleMatch=attrs.match(/style="([^"]*)"/);const origStyle=styleMatch?styleMatch[1]:'';
-      // v38: Full-viewport canvas with screenshot → ALWAYS use screenshot (not logo video)
-      if(isFullViewport&&fs.existsSync(canvasPath)){return`<img src="/images/canvas-${idx}.png" style="${origStyle};object-fit:cover;display:block"/>`;}
-      // Small canvas → prefer logo video, then any video
-      if(logoVid){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${logoVid}"></video>`;}
-      if(anyVid&&idx===0){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${anyVid}"></video>`;}
-      // Fallback: canvas screenshot or empty
-      if(fs.existsSync(canvasPath)){return`<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;}
-      return'';});
+  html=html.replace(/<canvas([^>]*)>[\s\S]*?<\/canvas>/g,(match,attrs)=>{const idx=ci++;if(logoVid){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${logoVid}"></video>`;}if(anyVid&&idx===0){return`<video autoplay muted playsinline loop style="width:100%;height:auto" src="${anyVid}"></video>`;}if(fs.existsSync(`${OUT}/images/canvas-${idx}.png`)){// v27: Detect full-viewport canvases (WebGL/WebGPU 3D scenes) — preserve their position/size
+      const wMatch=attrs.match(/width="(\d+)"/);const hMatch=attrs.match(/height="(\d+)"/);const w=wMatch?parseInt(wMatch[1]):0;const h=hMatch?parseInt(hMatch[1]):0;const isFullViewport=w>=1200&&h>=600;const styleMatch=attrs.match(/style="([^"]*)"/);const origStyle=styleMatch?styleMatch[1]:'';if(isFullViewport){return`<img src="/images/canvas-${idx}.png" style="${origStyle};object-fit:cover;display:block"/>`;}return`<img src="/images/canvas-${idx}.png" style="width:100%;height:auto"/>`;}return'';});
 
   // Also: empty Logo_container divs (JS-injected content that wasn't rendered) → inject video
   if (logoVid) {
@@ -1727,7 +1738,7 @@ async function capturePage(page, urlPath, isFirst) {
   // Inject CSS + fixes
   html=html.replace('</head>',`
 ${fontPreloadHints}<style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}*,*::before,*::after{transition:none!important}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 
@@ -2478,7 +2489,7 @@ async function main() {
         // Inject CSS
         cleanHTML=cleanHTML.replace('</head>',`
 <style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}*,*::before,*::after{transition:none!important}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 
