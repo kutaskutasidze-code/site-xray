@@ -1,69 +1,80 @@
-3,6c3,7
-<  * Site X-Ray v35 — Universal precision cloner.
-<  * Builds on v34 with METRIC-FOCUS on pixel fidelity:
-<  *   - Screenshot timeout safety on early viewport capture (prevents hang on font-heavy sites)
-<  *   - Previous: early viewport capture, relative link handling, text capture
+3,7c3,8
+<  * Site X-Ray v36 — Universal precision cloner.
+<  * Builds on v35 with UNIVERSAL improvements:
+<  *   - Image dimension preservation: inline width/height on all imgs before capture
+<  *   - Image visibility: force hidden carousel/slider images to remain in layout flow
+<  *   - Previous: screenshot timeout safety, early viewport capture, relative links, text capture
 ---
->  * Site X-Ray v36 — Universal precision cloner.
->  * Builds on v35 with UNIVERSAL improvements:
->  *   - Image dimension preservation: inline width/height on all imgs before capture
->  *   - Image visibility: force hidden carousel/slider images to remain in layout flow
->  *   - Previous: screenshot timeout safety, early viewport capture, relative links, text capture
-10c11
-<  * Usage: node v31-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v37 — Universal precision cloner.
+>  * Builds on v36 with PIXEL-FOCUS improvements:
+>  *   - Scroll-triggered video autoplay: add autoplay to videos with scroll-trigger data attrs
+>  *   - Font preloading: inject preload hints for local font files for faster font rendering
+>  *   - Font-display: swap in captured @font-face rules to prevent FOIT
+>  *   - Previous: image dimension preservation, image visibility, early viewport capture
+11c12
+<  * Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
-36,37c37,38
-<   console.log(`Site X-Ray v35
-< Usage: node v35-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v37-stable.js <url> [output-dir] [max-pages] [flags]
+37c38
+<   console.log(`Site X-Ray v36
 ---
->   console.log(`Site X-Ray v36
-> Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
-1456a1458,1504
->         }
->       });
->     } catch(e) {}
->   }).catch(() => {});
+>   console.log(`Site X-Ray v37
+1646a1648,1665
+>   // v37: PIXEL FIX — Add autoplay to scroll-triggered videos
+>   // Creative sites use JS libraries (Locomotive Scroll, GSAP ScrollTrigger) to trigger video playback
+>   // on scroll. Since we strip JS, these videos never play. Add autoplay so they match the original.
+>   try {
+>     html = html.replace(/<video([^>]*?)>/gi, (match, attrs) => {
+>       // Skip if already has autoplay
+>       if (/\bautoplay\b/i.test(attrs)) return match;
+>       // Check for scroll-trigger data attributes that indicate the video was meant to autoplay
+>       const hasScrollTrigger = /data-scroll|data-module-video|data-aos|data-inview|data-lazy-video|data-video-autoplay|data-animation/i.test(attrs);
+>       // Also check for muted+loop combo (strong signal this was meant to autoplay as background video)
+>       const isBgVideo = /\bmuted\b/i.test(attrs) && /\bloop\b/i.test(attrs);
+>       if (hasScrollTrigger || isBgVideo) {
+>         return `<video${attrs} autoplay>`;
+>       }
+>       return match;
+>     });
+>   } catch(e) { /* scroll-triggered video fix failed, continue */ }
 > 
->   // v36: IMAGE DIMENSION PRESERVATION — set explicit width/height on all images
->   // This ensures images render at correct sizes in clone even when CSS context is lost
->   await page.evaluate(() => {
->     try {
->       document.querySelectorAll('img').forEach(img => {
->         // Set loading=eager to prevent lazy-load issues in clone
->         img.setAttribute('loading', 'eager');
->         // If image has natural dimensions, set explicit width/height as attributes
->         if (img.naturalWidth > 0 && img.naturalHeight > 0) {
->           if (!img.getAttribute('width')) img.setAttribute('width', String(img.naturalWidth));
->           if (!img.getAttribute('height')) img.setAttribute('height', String(img.naturalHeight));
->         }
->         // If image is in a hidden container (display:none ancestor), force it visible
->         // by ensuring the image itself has minimum dimensions inline
->         const rect = img.getBoundingClientRect();
->         if (img.offsetWidth === 0 && img.naturalWidth > 0) {
->           // Image loaded but invisible — could be:
->           // 1. display:none ancestor (carousel non-active slides)
->           // 2. width:0 + overflow:hidden ancestor (hover-reveal patterns)
->           // Fix: walk up ancestor chain and fix the first hiding element
->           let el = img.parentElement;
->           let depth = 0;
->           while (el && el !== document.body && depth < 10) {
->             const cs = getComputedStyle(el);
->             if (cs.display === 'none') {
->               // Switch display:none to opacity:0 (keeps layout flow)
->               el.style.setProperty('display', '', 'important');
->               el.style.setProperty('opacity', '0', 'important');
->               el.style.setProperty('pointer-events', 'none', 'important');
->               break;
->             }
->             const w = parseFloat(cs.width);
->             if (w === 0 && cs.overflow === 'hidden') {
->               // Container has 0 width with overflow:hidden — JS-managed reveal
->               // Set min-width so image has layout dimensions
->               el.style.setProperty('min-width', '1px', 'important');
->               el.style.setProperty('overflow', 'visible', 'important');
->               break;
->             }
->             el = el.parentElement;
->             depth++;
->           }
+1668a1688,1711
+>   // v37: PIXEL FIX — Inject font preload hints for local fonts (faster font loading = better pixel match)
+>   // Original preloads were stripped above; add new ones pointing to local font files
+>   let fontPreloadHints = '';
+>   try {
+>     const fontsDir = `${OUT}/fonts`;
+>     if (fs.existsSync(fontsDir)) {
+>       const fontFiles = fs.readdirSync(fontsDir).filter(f => /\.(woff2?|ttf|otf)$/i.test(f));
+>       for (const f of fontFiles) {
+>         const ext = path.extname(f).toLowerCase();
+>         const type = ext === '.woff2' ? 'font/woff2' : ext === '.woff' ? 'font/woff' : ext === '.ttf' ? 'font/ttf' : 'font/otf';
+>         fontPreloadHints += `<link rel="preload" as="font" href="/fonts/${f}" type="${type}" crossorigin>\n`;
+>       }
+>     }
+>   } catch(e) { /* font preload generation failed, continue */ }
+> 
+>   // v37: PIXEL FIX — Add font-display: swap to all @font-face rules in captured CSS
+>   // Prevents Flash of Invisible Text (FOIT) ensuring text renders with correct font for pixel matching
+>   try {
+>     css = css.replace(/@font-face\s*\{([^}]*)\}/gi, (match, body) => {
+>       if (/font-display\s*:/i.test(body)) return match; // already has font-display
+>       return match.replace('{', '{ font-display: swap; ');
+>     });
+>   } catch(e) { /* font-display injection failed, continue */ }
+> 
+1671c1714
+< <style>${css}</style>
+---
+> ${fontPreloadHints}<style>${css}</style>
+2536a2580,2589
+>         // v37: Add autoplay to scroll-triggered videos in sub-pages too
+>         try {
+>           cleanHTML = cleanHTML.replace(/<video([^>]*?)>/gi, (match, attrs) => {
+>             if (/\bautoplay\b/i.test(attrs)) return match;
+>             const isBgVideo = /\bmuted\b/i.test(attrs) && /\bloop\b/i.test(attrs);
+>             const hasScrollTrigger = /data-scroll|data-module-video|data-inview/i.test(attrs);
+>             if (hasScrollTrigger || isBgVideo) return `<video${attrs} autoplay>`;
+>             return match;
+>           });
+>         } catch(e) {}

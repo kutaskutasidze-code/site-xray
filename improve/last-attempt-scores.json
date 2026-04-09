@@ -1,8 +1,62 @@
 [
   {
     "site": "https://www.locomotive.ca",
-    "old": 85,
-    "new": 89,
-    "diff": 4
+    "old": 89,
+    "new": 88,
+    "diff": -1
+  },
+  {
+    "site": "https://ingamana.com",
+    "old": 99,
+    "new": 99,
+    "diff": 0
+  },
+  {
+    "site": "https://resn.co.nz",
+    "old": 100,
+    "new": 100,
+    "diff": 0
+  },
+  {
+    "site": "https://www.awwwards.com/websites",
+    "old": 91,
+    "new": 91,
+    "diff": 0
+  },
+  {
+    "site": "https://basement.studio",
+    "old": 97,
+    "new": 97,
+    "diff": 0
+  },
+  {
+    "site": "https://cuberto.com",
+    "old": 96,
+    "new": 96,
+    "diff": 0
+  },
+  {
+    "site": "https://pentagram.com",
+    "old": 99,
+    "new": 99,
+    "diff": 0
+  },
+  {
+    "site": "https://www.freezpak.com",
+    "old": 100,
+    "new": 100,
+    "diff": 0
+  },
+  {
+    "site": "https://lusion.co",
+    "old": 98,
+    "new": 100,
+    "diff": 2
+  },
+  {
+    "site": "https://bruno-simon.com",
+    "old": 79,
+    "new": 93,
+    "diff": 14
   }
 ]
