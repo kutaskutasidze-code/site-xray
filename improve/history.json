@@ -1,5 +1,21 @@
 [
   {
+    "version": "v40",
+    "date": "2026-04-10",
+    "prev_version": "v39",
+    "prev_score": 86,
+    "new_score": 92,
+    "strategy": "universal",
+    "changes": [
+      "v40: Canvas capture fallback — allow viewport screenshot to be used for the first full-viewport canvas (>=1200x600) on multi-canvas sites. Previously, viewport screenshot fallback only worked when a page had exactly 1 canvas, causing full-viewport WebGL hero scenes to be completely dropped on sites with multiple canvases (e.g., lusion.co with 3 canvases)."
+    ],
+    "metrics_improved": {
+      "lusion.co pixels": "8 → 44",
+      "lusion.co overall": "86 → 92"
+    },
+    "regressions": "None. All mastered sites stable within volatile ranges."
+  },
+  {
     "version": "v38",
     "date": "2026-04-09",
     "prev_version": "v37",
