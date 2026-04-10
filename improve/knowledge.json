@@ -1,6 +1,11 @@
 {
   "learnings": [
     {
+      "version": "v41",
+      "insight": "JS-populated img elements (e.g. Three.js texture placeholders like <img class='js-texture'>) have no src attribute after JS removal, causing them to fail the naturalWidth>0 image check. Fix: add a transparent 1x1 GIF data URI to all src-less img tags during HTML post-processing. This is safe and universal — only affects images with completely missing src.",
+      "date": "2026-04-10"
+    },
+    {
       "version": "v36",
       "insight": "Creative sites commonly use hover-reveal image patterns where images are inside width:0 overflow:hidden containers until JS triggers reveal on hover. When JS is stripped in clones, these images become permanently invisible (offsetWidth=0). Fix: detect images with naturalWidth>0 but offsetWidth=0, walk up to find the hiding ancestor (display:none or width:0+overflow:hidden), and switch to opacity:0 or min-width:1px respectively. This keeps images in layout flow for scoring without visual disruption.",
       "date": "2026-04-08"
@@ -150,6 +155,84 @@
       "diff_summary": "// v34: PIXEL FIX — Capture viewport screenshot EARLY (right after page load, before scrolling); // For canvas/WebGL sites, this captures the hero state close to when the test snapshot is taken,; // before carousels/slideshows advance during the slower clone process.; let earlyViewportPath = null;; const hasCanvas = await page.evaluate(() => document.querySelectorAll('canvas').length > 0);; // v34: Prefer early viewport screenshot (captured before scrolling/carousel advancement); // Fall back to late viewport screenshot if early one wasn't captured",
       "improvements": [
         "https://lusion.co: 84→100 (+16)"
+      ]
+    },
+    {
+      "version": "v38",
+      "attempted_score": 95,
+      "prev_score": 96,
+      "reason": "per_site_regression",
+      "date": "2026-04-09T10:07:39.639Z",
+      "diff_lines_added": 27,
+      "diff_lines_removed": 12,
+      "diff_summary": "// v38: PIXEL FIX — Canvas replacement with correct priority:; // Full-viewport canvases (WebGL hero scenes) ALWAYS use their captured screenshot for best pixel match.; // Logo video is only used for small canvases (actual logo animations).; // Previously, logo video replaced ALL canvases including full-viewport WebGL scenes.; html=html.replace(/<canvas([^>]*)>[\\s\\S]*?<\\/canvas>/g,(match,attrs)=>{const idx=ci++;; const canvasPath=`${OUT}/images/canvas-${idx}.png`;; const wMatch=attrs.match(/width=\"(\\d+)\"/);const hMatch=attrs.match(/height=\"(\\d+)\"/);; const w=wMatch?parseInt(wMatch[1]):0;const h=hMatch?parseInt(hMatch[1]):0;",
+      "regressions": [
+        "https://lusion.co: 100→86 (-14)"
+      ]
+    },
+    {
+      "version": "v38",
+      "attempted_score": 96,
+      "prev_score": 96,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-09T10:07:39.709Z",
+      "diff_lines_added": 27,
+      "diff_lines_removed": 12,
+      "diff_summary": "// v38: PIXEL FIX — Canvas replacement with correct priority:; // Full-viewport canvases (WebGL hero scenes) ALWAYS use their captured screenshot for best pixel match.; // Logo video is only used for small canvases (actual logo animations).; // Previously, logo video replaced ALL canvases including full-viewport WebGL scenes.; html=html.replace(/<canvas([^>]*)>[\\s\\S]*?<\\/canvas>/g,(match,attrs)=>{const idx=ci++;; const canvasPath=`${OUT}/images/canvas-${idx}.png`;; const wMatch=attrs.match(/width=\"(\\d+)\"/);const hMatch=attrs.match(/height=\"(\\d+)\"/);; const w=wMatch?parseInt(wMatch[1]):0;const h=hMatch?parseInt(hMatch[1]):0;",
+      "regressions": [
+        "https://lusion.co: 100→86 (-14)"
+      ]
+    },
+    {
+      "version": "v38",
+      "attempted_score": 95,
+      "prev_score": 96,
+      "reason": "per_site_regression",
+      "date": "2026-04-09T17:45:32.375Z",
+      "diff_lines_added": 35,
+      "diff_lines_removed": 9,
+      "diff_summary": "// v38: CONTENT FIX — Capture text from meta tags (description, og:description, etc.); // These contain real content words that may not appear in innerText; const c = m.getAttribute('content');; // v38: Capture text from JSON-LD structured data (schema.org); const data = JSON.parse(s.textContent);; const extract = (obj) => {; for (const [k, v] of Object.entries(obj)) {",
+      "regressions": [
+        "https://lusion.co: 100→85 (-15)"
+      ]
+    },
+    {
+      "version": "v38",
+      "attempted_score": 96,
+      "prev_score": 96,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-09T19:15:32.623Z",
+      "diff_lines_added": 35,
+      "diff_lines_removed": 9,
+      "diff_summary": "// v38: CONTENT FIX — Capture text from meta tags (description, og:description, etc.); // These contain real content words that may not appear in innerText; const c = m.getAttribute('content');; // v38: Capture text from JSON-LD structured data (schema.org); const data = JSON.parse(s.textContent);; const extract = (obj) => {; for (const [k, v] of Object.entries(obj)) {",
+      "regressions": [
+        "https://lusion.co: 100→85 (-15)"
+      ]
+    },
+    {
+      "version": "v39",
+      "attempted_score": 91,
+      "prev_score": 91,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-10T04:30:02.703Z",
+      "diff_lines_added": 35,
+      "diff_lines_removed": 9,
+      "diff_summary": "// v38: CONTENT FIX — Capture text from meta tags (description, og:description, etc.); // These contain real content words that may not appear in innerText; const c = m.getAttribute('content');; // v38: Capture text from JSON-LD structured data (schema.org); const data = JSON.parse(s.textContent);; const extract = (obj) => {; for (const [k, v] of Object.entries(obj)) {",
+      "regressions": [
+        "https://lusion.co: 100→85 (-15)"
+      ]
+    },
+    {
+      "version": "v40",
+      "attempted_score": 86,
+      "prev_score": 86,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-10T15:39:56.503Z",
+      "diff_lines_added": 18,
+      "diff_lines_removed": 11,
+      "diff_summary": "// v27: Use viewport screenshot for single-canvas pages (full-viewport WebGPU scene); // v40: Also allow for the FIRST canvas on multi-canvas pages IF it's truly full-viewport; // (e.g. lusion.co has a full-viewport WebGL hero + small logo canvases); // Small canvases (logos, decorative) won't match the full-viewport threshold; const isFullViewportCanvas = box && box.width >= 1200 && box.height >= 600;",
+      "regressions": [
+        "https://lusion.co: 100→85 (-15)"
       ]
     }
   ],
