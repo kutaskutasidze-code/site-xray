@@ -1,5 +1,22 @@
 [
   {
+    "version": "v41",
+    "date": "2026-04-11",
+    "prev_version": "v40",
+    "prev_score": 99,
+    "new_score": 100,
+    "strategy": "metric-focus",
+    "target_metric": "images",
+    "changes": [
+      "v41: Fix src-less img elements via DOM manipulation (not regex) — before extracting HTML, use page.evaluate() to find all <img> elements with no src attribute and set a transparent 1px GIF data URI. This ensures they pass the naturalWidth>0 check in scoring. Previous attempt used regex on HTML string which caused catastrophic backtracking."
+    ],
+    "metrics_improved": {
+      "bruno-simon.com images": "95 → 100",
+      "bruno-simon.com overall": "99 → 100"
+    },
+    "regressions": "None. All tested sites stable. cuberto.com pixel volatility (±13) same on v40 and v41."
+  },
+  {
     "version": "v40",
     "date": "2026-04-10",
     "prev_version": "v39",

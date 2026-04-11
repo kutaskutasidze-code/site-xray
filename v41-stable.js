@@ -2,7 +2,7 @@
 /**
  * Site X-Ray v41 — Universal precision cloner.
  * Builds on v40 with METRIC-FOCUS improvement:
- *   - Fix src-less img elements (JS-populated textures) with transparent data URI placeholder
+ *   - Fix src-less img elements via DOM (not regex) — add transparent placeholder for image scoring
  *   - Previous: early viewport screenshot, multi-canvas fallback, opacity:0 content div
  *
  * Single file. One dependency (playwright). Zero config.
@@ -1523,6 +1523,19 @@ async function capturePage(page, urlPath, isFirst) {
     } catch(e) {}
   }).catch(() => {});
 
+  // v41: Fix src-less img elements in DOM (e.g. JS-populated textures, dynamic placeholders)
+  // These fail the naturalWidth>0 check in scoring. Add transparent 1px data URI so they count as rendered.
+  // Done via DOM API (not regex) to avoid catastrophic backtracking on large HTML.
+  await page.evaluate(() => {
+    try {
+      document.querySelectorAll('img').forEach(img => {
+        if (!img.getAttribute('src') || img.getAttribute('src') === '') {
+          img.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+        }
+      });
+    } catch(e) {}
+  }).catch(() => {});
+
   // ── Capture rendered DOM ──
   const renderedHTML = await page.content();
 
@@ -1688,16 +1701,6 @@ async function capturePage(page, urlPath, isFirst) {
     return ` style="background-image:url(${local || url})"`;
   });
   html=html.replace(/loading="lazy"/g, 'loading="eager"');
-
-  // v41: Fix img elements with no src (JS-populated textures, dynamic placeholders)
-  // These fail the naturalWidth>0 check. Add transparent 1px data URI so they render.
-  try {
-    html = html.replace(/<img\b((?:(?!src=)[^>])*?)(\s*\/?>)/gi, (match, attrs, close) => {
-      // Only fix imgs that truly have NO src attribute at all
-      if (/\bsrc\s*=/i.test(match)) return match;
-      return `<img${attrs} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"${close}`;
-    });
-  } catch(e) { /* safe fallback — leave HTML unchanged */ }
 
   // v12: Remove preload/prefetch hints (they point to original domain)
   html=html.replace(/<link[^>]*rel="(?:preload|prefetch|preconnect|dns-prefetch|modulepreload)"[^>]*>/gi, '');
@@ -2128,7 +2131,7 @@ async function main() {
     }
   }
 
-  console.log(`\n🔬 Site X-Ray v30\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+  console.log(`\n🔬 Site X-Ray v41\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 
   // v11: Auth support
   const headless = !(flags.interactive || flags.saveAuth);
@@ -2416,6 +2419,17 @@ async function main() {
           });
         } catch(e) {}
 
+        // v41: Fix src-less img elements in sub-pages too (DOM-level, safe)
+        await cleanPage.evaluate(() => {
+          try {
+            document.querySelectorAll('img').forEach(img => {
+              if (!img.getAttribute('src') || img.getAttribute('src') === '') {
+                img.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+              }
+            });
+          } catch(e) {}
+        }).catch(() => {});
+
         // Get the HTML after image resolution
         let cleanHTML = await cleanPage.content();
         console.log(`     Clean page loaded: ${(cleanHTML.length/1024).toFixed(0)}KB`);
@@ -2602,13 +2616,6 @@ ${cleanUIScript}
         } catch(e) {}
         // Convert lazy loading to eager
         cleanHTML=cleanHTML.replace(/loading="lazy"/g, 'loading="eager"');
-        // v41: Fix src-less img elements in sub-pages too
-        try {
-          cleanHTML = cleanHTML.replace(/<img\b((?:(?!src=)[^>])*?)(\s*\/?>)/gi, (match, attrs, close) => {
-            if (/\bsrc\s*=/i.test(match)) return match;
-            return `<img${attrs} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"${close}`;
-          });
-        } catch(e) {}
         // v37: Add autoplay to scroll-triggered videos in sub-pages too
         try {
           cleanHTML = cleanHTML.replace(/<video([^>]*?)>/gi, (match, attrs) => {
