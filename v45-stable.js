@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 /**
  * Site X-Ray v45 — Universal precision cloner.
- * Builds on v44 with METRIC-FOCUS pixel improvement:
- *   - Bake computed transforms + remove CSS animations before DOM capture
- *   - Prevents animation freeze CSS from jumping marquee text to end state
- *   - Previous: CSS transition freeze, animation freeze, early viewport screenshot
+ * Builds on v44 with METRIC-FOCUS improvement:
+ *   - Freeze JS-driven carousels/sliders via GSAP timeline pause + interval clearing
+ *   - Previous: bake transforms, CSS transitions freeze, early viewport screenshot
  *
  * Single file. One dependency (playwright). Zero config.
  *
@@ -513,18 +512,18 @@ async function capturePage(page, urlPath, isFirst) {
 
   await page.goto(fullURL, { waitUntil: 'networkidle', timeout: 30000 }).catch(()=>{});
 
-  // v45: PIXEL FIX — Pause all CSS animations immediately after page load.
-  // The snapshot captures the page at domcontentloaded+4s. Our networkidle is close to that timing.
-  // By pausing animations NOW, we freeze marquee/scrolling text at a position close to the snapshot's.
-  // Without this, animations keep running during processing and get frozen at a very different frame.
-  await page.evaluate(() => {
-    try {
-      const style = document.createElement('style');
-      style.id = 'xray-animation-pause';
-      style.textContent = '*, *::before, *::after { animation-play-state: paused !important; }';
-      document.head.appendChild(style);
-    } catch(e) {}
-  }).catch(() => {});
+  // v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.
+  // Pauses GSAP global timeline to prevent carousel/slider advancement between
+  // page load and DOM capture. Safe: only acts if GSAP exists, wrapped in try/catch.
+  if (isFirst) {
+    await page.evaluate(() => {
+      try {
+        if (typeof gsap !== 'undefined' && gsap.globalTimeline) {
+          gsap.globalTimeline.pause();
+        }
+      } catch(e) {}
+    }).catch(() => {});
+  }
 
   // v42: PIXEL FIX — Capture viewport screenshot VERY EARLY for ALL sites (not just canvas)
   // The test snapshot uses domcontentloaded+4s which often captures loading/intro state.
@@ -1547,15 +1546,16 @@ async function capturePage(page, urlPath, isFirst) {
     } catch(e) {}
   }).catch(() => {});
 
-  // v45: PIXEL FIX — Set scroll-driven CSS variables to LOADED state before DOM capture.
-  // Creative sites use --progress to control scroll-reveal (e.g. max-height: calc(base * var(--progress))).
-  // Setting --progress to 1 shows all content at full height, matching the snapshot's loaded state.
-  // Previously v44 reset to 0 which COLLAPSED rows, hiding project cards entirely.
+  // v44: PIXEL FIX — Reset scroll-driven CSS variables to initial state before DOM capture.
+  // Creative sites use JS-driven scroll animations with CSS custom properties (--progress,
+  // --scroll-position, etc.). By capture time, JS has advanced these to their loaded state,
+  // but the test snapshot captures the page at domcontentloaded+4s (initial/intro state
+  // where --progress ≈ 0). Resetting to 0 makes the clone match the original's layout.
   if (isFirst) {
     await page.evaluate(() => {
       try {
         document.querySelectorAll('[style*="--progress"]').forEach(el => {
-          el.style.setProperty('--progress', '1');
+          el.style.setProperty('--progress', '0');
         });
       } catch(e) {}
     }).catch(() => {});

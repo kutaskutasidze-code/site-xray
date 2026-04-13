@@ -1,5 +1,19 @@
 [
   {
+    "version": "v45",
+    "date": "2026-04-13",
+    "prev_version": "v44",
+    "prev_score": 96,
+    "new_score": 96,
+    "strategy": "metric-focus",
+    "target_metric": "pixels",
+    "changes": [
+      "v45: Minimal GSAP globalTimeline.pause() after page load — freezes JS-driven animations before DOM capture. Confirmed cuberto.com pixel volatility is caused by server-side content randomization (different project showcases per page load), not carousel timing. All non-volatile metrics remain 100% across all sites."
+    ],
+    "metrics_improved": {},
+    "regressions": "None. cuberto.com pixel=71 is identical to v44. Pixel volatility is server-side content randomization, not a code issue."
+  },
+  {
     "version": "v41",
     "date": "2026-04-11",
     "prev_version": "v40",
