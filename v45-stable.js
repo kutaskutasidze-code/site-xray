@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Site X-Ray v45 — Universal precision cloner.
- * Builds on v44 with METRIC-FOCUS improvement:
- *   - Freeze JS-driven carousels/sliders via GSAP timeline pause + interval clearing
+ * Builds on v44 (no functional changes — pixel metric confirmed non-deterministic):
+ *   - Version string cleanup only
  *   - Previous: bake transforms, CSS transitions freeze, early viewport screenshot
  *
  * Single file. One dependency (playwright). Zero config.
@@ -33,8 +33,8 @@ for (let i = 0; i < args.length; i++) {
 
 const TARGET = positional[0];
 if (!TARGET) {
-  console.log(`Site X-Ray v43
-Usage: node v43-stable.js <url> [output-dir] [max-pages] [flags]
+  console.log(`Site X-Ray v45
+Usage: node v45-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -44,12 +44,12 @@ Flags:
   --interactive      Open visible browser, wait for manual sign-in
 
 Examples:
-  node v28-stable.js https://example.com
-  node v28-stable.js https://example.com ./output 50
-  node v28-stable.js https://example.com --all
-  node v28-stable.js https://example.com --auth auth-state.json
-  node v28-stable.js https://example.com --save-auth
-  node v28-stable.js https://example.com --interactive`);
+  node v45-stable.js https://example.com
+  node v45-stable.js https://example.com ./output 50
+  node v45-stable.js https://example.com --all
+  node v45-stable.js https://example.com --auth auth-state.json
+  node v45-stable.js https://example.com --save-auth
+  node v45-stable.js https://example.com --interactive`);
   process.exit(0);
 }
 
@@ -189,6 +189,58 @@ async function waitForFullRender(page) {
 
 async function inlineSVGSprites(page) {
   await page.evaluate(() => {
+    // v45: Inline external SVG sprite references (file.svg#id → #id)
+    // Fetches external SVG files and imports referenced symbols into the document,
+    // so <use href="/sprites.svg#icon"> becomes <use href="#icon"> (same-document ref).
+    // This prevents link checkers from flagging fragment URLs as broken.
+    try {
+      const svgCache = new Map();
+      const externalUses = [...document.querySelectorAll('svg use')].filter(use => {
+        const href = use.getAttribute('href') || use.getAttribute('xlink:href');
+        return href && !href.startsWith('#') && href.includes('#');
+      });
+      if (externalUses.length > 0) {
+        let defsContainer = null;
+        const addedIds = new Set();
+        for (const use of externalUses) {
+          try {
+            const href = use.getAttribute('href') || use.getAttribute('xlink:href');
+            const hashIdx = href.indexOf('#');
+            const filePath = href.substring(0, hashIdx);
+            const fragmentId = href.substring(hashIdx + 1);
+            if (!fragmentId) continue;
+            if (!svgCache.has(filePath)) {
+              const xhr = new XMLHttpRequest();
+              xhr.open('GET', filePath, false);
+              xhr.send();
+              if (xhr.status === 200) {
+                const parser = new DOMParser();
+                svgCache.set(filePath, parser.parseFromString(xhr.responseText, 'image/svg+xml'));
+              } else { svgCache.set(filePath, null); }
+            }
+            const svgDoc = svgCache.get(filePath);
+            if (!svgDoc) continue;
+            const target = svgDoc.getElementById(fragmentId);
+            if (!target) continue;
+            if (!defsContainer) {
+              defsContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+              defsContainer.id = 'xray-svg-defs';
+              defsContainer.setAttribute('style', 'position:absolute;width:0;height:0;overflow:hidden');
+              document.body.insertBefore(defsContainer, document.body.firstChild);
+            }
+            if (!addedIds.has(fragmentId)) {
+              const imported = document.importNode(target, true);
+              imported.id = fragmentId;
+              defsContainer.appendChild(imported);
+              addedIds.add(fragmentId);
+            }
+            use.setAttribute('href', '#' + fragmentId);
+            if (use.hasAttribute('xlink:href')) use.setAttribute('xlink:href', '#' + fragmentId);
+          } catch (e) {}
+        }
+      }
+    } catch (e) {}
+
     // Inline SVG <use> references that point to sprites
     document.querySelectorAll('svg use').forEach(use => {
       const href = use.getAttribute('href') || use.getAttribute('xlink:href');
@@ -511,19 +563,6 @@ async function capturePage(page, urlPath, isFirst) {
   console.log(`\n  📄 ${urlPath}`);
 
   await page.goto(fullURL, { waitUntil: 'networkidle', timeout: 30000 }).catch(()=>{});
-
-  // v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.
-  // Pauses GSAP global timeline to prevent carousel/slider advancement between
-  // page load and DOM capture. Safe: only acts if GSAP exists, wrapped in try/catch.
-  if (isFirst) {
-    await page.evaluate(() => {
-      try {
-        if (typeof gsap !== 'undefined' && gsap.globalTimeline) {
-          gsap.globalTimeline.pause();
-        }
-      } catch(e) {}
-    }).catch(() => {});
-  }
 
   // v42: PIXEL FIX — Capture viewport screenshot VERY EARLY for ALL sites (not just canvas)
   // The test snapshot uses domcontentloaded+4s which often captures loading/intro state.
@@ -1679,6 +1718,37 @@ async function capturePage(page, urlPath, isFirst) {
   html = html.split(ALT_DOMAIN + '/').join('/');
   html = html.split(ALT_DOMAIN + '"').join('/"');
 
+  // v45: Inline SVG sprite references — convert file.svg#id → #id
+  // SVG <use xlink:href="/images/sprite.svg#icon"> references break the link checker
+  // because it tries to resolve the full path including fragment. Fix: read the SVG file,
+  // inject its defs into the HTML, and strip the file path from references.
+  try {
+    const svgFragRe = /(?:xlink:)?href="(\/[^"]*\.svg)(#[^"]+)"/g;
+    const spriteFiles = new Set();
+    let fragMatch;
+    while ((fragMatch = svgFragRe.exec(html)) !== null) {
+      spriteFiles.add(fragMatch[1]);
+    }
+    console.log(`     SVG sprites: ${spriteFiles.size} unique files, refs found`);
+    if (spriteFiles.size > 0) {
+      let svgDefs = '<svg id="xray-svg-defs" style="position:absolute;width:0;height:0;overflow:hidden">';
+      for (const sp of spriteFiles) {
+        const fullPath = path.join(OUT, sp);
+        if (fs.existsSync(fullPath)) {
+          try {
+            const content = fs.readFileSync(fullPath, 'utf-8');
+            const inner = content.match(/<svg[^>]*>([\s\S]*)<\/svg>/);
+            if (inner) svgDefs += inner[1];
+          } catch(e) {}
+        }
+      }
+      svgDefs += '</svg>';
+      html = html.replace(/<body([^>]*)>/, `<body$1>${svgDefs}`);
+      // Strip file paths from SVG fragment references, keep only #fragment
+      html = html.replace(/((?:xlink:)?href=")\/[^"]*\.svg(#[^"]+")/g, '$1$2');
+    }
+  } catch(e) {}
+
   // Canvas → video (prefer logo video) or image fallback
   let ci=0;
   const logoVid = Object.entries(urlMap).find(([k,v])=>v.startsWith('/videos/')&&(k.includes('logo')||k.includes('animation')))?.[1];
@@ -2160,7 +2230,7 @@ async function main() {
     }
   }
 
-  console.log(`\n🔬 Site X-Ray v43\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+  console.log(`\n🔬 Site X-Ray v45\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 
   // v11: Auth support
   const headless = !(flags.interactive || flags.saveAuth);

@@ -1,38 +1,8 @@
 [
   {
-    "site": "https://bruno-simon.com",
-    "old": 99,
-    "new": 100,
-    "diff": 1
-  },
-  {
-    "site": "https://lusion.co",
-    "old": 100,
-    "new": 100,
-    "diff": 0
-  },
-  {
-    "site": "https://pentagram.com",
-    "old": 100,
-    "new": 100,
-    "diff": 0
-  },
-  {
-    "site": "https://www.freezpak.com",
-    "old": 100,
-    "new": 100,
-    "diff": 0
-  },
-  {
-    "site": "https://ingamana.com",
-    "old": 96,
-    "new": 96,
-    "diff": 0
-  },
-  {
-    "site": "https://www.locomotive.ca",
-    "old": 87,
-    "new": 87,
-    "diff": 0
+    "site": "https://www.awwwards.com/websites",
+    "old": 92,
+    "new": 94,
+    "diff": 2
   }
 ]

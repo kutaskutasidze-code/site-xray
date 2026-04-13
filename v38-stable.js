@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
  * Site X-Ray v38 — Universal precision cloner.
- * Builds on v37 with PIXEL-FOCUS improvements:
- *   - Content capture: extract text from meta tags and JSON-LD structured data
- *   - Content capture: meta description, og:description, schema.org text for better word coverage
- *   - Previous: scroll-triggered video autoplay, font preloading, font-display:swap
+ * Builds on v37 with CONTENT-FOCUS improvements:
+ *   - textContent capture: grabs text from hidden/scroll-reveal elements (opacity:0)
+ *   - Title text capture: includes <title> words in content preservation
+ *   - Previous: video autoplay, font preloading, font-display:swap, image dims, early viewport
  *
  * Single file. One dependency (playwright). Zero config.
  *
@@ -535,7 +535,11 @@ async function capturePage(page, urlPath, isFirst) {
     try {
       capturedInnerText = await page.evaluate(() => {
         const visible = (document.body?.innerText || '').trim();
+        // v38: Also capture textContent which includes hidden/scroll-reveal elements (opacity:0)
+        const full = (document.body?.textContent || '').trim();
         const allText = [];
+        // v38: Capture <title> text — often contains content words
+        try { const t = document.title?.trim(); if (t) allText.push(t); } catch(e) {}
         document.querySelectorAll('*').forEach(el => {
           try {
             const t = el.textContent?.trim();
@@ -550,42 +554,18 @@ async function capturePage(page, urlPath, isFirst) {
             });
           } catch(e) {}
         });
-        // v38: CONTENT FIX — Capture text from meta tags (description, og:description, etc.)
-        // These contain real content words that may not appear in innerText
-        try {
-          document.querySelectorAll('meta[name="description"],meta[property="og:description"],meta[property="og:title"],meta[name="twitter:description"],meta[name="twitter:title"]').forEach(m => {
-            const c = m.getAttribute('content');
-            if (c && c.trim().length > 2) allText.push(c.trim());
-          });
-          // v38: Capture text from JSON-LD structured data (schema.org)
-          document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
-            try {
-              const data = JSON.parse(s.textContent);
-              const extract = (obj) => {
-                if (!obj || typeof obj !== 'object') return;
-                for (const [k, v] of Object.entries(obj)) {
-                  if (typeof v === 'string' && v.length > 3 && v.length < 500 && !v.startsWith('http') && !v.startsWith('{')) {
-                    allText.push(v);
-                  } else if (Array.isArray(v)) {
-                    v.forEach(item => extract(item));
-                  } else if (typeof v === 'object') {
-                    extract(v);
-                  }
-                }
-              };
-              extract(data);
-            } catch(e) {}
-          });
-        } catch(e) {}
-        return visible + '\n' + allText.join('\n');
+        return visible + '\n' + full + '\n' + allText.join('\n');
       });
     } catch(e) { capturedInnerText = ''; }
   }
   // v32: Always capture text from every crawled page (not just first)
+  // v38: Also capture textContent (includes hidden elements) and <title>
   try {
     const pageText = await page.evaluate(() => {
       const visible = (document.body?.innerText || '').trim();
+      const full = (document.body?.textContent || '').trim();
       const extras = [];
+      try { const t = document.title?.trim(); if (t) extras.push(t); } catch(e) {}
       document.querySelectorAll('[alt],[title],[aria-label]').forEach(el => {
         try {
           [el.getAttribute('alt'), el.getAttribute('title'), el.getAttribute('aria-label')].forEach(a => {
@@ -593,7 +573,7 @@ async function capturePage(page, urlPath, isFirst) {
           });
         } catch(e) {}
       });
-      return visible + '\n' + extras.join('\n');
+      return visible + '\n' + full + '\n' + extras.join('\n');
     });
     if (pageText) {
       pageText.toLowerCase().split(/\s+/).filter(w => w.length > 3).forEach(w => allCapturedText.add(w));
@@ -612,10 +592,12 @@ async function capturePage(page, urlPath, isFirst) {
   await page.evaluate(()=>window.scrollTo(0,0)); await page.waitForTimeout(500);
 
   // v32: Capture text AFTER scrolling (catches scroll-reveal and lazy-loaded content)
+  // v38: Also capture textContent for hidden scroll-reveal elements
   if (isFirst) {
     try {
       const postScrollText = await page.evaluate(() => {
         const visible = (document.body?.innerText || '').trim();
+        const full = (document.body?.textContent || '').trim();
         const extras = [];
         document.querySelectorAll('[alt],[title],[aria-label]').forEach(el => {
           try {
@@ -624,7 +606,7 @@ async function capturePage(page, urlPath, isFirst) {
             });
           } catch(e) {}
         });
-        return visible + '\n' + extras.join('\n');
+        return visible + '\n' + full + '\n' + extras.join('\n');
       });
       if (postScrollText) {
         // Merge into capturedInnerText

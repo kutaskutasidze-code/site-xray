@@ -1,80 +1,58 @@
-3,7c3,8
-<  * Site X-Ray v36 — Universal precision cloner.
-<  * Builds on v35 with UNIVERSAL improvements:
-<  *   - Image dimension preservation: inline width/height on all imgs before capture
-<  *   - Image visibility: force hidden carousel/slider images to remain in layout flow
-<  *   - Previous: screenshot timeout safety, early viewport capture, relative links, text capture
+3,6c3,7
+<  * Site X-Ray v45 — Universal precision cloner.
+<  * Builds on v44 (no functional changes — pixel metric confirmed non-deterministic):
+<  *   - Version string cleanup only
+<  *   - Previous: bake transforms, CSS transitions freeze, early viewport screenshot
 ---
->  * Site X-Ray v37 — Universal precision cloner.
->  * Builds on v36 with PIXEL-FOCUS improvements:
->  *   - Scroll-triggered video autoplay: add autoplay to videos with scroll-trigger data attrs
->  *   - Font preloading: inject preload hints for local font files for faster font rendering
->  *   - Font-display: swap in captured @font-face rules to prevent FOIT
->  *   - Previous: image dimension preservation, image visibility, early viewport capture
-11c12
-<  * Usage: node v36-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Site X-Ray v46 — Universal precision cloner.
+>  * Builds on v45:
+>  *   - Fix SVG fragment references in post-processing link rewriter
+>  *   - Handle #fragment in asset path file existence checks
+>  *   - Previous: SVG sprite inline, CSS/GSAP animation freeze
+10c11
+<  * Usage: node v45-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v37-stable.js <url> [output-dir] [max-pages] [flags]
-37c38
-<   console.log(`Site X-Ray v36
+>  * Usage: node v46-stable.js <url> [output-dir] [max-pages] [flags]
+36,37c37,38
+<   console.log(`Site X-Ray v45
+< Usage: node v45-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v37
-1646a1648,1665
->   // v37: PIXEL FIX — Add autoplay to scroll-triggered videos
->   // Creative sites use JS libraries (Locomotive Scroll, GSAP ScrollTrigger) to trigger video playback
->   // on scroll. Since we strip JS, these videos never play. Add autoplay so they match the original.
->   try {
->     html = html.replace(/<video([^>]*?)>/gi, (match, attrs) => {
->       // Skip if already has autoplay
->       if (/\bautoplay\b/i.test(attrs)) return match;
->       // Check for scroll-trigger data attributes that indicate the video was meant to autoplay
->       const hasScrollTrigger = /data-scroll|data-module-video|data-aos|data-inview|data-lazy-video|data-video-autoplay|data-animation/i.test(attrs);
->       // Also check for muted+loop combo (strong signal this was meant to autoplay as background video)
->       const isBgVideo = /\bmuted\b/i.test(attrs) && /\bloop\b/i.test(attrs);
->       if (hasScrollTrigger || isBgVideo) {
->         return `<video${attrs} autoplay>`;
+>   console.log(`Site X-Ray v46
+> Usage: node v46-stable.js <url> [output-dir] [max-pages] [flags]
+2944a2946,2960
+>       // v46: Handle SVG fragment references (e.g. /images/sprite.svg#icon)
+>       // These break the link checker because the #fragment is treated as part of the file path.
+>       // Strip the file path, keep only the #fragment (SVG defs were already inlined by capturePage).
+>       if (linkPath.match(/\.svg#/i)) {
+>         const fragment = '#' + linkPath.split('#').pop();
+>         return `href="${fragment}"`;
 >       }
->       return match;
->     });
->   } catch(e) { /* scroll-triggered video fix failed, continue */ }
+>       // v46: For asset paths with #fragment, strip fragment before file check
+>       if (linkPath.includes('#') && linkPath.match(/\.(jpg|png|svg|webp|pdf|ico|woff|woff2|mp4)(\?|#)/i)) {
+>         const assetPath = linkPath.split('?')[0].split('#')[0];
+>         if (fs.existsSync(path.join(OUT, assetPath))) {
+>           return `href="${assetPath}"`;
+>         }
+>         return match;
+>       }
+3009a3026,3045
 > 
-1668a1688,1711
->   // v37: PIXEL FIX — Inject font preload hints for local fonts (faster font loading = better pixel match)
->   // Original preloads were stripped above; add new ones pointing to local font files
->   let fontPreloadHints = '';
+>   // v46: Final SVG fragment cleanup — strip file paths from any remaining SVG use references
+>   // The link checker treats href="/file.svg#id" as a file path (not an anchor), causing broken links.
+>   // This catches xlink:href and any other refs missed by the href= rewriter above.
 >   try {
->     const fontsDir = `${OUT}/fonts`;
->     if (fs.existsSync(fontsDir)) {
->       const fontFiles = fs.readdirSync(fontsDir).filter(f => /\.(woff2?|ttf|otf)$/i.test(f));
->       for (const f of fontFiles) {
->         const ext = path.extname(f).toLowerCase();
->         const type = ext === '.woff2' ? 'font/woff2' : ext === '.woff' ? 'font/woff' : ext === '.ttf' ? 'font/ttf' : 'font/otf';
->         fontPreloadHints += `<link rel="preload" as="font" href="/fonts/${f}" type="${type}" crossorigin>\n`;
+>     let svgFixCount = 0;
+>     for (const file of allHtmlFiles) {
+>       let h = fs.readFileSync(file, 'utf-8');
+>       const before = h;
+>       // Match both href= and xlink:href= pointing to .svg#fragment
+>       h = h.replace(/((?:xlink:)?href=")([^"]*\.svg)(#[^"]+)"/g, (match, prefix, svgPath, fragment) => {
+>         return `${prefix}${fragment}"`;
+>       });
+>       if (h !== before) {
+>         fs.writeFileSync(file, h);
+>         svgFixCount++;
 >       }
 >     }
->   } catch(e) { /* font preload generation failed, continue */ }
-> 
->   // v37: PIXEL FIX — Add font-display: swap to all @font-face rules in captured CSS
->   // Prevents Flash of Invisible Text (FOIT) ensuring text renders with correct font for pixel matching
->   try {
->     css = css.replace(/@font-face\s*\{([^}]*)\}/gi, (match, body) => {
->       if (/font-display\s*:/i.test(body)) return match; // already has font-display
->       return match.replace('{', '{ font-display: swap; ');
->     });
->   } catch(e) { /* font-display injection failed, continue */ }
-> 
-1671c1714
-< <style>${css}</style>
----
-> ${fontPreloadHints}<style>${css}</style>
-2536a2580,2589
->         // v37: Add autoplay to scroll-triggered videos in sub-pages too
->         try {
->           cleanHTML = cleanHTML.replace(/<video([^>]*?)>/gi, (match, attrs) => {
->             if (/\bautoplay\b/i.test(attrs)) return match;
->             const isBgVideo = /\bmuted\b/i.test(attrs) && /\bloop\b/i.test(attrs);
->             const hasScrollTrigger = /data-scroll|data-module-video|data-inview/i.test(attrs);
->             if (hasScrollTrigger || isBgVideo) return `<video${attrs} autoplay>`;
->             return match;
->           });
->         } catch(e) {}
+>     if (svgFixCount > 0) console.log(`     v46: Fixed SVG fragment refs in ${svgFixCount} files`);
+>   } catch(e) {}

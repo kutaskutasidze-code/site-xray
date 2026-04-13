@@ -87,16 +87,17 @@
       "diff": 1,
       "date": "2026-04-09T04:07:49.364Z",
       "log_tail": "Acknowledged — that was the full test suite run (93/100). Already reviewed and committed as v37. All tasks complete.\n"
+    },
+    {
+      "version": "v46",
+      "score": 95,
+      "prev_score": 92,
+      "diff": 3,
+      "date": "2026-04-13T10:23:31.495Z",
+      "log_tail": "The background test suite completed successfully, confirming the results. v46 is committed and ready.\n"
     }
   ],
   "failed_approaches": [
-    {
-      "version": "v27",
-      "attempted_score": 92,
-      "prev_score": 92,
-      "reason": "all_retries_exhausted",
-      "date": "2026-04-05T20:45:17.530Z"
-    },
     {
       "version": "v30",
       "attempted_score": 88,
@@ -304,6 +305,26 @@
       "diff_lines_added": 24,
       "diff_lines_removed": 11,
       "diff_summary": "// v45: PIXEL FIX — Pause all CSS animations immediately after page load.; // The snapshot captures the page at domcontentloaded+4s. Our networkidle is close to that timing.; // By pausing animations NOW, we freeze marquee/scrolling text at a position close to the snapshot's.; // Without this, animations keep running during processing and get frozen at a very different frame.; const style = document.createElement('style');; // v45: PIXEL FIX — Set scroll-driven CSS variables to LOADED state before DOM capture.; // Creative sites use --progress to control scroll-reveal (e.g. max-height: calc(base * var(--progress))).; // Setting --progress to 1 shows all content at full height, matching the snapshot's loaded state."
+    },
+    {
+      "version": "v45",
+      "attempted_score": 92,
+      "prev_score": 96,
+      "reason": "score_dropped",
+      "date": "2026-04-13T01:37:36.623Z",
+      "diff_lines_added": 18,
+      "diff_lines_removed": 5,
+      "diff_summary": "// v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.; // Pauses GSAP global timeline to prevent carousel/slider advancement between; // page load and DOM capture. Safe: only acts if GSAP exists, wrapped in try/catch."
+    },
+    {
+      "version": "v45",
+      "attempted_score": 96,
+      "prev_score": 96,
+      "reason": "all_retries_exhausted",
+      "date": "2026-04-13T03:07:36.760Z",
+      "diff_lines_added": 18,
+      "diff_lines_removed": 5,
+      "diff_summary": "// v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.; // Pauses GSAP global timeline to prevent carousel/slider advancement between; // page load and DOM capture. Safe: only acts if GSAP exists, wrapped in try/catch."
     }
   ],
   "successful_approaches_v45": [

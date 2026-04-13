@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 /**
- * Site X-Ray v40 — Universal precision cloner.
- * Builds on v39 with UNIVERSAL improvements:
- *   - Very-early viewport screenshot: capture right after page.goto, before wait delay
- *   - Multi-canvas viewport fallback: use viewport screenshot for largest canvas on multi-canvas sites
- *   - Previous: opacity:0 content div, textContent capture, font preloading, image dims
+ * Site X-Ray v39 — Universal precision cloner.
+ * Builds on v38 with PER-SITE improvements:
+ *   - Content div visibility fix: use opacity:0 instead of clip:rect for innerText compatibility
+ *   - Previous: textContent capture, title text, font preloading, font-display:swap, image dims
  *
  * Single file. One dependency (playwright). Zero config.
  *
- * Usage: node v40-stable.js <url> [output-dir] [max-pages] [flags]
+ * Usage: node v39-stable.js <url> [output-dir] [max-pages] [flags]
  * Default max-pages: 20
  */
 
@@ -34,8 +33,8 @@ for (let i = 0; i < args.length; i++) {
 
 const TARGET = positional[0];
 if (!TARGET) {
-  console.log(`Site X-Ray v40
-Usage: node v40-stable.js <url> [output-dir] [max-pages] [flags]
+  console.log(`Site X-Ray v39
+Usage: node v39-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -512,11 +511,11 @@ async function capturePage(page, urlPath, isFirst) {
   console.log(`\n  📄 ${urlPath}`);
 
   await page.goto(fullURL, { waitUntil: 'networkidle', timeout: 30000 }).catch(()=>{});
+  await page.waitForTimeout(isFirst ? 3000 : 1500);
 
-  // v40: PIXEL FIX — Capture viewport screenshot VERY EARLY (right after networkidle, BEFORE wait delay)
-  // The test snapshot uses domcontentloaded+4s which often captures loading/intro state.
-  // By taking our screenshot before the extra 3s wait, we capture a state closer to the test's timing.
-  // This replaces the v34 approach which took the screenshot AFTER the wait.
+  // v34: PIXEL FIX — Capture viewport screenshot EARLY (right after page load, before scrolling)
+  // For canvas/WebGL sites, this captures the hero state close to when the test snapshot is taken,
+  // before carousels/slideshows advance during the slower clone process.
   let earlyViewportPath = null;
   if (isFirst) {
     try {
@@ -528,8 +527,6 @@ async function capturePage(page, urlPath, isFirst) {
       }
     } catch(e) { earlyViewportPath = null; }
   }
-
-  await page.waitForTimeout(isFirst ? 3000 : 1500);
 
   // v31: Capture body text EARLY (before DOM manipulation which can destroy JS-rendered content)
   // v32: Enhanced capture — also grabs alt/title/aria-label attributes and accumulates across pages
@@ -888,14 +885,8 @@ async function capturePage(page, urlPath, isFirst) {
         const isBlank = buf.length < expectedMinSize;
         if(!isBlank){fs.writeFileSync(canvasPath,buf);captured=true;}
       }
-      // v40: Use viewport screenshot for the LARGEST canvas on multi-canvas sites too
-      // v27 restricted to canvases.length===1 but this missed WebGL sites with auxiliary canvases.
-      // Now: use viewport capture for any full-viewport canvas (>= 80% of viewport width AND height).
-      const isFullViewport = box && box.width >= 1100 && box.height >= 700;
-      if(!captured&&isFullViewport&&viewportScreenshotPath&&fs.existsSync(viewportScreenshotPath)){
-        fs.copyFileSync(viewportScreenshotPath,canvasPath);captured=true;
-      }
-      // v27 original: single-canvas fallback for large but not full-viewport canvases
+      // v27: Use viewport screenshot ONLY when there's exactly 1 canvas on the page (full-viewport WebGPU scene)
+      // Sites with multiple canvases (e.g. basement.studio) should NOT get viewport replacement
       if(!captured&&isLargeCanvas&&canvases.length===1&&viewportScreenshotPath&&fs.existsSync(viewportScreenshotPath)){
         fs.copyFileSync(viewportScreenshotPath,canvasPath);captured=true;
       }

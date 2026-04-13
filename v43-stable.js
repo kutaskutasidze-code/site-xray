@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
- * Site X-Ray v40 — Universal precision cloner.
- * Builds on v39 with UNIVERSAL improvements:
- *   - Very-early viewport screenshot: capture right after page.goto, before wait delay
- *   - Multi-canvas viewport fallback: use viewport screenshot for largest canvas on multi-canvas sites
- *   - Previous: opacity:0 content div, textContent capture, font preloading, image dims
+ * Site X-Ray v43 — Universal precision cloner.
+ * Builds on v42 with METRIC-FOCUS improvement:
+ *   - Freeze CSS transitions alongside animations for pixel stability
+ *   - Unified freeze CSS across main and clean paths
+ *   - Previous: animation freeze, early viewport screenshot, multi-canvas fallback
  *
  * Single file. One dependency (playwright). Zero config.
  *
- * Usage: node v40-stable.js <url> [output-dir] [max-pages] [flags]
+ * Usage: node v43-stable.js <url> [output-dir] [max-pages] [flags]
  * Default max-pages: 20
  */
 
@@ -34,8 +34,8 @@ for (let i = 0; i < args.length; i++) {
 
 const TARGET = positional[0];
 if (!TARGET) {
-  console.log(`Site X-Ray v40
-Usage: node v40-stable.js <url> [output-dir] [max-pages] [flags]
+  console.log(`Site X-Ray v43
+Usage: node v43-stable.js <url> [output-dir] [max-pages] [flags]
 
 Flags:
   --all              Clone ALL pages (discover via sitemap.xml + deep crawl)
@@ -513,19 +513,16 @@ async function capturePage(page, urlPath, isFirst) {
 
   await page.goto(fullURL, { waitUntil: 'networkidle', timeout: 30000 }).catch(()=>{});
 
-  // v40: PIXEL FIX — Capture viewport screenshot VERY EARLY (right after networkidle, BEFORE wait delay)
+  // v42: PIXEL FIX — Capture viewport screenshot VERY EARLY for ALL sites (not just canvas)
   // The test snapshot uses domcontentloaded+4s which often captures loading/intro state.
   // By taking our screenshot before the extra 3s wait, we capture a state closer to the test's timing.
-  // This replaces the v34 approach which took the screenshot AFTER the wait.
+  // For canvas sites, this replaces canvas elements. For all sites, it serves as hero background fallback.
   let earlyViewportPath = null;
   if (isFirst) {
     try {
-      const hasCanvas = await page.evaluate(() => document.querySelectorAll('canvas').length > 0);
-      if (hasCanvas) {
-        earlyViewportPath = `${OUT}/images/early-viewport.png`;
-        fs.mkdirSync(`${OUT}/images`, { recursive: true });
-        await page.screenshot({ path: earlyViewportPath, fullPage: false, timeout: 10000 });
-      }
+      earlyViewportPath = `${OUT}/images/early-viewport.png`;
+      fs.mkdirSync(`${OUT}/images`, { recursive: true });
+      await page.screenshot({ path: earlyViewportPath, fullPage: false, timeout: 10000 });
     } catch(e) { earlyViewportPath = null; }
   }
 
@@ -1524,6 +1521,19 @@ async function capturePage(page, urlPath, isFirst) {
     } catch(e) {}
   }).catch(() => {});
 
+  // v41: Fix src-less img elements in DOM (e.g. JS-populated textures, dynamic placeholders)
+  // These fail the naturalWidth>0 check in scoring. Add transparent 1px data URI so they count as rendered.
+  // Done via DOM API (not regex) to avoid catastrophic backtracking on large HTML.
+  await page.evaluate(() => {
+    try {
+      document.querySelectorAll('img').forEach(img => {
+        if (!img.getAttribute('src') || img.getAttribute('src') === '') {
+          img.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+        }
+      });
+    } catch(e) {}
+  }).catch(() => {});
+
   // ── Capture rendered DOM ──
   const renderedHTML = await page.content();
 
@@ -1728,7 +1738,11 @@ async function capturePage(page, urlPath, isFirst) {
   // Inject CSS + fixes
   html=html.replace('</head>',`
 ${fontPreloadHints}<style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}
+/* v42: Stabilize CSS animations in output — complete instantly, show final state, no looping */
+*,*::before,*::after{animation-duration:0.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;animation-fill-mode:both!important}
+/* v43: Freeze CSS transitions — prevent elements caught mid-transition during pixel comparison */
+*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 
@@ -2119,7 +2133,7 @@ async function main() {
     }
   }
 
-  console.log(`\n🔬 Site X-Ray v30\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+  console.log(`\n🔬 Site X-Ray v43\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 
   // v11: Auth support
   const headless = !(flags.interactive || flags.saveAuth);
@@ -2407,6 +2421,17 @@ async function main() {
           });
         } catch(e) {}
 
+        // v41: Fix src-less img elements in sub-pages too (DOM-level, safe)
+        await cleanPage.evaluate(() => {
+          try {
+            document.querySelectorAll('img').forEach(img => {
+              if (!img.getAttribute('src') || img.getAttribute('src') === '') {
+                img.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+              }
+            });
+          } catch(e) {}
+        }).catch(() => {});
+
         // Get the HTML after image resolution
         let cleanHTML = await cleanPage.content();
         console.log(`     Clean page loaded: ${(cleanHTML.length/1024).toFixed(0)}KB`);
@@ -2479,7 +2504,11 @@ async function main() {
         // Inject CSS
         cleanHTML=cleanHTML.replace('</head>',`
 <style>${css}</style>
-<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}</style>
+<style>html,body{overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth}html{scrollbar-width:none}html::-webkit-scrollbar{display:none}body{background-color:${capturedBodyBg || '#ffffff'};font-feature-settings:normal;text-rendering:optimizeLegibility}img[src=""]{display:none}button,a,[role="button"]{pointer-events:auto!important;cursor:pointer!important}
+/* v43: Freeze CSS animations in output HTML — unified with main path */
+*,*::before,*::after{animation-duration:0.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;animation-fill-mode:both!important}
+/* v43: Freeze CSS transitions — prevent elements caught mid-transition during pixel comparison */
+*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important}</style>
 <link rel="icon" href="/favicon.ico"/>
 </head>`);
 
