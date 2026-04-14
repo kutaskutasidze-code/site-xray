@@ -33,6 +33,9 @@ Best selection of Winning websites. Web Design Inspiration for your inspiration.
 
 Discover the best website designs of the world. Awwwards recognizes the talent and effort of the best designers, web developers and digital agencies.
 
+Lusion PRO
+DEV
+SOTD
 NaughtyDuk PRO
 DEV
 SOTD
@@ -53,7 +56,12 @@ DEV
 SOTD
 Shader PRO
 HM
+DEV
 PROMOTED
+Forwwward Studio PRO
+HM
+Designer.Chris
+HM
 Double Play PRO
 DEV
 SOTD
@@ -98,13 +106,6 @@ HM
 BambukDesignStudio
 HM
 Mats Erdkamp
-HM
-Greg Lallé PRO
-DEV
-SOTD
-Evolve PRO
-HM
-federica_procaccino PRO
 HM
 
 Websites

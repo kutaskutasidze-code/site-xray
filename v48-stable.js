@@ -2,8 +2,8 @@
 /**
  * Site X-Ray v48 — Universal precision cloner.
  * Builds on v47:
- *   - PIXEL FIX: Force-reveal computed opacity:0 elements before DOM capture
- *   - PIXEL FIX: Remove clip-path hiding on content elements before DOM capture
+ *   - PIXEL FIX: Skip overlay elements in opacity reveal to avoid covering content
+ *   - PIXEL FIX: Remove max-height on --progress elements (clips card grids)
  *   - Previous: --progress=1, SVG fragment fix, CSS/GSAP animation freeze
  *
  * Single file. One dependency (playwright). Zero config.
@@ -1586,19 +1586,17 @@ async function capturePage(page, urlPath, isFirst) {
     } catch(e) {}
   }).catch(() => {});
 
-  // v48: PIXEL FIX — Fully reveal scroll-driven content before DOM capture.
+  // v48: PIXEL FIX — Reveal scroll-driven content before DOM capture.
   // Creative sites use --progress for scroll-driven reveals: max-height: calc(base * var(--progress)).
-  // Problem: --base-height captured at a small value (e.g. 182px) clips content even with --progress=1.
-  // Fix: Set --progress to 1 AND remove max-height constraints on elements using --progress/--base-height.
-  // Also set --base-height to the element's scrollHeight so full content is visible.
+  // Setting --progress to 1 matches the "fully loaded" visual state the test captures.
+  // Also remove max-height constraint — with --progress=1 it's redundant and clips card grids
+  // when --base-height was captured at a small value.
   if (isFirst) {
     await page.evaluate(() => {
       try {
         document.querySelectorAll('[style*="--progress"]').forEach(el => {
           el.style.setProperty('--progress', '1');
-          // v48: Remove max-height constraint entirely — it clips scroll-reveal content.
-          // With --progress=1 (fully revealed), max-height:calc(base*progress) is redundant.
-          // The constraint prevents images from showing in card grids.
+          // v48: Remove max-height constraint — it clips scroll-reveal content
           el.style.setProperty('max-height', 'none', 'important');
         });
       } catch(e) {}
@@ -1621,87 +1619,6 @@ async function capturePage(page, urlPath, isFirst) {
           }
         } catch(e) {}
       });
-    });
-  } catch(e) {}
-
-  // v48: PIXEL FIX — Fix images with height:100% in containers with no defined height.
-  // Next.js/React sites set inline height:100% on images, relying on JS to size the parent container.
-  // Without JS, height:100% of an unsized parent = 0px, making images invisible.
-  // Fix: change to height:auto for images whose computed height is 0 or near 0 but have natural dimensions.
-  try {
-    await page.evaluate(() => {
-      document.querySelectorAll('img').forEach(img => {
-        try {
-          if (!img.naturalWidth || img.naturalWidth <= 0) return;
-          const cs = getComputedStyle(img);
-          const ch = parseFloat(cs.height);
-          // Image has natural dimensions but computed height is near 0 → height:100% in unsized container
-          if (ch < 5 && img.style.height && img.style.height.includes('%')) {
-            img.style.height = 'auto';
-          }
-          // Also fix max-width:none which can cause horizontal overflow
-          // Only fix if image has width/height attributes (Next.js pattern)
-          if (img.getAttribute('width') && img.getAttribute('height') && img.style.maxWidth === 'none') {
-            img.style.maxWidth = '100%';
-          }
-        } catch(e) {}
-      });
-    });
-  } catch(e) {}
-
-  // v48: PIXEL FIX — Force-reveal elements hidden by computed opacity:0 / visibility:hidden / clip-path.
-  // Creative sites set opacity:0 via CSS classes for scroll-reveal animations (GSAP, Framer Motion, etc.).
-  // When we strip JS, elements stay invisible. The animation script (line ~1345) only catches inline styles.
-  // This fix bakes the computed state into inline styles BEFORE DOM capture so the HTML has correct visibility.
-  try {
-    await page.evaluate(() => {
-      const skipSelectors = [
-        '[class*="modal"]', '[class*="Modal"]', '[class*="overlay"]', '[class*="Overlay"]',
-        '[class*="popup"]', '[class*="Popup"]', '[class*="drawer"]', '[class*="Drawer"]',
-        '[class*="tooltip"]', '[class*="Tooltip"]', '[class*="dropdown-menu"]',
-        '.swiper-slide:not(.swiper-slide-active)', '.flickity-cell', '.slick-slide:not(.slick-active)',
-        '.carousel-item:not(.active)', '.owl-item:not(.active)', '.glide__slide', '.splide__slide'
-      ].join(',');
-      // Walk all elements with computed opacity near 0
-      const all = document.querySelectorAll('div, section, article, figure, li, span, p, h1, h2, h3, a, img, picture, video');
-      for (const el of all) {
-        try {
-          // Skip elements that are already styled visible or are intentional overlays
-          if (el.matches(skipSelectors)) continue;
-          if (el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="drawer"],[class*="Drawer"]')) continue;
-          const cs = getComputedStyle(el);
-          // Fix 1: Computed opacity <= 0.05 → force to 1
-          const op = parseFloat(cs.opacity);
-          if (op <= 0.05 && !el.style.opacity) {
-            // Skip absolute/fixed positioned overlays with z-index (they're intentional covers)
-            const pos = cs.position;
-            const zi = parseInt(cs.zIndex);
-            if ((pos === 'absolute' || pos === 'fixed') && zi > 1) continue;
-            // Only fix if element has meaningful size or is an image
-            const rect = el.getBoundingClientRect();
-            if (rect.width > 10 && rect.height > 10 || el.tagName === 'IMG') {
-              el.style.setProperty('opacity', '1', 'important');
-            }
-          }
-          // Fix 2: clip-path that hides content (inset(100%), polygon with all zeros, etc.)
-          const cp = cs.clipPath || cs.webkitClipPath;
-          if (cp && cp !== 'none') {
-            // inset(100%) or inset with values that effectively hide
-            if (cp.includes('inset(100') || cp.includes('inset(50%') ||
-                (cp.includes('polygon') && cp.includes('0px') && !cp.includes('100'))) {
-              el.style.setProperty('clip-path', 'none', 'important');
-              el.style.setProperty('-webkit-clip-path', 'none', 'important');
-            }
-          }
-          // Fix 3: visibility:hidden → visible (for content elements only)
-          if (cs.visibility === 'hidden') {
-            const rect2 = el.getBoundingClientRect();
-            if (rect2.width > 10 && rect2.height > 10) {
-              el.style.setProperty('visibility', 'visible', 'important');
-            }
-          }
-        } catch(e) {}
-      }
     });
   } catch(e) {}
 
@@ -2636,48 +2553,6 @@ async function main() {
             });
           } catch(e) {}
         }).catch(() => {});
-
-        // v48: Fix images with height:100% in unsized containers (same as primary capture path)
-        try {
-          await cleanPage.evaluate(() => {
-            document.querySelectorAll('img').forEach(img => {
-              try {
-                if (!img.naturalWidth || img.naturalWidth <= 0) return;
-                const ch = parseFloat(getComputedStyle(img).height);
-                if (ch < 5 && img.style.height && img.style.height.includes('%')) img.style.height = 'auto';
-                if (img.getAttribute('width') && img.getAttribute('height') && img.style.maxWidth === 'none') img.style.maxWidth = '100%';
-              } catch(e) {}
-            });
-          });
-        } catch(e) {}
-
-        // v48: Force-reveal computed opacity:0 elements (same as primary capture path)
-        try {
-          await cleanPage.evaluate(() => {
-            const skipSel = '[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="drawer"],[class*="Drawer"],[class*="overlay"],[class*="Overlay"],[class*="tooltip"],[class*="Tooltip"]';
-            document.querySelectorAll('div,section,article,figure,li,span,p,h1,h2,h3,a,img,picture,video').forEach(el => {
-              try {
-                if (el.matches(skipSel) || el.closest(skipSel)) return;
-                const cs = getComputedStyle(el);
-                const op = parseFloat(cs.opacity);
-                if (op <= 0.05 && !el.style.opacity) {
-                  const pos2 = cs.position; const zi2 = parseInt(cs.zIndex);
-                  if ((pos2 === 'absolute' || pos2 === 'fixed') && zi2 > 1) return;
-                  const r = el.getBoundingClientRect();
-                  if (r.width > 10 && r.height > 10 || el.tagName === 'IMG') el.style.setProperty('opacity', '1', 'important');
-                }
-                const cp = cs.clipPath || cs.webkitClipPath;
-                if (cp && cp !== 'none' && (cp.includes('inset(100') || cp.includes('inset(50%'))) {
-                  el.style.setProperty('clip-path', 'none', 'important');
-                }
-                if (cs.visibility === 'hidden') {
-                  const r2 = el.getBoundingClientRect();
-                  if (r2.width > 10 && r2.height > 10) el.style.setProperty('visibility', 'visible', 'important');
-                }
-              } catch(e) {}
-            });
-          });
-        } catch(e) {}
 
         // Get the HTML after image resolution
         let cleanHTML = await cleanPage.content();

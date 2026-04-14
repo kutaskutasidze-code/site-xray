@@ -1,58 +1,189 @@
 3,6c3,7
-<  * Site X-Ray v45 — Universal precision cloner.
-<  * Builds on v44 (no functional changes — pixel metric confirmed non-deterministic):
-<  *   - Version string cleanup only
-<  *   - Previous: bake transforms, CSS transitions freeze, early viewport screenshot
+<  * Site X-Ray v47 — Universal precision cloner.
+<  * Builds on v46:
+<  *   - PIXEL FIX: Set scroll-driven --progress to 1 (not 0) to reveal content
+<  *   - Previous: SVG fragment fix, CSS/GSAP animation freeze
 ---
->  * Site X-Ray v46 — Universal precision cloner.
->  * Builds on v45:
->  *   - Fix SVG fragment references in post-processing link rewriter
->  *   - Handle #fragment in asset path file existence checks
->  *   - Previous: SVG sprite inline, CSS/GSAP animation freeze
+>  * Site X-Ray v48 — Universal precision cloner.
+>  * Builds on v47:
+>  *   - PIXEL FIX: Force-reveal computed opacity:0 elements before DOM capture
+>  *   - PIXEL FIX: Remove clip-path hiding on content elements before DOM capture
+>  *   - Previous: --progress=1, SVG fragment fix, CSS/GSAP animation freeze
 10c11
-<  * Usage: node v45-stable.js <url> [output-dir] [max-pages] [flags]
+<  * Usage: node v47-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->  * Usage: node v46-stable.js <url> [output-dir] [max-pages] [flags]
+>  * Usage: node v48-stable.js <url> [output-dir] [max-pages] [flags]
 36,37c37,38
-<   console.log(`Site X-Ray v45
-< Usage: node v45-stable.js <url> [output-dir] [max-pages] [flags]
+<   console.log(`Site X-Ray v47
+< Usage: node v47-stable.js <url> [output-dir] [max-pages] [flags]
 ---
->   console.log(`Site X-Ray v46
-> Usage: node v46-stable.js <url> [output-dir] [max-pages] [flags]
-2944a2946,2960
->       // v46: Handle SVG fragment references (e.g. /images/sprite.svg#icon)
->       // These break the link checker because the #fragment is treated as part of the file path.
->       // Strip the file path, keep only the #fragment (SVG defs were already inlined by capturePage).
->       if (linkPath.match(/\.svg#/i)) {
->         const fragment = '#' + linkPath.split('#').pop();
->         return `href="${fragment}"`;
->       }
->       // v46: For asset paths with #fragment, strip fragment before file check
->       if (linkPath.includes('#') && linkPath.match(/\.(jpg|png|svg|webp|pdf|ico|woff|woff2|mp4)(\?|#)/i)) {
->         const assetPath = linkPath.split('?')[0].split('#')[0];
->         if (fs.existsSync(path.join(OUT, assetPath))) {
->           return `href="${assetPath}"`;
->         }
->         return match;
->       }
-3009a3026,3045
-> 
->   // v46: Final SVG fragment cleanup — strip file paths from any remaining SVG use references
->   // The link checker treats href="/file.svg#id" as a file path (not an anchor), causing broken links.
->   // This catches xlink:href and any other refs missed by the href= rewriter above.
+>   console.log(`Site X-Ray v48
+> Usage: node v48-stable.js <url> [output-dir] [max-pages] [flags]
+47,52c48,53
+<   node v47-stable.js https://example.com
+<   node v47-stable.js https://example.com ./output 50
+<   node v47-stable.js https://example.com --all
+<   node v47-stable.js https://example.com --auth auth-state.json
+<   node v47-stable.js https://example.com --save-auth
+<   node v47-stable.js https://example.com --interactive`);
+---
+>   node v48-stable.js https://example.com
+>   node v48-stable.js https://example.com ./output 50
+>   node v48-stable.js https://example.com --all
+>   node v48-stable.js https://example.com --auth auth-state.json
+>   node v48-stable.js https://example.com --save-auth
+>   node v48-stable.js https://example.com --interactive`);
+1588c1589
+<   // v47: PIXEL FIX — Set scroll-driven --progress to 1 (fully revealed) before DOM capture.
+---
+>   // v48: PIXEL FIX — Fully reveal scroll-driven content before DOM capture.
+1590,1592c1591,1593
+<   // At domcontentloaded+4s (when the test snapshots), JS has set --progress to ~1 (loaded state).
+<   // v44 incorrectly reset to 0, which collapsed scroll-driven rows (e.g. ingamana thumbnails).
+<   // Setting to 1 matches the "fully loaded" visual state the test captures.
+---
+>   // Problem: --base-height captured at a small value (e.g. 182px) clips content even with --progress=1.
+>   // Fix: Set --progress to 1 AND remove max-height constraints on elements using --progress/--base-height.
+>   // Also set --base-height to the element's scrollHeight so full content is visible.
+1597a1599,1602
+>           // v48: Remove max-height constraint entirely — it clips scroll-reveal content.
+>           // With --progress=1 (fully revealed), max-height:calc(base*progress) is redundant.
+>           // The constraint prevents images from showing in card grids.
+>           el.style.setProperty('max-height', 'none', 'important');
+1621a1627,1707
+>   // v48: PIXEL FIX — Fix images with height:100% in containers with no defined height.
+>   // Next.js/React sites set inline height:100% on images, relying on JS to size the parent container.
+>   // Without JS, height:100% of an unsized parent = 0px, making images invisible.
+>   // Fix: change to height:auto for images whose computed height is 0 or near 0 but have natural dimensions.
 >   try {
->     let svgFixCount = 0;
->     for (const file of allHtmlFiles) {
->       let h = fs.readFileSync(file, 'utf-8');
->       const before = h;
->       // Match both href= and xlink:href= pointing to .svg#fragment
->       h = h.replace(/((?:xlink:)?href=")([^"]*\.svg)(#[^"]+)"/g, (match, prefix, svgPath, fragment) => {
->         return `${prefix}${fragment}"`;
+>     await page.evaluate(() => {
+>       document.querySelectorAll('img').forEach(img => {
+>         try {
+>           if (!img.naturalWidth || img.naturalWidth <= 0) return;
+>           const cs = getComputedStyle(img);
+>           const ch = parseFloat(cs.height);
+>           // Image has natural dimensions but computed height is near 0 → height:100% in unsized container
+>           if (ch < 5 && img.style.height && img.style.height.includes('%')) {
+>             img.style.height = 'auto';
+>           }
+>           // Also fix max-width:none which can cause horizontal overflow
+>           // Only fix if image has width/height attributes (Next.js pattern)
+>           if (img.getAttribute('width') && img.getAttribute('height') && img.style.maxWidth === 'none') {
+>             img.style.maxWidth = '100%';
+>           }
+>         } catch(e) {}
 >       });
->       if (h !== before) {
->         fs.writeFileSync(file, h);
->         svgFixCount++;
->       }
->     }
->     if (svgFixCount > 0) console.log(`     v46: Fixed SVG fragment refs in ${svgFixCount} files`);
+>     });
 >   } catch(e) {}
+> 
+>   // v48: PIXEL FIX — Force-reveal elements hidden by computed opacity:0 / visibility:hidden / clip-path.
+>   // Creative sites set opacity:0 via CSS classes for scroll-reveal animations (GSAP, Framer Motion, etc.).
+>   // When we strip JS, elements stay invisible. The animation script (line ~1345) only catches inline styles.
+>   // This fix bakes the computed state into inline styles BEFORE DOM capture so the HTML has correct visibility.
+>   try {
+>     await page.evaluate(() => {
+>       const skipSelectors = [
+>         '[class*="modal"]', '[class*="Modal"]', '[class*="overlay"]', '[class*="Overlay"]',
+>         '[class*="popup"]', '[class*="Popup"]', '[class*="drawer"]', '[class*="Drawer"]',
+>         '[class*="tooltip"]', '[class*="Tooltip"]', '[class*="dropdown-menu"]',
+>         '.swiper-slide:not(.swiper-slide-active)', '.flickity-cell', '.slick-slide:not(.slick-active)',
+>         '.carousel-item:not(.active)', '.owl-item:not(.active)', '.glide__slide', '.splide__slide'
+>       ].join(',');
+>       // Walk all elements with computed opacity near 0
+>       const all = document.querySelectorAll('div, section, article, figure, li, span, p, h1, h2, h3, a, img, picture, video');
+>       for (const el of all) {
+>         try {
+>           // Skip elements that are already styled visible or are intentional overlays
+>           if (el.matches(skipSelectors)) continue;
+>           if (el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="drawer"],[class*="Drawer"]')) continue;
+>           const cs = getComputedStyle(el);
+>           // Fix 1: Computed opacity <= 0.05 → force to 1
+>           const op = parseFloat(cs.opacity);
+>           if (op <= 0.05 && !el.style.opacity) {
+>             // Skip absolute/fixed positioned overlays with z-index (they're intentional covers)
+>             const pos = cs.position;
+>             const zi = parseInt(cs.zIndex);
+>             if ((pos === 'absolute' || pos === 'fixed') && zi > 1) continue;
+>             // Only fix if element has meaningful size or is an image
+>             const rect = el.getBoundingClientRect();
+>             if (rect.width > 10 && rect.height > 10 || el.tagName === 'IMG') {
+>               el.style.setProperty('opacity', '1', 'important');
+>             }
+>           }
+>           // Fix 2: clip-path that hides content (inset(100%), polygon with all zeros, etc.)
+>           const cp = cs.clipPath || cs.webkitClipPath;
+>           if (cp && cp !== 'none') {
+>             // inset(100%) or inset with values that effectively hide
+>             if (cp.includes('inset(100') || cp.includes('inset(50%') ||
+>                 (cp.includes('polygon') && cp.includes('0px') && !cp.includes('100'))) {
+>               el.style.setProperty('clip-path', 'none', 'important');
+>               el.style.setProperty('-webkit-clip-path', 'none', 'important');
+>             }
+>           }
+>           // Fix 3: visibility:hidden → visible (for content elements only)
+>           if (cs.visibility === 'hidden') {
+>             const rect2 = el.getBoundingClientRect();
+>             if (rect2.width > 10 && rect2.height > 10) {
+>               el.style.setProperty('visibility', 'visible', 'important');
+>             }
+>           }
+>         } catch(e) {}
+>       }
+>     });
+>   } catch(e) {}
+> 
+2005a2092,2094
+>         // v48: Skip absolute/fixed positioned overlays with z-index > 1 (intentional covers)
+>         const pos=cs.position;const zi=parseInt(cs.zIndex);
+>         if((pos==='absolute'||pos==='fixed')&&zi>1)return;
+2252c2341
+<   console.log(`\n🔬 Site X-Ray v47\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+---
+>   console.log(`\n🔬 Site X-Ray v48\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
+2550a2640,2681
+>         // v48: Fix images with height:100% in unsized containers (same as primary capture path)
+>         try {
+>           await cleanPage.evaluate(() => {
+>             document.querySelectorAll('img').forEach(img => {
+>               try {
+>                 if (!img.naturalWidth || img.naturalWidth <= 0) return;
+>                 const ch = parseFloat(getComputedStyle(img).height);
+>                 if (ch < 5 && img.style.height && img.style.height.includes('%')) img.style.height = 'auto';
+>                 if (img.getAttribute('width') && img.getAttribute('height') && img.style.maxWidth === 'none') img.style.maxWidth = '100%';
+>               } catch(e) {}
+>             });
+>           });
+>         } catch(e) {}
+> 
+>         // v48: Force-reveal computed opacity:0 elements (same as primary capture path)
+>         try {
+>           await cleanPage.evaluate(() => {
+>             const skipSel = '[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="drawer"],[class*="Drawer"],[class*="overlay"],[class*="Overlay"],[class*="tooltip"],[class*="Tooltip"]';
+>             document.querySelectorAll('div,section,article,figure,li,span,p,h1,h2,h3,a,img,picture,video').forEach(el => {
+>               try {
+>                 if (el.matches(skipSel) || el.closest(skipSel)) return;
+>                 const cs = getComputedStyle(el);
+>                 const op = parseFloat(cs.opacity);
+>                 if (op <= 0.05 && !el.style.opacity) {
+>                   const pos2 = cs.position; const zi2 = parseInt(cs.zIndex);
+>                   if ((pos2 === 'absolute' || pos2 === 'fixed') && zi2 > 1) return;
+>                   const r = el.getBoundingClientRect();
+>                   if (r.width > 10 && r.height > 10 || el.tagName === 'IMG') el.style.setProperty('opacity', '1', 'important');
+>                 }
+>                 const cp = cs.clipPath || cs.webkitClipPath;
+>                 if (cp && cp !== 'none' && (cp.includes('inset(100') || cp.includes('inset(50%'))) {
+>                   el.style.setProperty('clip-path', 'none', 'important');
+>                 }
+>                 if (cs.visibility === 'hidden') {
+>                   const r2 = el.getBoundingClientRect();
+>                   if (r2.width > 10 && r2.height > 10) el.style.setProperty('visibility', 'visible', 'important');
+>                 }
+>               } catch(e) {}
+>             });
+>           });
+>         } catch(e) {}
+> 
+2655a2787,2789
+>         // v48: Skip absolute/fixed positioned overlays with z-index > 1
+>         const pos=cs.position;const zi=parseInt(cs.zIndex);
+>         if((pos==='absolute'||pos==='fixed')&&zi>1)return;

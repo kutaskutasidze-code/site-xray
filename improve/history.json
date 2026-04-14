@@ -1,5 +1,23 @@
 [
   {
+    "version": "v48",
+    "date": "2026-04-14",
+    "prev_version": "v47",
+    "prev_score": 97,
+    "new_score": 99,
+    "strategy": "metric-focus",
+    "target_metric": "pixels",
+    "changes": [
+      "v48: Skip absolute/fixed positioned overlays with z-index>1 in opacity reveal — the Element_elementSeen overlay on ingamana.com was being forced to opacity:1, creating white boxes covering project card images.",
+      "v48: Remove max-height constraint on scroll-driven --progress elements — max-height:calc(base*progress) was clipping card rows even with --progress=1 when --base-height was captured at a small value."
+    ],
+    "metrics_improved": {
+      "ingamana.com pixels": "77 → 91",
+      "ingamana.com overall": "97 → 99"
+    },
+    "regressions": "None."
+  },
+  {
     "version": "v45",
     "date": "2026-04-13",
     "prev_version": "v44",
