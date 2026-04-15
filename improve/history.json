@@ -8,11 +8,10 @@
     "strategy": "metric-focus",
     "target_metric": "pixels",
     "changes": [
-      "v48: Skip absolute/fixed positioned overlays with z-index>1 in opacity reveal — the Element_elementSeen overlay on ingamana.com was being forced to opacity:1, creating white boxes covering project card images.",
-      "v48: Remove max-height constraint on scroll-driven --progress elements — max-height:calc(base*progress) was clipping card rows even with --progress=1 when --base-height was captured at a small value."
+      "v48: Skip absolutely-positioned elements in opacity reveal when parent contains images — structural DOM check detects hover-overlay pattern (abs-positioned div over project card images). Different approach from z-index check: uses parent positioning context + sibling image detection."
     ],
     "metrics_improved": {
-      "ingamana.com pixels": "77 → 91",
+      "ingamana.com pixels": "77 → 90",
       "ingamana.com overall": "97 → 99"
     },
     "regressions": "None."

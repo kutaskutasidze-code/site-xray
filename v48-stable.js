@@ -2,8 +2,7 @@
 /**
  * Site X-Ray v48 — Universal precision cloner.
  * Builds on v47:
- *   - PIXEL FIX: Skip overlay elements in opacity reveal to avoid covering content
- *   - PIXEL FIX: Remove max-height on --progress elements (clips card grids)
+ *   - PIXEL FIX: Skip image-overlay divs in opacity reveal (structural DOM check)
  *   - Previous: --progress=1, SVG fragment fix, CSS/GSAP animation freeze
  *
  * Single file. One dependency (playwright). Zero config.
@@ -1586,18 +1585,16 @@ async function capturePage(page, urlPath, isFirst) {
     } catch(e) {}
   }).catch(() => {});
 
-  // v48: PIXEL FIX — Reveal scroll-driven content before DOM capture.
+  // v47: PIXEL FIX — Set scroll-driven --progress to 1 (fully revealed) before DOM capture.
   // Creative sites use --progress for scroll-driven reveals: max-height: calc(base * var(--progress)).
-  // Setting --progress to 1 matches the "fully loaded" visual state the test captures.
-  // Also remove max-height constraint — with --progress=1 it's redundant and clips card grids
-  // when --base-height was captured at a small value.
+  // At domcontentloaded+4s (when the test snapshots), JS has set --progress to ~1 (loaded state).
+  // v44 incorrectly reset to 0, which collapsed scroll-driven rows (e.g. ingamana thumbnails).
+  // Setting to 1 matches the "fully loaded" visual state the test captures.
   if (isFirst) {
     await page.evaluate(() => {
       try {
         document.querySelectorAll('[style*="--progress"]').forEach(el => {
           el.style.setProperty('--progress', '1');
-          // v48: Remove max-height constraint — it clips scroll-reveal content
-          el.style.setProperty('max-height', 'none', 'important');
         });
       } catch(e) {}
     }).catch(() => {});
@@ -2006,12 +2003,24 @@ try{
         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="Popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="Cookie"],[class*="consent"],[class*="banner"],[class*="Banner"]'))return;
         // v24: Skip carousel/slider slides and their children
         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
-        // v48: Skip absolute/fixed positioned overlays with z-index > 1 (intentional covers)
-        const pos=cs.position;const zi=parseInt(cs.zIndex);
-        if((pos==='absolute'||pos==='fixed')&&zi>1)return;
         // Skip tiny elements (decorative)
         const r=el.getBoundingClientRect();
         if(r.width<10||r.height<5)return;
+        // v48: Skip absolutely-positioned elements that overlay sibling images
+        // Creative sites use abs-positioned divs over project cards for hover effects.
+        // When JS is stripped, revealing these creates white boxes covering card images.
+        const pos=cs.position;
+        if(pos==='absolute'||pos==='fixed'){
+          const par=el.parentElement;
+          if(par){
+            const parPos=getComputedStyle(par).position;
+            // Parent is a positioning context with images = hover overlay pattern
+            if(parPos==='relative'||parPos==='absolute'||parPos==='fixed'){
+              const hasImg=par.querySelector('img,video,picture,canvas');
+              if(hasImg)return;
+            }
+          }
+        }
         el.style.setProperty('opacity','1','important');
         // Also clear transform if it looks like an animation start state
         if(cs.transform&&cs.transform!=='none'){
@@ -2659,9 +2668,6 @@ try{
       if(parseFloat(cs.opacity)<0.05){
         if(el.closest('[class*="modal"],[class*="Modal"],[class*="popup"],[class*="overlay"],[class*="Overlay"],[role="dialog"],[class*="cookie"],[class*="consent"],[class*="banner"]'))return;
         if(el.matches(carouselSlideSel)||el.closest(carouselWrapperSel))return;
-        // v48: Skip absolute/fixed positioned overlays with z-index > 1
-        const pos=cs.position;const zi=parseInt(cs.zIndex);
-        if((pos==='absolute'||pos==='fixed')&&zi>1)return;
         const r=el.getBoundingClientRect();
         if(r.width<10||r.height<5)return;
         el.style.setProperty('opacity','1','important');
