@@ -2,10 +2,8 @@
   "consecutive_failures": 0,
   "last_approaches": [],
   "regressions_seen": [],
-  "current_strategy": "metric-focus",
-  "last_success_date": "2026-04-15T03:56:00.000Z",
+  "current_strategy": "universal",
+  "last_success_date": "2026-04-15T04:24:21.389Z",
   "last_success_version": "v48",
-  "last_success_score": 99,
-  "last_failure_date": "2026-04-15T02:57:50.205Z",
-  "last_failure_reason": null
+  "last_success_score": 97
 }

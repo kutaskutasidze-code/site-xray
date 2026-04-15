@@ -1,4 +1,4 @@
-3,6c3,7
+3,6c3,6
 <  * Site X-Ray v47 — Universal precision cloner.
 <  * Builds on v46:
 <  *   - PIXEL FIX: Set scroll-driven --progress to 1 (not 0) to reveal content
@@ -6,20 +6,19 @@
 ---
 >  * Site X-Ray v48 — Universal precision cloner.
 >  * Builds on v47:
->  *   - PIXEL FIX: Skip overlay elements in opacity reveal to avoid covering content
->  *   - PIXEL FIX: Remove max-height on --progress elements (clips card grids)
+>  *   - PIXEL FIX: Skip image-overlay divs in opacity reveal (structural DOM check)
 >  *   - Previous: --progress=1, SVG fragment fix, CSS/GSAP animation freeze
-10c11
+10c10
 <  * Usage: node v47-stable.js <url> [output-dir] [max-pages] [flags]
 ---
 >  * Usage: node v48-stable.js <url> [output-dir] [max-pages] [flags]
-36,37c37,38
+36,37c36,37
 <   console.log(`Site X-Ray v47
 < Usage: node v47-stable.js <url> [output-dir] [max-pages] [flags]
 ---
 >   console.log(`Site X-Ray v48
 > Usage: node v48-stable.js <url> [output-dir] [max-pages] [flags]
-47,52c48,53
+47,52c47,52
 <   node v47-stable.js https://example.com
 <   node v47-stable.js https://example.com ./output 50
 <   node v47-stable.js https://example.com --all
@@ -33,30 +32,23 @@
 >   node v48-stable.js https://example.com --auth auth-state.json
 >   node v48-stable.js https://example.com --save-auth
 >   node v48-stable.js https://example.com --interactive`);
-1588c1589
-<   // v47: PIXEL FIX — Set scroll-driven --progress to 1 (fully revealed) before DOM capture.
----
->   // v48: PIXEL FIX — Reveal scroll-driven content before DOM capture.
-1590,1592c1591,1593
-<   // At domcontentloaded+4s (when the test snapshots), JS has set --progress to ~1 (loaded state).
-<   // v44 incorrectly reset to 0, which collapsed scroll-driven rows (e.g. ingamana thumbnails).
-<   // Setting to 1 matches the "fully loaded" visual state the test captures.
----
->   // Setting --progress to 1 matches the "fully loaded" visual state the test captures.
->   // Also remove max-height constraint — with --progress=1 it's redundant and clips card grids
->   // when --base-height was captured at a small value.
-1597a1599,1600
->           // v48: Remove max-height constraint — it clips scroll-reveal content
->           el.style.setProperty('max-height', 'none', 'important');
-2005a2009,2011
->         // v48: Skip absolute/fixed positioned overlays with z-index > 1 (intentional covers)
->         const pos=cs.position;const zi=parseInt(cs.zIndex);
->         if((pos==='absolute'||pos==='fixed')&&zi>1)return;
-2252c2258
+2008a2009,2023
+>         // v48: Skip absolutely-positioned elements that overlay sibling images
+>         // Creative sites use abs-positioned divs over project cards for hover effects.
+>         // When JS is stripped, revealing these creates white boxes covering card images.
+>         const pos=cs.position;
+>         if(pos==='absolute'||pos==='fixed'){
+>           const par=el.parentElement;
+>           if(par){
+>             const parPos=getComputedStyle(par).position;
+>             // Parent is a positioning context with images = hover overlay pattern
+>             if(parPos==='relative'||parPos==='absolute'||parPos==='fixed'){
+>               const hasImg=par.querySelector('img,video,picture,canvas');
+>               if(hasImg)return;
+>             }
+>           }
+>         }
+2252c2267
 <   console.log(`\n🔬 Site X-Ray v47\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
 ---
 >   console.log(`\n🔬 Site X-Ray v48\n   ${TARGET} → ${OUT}\n   Max pages: ${MAX_PAGES}${sitemapPages.length ? ` (${sitemapPages.length} from sitemap)` : ''}\n`);
-2655a2662,2664
->         // v48: Skip absolute/fixed positioned overlays with z-index > 1
->         const pos=cs.position;const zi=parseInt(cs.zIndex);
->         if((pos==='absolute'||pos==='fixed')&&zi>1)return;

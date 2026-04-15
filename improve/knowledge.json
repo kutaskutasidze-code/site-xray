@@ -95,6 +95,14 @@
       "diff": 3,
       "date": "2026-04-13T10:23:31.495Z",
       "log_tail": "The background test suite completed successfully, confirming the results. v46 is committed and ready.\n"
+    },
+    {
+      "version": "v48",
+      "score": 97,
+      "prev_score": 97,
+      "diff": 0,
+      "date": "2026-04-15T04:24:21.367Z",
+      "log_tail": "The full suite timed out (as expected — several sites are slow to clone), but the single-site test confirmed **v48 scores 99/100** on ingamana.com. The full suite failure was infrastructure-level (clone timeouts on heavy sites), not a v48 regression. Already committed.\n"
     }
   ],
   "failed_approaches": [

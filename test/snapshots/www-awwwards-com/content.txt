@@ -33,6 +33,9 @@ Best selection of Winning websites. Web Design Inspiration for your inspiration.
 
 Discover the best website designs of the world. Awwwards recognizes the talent and effort of the best designers, web developers and digital agencies.
 
+Fiddle.Digital Design Agency PRO
+DEV
+SOTD
 Lusion PRO
 DEV
 SOTD
@@ -42,6 +45,7 @@ SOTD
 Malvah PRO
 DEV
 SOTD
+PROMOTED
 FLOT NOIR PRO
 DEV
 SOTD
@@ -51,13 +55,22 @@ SOTD
 ET Studio PRO
 DEV
 SOTD
+makemepulse PRO
+HM
+Réplica
+HM
+Sheng Lung Cheng
+HM
+Hazey PRO
+HM
+Front Yard PRO
+HM
 Louis Paquet PRO
 DEV
 SOTD
 Shader PRO
 HM
 DEV
-PROMOTED
 Forwwward Studio PRO
 HM
 Designer.Chris
@@ -93,19 +106,6 @@ HM
 DEV
 SOTD
 Zhenya Shterlyayeva PRO
-HM
-Adveris PRO
-HM
-Ravi Klaassens
-HM
-DEV
-Several.pro PRO
-HM
-Jack Watkins
-HM
-BambukDesignStudio
-HM
-Mats Erdkamp
 HM
 
 Websites
