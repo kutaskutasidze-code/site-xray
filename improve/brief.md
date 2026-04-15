@@ -35,9 +35,9 @@ All metrics ranked by average:
   manifest        avg:100  worst:100 ()
 
 ### RECENT FAILED APPROACHES FROM KNOWLEDGE BASE
-  v45: score_dropped — code: // v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.; // Pauses GSAP global timeline to prevent 
-  v45: all_retries_exhausted — code: // v45: PIXEL FIX — Freeze JS-driven animations immediately after page load.; // Pauses GSAP global timeline to prevent 
   v47: all_retries_exhausted — code: // v46: Handle SVG fragment references (e.g. /images/sprite.svg#icon); // These break the link checker because the #frag
+  v48: score_dropped — code: // v48: PIXEL FIX — Fully reveal scroll-driven content before DOM capture.; // Problem: --base-height captured at a smal
+  v48: all_retries_exhausted — code: // v48: PIXEL FIX — Reveal scroll-driven content before DOM capture.; // Setting --progress to 1 matches the "fully load
 
 ### VOLATILE METRICS (IGNORE — scores fluctuate naturally)
   basement.studio images: ±100 (NON-DETERMINISTIC, don't try to fix)
@@ -54,10 +54,15 @@ All metrics ranked by average:
   pentagram.com content: ±44 (NON-DETERMINISTIC, don't try to fix)
   pentagram.com layout: ±100 (NON-DETERMINISTIC, don't try to fix)
   pentagram.com interactions: ±49 (NON-DETERMINISTIC, don't try to fix)
-  ingamana.com content: ±87 (NON-DETERMINISTIC, don't try to fix)
-  ingamana.com layout: ±78 (NON-DETERMINISTIC, don't try to fix)
-  ingamana.com interactions: ±25 (NON-DETERMINISTIC, don't try to fix)
-  ingamana.com pixels: ±54 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com images: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com css: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com links: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com content: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com layout: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com interactions: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com console: ±100 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com pixels: ±90 (NON-DETERMINISTIC, don't try to fix)
+  ingamana.com manifest: ±70 (NON-DETERMINISTIC, don't try to fix)
   cuberto.com css: ±85 (NON-DETERMINISTIC, don't try to fix)
   cuberto.com content: ±50 (NON-DETERMINISTIC, don't try to fix)
   cuberto.com layout: ±100 (NON-DETERMINISTIC, don't try to fix)
